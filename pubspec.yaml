@@ -23,7 +23,10 @@ dependencies:
       ref: develop-0.1
 
   living_network_repository:
-    path: ../living_network_repository
+    # path: ../living_network_repository
+    git:
+      url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git
+      ref: develop
 
 dev_dependencies:
   flutter_test:
