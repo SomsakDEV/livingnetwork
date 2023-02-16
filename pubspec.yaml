@@ -27,6 +27,11 @@ dependencies:
     git:
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git
       ref: develop
+  google_maps_flutter: ^2.2.3
+  json_serializable: ^6.6.1
+  google_maps_flutter_web: ^0.4.0+5
+  location: ^4.4.0
+  syncfusion_flutter_maps: ^20.4.50
 
 dev_dependencies:
   flutter_test:
@@ -43,6 +48,9 @@ flutter:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
+  assets:
+  - assets/images/
+  - assets/locations.json
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
