@@ -31,6 +31,10 @@ dependencies:
     #   url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git
     #   ref: develop
   syncfusion_flutter_gauges: ^20.4.50
+  json_annotation: ^4.8.0
+  google_maps_flutter: ^2.2.3
+  location: ^4.4.0
+  syncfusion_flutter_maps: ^20.4.50
   
 
 dev_dependencies:
