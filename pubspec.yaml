@@ -9,29 +9,29 @@ environment:
   flutter: ">=1.17.0"
 
 dependencies:
+  percent_indicator: ^4.2.2
   flutter:
     sdk: flutter
 
   core:
+    # path: ../core
     git:
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/core.git
       ref: master
 
   ui_style:
+    # path: ../ui_styles
     git: 
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/ui_styles.git
       ref: develop-0.1
 
   living_network_repository:
-    # path: ../living_network_repository
-    git:
-      url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git
-      ref: develop
-  google_maps_flutter: ^2.2.3
-  json_serializable: ^6.6.1
-  google_maps_flutter_web: ^0.4.0+5
-  location: ^4.4.0
-  syncfusion_flutter_maps: ^20.4.50
+    path: ../living_network_repository
+    # git:
+    #   url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git
+    #   ref: develop
+  syncfusion_flutter_gauges: ^20.4.50
+  
 
 dev_dependencies:
   flutter_test:
