@@ -449,11 +449,9 @@ packages:
   living_network_repository:
     dependency: "direct main"
     description:
-      path: "."
-      ref: develop
-      resolved-ref: "5bb1b26f229380d17b23b594daf06f5f7ffe7771"
-      url: "https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git"
-    source: git
+      path: "../living_network_repository"
+      relative: true
+    source: path
     version: "0.0.1"
   logging:
     dependency: transitive
@@ -576,7 +574,7 @@ packages:
     source: hosted
     version: "1.11.1"
   percent_indicator:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: percent_indicator
       sha256: cec41f67181fbd5322aa68b355621d1a4eea827426b8eeb613f6cbe195ff7b4a
@@ -756,6 +754,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "33141f9073c607bd113898d241aa6a03ccc1856a314bd061015180c35d47012f"
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.50"
+  syncfusion_flutter_gauges:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_gauges
+      sha256: a27244f63a0553880be385435ed7a5bc367a010830161069d56cc26e863c5797
+      url: "https://pub.dev"
+    source: hosted
+    version: "20.4.50"
   synchronized:
     dependency: transitive
     description:
