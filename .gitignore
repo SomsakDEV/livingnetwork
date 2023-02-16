@@ -49,7 +49,7 @@ app.*.map.json
 # /windows/
 .vscode/launch.json
 lib/map_screen/main.dart
-.dart_tool/*
+.dart_tool/
 /web/
 *.flutter-plugins
 *.flutter-plugins-dependencies
