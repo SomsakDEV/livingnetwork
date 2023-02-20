@@ -1,4 +1,4 @@
-// ignore_for_file: sort_child_properties_last, prefer_const_constructors
+// ignore_for_file: sort_child_properties_last, prefer_const_constructors, unnecessary_null_comparison, prefer_if_null_operators
 
 import 'package:flutter/material.dart';
 import 'package:ui_style/ui_style.dart';
@@ -10,7 +10,6 @@ class UiButtonMode extends StatefulWidget {
   final String title;
   final String detail;
   final ButtonType buttonType;
-  final Icon? prefixIcon;
   final Color? backgroundColor;
   final bool? isSmall;
   final double? width;
@@ -20,6 +19,7 @@ class UiButtonMode extends StatefulWidget {
   final double? fontSize;
   final VoidCallback? onPress;
   final double? borderRadius;
+  final Color? borderColor;
 
   const UiButtonMode({
     Key? key,
@@ -36,7 +36,7 @@ class UiButtonMode extends StatefulWidget {
     this.isSmall,
     this.borderRadius,
     this.fontSize,
-    this.prefixIcon,
+    this.borderColor,
   }) : super(key: key);
 
   @override
@@ -71,7 +71,10 @@ class _UiButtonModeState extends State<UiButtonMode> {
       onTap: !clickEnable ? () {} : () => widget.onPress!(),
       child: Card(
         shape: RoundedRectangleBorder(
-            side: BorderSide(color: BaseColors.kellyGreen500),
+            // side: BorderSide(color: BaseColors.kellyGreen500),
+            side: BorderSide(
+                color: widget.borderColor ?? BaseColors.kellyGreen100,
+                width: 2),
             borderRadius: BorderRadius.circular(10.0)),
         color: backgroundColor,
         child: SizedBox(
@@ -85,7 +88,6 @@ class _UiButtonModeState extends State<UiButtonMode> {
             mainAxisAlignment: MainAxisAlignment.start,
             mainAxisSize: MainAxisSize.min,
             children: [
-              widget.prefixIcon ?? const SizedBox(),
               Padding(
                 padding:
                     const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
