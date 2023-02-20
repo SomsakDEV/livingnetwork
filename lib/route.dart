@@ -4,6 +4,7 @@ import 'package:living_network/livingnetwork/presentation/pages/lvnw_main.dart';
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_home.dart';
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_mobile.dart';
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_noon.dart';
+import 'package:living_network/map_direction/md_main.dart';
 import 'package:living_network/map_screen/map_screen.dart';
 import 'package:living_network/map_screen/map_widget.dart';
 import 'package:living_network/mode_screen/4g_phone_4g_pack.dart';
@@ -69,6 +70,12 @@ class RouteLivingNetwork {
           settings: route,
           pageBuilder: (context, animation, secondaryAnimation) =>
               const FiveGPhoneFiveGPackage(),
+        );
+      case '/map_direction':
+        return PageRouteBuilder(
+          settings: route,
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const MapDirection(),
         );
     }
     return currentRoute;

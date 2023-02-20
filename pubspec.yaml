@@ -36,9 +36,14 @@ dependencies:
   location: ^4.4.0
   syncfusion_flutter_maps: ^20.4.50
 <<<<<<< HEAD
+<<<<<<< HEAD
   google_maps_flutter_web: ^0.4.0+5
   selectable_container: ^1.0.7
 =======
+=======
+  google_maps_flutter_web: ^0.4.0+5
+  solid_bottom_sheet: ^0.1.10
+>>>>>>> 09d041189e6473d09a0f4b19ce2084cb5b7bd1a6
   # google_maps_flutter_web: ^0.4.0+5
   # selectable_container: ^1.0.7
 >>>>>>> 85ea6cb5cf7bde55f10f9653e5c130ca45d25f96

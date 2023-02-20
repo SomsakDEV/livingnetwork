@@ -75,11 +75,11 @@ class _PerformanceMainState extends State<PerformanceMain> {
             children: [
               Expanded(
                 child: Stack(
+                  alignment: Alignment.topLeft,
                   children: [
                     CustomExpansionTile(
                       backgroundColor: Colors.transparent,
                       collapsedBackgroundColor: Colors.transparent,
-                      
                       children: [
                         CardContentWidget(
                           contentList: contentList,

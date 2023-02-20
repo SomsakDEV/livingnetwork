@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/internet_usage/iu_main.dart';
+import 'package:living_network/map_direction/md_main.dart';
+import 'package:living_network/sale_badge_widget/sb_main.dart';
 import 'package:living_network/speed_comparing/sc_main.dart';
 
 import 'package:living_network_repository/function_a.dart';
@@ -19,9 +21,11 @@ class _MyWidgetState extends State<MyWidget> {
       body: Center(
         child: Column(
           children: [
-            Text(FunctionA().testFunction()),
-            SpeedComparingMain(),
-            InternetUsage(),
+            ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/map_direction');
+                },
+                child: Text('Direction'))
           ],
         ),
       ),
