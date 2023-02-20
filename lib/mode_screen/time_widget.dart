@@ -8,6 +8,7 @@ import 'package:ui_style/base_color.dart';
 class TimeWidget extends StatefulWidget {
   // final Duration countDownTime;
   final DateTime expire;
+  final TextStyle? textStyle;
 
   // final String title;
 
@@ -15,6 +16,8 @@ class TimeWidget extends StatefulWidget {
     super.key,
     // required this.countDownTime,
     required this.expire,
+    this.textStyle,
+
   });
 
   @override
@@ -34,24 +37,20 @@ class _TimeWidgetState extends State<TimeWidget> {
     startTimer();
   }
 
-  void setStateIfMounted() {
-    if (mounted) {
-      setState(
-        () {
-          final seconds = duration.inSeconds - 1;
-          if (seconds < 0) {
-            timer?.cancel();
-          } else {
-            duration = Duration(seconds: seconds);
-          }
-        },
-      );
-    }
-  }
 
   startTimer() {
-    timer =
-        Timer.periodic(const Duration(seconds: 1), (_) => setStateIfMounted());
+    timer = Timer.periodic(
+        const Duration(seconds: 1),
+        (_) => setState(
+              () {
+                final seconds = duration.inSeconds - 1;
+                if (seconds < 0) {
+                  timer?.cancel();
+                } else {
+                  duration = Duration(seconds: seconds);
+                }
+              },
+            ));
   }
 
   buildTime() {
@@ -61,12 +60,19 @@ class _TimeWidgetState extends State<TimeWidget> {
     final seconds = twoDigits(duration.inSeconds.remainder(60));
 
     return Text(
-      '$hours:$minutes:$seconds',
-      style: const TextStyle(
+      '$hours : $minutes : $seconds',
+      style: widget.textStyle ?? const TextStyle(
           fontWeight: FontWeight.w700,
-          color: BaseColors.neutralsBlack,
+          color: BaseColors.whiteColor,
           fontSize: 14),
     );
+  }
+
+  @override
+  void dispose() {
+    // buildTime().dispose();
+    timer?.cancel();
+    super.dispose();
   }
 
   @override
