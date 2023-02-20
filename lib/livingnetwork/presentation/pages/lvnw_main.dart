@@ -5,7 +5,14 @@ import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_home.d
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_mobile.dart';
 
 class LivingNetwork extends StatefulWidget {
-  const LivingNetwork({super.key});
+  final String network;
+  final String phone;
+
+  const LivingNetwork({
+    Key? key,
+    required this.network,
+    required this.phone,
+  }) : super(key: key);
 
   @override
   State<LivingNetwork> createState() => _LivingNetworkState();
@@ -17,7 +24,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.white,
-           elevation: 0,
+          elevation: 0,
           title: const Text(
             'Living Network',
             style: TextStyle(
@@ -49,7 +56,8 @@ class _LivingNetworkState extends State<LivingNetwork> {
               ),
               body: TabBarView(
                 children: [
-                  LivingNetworkMobile(),
+                  LivingNetworkMobile(
+                      network: widget.network, phone: widget.phone),
                   LivingNetworkHome(),
                 ],
               ),
