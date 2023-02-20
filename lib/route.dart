@@ -6,6 +6,7 @@ import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_mobile
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_noon.dart';
 import 'package:living_network/map_screen/map_screen.dart';
 import 'package:living_network/map_screen/map_widget.dart';
+import 'package:living_network/mode_screen/mode_widget.dart';
 
 class RouteLivingNetwork {
   Route? getLivingNetworkRoute(RouteSettings route, Route? currentRoute) {
@@ -34,6 +35,12 @@ class RouteLivingNetwork {
           settings: route,
           pageBuilder: (context, animation, secondaryAnimation) =>
               const LivingNetworkNoon(),
+        );
+      case '/mode_widget':
+        return PageRouteBuilder(
+          settings: route,
+          pageBuilder: (context, animation, secondaryAnimation) =>
+              const ModeWidget(),
         );
     }
     return currentRoute;
