@@ -1,13 +1,21 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:ui_style/base_color.dart';
-import 'package:ui_style/ui_button.dart';
-import 'package:ui_style/ui_popup_dialog.dart';
+import 'package:living_network/internet_usage/iu_main.dart';
+import 'package:living_network/map_screen/map_widget.dart';
+import 'package:living_network/speed_comparing/sc_main.dart';
+import 'package:ui_style/ui_style.dart';
 
 class LivingNetworkMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
-  const LivingNetworkMobile({super.key});
+  final String network;
+  final String phone;
+
+  const LivingNetworkMobile({
+    super.key,
+    required this.network,
+    required this.phone,
+  });
 
   @override
   State<LivingNetworkMobile> createState() => _LivingNetworkMobileState();
@@ -21,9 +29,9 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
   @override
   void initState() {
     super.initState();
-
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
+        barrierDismissible: false,
         builder: (context) {
           return Dialog(
               backgroundColor: BaseColors.transparent,
@@ -96,9 +104,10 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
           Column(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height * 0.32,
+                height: MediaQuery.of(context).size.height * 0.45,
                 width: MediaQuery.of(context).size.width,
                 color: Colors.amber,
+                child: MapWidget(),
               ),
               Container(
                 height: MediaQuery.of(context).size.height * 0.85,
@@ -119,7 +128,7 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                     width: MediaQuery.of(context).size.width * 0.93,
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: SpeedComparingMain(),
                   ),
                   _sizedBox,
                   Container(
@@ -128,17 +137,41 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                         borderRadius: BorderRadius.circular(8),
                         border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                     width: MediaQuery.of(context).size.width * 0.93,
-                    height: MediaQuery.of(context).size.height * 0.2,
+                    child: InternetUsage(),
                   ),
                   _sizedBox,
                   Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                  ),
+                      alignment: Alignment.center,
+                      decoration: BoxDecoration(
+                          color: Color(0xFFFFFFFF),
+                          borderRadius: BorderRadius.circular(8),
+                          border:
+                              Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                      width: MediaQuery.of(context).size.width * 0.93,
+                      child: 
+                      Container(
+                        // decoration: BoxDecoration(
+                        //     borderRadius: BorderRadius.all(Radius.circular(8)),
+                        //     gradient: LinearGradient(
+                        //         begin: FractionalOffset.centerLeft,
+                        //         end: FractionalOffset.centerRight,
+                        //         colors: const [
+                        //           Color(0xFF9EDE3E),
+                        //           Color(0xFF64CA00)
+                        //         ])),
+                        // width: 90,
+                        // height: 24,
+                        // child: Row(children: [
+                        //   Image.asset(
+                        //     'packages/livingnetwork/assets/images/Vector.png',
+                        //     width: 11.44,
+                        //     height: 13,),
+                        //   TimeWidget(
+                        //     expire: DateTime(2023, 2, 21),
+                        //   )
+                        // ]),
+                      )
+                      ),
                   _sizedBox,
                   Container(
                     decoration: BoxDecoration(

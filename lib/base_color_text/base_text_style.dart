@@ -122,11 +122,42 @@ class LNBaseTextStyle {
   static const header6_1 = TextStyle(
     fontFamily: 'DB Heavent',
     color: BaseColorsLN.neutralsBlack,
-    fontSize: 24,
-    fontWeight: FontWeight.w500,  
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
     height: 1,
+    // letterSpacing: -0.4,
+  );
+  static const header6_1B = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.neutralsBlack,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const header6_2 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.primaryColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const discountText = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.textColorTabbar,
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    decoration: TextDecoration.lineThrough,
     // letterSpacing: -0.4,
   );
 
@@ -145,6 +176,16 @@ class LNBaseTextStyle {
     fontFamily: 'DB Heavent',
     color: BaseColors.neutralsBlack,
     fontSize: 20,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1.2,
+    // letterSpacing: -0.4,
+  );
+  static const body3 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColors.neutralsBlack,
+    fontSize: 16,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
@@ -174,11 +215,31 @@ class LNBaseTextStyle {
     // letterSpacing: -0.4,
   );
 
+  static const caption_1 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColors.textColorTabbar,
+    fontSize: 12,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    // leadingDistribution: TextLeadingDistribution.even,
+    // height: 1.33,
+    // letterSpacing: -0.4,
+  );
+
   static const caption2 = TextStyle(
     fontFamily: 'DB Heavent',
     color: BaseColors.textColorTabbar,
     fontSize: 22,
     fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const caption3 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColors.textColorTabbar,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
   );
