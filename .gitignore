@@ -50,7 +50,6 @@ app.*.map.json
 .vscode/launch.json
 lib/map_screen/main.dart
 .dart_tool/
-/web/
 *.flutter-plugins
 *.flutter-plugins-dependencies
 *.dart_tool/package_config_subset
