@@ -83,7 +83,8 @@ Future<Locations> getGoogleOffices() async {
   // Fallback for when the above HTTP request fails.
   return Locations.fromJson(
     json.decode(
-      await rootBundle.loadString('assets/locations.json'),
+      // await rootBundle.loadString('assets/locations.json'),
+      await rootBundle.loadString('packages/living_network/assets/locations.json'),
     ) as Map<String, dynamic>,
   );
 }

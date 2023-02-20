@@ -1,18 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:ui_style/base_color.dart';
 
-class ToggleTab extends StatefulWidget {
-  const ToggleTab({super.key});
-
+class ToggleSignal extends StatefulWidget {
+  const ToggleSignal({super.key});
   @override
-  State<ToggleTab> createState() => _ToggleTabState();
+  State<ToggleSignal> createState() => _ToggleSignalState();
 }
 
-class _ToggleTabState extends State<ToggleTab> {
-  //  List<Widget> signal = <Widget>[
-  //   const Text('4G', style: TextStyle(color: Colors.white)),
-  //   const Text('5G', style: TextStyle(color: Colors.white))
-  // ];
+class _ToggleSignalState extends State<ToggleSignal> {
   List<Widget> signal = <Widget>[const Text('4G'), const Text('5G')];
   List<bool> selected = <bool>[true, false];
   @override
@@ -20,8 +15,8 @@ class _ToggleTabState extends State<ToggleTab> {
     return Container(
       padding: EdgeInsets.zero,
       decoration: BoxDecoration(
-        color: Color(0xFFDAE1E6),
-        border: Border.all(color: Color(0xFFDAE1E6), width: 0.5),
+        color: BaseColors.whiteColor,
+        border: Border.all(color: BaseColors.greyColor, width: 0.5),
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
       ),
       child: ToggleButtons(
@@ -33,18 +28,18 @@ class _ToggleTabState extends State<ToggleTab> {
             }
           });
         },
+        textStyle: const TextStyle(
+            fontSize: 22, color: BaseColors.textColorTabbar, fontWeight: FontWeight.w500, fontFamily: 'DB Heaven'),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
-        selectedBorderColor: Color(0xFF657884),
-        selectedColor: Colors.green[200],
-        fillColor: Colors.green[600],
-        color: Color(0xFF657884),
+        selectedBorderColor: BaseColors.kellyGreen100,
+        selectedColor: BaseColors.whiteColor,
+        fillColor: BaseColors.greenColor700,
+        color: BaseColors.bgToastColor,
         borderWidth: 1.0,
-        borderColor: Color(0xFF4CA00),
-        // selectedColor: Color(0x3364CA00),
-        // fillColor: Color(0x9964CA00),
+        borderColor: BaseColors.greyColor,
         constraints: const BoxConstraints(
-          minHeight: 50.0,
-          minWidth: 150.0,
+          minHeight: 38.0,
+          minWidth: 160.25,
         ),
         isSelected: selected,
         children: signal,
