@@ -36,6 +36,7 @@ dependencies:
   location: ^4.4.0
   syncfusion_flutter_maps: ^20.4.50
   google_maps_flutter_web: ^0.4.0+5
+  selectable_container: ^1.0.7
   
 
 dev_dependencies:

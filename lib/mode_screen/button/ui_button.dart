@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, unnecessary_null_comparison, prefer_if_null_operators
 
 import 'package:flutter/material.dart';
+import 'package:living_network/mode_screen/time_widget.dart';
 import 'package:ui_style/ui_style.dart';
 
 enum ButtonType { primaryBtn, secondaryBtn }
@@ -20,6 +21,9 @@ class UiButtonMode extends StatefulWidget {
   final VoidCallback? onPress;
   final double? borderRadius;
   final Color? borderColor;
+  final Color? colorTitle;
+  final Color? colorDetail;
+  final DateTime? expireDate;
 
   const UiButtonMode({
     Key? key,
@@ -27,6 +31,7 @@ class UiButtonMode extends StatefulWidget {
     required this.title,
     required this.detail,
     required this.buttonType,
+    this.expireDate,
     this.backgroundColor,
     this.onPress,
     this.width,
@@ -37,6 +42,8 @@ class UiButtonMode extends StatefulWidget {
     this.borderRadius,
     this.fontSize,
     this.borderColor,
+    this.colorTitle,
+    this.colorDetail,
   }) : super(key: key);
 
   @override
@@ -58,7 +65,8 @@ class _UiButtonModeState extends State<UiButtonMode> {
     }
 
     final Color? backgroundColor = isPrimary == true && clickEnable == false
-        ? BaseColors.neutralsMediumGrey
+        ? //BaseColors.neutralsMediumGrey
+        Color(0xFFFAFAFA)
         : isPrimary == true
             ? widget.backgroundColor ?? BaseColors.kellyGreen100
             : null;
@@ -98,6 +106,36 @@ class _UiButtonModeState extends State<UiButtonMode> {
                     Row(
                       children: [
                         widget.icon,
+                        Container(
+                          decoration: BoxDecoration(
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(8)),
+                              gradient: LinearGradient(
+                                  begin: FractionalOffset.centerLeft,
+                                  end: FractionalOffset.centerRight,
+                                  colors: const [
+                                    Color(0xFF9EDE3E),
+                                    Color(0xFF64CA00)
+                                  ])),
+                          width: 68,
+                          height: 24,
+                          child: Row(children: [
+                            SizedBox(
+                              width: 4.33,
+                            ),
+                            Image.asset(
+                              'packages/living_network/assets/images/Vector.png',
+                              width: 11.44,
+                              height: 13,
+                            ),
+                            SizedBox(
+                              width: 4.23,
+                            ),
+                            TimeWidget(
+                              expire: widget.expireDate,
+                            )
+                          ]),
+                        )
                       ],
                     ),
                     Text(
@@ -105,7 +143,9 @@ class _UiButtonModeState extends State<UiButtonMode> {
                       textAlign: TextAlign.left,
                       style: widget.textStyle ??
                           TextStyle(
-                            color: Colors.black,
+                            color: widget.colorTitle != null
+                                ? widget.colorTitle
+                                : Colors.black,
                             fontSize: widget.fontSize ?? 18,
                             fontWeight: FontWeight.normal,
                           ),
@@ -115,7 +155,9 @@ class _UiButtonModeState extends State<UiButtonMode> {
                       style: widget.textStyle ??
                           TextStyle(
                             height: 0.5,
-                            color: BaseColors.kellyGreen500,
+                            color: widget.colorDetail != null
+                                ? widget.colorDetail
+                                : BaseColors.kellyGreen500,
                             fontSize: widget.fontSize ?? 18,
                             fontWeight: FontWeight.normal,
                           ),

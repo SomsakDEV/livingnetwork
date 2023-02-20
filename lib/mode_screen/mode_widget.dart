@@ -1,9 +1,10 @@
-// ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers, prefer_const_constructors, dead_code, prefer_const_literals_to_create_immutables, unnecessary_new
+// ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers, prefer_const_constructors, dead_code, prefer_const_literals_to_create_immutables, unnecessary_new, unused_label, sized_box_for_whitespace
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:living_network/mode_screen/tab_bar/mode_tab_bar.dart';
+import 'package:living_network/mode_screen/time_widget.dart';
 import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
 
@@ -98,24 +99,30 @@ class _ModeWidgetState extends State<ModeWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: button.UiButtonMode(
-                      icon: Image.asset(
-                        'packages/living_network/assets/images/mode_max.png',
-                        height: 15,
-                        width: 15,
-                      ),
-                      title: 'Max Mode',
-                      detail: 'default',
-                      buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
-                      width: 143,
-                      borderRadius: 10,
-                      borderColor:
-                          focusMaxMode ? ui.BaseColors.kellyGreen500 : null,
-                      isDisable: true,
-                      onPress: () {
-                        print(focusMaxMode);
-                        if (!focusMaxMode) {
+                    child: GestureDetector(
+                      onTap: () {
+                        setState(() {
+                          focusMaxMode = true;
+                        });
+                      },
+                      child: button.UiButtonMode(
+                        icon: Image.asset(
+                          'packages/living_network/assets/images/mode_max_bw.png',
+                          height: 15,
+                          width: 15,
+                        ),
+                        title: 'Max Mode',
+                        detail: 'default',
+                        buttonType: button.ButtonType.primaryBtn,
+                        height: 70,
+                        width: 143,
+                        borderRadius: 10,
+                        backgroundColor: Color(0xFFFAFAFA),
+                        borderColor: Color(0xFFFAFAFA),
+                        colorTitle: Color(0xFF7B8E98),
+                        colorDetail: Color(0xFFB0BEC5),
+                        isDisable: true,
+                        onPress: () {
                           showModalBottomSheet(
                             context: context,
                             builder: (BuildContext context) {
@@ -124,14 +131,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
-                                  setState(() {
-                                    focusMaxMode = true;
-                                    focusEcoMode = false;
-                                    focusLiveMode = false;
-                                    focusGameMode = false;
-                                    Navigator.pop(context);
-                                  });
-
                                   print("active");
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -139,14 +138,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                               );
                             },
                           );
-                        }
-                      },
+                        },
+                      ),
                     ),
                   ),
                   Expanded(
                     child: button.UiButtonMode(
                       icon: Image.asset(
-                        'packages/living_network/assets/images/mode_eco.png',
+                        'packages/living_network/assets/images/mode_eco_bw.png',
                         height: 15,
                         width: 15,
                       ),
@@ -156,8 +155,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusEcoMode ? ui.BaseColors.kellyGreen500 : null,
+                      backgroundColor: Color(0xFFFAFAFA),
+                      borderColor: Color(0xFFFAFAFA),
+                      colorTitle: Color(0xFF7B8E98),
+                      colorDetail: Color(0xFFB0BEC5),
+                      isDisable: true,
                       onPress: () {
                         if (!focusEcoMode) {
                           showModalBottomSheet(
@@ -168,14 +170,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
-                                  setState(() {
-                                    focusMaxMode = false;
-                                    focusEcoMode = true;
-                                    focusLiveMode = false;
-                                    focusGameMode = false;
-                                    Navigator.pop(context);
-                                  });
-
                                   print("active");
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -195,7 +189,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.UiButtonMode(
                       icon: Image.asset(
-                        'packages/living_network/assets/images/mode_live.png',
+                        'packages/living_network/assets/images/mode_live_bw.png',
                         height: 15,
                         width: 15,
                       ),
@@ -205,8 +199,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusLiveMode ? ui.BaseColors.kellyGreen500 : null,
+                      backgroundColor: Color(0xFFFAFAFA),
+                      borderColor: Color(0xFFFAFAFA),
+                      colorTitle: Color(0xFF7B8E98),
+                      colorDetail: Color(0xFFB0BEC5),
+                      isDisable: true,
                       onPress: () {
                         if (!focusLiveMode) {
                           showModalBottomSheet(
@@ -217,14 +214,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
-                                  setState(() {
-                                    focusMaxMode = false;
-                                    focusEcoMode = false;
-                                    focusLiveMode = true;
-                                    focusGameMode = false;
-                                    Navigator.pop(context);
-                                  });
-
                                   print("active");
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -239,7 +228,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.UiButtonMode(
                       icon: Image.asset(
-                        'packages/living_network/assets/images/mode_game.png',
+                        'packages/living_network/assets/images/mode_game_bw.png',
                         height: 15,
                         width: 15,
                       ),
@@ -249,8 +238,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusGameMode ? ui.BaseColors.kellyGreen500 : null,
+                      backgroundColor: Color(0xFFFAFAFA),
+                      borderColor: Color(0xFFFAFAFA),
+                      colorTitle: Color(0xFF7B8E98),
+                      colorDetail: Color(0xFFB0BEC5),
+                      isDisable: true,
                       onPress: () {
                         if (!focusGameMode) {
                           showModalBottomSheet(
@@ -261,14 +253,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
-                                  setState(() {
-                                    focusMaxMode = false;
-                                    focusEcoMode = false;
-                                    focusLiveMode = false;
-                                    focusGameMode = true;
-                                    Navigator.pop(context);
-                                  });
-
                                   print("active");
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -310,6 +294,29 @@ class _ModeWidgetState extends State<ModeWidget> {
                     ),
                   )
                 ],
+              ),
+              Container(
+                height: 54,
+                width: 295,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      'Free trial will expire:           ',
+                      style: TextStyle(
+                        fontFamily: 'DB Heavent',
+                        // fontFamilyFallback: ['NotoSansThaiUI'],
+                        color: Color(0xFF657884),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w500,
+                        fontStyle: FontStyle.normal,
+                      ),
+                    ),
+                    TimeWidget(
+                      expire: DateTime(2023, 2, 21, 15, 30),
+                    ),
+                  ],
+                ),
               ),
             ],
           ),
