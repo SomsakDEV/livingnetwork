@@ -36,6 +36,7 @@ dependencies:
   location: ^4.4.0
   syncfusion_flutter_maps: ^20.4.50
   google_maps_flutter_web: ^0.4.0+5
+  solid_bottom_sheet: ^0.1.10
   
 
 dev_dependencies:
