@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/map_screen/map_widget.dart';
-import 'package:living_network/map_screen/toggle_bar.dart';
 import 'package:solid_bottom_sheet/solid_bottom_sheet.dart';
 
 class MapDirection extends StatefulWidget {
