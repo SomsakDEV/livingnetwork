@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:ui_style/ui_button.dart';
 
-class LivingNetworkNoon extends StatefulWidget {
-  static const ROUTE_NAME = '/livingnetwork/noon';
-  const LivingNetworkNoon({super.key});
+class LivingNetworkFiveGMode extends StatefulWidget {
+  static const ROUTE_NAME = '/livingnetwork/5GMode';
+  const LivingNetworkFiveGMode({super.key});
 
   @override
-  State<LivingNetworkNoon> createState() => _LivingNetworkNoonState();
+  State<LivingNetworkFiveGMode> createState() => _LivingNetworkFiveGModeState();
 }
 
-class _LivingNetworkNoonState extends State<LivingNetworkNoon> {
+class _LivingNetworkFiveGModeState extends State<LivingNetworkFiveGMode> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(

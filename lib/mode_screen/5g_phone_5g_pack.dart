@@ -1,14 +1,14 @@
-// ignore_for_file: prefer_const_constructors
+// ignore_for_file: prefer_const_constructors, deprecated_member_use_from_same_package, sort_child_properties_last, prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
+import 'package:living_network/internet_usage/iu_widget.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
-import 'package:selectable_container/selectable_container.dart';
+import 'package:living_network/mode_screen/time_widget.dart';
 import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
-
-import 'tab_bar/mode_tab_bar.dart';
+import 'package:ui_style/ui_style.dart';
 
 class FiveGPhoneFiveGPackage extends StatefulWidget {
   const FiveGPhoneFiveGPackage({super.key});
@@ -18,14 +18,10 @@ class FiveGPhoneFiveGPackage extends StatefulWidget {
 }
 
 class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
-  late bool focusMaxMode = true;
+  late bool focusMaxMode = false;
   late bool focusEcoMode = false;
   late bool focusLiveMode = false;
   late bool focusGameMode = false;
-
-  bool _select1 = false;
-  bool _select2 = false;
-  bool isSelectedMode = false;
 
   SizedBox btwRow = SizedBox(
     height: 5,
@@ -127,6 +123,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
+                                  
                                   setState(() {
                                     focusMaxMode = true;
                                     focusEcoMode = false;
@@ -254,7 +251,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                       borderRadius: 10,
                       borderColor:
                           focusGameMode ? ui.BaseColors.kellyGreen500 : null,
-                      expireDate: DateTime(2023, 2, 22),
+                      expireDate: DateTime.now().add(Duration(days: 1)),
                       onPress: () {
                         if (!focusGameMode) {
                           showModalBottomSheet(
@@ -310,11 +307,15 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                           //letterSpacing: -0.4,
                         ),
                       ),
-                      subtitle: ModeTagBar(maxValue: 100, markerValue: 80),
+                      subtitle: IUWidget(maxValue: 100, markerValue: 80, barColorGradient: [ BaseColorsLN.speedCompare2, BaseColorsLN.speedCompare2,],),
                     ),
                   )
                 ],
               ),
+              TimeWidget(
+                expire: DateTime.now().add(Duration(days: 1)),
+                
+              )
             ],
           ),
         ),
@@ -322,3 +323,6 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
     );
   }
 }
+
+
+

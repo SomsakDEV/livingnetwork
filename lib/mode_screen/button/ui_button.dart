@@ -106,35 +106,9 @@ class _UiButtonModeState extends State<UiButtonMode> {
                     Row(
                       children: [
                         widget.icon,
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              gradient: LinearGradient(
-                                  begin: FractionalOffset.centerLeft,
-                                  end: FractionalOffset.centerRight,
-                                  colors: const [
-                                    Color(0xFF9EDE3E),
-                                    Color(0xFF64CA00)
-                                  ])),
-                          width: 68,
-                          height: 24,
-                          child: Row(children: [
-                            SizedBox(
-                              width: 4.33,
-                            ),
-                            Image.asset(
-                              'packages/living_network/assets/images/Vector.png',
-                              width: 11.44,
-                              height: 13,
-                            ),
-                            SizedBox(
-                              width: 4.23,
-                            ),
-                            TimeWidget(
-                              expire: widget.expireDate,
-                            )
-                          ]),
+                        TimeWidget(
+                          expire: widget.expireDate,
+                          isFreeTrial: false,
                         )
                       ],
                     ),

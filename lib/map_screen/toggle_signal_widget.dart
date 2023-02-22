@@ -8,21 +8,21 @@ class ToggleSignal extends StatefulWidget {
 }
 
 class _ToggleSignalState extends State<ToggleSignal> {
-  List<Widget> signal = <Widget>[const Text('4G'), const Text('5G')];
   List<bool> selected = <bool>[true, false];
   @override
   Widget build(BuildContext context) {
+    var conH = MediaQuery.of(context).size.height;
+    var conW = MediaQuery.of(context).size.width;
     return Container(
-      padding: EdgeInsets.zero,
+      height: conH * 0.0325,
       decoration: BoxDecoration(
         color: BaseColors.whiteColor,
-        border: Border.all(color: BaseColors.greyColor, width: 0.5),
+        border: Border.all(color: BaseColors.greyColor, width: 1),
         borderRadius: const BorderRadius.all(Radius.circular(8.0)),
       ),
       child: ToggleButtons(
         onPressed: (int index) {
           setState(() {
-            // The button that is tapped is set to true, and the others to false.
             for (int i = 0; i < selected.length; i++) {
               selected[i] = i == index;
             }
@@ -35,14 +35,19 @@ class _ToggleSignalState extends State<ToggleSignal> {
         selectedColor: BaseColors.whiteColor,
         fillColor: BaseColors.greenColor700,
         color: BaseColors.bgToastColor,
-        borderWidth: 1.0,
+        borderWidth: 0.5,
         borderColor: BaseColors.greyColor,
-        constraints: const BoxConstraints(
-          minHeight: 38.0,
-          minWidth: 160.25,
-        ),
         isSelected: selected,
-        children: signal,
+        children: <Widget>[
+          SizedBox(
+            width: conW * 0.35,
+            child: const Center(child: Text('4G')),
+          ),
+          SizedBox(
+            width: conW * 0.35,
+            child: const Center(child: Text('5G')),
+          ),
+        ],
       ),
     );
   }

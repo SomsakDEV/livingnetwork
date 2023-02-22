@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
 
 import 'package:flutter/material.dart';
-import 'package:living_network/map_screen/botton_selection.dart';
+import 'package:living_network/map_screen/button_selection.dart';
 import 'package:living_network/map_screen/places_widget.dart';
 import 'package:living_network/map_screen/map_widget.dart';
 import 'package:living_network/map_screen/toggle_signal_widget.dart';
@@ -17,8 +17,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   bool _select1 = true;
   bool _select2 = true;
-  SizedBox getHBox([var a = 15]) => SizedBox(height: a);
-  SizedBox getWBox([var a = 15]) => SizedBox(width: a);
+  SizedBox getHBox([double a = 15.0]) => SizedBox(height: a);
+  SizedBox getWBox([double a = 15.0]) => SizedBox(width: a);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -71,7 +71,7 @@ class _MapScreenState extends State<MapScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Expanded(
-                  child: BottonSelection(
+                  child: ButtonSelection(
                     marginColor: BaseColors.greenDark1A,
                     selectedBackgroundColor: BaseColors.greenColor100,
                     selectedBorderColor: BaseColors.primaryColor,
@@ -90,7 +90,7 @@ class _MapScreenState extends State<MapScreen> {
                 ),
                 getWBox(),
                 Expanded(
-                  child: BottonSelection(
+                  child: ButtonSelection(
                     marginColor: BaseColors.greenDark1A,
                     selectedBackgroundColor: BaseColors.greenColor100,
                     selectedBorderColor: BaseColors.primaryColor,
