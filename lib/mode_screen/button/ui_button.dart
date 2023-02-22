@@ -100,42 +100,42 @@ class _UiButtonModeState extends State<UiButtonMode> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
                 child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
                       children: [
-                        Row(
-                          children: [
-                            widget.icon,
-                            TimeWidget(
-                              expire: widget.expireDate,
-                              isFreeTrial: false,
-                            )
-                          ],
-                        ),
-                        Text(
-                          widget.title,
-                          textAlign: TextAlign.left,
-                          style: widget.textStyle ??
-                              TextStyle(
-                                color: widget.colorTitle != null
-                                    ? widget.colorTitle
-                                    : Colors.black,
-                                fontSize: widget.fontSize ?? 18,
-                                fontWeight: FontWeight.normal,
-                              ),
-                        ),
-                        Text(
-                          widget.detail,
-                          style: widget.textStyle ??
-                              TextStyle(
-                                height: 0.5,
-                                color: widget.colorDetail != null
-                                    ? widget.colorDetail
-                                    : BaseColors.kellyGreen500,
-                                fontSize: widget.fontSize ?? 18,
-                                fontWeight: FontWeight.normal,
-                              ),
-                        ),
+                        widget.icon,
+                        TimeWidget(
+                          expire: widget.expireDate,
+                          isFreeTrial: false,
+                        )
+                      ],
+                    ),
+                    Text(
+                      widget.title,
+                      textAlign: TextAlign.left,
+                      style: widget.textStyle ??
+                          TextStyle(
+                            color: widget.colorTitle != null
+                                ? widget.colorTitle
+                                : Colors.black,
+                            fontSize: widget.fontSize ?? 18,
+                            fontWeight: FontWeight.normal,
+                          ),
+                    ),
+                    Text(
+                      widget.detail,
+                      style: widget.textStyle ??
+                          TextStyle(
+                            height: 0.5,
+                            color: widget.colorDetail != null
+                                ? widget.colorDetail
+                                : BaseColors.kellyGreen500,
+                            fontSize: widget.fontSize ?? 18,
+                            fontWeight: FontWeight.normal,
+                          ),
+                    ),
                   ],
                 ),
               ),

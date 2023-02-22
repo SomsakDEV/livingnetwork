@@ -1,4 +1,6 @@
 // ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers, prefer_const_constructors, dead_code, prefer_const_literals_to_create_immutables, unnecessary_new, unused_label, sized_box_for_whitespace
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
@@ -22,11 +24,43 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool focusLiveMode = false;
   late bool focusGameMode = false;
 
+  String? fiveGMode, 
+          packageName, 
+          packageState, 
+          currentMode;
+  double? maxQuota, 
+          reaminingQuota;
+  DateTime? startDate, 
+            expireDate;
+
   bool isSelectedMode = false;
 
   SizedBox btwRow = SizedBox(
     height: 5,
   );
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  // }
+
+  final formKey = GlobalKey<FormState>();
+
+  void callAPIMode() async {
+    if (formKey.currentState!.validate()) {
+      formKey.currentState!.save();
+
+      var res = 'success';
+
+      //var body = jsonDecode(response.body);
+      //if (body['status'] == 'success') {
+        if (fiveGMode == '5G') {
+
+        }
+      //}
+
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -275,7 +309,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: ListTile(
                       leading: Image.asset(
-                          'packages/living_network/assets/images/mode_internet.png', height: 44, width: 44,),
+                        'packages/living_network/assets/images/mode_internet.png',
+                        height: 44,
+                        width: 44,
+                      ),
                       textColor: BaseColorsLN.textColorTabbar,
                       title: Text(
                         '5G Free trial',
@@ -291,34 +328,41 @@ class _ModeWidgetState extends State<ModeWidget> {
                           //letterSpacing: -0.4,
                         ),
                       ),
-                      subtitle: IUWidget(maxValue: 100, markerValue: 80, barColorGradient: [ BaseColorsLN.speedCompare2, BaseColorsLN.speedCompare2,],),
+                      subtitle: IUWidget(
+                        maxValue: 100,
+                        markerValue: 80,
+                        barColorGradient: [
+                          BaseColorsLN.speedCompare2,
+                          BaseColorsLN.speedCompare2,
+                        ],
+                      ),
                     ),
                   )
                 ],
               ),
-              Container(
-                height: 54,
-                width: 295,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Free trial will expire:           ',
-                      style: TextStyle(
-                        fontFamily: 'DB Heavent',
-                        // fontFamilyFallback: ['NotoSansThaiUI'],
-                        color: Color(0xFF657884),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                    TimeWidget(
-                      expire: DateTime(2023, 2, 21, 15, 30),
-                    ),
-                  ],
-                ),
+              // Container(
+              //   height: 54,
+              //   width: 295,
+              //   child: Row(
+              //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              //     children: [
+              //       Text(
+              //         'Free trial will expire:           ',
+              //         style: TextStyle(
+              //           fontFamily: 'DB Heavent',
+              //           // fontFamilyFallback: ['NotoSansThaiUI'],
+              //           color: Color(0xFF657884),
+              //           fontSize: 18,
+              //           fontWeight: FontWeight.w500,
+              //           fontStyle: FontStyle.normal,
+              //         ),
+              //       ),
+              TimeWidget(
+                expire: DateTime.now().add(Duration(days: 1)),
               ),
+              // ],
+              // ),
+              // ),
             ],
           ),
         ),
@@ -327,53 +371,60 @@ class _ModeWidgetState extends State<ModeWidget> {
   }
 }
 
-
 Widget showFreeTrial() {
-  return Card(child: Container(height: 54,
-                width: 295,
-                decoration: BoxDecoration(color: Color(0xFF64CA00)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Free trial',
-                      style: TextStyle(
-                        fontFamily: 'DB Heavent',
-                        // fontFamilyFallback: ['NotoSansThaiUI'],
-                        color: Color(0xFF657884),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                    TimeWidget(
-                      expire: DateTime(2023, 2, 21, 15, 30),
-                    ),
-                  ],
-                ),),);
+  return Card(
+    child: Container(
+      height: 54,
+      width: 295,
+      decoration: BoxDecoration(color: Color(0xFF64CA00)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Free trial',
+            style: TextStyle(
+              fontFamily: 'DB Heavent',
+              // fontFamilyFallback: ['NotoSansThaiUI'],
+              color: Color(0xFF657884),
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              fontStyle: FontStyle.normal,
+            ),
+          ),
+          TimeWidget(
+            expire: DateTime(2023, 2, 21, 15, 30),
+          ),
+        ],
+      ),
+    ),
+  );
 }
 
 Widget closeFreeTrial() {
-  return Card(child: Container(height: 54,
-                width: 295,
-                decoration: BoxDecoration(color: Color(0xFFF2F4F6)),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      'Free trial will expire:     ',
-                      style: TextStyle(
-                        fontFamily: 'DB Heavent',
-                        // fontFamilyFallback: ['NotoSansThaiUI'],
-                        color: Color(0xFF657884),
-                        fontSize: 18,
-                        fontWeight: FontWeight.w500,
-                        fontStyle: FontStyle.normal,
-                      ),
-                    ),
-                    TimeWidget(
-                      expire: DateTime(2023, 2, 21, 15, 30),
-                    ),
-                  ],
-                ),),);
+  return Card(
+    child: Container(
+      height: 54,
+      width: 295,
+      decoration: BoxDecoration(color: Color(0xFFF2F4F6)),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          Text(
+            'Free trial will expire:     ',
+            style: TextStyle(
+              fontFamily: 'DB Heavent',
+              // fontFamilyFallback: ['NotoSansThaiUI'],
+              color: Color(0xFF657884),
+              fontSize: 18,
+              fontWeight: FontWeight.w500,
+              fontStyle: FontStyle.normal,
+            ),
+          ),
+          TimeWidget(
+            expire: DateTime(2023, 2, 21, 15, 30),
+          ),
+        ],
+      ),
+    ),
+  );
 }

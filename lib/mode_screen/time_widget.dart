@@ -47,12 +47,14 @@ class _TimeWidgetState extends State<TimeWidget> {
             ));
   }
 
-  buildTime() {
+buildTime() {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final hours = twoDigits(duration.inHours);
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
-    if (hours != '00' && minutes != '00' && seconds != '00') {
+    if (hours == '00' && minutes == '00' && seconds == '00') {
+      return const SizedBox();
+    } else {
       if (!widget.isFreeTrial) {
         return Align(
           alignment: Alignment.topRight,
@@ -122,8 +124,6 @@ class _TimeWidgetState extends State<TimeWidget> {
                   ),
                 ]));
       }
-    } else {
-      return const SizedBox();
     }
   }
 
