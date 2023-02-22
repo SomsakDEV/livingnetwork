@@ -1,0 +1,27 @@
+gradle-wrapper.jar
+/.gradle
+/captures/
+/gradlew
+/gradlew.bat
+/local.properties
+GeneratedPluginRegistrant.java
+.pub-cache/
+.pub/
+/build/
+**/doc/api/
+
+**/ios/Flutter/.last_build_id
+
+.dart_tool/
+
+.flutter-plugins
+
+.flutter-plugins-dependencies
+
+.packages
+
+# Remember to never publicly share your keystore.
+# See https://flutter.dev/docs/deployment/android#reference-the-keystore-from-the-app
+key.properties
+**/*.keystore
+**/*.jks
