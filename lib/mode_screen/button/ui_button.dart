@@ -100,68 +100,42 @@ class _UiButtonModeState extends State<UiButtonMode> {
                 padding:
                     const EdgeInsets.symmetric(horizontal: 4.0, vertical: 4.0),
                 child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Row(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        widget.icon,
-                        Container(
-                          decoration: BoxDecoration(
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(8)),
-                              gradient: LinearGradient(
-                                  begin: FractionalOffset.centerLeft,
-                                  end: FractionalOffset.centerRight,
-                                  colors: const [
-                                    Color(0xFF9EDE3E),
-                                    Color(0xFF64CA00)
-                                  ])),
-                          width: 68,
-                          height: 24,
-                          child: Row(children: [
-                            SizedBox(
-                              width: 4.33,
-                            ),
-                            Image.asset(
-                              'packages/living_network/assets/images/Vector.png',
-                              width: 11.44,
-                              height: 13,
-                            ),
-                            SizedBox(
-                              width: 4.23,
-                            ),
+                        Row(
+                          children: [
+                            widget.icon,
                             TimeWidget(
                               expire: widget.expireDate,
+                              isFreeTrial: false,
                             )
-                          ]),
-                        )
-                      ],
-                    ),
-                    Text(
-                      widget.title,
-                      textAlign: TextAlign.left,
-                      style: widget.textStyle ??
-                          TextStyle(
-                            color: widget.colorTitle != null
-                                ? widget.colorTitle
-                                : Colors.black,
-                            fontSize: widget.fontSize ?? 18,
-                            fontWeight: FontWeight.normal,
-                          ),
-                    ),
-                    Text(
-                      widget.detail,
-                      style: widget.textStyle ??
-                          TextStyle(
-                            height: 0.5,
-                            color: widget.colorDetail != null
-                                ? widget.colorDetail
-                                : BaseColors.kellyGreen500,
-                            fontSize: widget.fontSize ?? 18,
-                            fontWeight: FontWeight.normal,
-                          ),
-                    ),
+                          ],
+                        ),
+                        Text(
+                          widget.title,
+                          textAlign: TextAlign.left,
+                          style: widget.textStyle ??
+                              TextStyle(
+                                color: widget.colorTitle != null
+                                    ? widget.colorTitle
+                                    : Colors.black,
+                                fontSize: widget.fontSize ?? 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
+                        Text(
+                          widget.detail,
+                          style: widget.textStyle ??
+                              TextStyle(
+                                height: 0.5,
+                                color: widget.colorDetail != null
+                                    ? widget.colorDetail
+                                    : BaseColors.kellyGreen500,
+                                fontSize: widget.fontSize ?? 18,
+                                fontWeight: FontWeight.normal,
+                              ),
+                        ),
                   ],
                 ),
               ),
