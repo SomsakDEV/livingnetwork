@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 /// Box that can be tapped.
 /// When selected a check Icon appears
-class BottonSelection extends StatelessWidget {
+class ButtonSelection extends StatelessWidget {
   /// Background color for the space between the child and the
   /// Defaul value: scaffoldBackgroundColor
   final Color? marginColor;
@@ -65,7 +65,7 @@ class BottonSelection extends StatelessWidget {
   ///Default not selected
   final bool selected;
 
-  BottonSelection(
+  ButtonSelection(
       {required this.selected,
       this.marginColor,
       this.unselectedBackgroundColor,
