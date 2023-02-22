@@ -17,8 +17,8 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   bool _select1 = true;
   bool _select2 = true;
-  SizedBox getHBox([var a = 15]) => SizedBox(height: a);
-  SizedBox getWBox([var a = 15]) => SizedBox(width: a);
+  SizedBox getHBox([double a = 15.0]) => SizedBox(height: a);
+  SizedBox getWBox([double a = 15.0]) => SizedBox(width: a);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
