@@ -234,6 +234,15 @@ class LNBaseTextStyle {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
+  static const caption2_1 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.textColorTabbar,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
   static const caption3 = TextStyle(
     fontFamily: 'DB Heavent',
     color: BaseColorsLN.textColorTabbar,
@@ -259,6 +268,24 @@ class LNBaseTextStyle {
     color: BaseColorsLN.lowInternet1,
     fontSize: 28,
     fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const mapTextButton = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.kellyGreen500,
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const mapButtonDirection = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.whiteColor,
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
   );
