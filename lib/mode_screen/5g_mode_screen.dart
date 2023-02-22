@@ -2,6 +2,9 @@
 
 import 'package:flutter/material.dart';
 import 'package:living_network/mode_screen/4g_phone_4g_pack.dart';
+import 'package:living_network/mode_screen/4g_phone_5g_pack.dart';
+import 'package:living_network/mode_screen/5g_phone_4g_pack.dart';
+import 'package:living_network/mode_screen/5g_phone_5g_pack.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class FiveGModeScreen extends StatefulWidget {
@@ -20,7 +23,7 @@ class _FiveGModeScreenState extends State<FiveGModeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Title'),
+        title: const Text('Mode'),
       ),
       body: Container(),
     );
@@ -29,4 +32,7 @@ class _FiveGModeScreenState extends State<FiveGModeScreen> {
 
 Map<String, WidgetBuilder> routes = {
   '4GPhone4GPack ': (BuildContext context) => FourGPhoneFourGPackage(),
+  '4GPhone5GPack ': (BuildContext context) => FourGPhoneFiveGPackage(),
+  '5GPhone4GPack ': (BuildContext context) => FiveGPhoneFourGPackage(),
+  '5GPhone5GPack ': (BuildContext context) => FiveGPhoneFiveGPackage(),
 };

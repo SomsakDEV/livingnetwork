@@ -1,11 +1,11 @@
 name: living_network
 description: A new Flutter package project.
 version: 0.0.1
-publish_to : none
+publish_to: none
 homepage:
 
 environment:
-  sdk: '>=2.18.0 <3.0.0'
+  sdk: ">=2.18.0 <3.0.0"
   flutter: ">=1.17.0"
 
 dependencies:
@@ -21,7 +21,7 @@ dependencies:
 
   ui_style:
     # path: ../ui_styles
-    git: 
+    git:
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/ui_styles.git
       ref: develop-0.1
 
@@ -38,10 +38,6 @@ dependencies:
   selectable_container: ^1.0.7
   solid_bottom_sheet: ^0.1.10
 
-
-
-  
-
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -52,14 +48,13 @@ dev_dependencies:
 
 # The following section is specific to Flutter packages.
 flutter:
-
   # To add assets to your package, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
   assets:
-  - assets/images/
-  - assets/locations.json
+    - assets/images/
+    - assets/locations.json
   #
   # For details regarding assets in packages, see
   # https://flutter.dev/assets-and-images/#from-packages
@@ -86,3 +81,5 @@ flutter:
   #
   # For details regarding fonts in packages, see
   # https://flutter.dev/custom-fonts/#from-packages
+dependency_overrides:
+  intl: ^0.17.0

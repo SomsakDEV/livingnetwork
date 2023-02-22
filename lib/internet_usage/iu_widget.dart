@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
-import 'package:ui_style/base_color.dart';
-import 'package:ui_style/ui_style.dart';
 
 class IUWidget extends StatefulWidget {
   final List<LinearMarkerPointer>? markerPointers;
@@ -44,7 +42,7 @@ class _IUWidgetState extends State<IUWidget> {
                 axisTrackStyle: const LinearAxisTrackStyle(
                   thickness: 10,
                   edgeStyle: LinearEdgeStyle.bothCurve,
-                  color: BaseColors.neutralsLightestGrey,
+                  color: BaseColorsLN.neutralsLightestGrey,
                 ),
                 //Value
                 barPointers: [

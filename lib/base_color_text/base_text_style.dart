@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:ui_style/ui_style.dart';
 
 class LNBaseTextStyle {
   LNBaseTextStyle._();
@@ -8,7 +7,7 @@ class LNBaseTextStyle {
   static const head1Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.normal,
@@ -20,7 +19,7 @@ class LNBaseTextStyle {
   static const head2Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.normal,
@@ -31,7 +30,7 @@ class LNBaseTextStyle {
   static const head4Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -42,7 +41,7 @@ class LNBaseTextStyle {
   static const body1Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -55,7 +54,7 @@ class LNBaseTextStyle {
 
   static const header1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 62,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -66,7 +65,7 @@ class LNBaseTextStyle {
 
   static const header2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 56,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -77,7 +76,7 @@ class LNBaseTextStyle {
 
   static const header3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 40,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -88,7 +87,7 @@ class LNBaseTextStyle {
 
   static const header4 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 32,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -99,7 +98,7 @@ class LNBaseTextStyle {
 
   static const header5 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 28,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -110,7 +109,7 @@ class LNBaseTextStyle {
 
   static const header6 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 24,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -163,7 +162,7 @@ class LNBaseTextStyle {
 
   static const body1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 24,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -174,7 +173,7 @@ class LNBaseTextStyle {
 
   static const body2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -184,7 +183,7 @@ class LNBaseTextStyle {
   );
   static const body3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -195,7 +194,7 @@ class LNBaseTextStyle {
 
   static const keywords = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.neutralsBlack,
+    color: BaseColorsLN.neutralsBlack,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -206,7 +205,7 @@ class LNBaseTextStyle {
 
   static const caption = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.textColorTabbar,
+    color: BaseColorsLN.textColorTabbar,
     fontSize: 18,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -217,7 +216,7 @@ class LNBaseTextStyle {
 
   static const caption_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.textColorTabbar,
+    color: BaseColorsLN.textColorTabbar,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -228,7 +227,7 @@ class LNBaseTextStyle {
 
   static const caption2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.textColorTabbar,
+    color: BaseColorsLN.textColorTabbar,
     fontSize: 22,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -237,7 +236,7 @@ class LNBaseTextStyle {
 
   static const caption3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.textColorTabbar,
+    color: BaseColorsLN.textColorTabbar,
     fontSize: 14,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -246,7 +245,7 @@ class LNBaseTextStyle {
 
   static const speedCompare5G = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColors.primaryColor,
+    color: BaseColorsLN.primaryColor,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
