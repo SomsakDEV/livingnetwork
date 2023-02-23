@@ -14,7 +14,7 @@ class _ToggleSignalState extends State<ToggleSignal> {
     var conH = MediaQuery.of(context).size.height;
     var conW = MediaQuery.of(context).size.width;
     return Container(
-      height: conH * 0.0325,
+      height: conH * 0.0350,
       decoration: BoxDecoration(
         color: BaseColors.whiteColor,
         border: Border.all(color: BaseColors.greyColor, width: 1),
@@ -40,11 +40,11 @@ class _ToggleSignalState extends State<ToggleSignal> {
         isSelected: selected,
         children: <Widget>[
           SizedBox(
-            width: conW * 0.35,
+            width: conW * 0.365,
             child: const Center(child: Text('4G')),
           ),
           SizedBox(
-            width: conW * 0.35,
+            width: conW * 0.365,
             child: const Center(child: Text('5G')),
           ),
         ],
