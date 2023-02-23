@@ -8,6 +8,10 @@ class IUWidget extends StatefulWidget {
   final double markerValue;
   final List<Color>? barColorGradient;
   final LinearEdgeStyle? barPointerEdgeStyle;
+  final int? animationDuration;
+  final double? thickness;
+  final EdgeInsets? padding;
+  final bool? animateRange;
 
   const IUWidget({
     required this.maxValue,
@@ -15,6 +19,10 @@ class IUWidget extends StatefulWidget {
     this.markerPointers,
     this.barColorGradient,
     this.barPointerEdgeStyle,
+    this.animationDuration,
+    this.thickness,
+    this.padding,
+    this.animateRange,
     super.key,
   });
 
@@ -26,29 +34,30 @@ class _IUWidgetState extends State<IUWidget> {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 20, right: 10, bottom: 10),
+      padding: widget.padding ?? const EdgeInsets.only(top: 20, right: 10, bottom: 10),
       child: Row(
         // mainAxisSize: MainAxisSize.max,
         // mainAxisAlignment: MainAxisAlignment.start,
         children: [
           Expanded(
             child: SfLinearGauge(
-                animationDuration: 1000,
-                animateRange: true,
+                animateRange: widget.animateRange ?? true,
+                animationDuration: widget.animationDuration ?? 1000,
                 maximum: widget.maxValue,
                 //Style bar
                 showTicks: false,
                 showLabels: false,
-                axisTrackStyle: const LinearAxisTrackStyle(
-                  thickness: 10,
+                axisTrackStyle: LinearAxisTrackStyle(
+                  thickness: widget.thickness ?? 10,
                   edgeStyle: LinearEdgeStyle.bothCurve,
                   color: BaseColorsLN.neutralsLightestGrey,
                 ),
                 //Value
                 barPointers: [
                   LinearBarPointer(
+                    enableAnimation: widget.animateRange ?? true,
                     value: widget.markerValue,
-                    thickness: 10,
+                    thickness: widget.thickness ?? 10,
                     edgeStyle: widget.barPointerEdgeStyle ?? LinearEdgeStyle.bothCurve,
                     shaderCallback: shader,
                   ),
