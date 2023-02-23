@@ -13,3 +13,20 @@ List<Image> image = [
   Image.asset('packages/living_network/assets/images/mode_live.png'),
   Image.asset('packages/living_network/assets/images/mode_game.png')
 ];
+
+
+List title_preformance = ['Browsing / Social', 'Live', 'Video streaming', 'Music streaming', 'Game'];
+List subTitle_preformance = [
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. LINE, Facebook, Twitter, Google',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. Tiktok, Facebook Live, Youtube Live',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. Youtube, Netflix, Disney Hostar, HBO Go',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. Joox, Spotify, Youtube Music, Apple Music, Plern',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. ROV, Pub G, Among Us, Candy Crush'
+];
+List<Image> image_preformance = [
+  Image.asset('packages/living_network/assets/images/performance_icon_1.png'),
+  Image.asset('packages/living_network/assets/images/performance_icon_2.png'),
+  Image.asset('packages/living_network/assets/images/performance_icon_3.png'),
+  Image.asset('packages/living_network/assets/images/performance_icon_4.png'),
+  Image.asset('packages/living_network/assets/images/performance_icon_5.png')
+];

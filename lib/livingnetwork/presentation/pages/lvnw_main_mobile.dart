@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:living_network/cell_tower_info/ct_main.dart';
 import 'package:living_network/internet_usage/iu_main.dart';
 import 'package:living_network/map_screen/map_widget.dart';
+import 'package:living_network/mode_screen/mode_widget.dart';
 import 'package:living_network/performance_widget/p_main.dart';
 import 'package:living_network/speed_comparing/sc_main.dart';
 import 'package:ui_style/ui_style.dart';
@@ -102,105 +103,85 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
   Widget build(BuildContext context) {
     return SingleChildScrollView(
       child: Stack(
-        children: [
-          Column(
-            children: <Widget>[
-              Container(
-                height: MediaQuery.of(context).size.height * 0.35,
-                width: MediaQuery.of(context).size.width,
-                color: Colors.amber,
-                child: MapWidget(),
-              ),
-              Container(
-                height: MediaQuery.of(context).size.height * 0.85,
-                width: MediaQuery.of(context).size.width,
-                color: Color(0xFFF0F0F0),
-              )
-            ],
+        children: <Widget>[
+          Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.amber,
+            child: MapWidget(),
           ),
-          Positioned(
-              top: MediaQuery.of(context).size.height * 0.30,
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/livingnetwork/map');
+            },
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.35,
               width: MediaQuery.of(context).size.width,
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: CellTowerInfoMain(),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: PerformanceMain(),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: SpeedComparingMain(),
-                  ),
-                  _sizedBox,
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    child: InternetUsage(),
-                  ),
-                  _sizedBox,
-                  Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          color: Color(0xFFFFFFFF),
-                          borderRadius: BorderRadius.circular(8),
-                          border:
-                              Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                      width: MediaQuery.of(context).size.width * 0.93,
-                      child: 
+            ),
+          ),
+          Column(
+            children: [
+              SizedBox(
+                height: MediaQuery.of(context).size.height * 0.30,
+                width: MediaQuery.of(context).size.width,
+              ),
+              SizedBox(
+                  width: MediaQuery.of(context).size.width,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
                       Container(
-                        // decoration: BoxDecoration(
-                        //     borderRadius: BorderRadius.all(Radius.circular(8)),
-                        //     gradient: LinearGradient(
-                        //         begin: FractionalOffset.centerLeft,
-                        //         end: FractionalOffset.centerRight,
-                        //         colors: const [
-                        //           Color(0xFF9EDE3E),
-                        //           Color(0xFF64CA00)
-                        //         ])),
-                        // width: 90,
-                        // height: 24,
-                        // child: Row(children: [
-                        //   Image.asset(
-                        //     'packages/livingnetwork/assets/images/Vector.png',
-                        //     width: 11.44,
-                        //     height: 13,),
-                        //   TimeWidget(
-                        //     expire: DateTime(2023, 2, 21),
-                        //   )
-                        // ]),
-                      )
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        child: CellTowerInfoMain(),
                       ),
-                  _sizedBox,
-                  Container(
-                    decoration: BoxDecoration(
-                        color: Color(0xFFFFFFFF),
-                        borderRadius: BorderRadius.circular(8),
-                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: MediaQuery.of(context).size.width * 0.93,
-                    height: MediaQuery.of(context).size.height * 0.2,
-                  ),
-                ],
-              ))
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        child: PerformanceMain(),
+                      ),
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        child: SpeedComparingMain(),
+                      ),
+                      _sizedBox,
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        child: InternetUsage(),
+                      ),
+                      _sizedBox,
+                      Container(
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                              color: Color(0xFFFFFFFF),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                  width: 3, color: Color(0xFFF0F0F0))),
+                          width: MediaQuery.of(context).size.width * 0.93,
+                          child: ModeWidget()),
+                      _sizedBox
+                    ],
+                  )),
+            ],
+          )
         ],
       ),
     );
