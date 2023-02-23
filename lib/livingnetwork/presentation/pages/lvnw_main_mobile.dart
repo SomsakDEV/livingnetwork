@@ -1,8 +1,10 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:living_network/cell_tower_info/ct_main.dart';
 import 'package:living_network/internet_usage/iu_main.dart';
 import 'package:living_network/map_screen/map_widget.dart';
+import 'package:living_network/performance_widget/p_main.dart';
 import 'package:living_network/speed_comparing/sc_main.dart';
 import 'package:ui_style/ui_style.dart';
 
@@ -47,7 +49,7 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                         child: Image.asset(
-                          'packages/living_network/assets/images/image.png',
+                          'packages/living_network/assets/images/Image.png',
                           width: 260,
                         ),
                       ),
@@ -104,7 +106,7 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
           Column(
             children: <Widget>[
               Container(
-                height: MediaQuery.of(context).size.height * 0.45,
+                height: MediaQuery.of(context).size.height * 0.35,
                 width: MediaQuery.of(context).size.width,
                 color: Colors.amber,
                 child: MapWidget(),
@@ -117,11 +119,27 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
             ],
           ),
           Positioned(
-              top: MediaQuery.of(context).size.height * 0.23,
+              top: MediaQuery.of(context).size.height * 0.30,
               width: MediaQuery.of(context).size.width,
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFFFFFF),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                    width: MediaQuery.of(context).size.width * 0.93,
+                    child: CellTowerInfoMain(),
+                  ),
+                  Container(
+                    decoration: BoxDecoration(
+                        color: Color(0xFFFFFFFF),
+                        borderRadius: BorderRadius.circular(8),
+                        border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                    width: MediaQuery.of(context).size.width * 0.93,
+                    child: PerformanceMain(),
+                  ),
                   Container(
                     decoration: BoxDecoration(
                         color: Color(0xFFFFFFFF),
