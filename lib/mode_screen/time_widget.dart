@@ -94,7 +94,7 @@ buildTime() {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 color: Color(0xFFF2F4F6)),
-            width: MediaQuery.of(context).size.width * 0.87,
+            width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

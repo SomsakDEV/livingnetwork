@@ -1,104 +1,34 @@
 {
    "offices":[
       {
-         "address":"Aabogade 15\n8200 Aarhus\nDenmark",
-         "id":"aarhus",
-         "image":"assets/images/p1.png",
-         "lat":56.172249,
-         "lng":10.187372,
-         "name":"\u0e2d\u0e2d\u0e23\u0e4c\u0e2e\u0e39\u0e2a",
-         "phone":"",
-         "region":"europe"
+         "id":"current cellular",
+         "image":"assets/images/cellular_current.png",
+         "lat":13.783889514456709,
+         "lng":100.5471371883403
       },
       {
-         "address":"Claude Debussylaan 34\n1082 MD, Amsterdam\nNetherlands",
-         "id":"amsterdam",
-         "image":"assets/images/p1.png",
-         "lat":52.337801,
-         "lng":4.872066,
-         "name":"\u0e2d\u0e31\u0e21\u0e2a\u0e40\u0e15\u0e2d\u0e23\u0e4c\u0e14\u0e31\u0e21",
-         "phone":"",
-         "region":"europe"
+         "id":"other cellular 1",
+         "image":"assets/images/cellular_other.png",
+         "lat":13.785486273968663, 
+         "lng":100.54486674628475
       },
       {
-         "address":"2300 Traverwood Dr.\nAnn Arbor, MI 48105\nUnited States",
-         "id":"ann-arbor",
-         "image":"assets/images/p2.png",
-         "lat":42.3063848,
-         "lng":-83.7140833,
-         "name":"\u0e41\u0e2d\u0e19\u0e2d\u0e32\u0e23\u0e4c\u0e40\u0e1a\u0e2d\u0e23\u0e4c",
-         "phone":"+1 734-332-6500",
-         "region":"north-america"
+         "id":"other cellular 2",
+         "image":"assets/images/cellular_other.png",
+         "lat":13.783791753315596, 
+         "lng":100.54862471934223
       },
       {
-         "address":"Fragkokklisias 7\nAthens 151 25\nGreece",
-         "id":"athens",
-         "image":"assets/images/p2.png",
-         "lat":38.03902,
-         "lng":23.804595,
-         "name":"\u0e40\u0e2d\u0e40\u0e18\u0e19\u0e2a\u0e4c",
-         "phone":"",
-         "region":"europe"
+         "id":"Super Wifi",
+         "image":"assets/images/bit_wifi.png",
+         "lat":13.782173257366233, 
+         "lng":100.54646612172291
       },
       {
-         "address":"10 10th Street NE\nAtlanta, GA 30309\nUnited States",
-         "id":"atlanta",
-         "image":"assets/images/p3.png",
-         "lat":33.781827,
-         "lng":-84.387301,
-         "name":"\u0e41\u0e2d\u0e15\u0e41\u0e25\u0e19\u0e15\u0e32",
-         "phone":"+1 404-487-9000",
-         "region":"north-america"
-      },
-      {
-         "address":"500 W 2nd St\nSuite 2900\nAustin, TX 78701\nUnited States",
-         "id":"austin",
-         "image":"assets/images/p3.png",
-         "lat":30.266035,
-         "lng":-97.749237,
-         "name":"\u0e2d\u0e2d\u0e2a\u0e15\u0e34\u0e19",
-         "phone":"+1 512-343-5283",
-         "region":"north-america"
-      },
-      {
-         "address":"No. 3, RMZ Infinity - Tower E\nOld Madras Road\n4th and 5th Floors\nBangalore, 560 016, India",
-         "id":"bangalore",
-         "image":"assets/images/p4.png",
-         "lat":12.99332,
-         "lng":77.660176,
-         "name":"\u0e1a\u0e31\u0e07\u0e04\u0e32\u0e25\u0e2d\u0e23\u0e4c",
-         "phone":"+91-80-67218000",
-         "region":"asia-pacific"
-      },
-      {
-         "address":"57 \u0e2d\u0e32\u0e04\u0e32\u0e23\u0e1b\u0e32\u0e23\u0e4c\u0e04 \u0e40\u0e27\u0e19\u0e40\u0e0a\u0e2d\u0e23\u0e4c \u0e2d\u0e35\u0e42\u0e04\u0e40\u0e1e\u0e25\u0e47\u0e01\u0e0b\u0e4c\n\u0e0a\u0e31\u0e49\u0e19 14 \u0e16\u0e19\u0e19\u0e27\u0e34\u0e17\u0e22\u0e38\n\u0e01\u0e23\u0e38\u0e07\u0e40\u0e17\u0e1e\u0e2f 10330 \u0e1b\u0e23\u0e30\u0e40\u0e17\u0e28\u0e44\u0e17\u0e22",
-         "id":"bangkok",
-         "image":"assets/images/p4.png",
-         "lat":13.742866,
-         "lng":100.547983,
-         "name":"\u0e01\u0e23\u0e38\u0e07\u0e40\u0e17\u0e1e\u0e2f",
-         "phone":"",
-         "region":"asia-pacific"
-      },
-      {
-         "address":"6th Floor, Tower B, Raycom InfoTech Park\nNo. 2 Kexueyuan South Road\nZhongguancun Beijing 100190",
-         "id":"beijing",
-         "image":"assets/images/p5.png",
-         "lat":39.9848878,
-         "lng":116.3265708,
-         "name":"\u0e1b\u0e31\u0e01\u0e01\u0e34\u0e48\u0e07",
-         "phone":"+86-10-62503000",
-         "region":"asia-pacific"
-      },
-      {
-         "address":"Boulevard Corporate Tower\nAv. dos Andradas, 3000 - Andares 14-17\nSanta Efig\u00eania\nBelo Horizonte\n30260-070, Brazil",
-         "id":"belo-horizonte",
-         "image":"assets/images/p5.png",
-         "lat":-19.920225,
-         "lng":-43.920845,
-         "name":"\u0e40\u0e1a\u0e42\u0e25\u0e42\u0e2d\u0e23\u0e35\u0e0b\u0e2d\u0e19\u0e15\u0e35",
-         "phone":"+55-31-2128-6800",
-         "region":"latin-america"
+         "id":"bad signal",
+         "image":"assets/images/cellular_bad.png",
+         "lat":13.78476936288522, 
+         "lng":100.5518905768803
       }
   ]
 }

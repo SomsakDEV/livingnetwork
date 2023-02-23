@@ -1,6 +1,4 @@
 // ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers, prefer_const_constructors, dead_code, prefer_const_literals_to_create_immutables, unnecessary_new, unused_label, sized_box_for_whitespace, avoid_init_to_null
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
@@ -13,7 +11,8 @@ import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
 
 class ModeWidget extends StatefulWidget {
-  const ModeWidget({super.key});
+  //bool phone, package;
+  const ModeWidget({super.key, /*required this.phone, required this.package*/});
 
   @override
   State<ModeWidget> createState() => _ModeWidgetState();
@@ -33,7 +32,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   late num speed;
   late bool fup = false;
   late double reaminingQuota;
-  late DateTime startDate, expireDate;
+  late DateTime startDate, expireDateMode = DateTime(2023,02,23,23,40,33);
 
   bool isSelectedMode = false;
 
@@ -65,8 +64,6 @@ class _ModeWidgetState extends State<ModeWidget> {
     //letterSpacing: -0.4,
   );
 
-  //For Active Mode
-
   //For disable Mode 'backgroudcolor'
   late int disableBackgroudColor = 0xFFEEF8E8;
   late int? disableBorderColor = 0xFFEEF8E8;
@@ -92,6 +89,21 @@ class _ModeWidgetState extends State<ModeWidget> {
     'packages/living_network/assets/images/mode_game.png',
     height: 15,
     width: 15,
+  );
+  late Image imageInternet = Image.asset(
+    'packages/living_network/assets/images/mode_internet.png',
+    height: 44,
+    width: 44,
+  );
+  late Image imageTitle = Image.asset(
+    'packages/living_network/assets/images/mode_title.png',
+    height: 44,
+    fit: BoxFit.cover,
+  );
+  late Image imageInformation = Image.asset(
+    'packages/living_network/assets/images/information.png',
+    height: 13.33,
+    width: 13.33,
   );
 
   @override
@@ -128,6 +140,11 @@ class _ModeWidgetState extends State<ModeWidget> {
           height: 15,
           width: 15,
         );
+        imageInternet = Image.asset(
+          'packages/living_network/assets/images/mode_internet_bw.png',
+          height: 44,
+          width: 44,
+        );
       }
     } else if (packageMode == '5G' && packageState == 'active') {
       if (currentMode == 'maxmode') {
@@ -139,7 +156,9 @@ class _ModeWidgetState extends State<ModeWidget> {
       } else if (currentMode == 'gamemode') {
         !focusGameMode;
       }
-    } else {}
+    } else {
+      print('have some problem');
+    }
     return Card(
       color: Colors.blueGrey,
       child: Container(
@@ -156,11 +175,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 mainAxisAlignment: MainAxisAlignment.start,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset(
-                    'packages/living_network/assets/images/mode_title.png',
-                    height: 44,
-                    fit: BoxFit.cover,
-                  ),
+                  imageTitle,
                   Padding(
                     // padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     padding: const EdgeInsets.only(left: 8),
@@ -169,22 +184,17 @@ class _ModeWidgetState extends State<ModeWidget> {
                         ),
                   ),
                   IconButton(
-                    onPressed: () {
-                      showModalBottomSheet(
-                        elevation: 0,
-                        backgroundColor: Colors.transparent,
-                        context: context,
-                        builder: (BuildContext context) {
-                          return UiBottomSheetCardDialogTextMode();
-                        },
-                      );
-                    },
-                    icon: Image.asset(
-                      'packages/living_network/assets/images/information.png',
-                      height: 13.33,
-                      width: 13.33,
-                    ),
-                  )
+                      onPressed: () {
+                        showModalBottomSheet(
+                          elevation: 0,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return UiBottomSheetCardDialogTextMode();
+                          },
+                        );
+                      },
+                      icon: imageInformation)
                 ],
               ),
             ),
@@ -210,25 +220,30 @@ class _ModeWidgetState extends State<ModeWidget> {
                     colorDetail: Color(disableColorDetail!),
                     isDisable: isDiableMode,
                     onPress: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return UiBottomSheetCardDialogMode(
-                            title: 'Switch to Max mode?',
-                            desc: 'Detail: save battery',
-                            textSubmitBtn: 'Switch to Max mode',
-                            onPressedSubmit: (isClicked) {
-                              print("active");
-                              setState(() {
-                                Navigator.pop(context);
-                                focusMaxMode = true;
-                              });
-                            },
-                            onPressedCancel: (isClicked) =>
-                                Navigator.pop(context),
-                          );
-                        },
-                      );
+                      if (!focusMaxMode) {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return UiBottomSheetCardDialogMode(
+                              title: 'Switch to Max mode?',
+                              desc: 'Detail: Default Mode',
+                              textSubmitBtn: 'Switch to Max mode',
+                              onPressedSubmit: (isClicked) {
+                                print("active");
+                                setState(() {
+                                  Navigator.pop(context);
+                                  focusMaxMode = true;
+                                  focusEcoMode = false;
+                                  focusLiveMode = false;
+                                  focusGameMode = false;
+                                });
+                              },
+                              onPressedCancel: (isClicked) =>
+                                  Navigator.pop(context),
+                            );
+                          },
+                        );
+                      }
                     },
                   ),
                 ),
@@ -242,12 +257,16 @@ class _ModeWidgetState extends State<ModeWidget> {
                     width: 143,
                     borderRadius: 10,
                     backgroundColor: Color(disableBackgroudColor),
-                    borderColor: Color(disableBorderColor!),
+                    borderColor: isDiableMode
+                        ? Color(disableBorderColor!)
+                        : focusEcoMode
+                            ? Color(0xFF64CA00)
+                            : Color(0xFFEEF8E8),
                     colorTitle: Color(disableTitleColor!),
                     colorDetail: Color(disableColorDetail!),
                     isDisable: isDiableMode,
                     onPress: () {
-                      if (focusEcoMode) {
+                      if (!focusEcoMode) {
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
@@ -257,6 +276,13 @@ class _ModeWidgetState extends State<ModeWidget> {
                               textSubmitBtn: 'Switch to Eco mode',
                               onPressedSubmit: (isClicked) {
                                 print("active");
+                                setState(() {
+                                  Navigator.pop(context);
+                                  focusMaxMode = false;
+                                  focusEcoMode = true;
+                                  focusLiveMode = false;
+                                  focusGameMode = false;
+                                });
                               },
                               onPressedCancel: (isClicked) =>
                                   Navigator.pop(context),
@@ -282,25 +308,36 @@ class _ModeWidgetState extends State<ModeWidget> {
                     width: 143,
                     borderRadius: 10,
                     backgroundColor: Color(disableBackgroudColor),
-                    borderColor: Color(disableBorderColor!),
+                    borderColor: isDiableMode
+                        ? Color(disableBorderColor!)
+                        : focusLiveMode
+                            ? Color(0xFF64CA00)
+                            : Color(0xFFEEF8E8),
                     colorTitle: Color(disableTitleColor!),
                     colorDetail: Color(disableColorDetail!),
                     isDisable: isDiableMode,
+                    expireDate: expireDateMode,
                     onPress: () {
-                      if (focusLiveMode) {
+                      if (!focusLiveMode) {
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
                             return UiBottomSheetCardDialogMode(
                               title: 'Switch to Live mode?',
-                              desc: 'Detail: save battery',
+                              desc: 'Detail: smoothly live',
                               textSubmitBtn: 'Switch to Live mode',
                               onPressedSubmit: (isClicked) {
                                 print("active");
                                 setState(() {
                                   Navigator.pop(context);
-                                  disableBorderColor = 0xFF64CA00;
+                                  focusMaxMode = false;
+                                  focusEcoMode = false;
+                                  focusLiveMode = true;
+                                  focusGameMode = false;
                                 });
+                                if (focusLiveMode) {
+                                  expireDateMode = DateTime.now().add(Duration(seconds: 10));
+                                }
                               },
                               onPressedCancel: (isClicked) =>
                                   Navigator.pop(context),
@@ -321,21 +358,32 @@ class _ModeWidgetState extends State<ModeWidget> {
                     width: 143,
                     borderRadius: 10,
                     backgroundColor: Color(disableBackgroudColor),
-                    borderColor: Color(disableBorderColor!),
+                    borderColor: isDiableMode
+                        ? Color(disableBorderColor!)
+                        : focusGameMode
+                            ? Color(0xFF64CA00)
+                            : Color(0xFFEEF8E8),
                     colorTitle: Color(disableTitleColor!),
                     colorDetail: Color(disableColorDetail!),
                     isDisable: isDiableMode,
                     onPress: () {
-                      if (focusGameMode) {
+                      if (!focusGameMode) {
                         showModalBottomSheet(
                           context: context,
                           builder: (BuildContext context) {
                             return UiBottomSheetCardDialogMode(
                               title: 'Switch to Game mode?',
-                              desc: 'Detail: save battery',
+                              desc: 'Detail: Lower Latency',
                               textSubmitBtn: 'Switch to Game mode',
                               onPressedSubmit: (isClicked) {
                                 print("active");
+                                setState(() {
+                                  Navigator.pop(context);
+                                  focusMaxMode = false;
+                                  focusEcoMode = false;
+                                  focusLiveMode = false;
+                                  focusGameMode = true;
+                                });
                               },
                               onPressedCancel: (isClicked) =>
                                   Navigator.pop(context),
@@ -355,11 +403,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               children: [
                 Expanded(
                   child: ListTile(
-                    leading: Image.asset(
-                      'packages/living_network/assets/images/mode_internet.png',
-                      height: 44,
-                      width: 44,
-                    ),
+                    leading: imageInternet,
                     textColor: BaseColorsLN.textColorTabbar,
                     title: Text(
                       '5G Free trial',
@@ -370,7 +414,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                         fontStyle: FontStyle.normal,
-                        //leadingDistribution: TextLeadingDistribution.even,
+                        leadingDistribution: TextLeadingDistribution.even,
                         //height: 1.5,
                         //letterSpacing: -0.4,
                       ),
@@ -387,25 +431,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                 )
               ],
             ),
-            // Container(
-            //   height: 54,
-            //   width: 295,
-            //   child: Row(
-            //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            //     children: [
-            //       Text(
-            //         'Free trial will expire:           ',
-            //         style: TextStyle(
-            //           fontFamily: 'DB Heavent',
-            //           // fontFamilyFallback: ['NotoSansThaiUI'],
-            //           color: Color(0xFF657884),
-            //           fontSize: 18,
-            //           fontWeight: FontWeight.w500,
-            //           fontStyle: FontStyle.normal,
-            //         ),
-            //       ),
             TimeWidget(
-              expire: DateTime.now().add(Duration(days: 1)),
+              expire: DateTime.now().add(Duration(seconds: expireDateMode.second)),
             ),
             // ],
             // ),
@@ -437,7 +464,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               ),
             ),
             TimeWidget(
-              expire: DateTime(2023, 2, 21, 15, 30),
+              // expire: DateTime.now().add(Duration(seconds: expire)),
             ),
           ],
         ),
@@ -466,7 +493,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               ),
             ),
             TimeWidget(
-              expire: DateTime(2023, 2, 21, 15, 30),
+              // expire: DateTime.now().add(Duration(seconds: expire)),
             ),
           ],
         ),
