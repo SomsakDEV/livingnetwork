@@ -5,13 +5,9 @@ import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_home.d
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_mobile.dart';
 
 class LivingNetwork extends StatefulWidget {
-  final String network;
-  final String phone;
 
   const LivingNetwork({
     Key? key,
-    required this.network,
-    required this.phone,
   }) : super(key: key);
 
   @override
@@ -56,8 +52,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
               ),
               body: TabBarView(
                 children: [
-                  LivingNetworkMobile(
-                      network: widget.network, phone: widget.phone),
+                  LivingNetworkMobile(),
                   LivingNetworkHome(),
                 ],
               ),

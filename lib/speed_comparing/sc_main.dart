@@ -17,10 +17,6 @@ class _SpeedComparingMainState extends State<SpeedComparingMain> {
   Widget build(BuildContext context) {
     return Card(
       shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: BaseColorsLN.lightestGrey),
-        borderRadius: BorderRadius.circular(8),
-      ),
       child: Column(
         children: [
           Padding(

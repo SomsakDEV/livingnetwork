@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/base_color_text/base_text_style.dart';
 
 class CellTowerInfoMain extends StatefulWidget {
@@ -14,10 +13,6 @@ class _CellTowerInfoMainState extends State<CellTowerInfoMain> {
   Widget build(BuildContext context) {
     return Card(
       shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: BaseColorsLN.lightestGrey),
-        borderRadius: BorderRadius.circular(8),
-      ),
       child: Padding(
         padding: const EdgeInsets.only(left: 10.0, top: 10.0, bottom: 10.0, right: 16),
         child: Row(
