@@ -5,9 +5,9 @@ import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
+import 'package:living_network/mode_screen/time_widget.dart';
 import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
-import 'package:ui_style/ui_style.dart';
 
 class FiveGPhoneFiveGPackage extends StatefulWidget {
   const FiveGPhoneFiveGPackage({super.key});
@@ -27,6 +27,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
   );
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -122,6 +123,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
+
                                   setState(() {
                                     focusMaxMode = true;
                                     focusEcoMode = false;
@@ -248,7 +250,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                       borderRadius: 10,
                       borderColor:
                           focusGameMode ? ui.BaseColors.kellyGreen500 : null,
-                      expireDate: DateTime(2023, 2, 23),
+                      expireDate: DateTime.now().add(Duration(days: 1)),
                       onPress: () {
                         if (!focusGameMode) {
                           showModalBottomSheet(
@@ -309,6 +311,10 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                   )
                 ],
               ),
+              TimeWidget(
+                expire: DateTime.now().add(Duration(days: 1)),
+                
+              )
             ],
           ),
         ),

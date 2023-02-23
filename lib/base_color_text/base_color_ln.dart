@@ -113,6 +113,9 @@ class BaseColorsLN {
 
   //Internet Usage
   static const header6_1 = Color(0xFF38454C);
+
+  //Map Direction
+  static const mapIcon = Color(0xFFE6E6E6);
 }
 
 

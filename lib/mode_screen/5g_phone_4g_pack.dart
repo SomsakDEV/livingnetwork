@@ -3,7 +3,7 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
-import 'package:living_network/map_screen/botton_selection.dart';
+import 'package:living_network/map_screen/button_selection.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:selectable_container/selectable_container.dart';
@@ -113,8 +113,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusMaxMode ? ui.BaseColors.kellyGreen500 : null,
+                      borderColor: focusMaxMode ? ui.BaseColors.kellyGreen500 : null,
                       onPress: () {
                         print(focusMaxMode);
                         if (!focusMaxMode) {
@@ -136,8 +135,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
 
                                   print("active");
                                 },
-                                onPressedCancel: (isClicked) =>
-                                    Navigator.pop(context),
+                                onPressedCancel: (isClicked) => Navigator.pop(context),
                               );
                             },
                           );
@@ -158,8 +156,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusEcoMode ? ui.BaseColors.kellyGreen500 : null,
+                      borderColor: focusEcoMode ? ui.BaseColors.kellyGreen500 : null,
                       onPress: () {
                         if (!focusEcoMode) {
                           showModalBottomSheet(
@@ -180,8 +177,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
 
                                   print("active");
                                 },
-                                onPressedCancel: (isClicked) =>
-                                    Navigator.pop(context),
+                                onPressedCancel: (isClicked) => Navigator.pop(context),
                               );
                             },
                           );
@@ -207,8 +203,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusLiveMode ? ui.BaseColors.kellyGreen500 : null,
+                      borderColor: focusLiveMode ? ui.BaseColors.kellyGreen500 : null,
                       onPress: () {
                         if (!focusLiveMode) {
                           showModalBottomSheet(
@@ -229,8 +224,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
 
                                   print("active");
                                 },
-                                onPressedCancel: (isClicked) =>
-                                    Navigator.pop(context),
+                                onPressedCancel: (isClicked) => Navigator.pop(context),
                               );
                             },
                           );
@@ -251,8 +245,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      borderColor:
-                          focusGameMode ? ui.BaseColors.kellyGreen500 : null,
+                      borderColor: focusGameMode ? ui.BaseColors.kellyGreen500 : null,
                       expireDate: DateTime(2023, 2, 22),
                       onPress: () {
                         if (!focusGameMode) {
@@ -274,8 +267,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
 
                                   print("active");
                                 },
-                                onPressedCancel: (isClicked) =>
-                                    Navigator.pop(context),
+                                onPressedCancel: (isClicked) => Navigator.pop(context),
                               );
                             },
                           );
@@ -292,8 +284,7 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
                 children: [
                   Expanded(
                     child: ListTile(
-                      leading: Image.asset(
-                          'packages/living_network/assets/images/mode_internet.png'),
+                      leading: Image.asset('packages/living_network/assets/images/mode_internet.png'),
                       textColor: BaseColorsLN.textColorTabbar,
                       title: Text(
                         '5G Free trial',
@@ -309,7 +300,14 @@ class _FiveGPhoneFourGPackageState extends State<FiveGPhoneFourGPackage> {
                           //letterSpacing: -0.4,
                         ),
                       ),
-                      subtitle: IUWidget(maxValue: 100, markerValue: 80, barColorGradient: [ BaseColorsLN.speedCompare2, BaseColorsLN.speedCompare2,],),
+                      subtitle: IUWidget(
+                        maxValue: 100,
+                        markerValue: 80,
+                        barColorGradient: [
+                          BaseColorsLN.speedCompare2,
+                          BaseColorsLN.speedCompare2,
+                        ],
+                      ),
                     ),
                   )
                 ],

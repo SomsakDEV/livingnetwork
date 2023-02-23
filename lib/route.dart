@@ -3,7 +3,7 @@ import 'package:living_network/living_network.dart';
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main.dart';
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_home.dart';
 import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_mobile.dart';
-import 'package:living_network/livingnetwork/presentation/pages/lvnw_noon.dart';
+import 'package:living_network/livingnetwork/presentation/pages/lvnw_5g_mode.dart';
 import 'package:living_network/map_direction/md_main.dart';
 import 'package:living_network/map_screen/map_screen.dart';
 import 'package:living_network/map_screen/map_widget.dart';
@@ -35,11 +35,11 @@ class RouteLivingNetwork {
           pageBuilder: (context, animation, secondaryAnimation) =>
               LivingNetwork(network: args?['network'], phone: args?['phone']),
         );
-      case '/livingnetwork/noon':
+      case '/livingnetwork/5GMode':
         return PageRouteBuilder(
           settings: route,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              const LivingNetworkNoon(),
+              const LivingNetworkFiveGMode(),
         );
       case '/mode_widget':
         return PageRouteBuilder(
