@@ -11,13 +11,9 @@ import 'package:ui_style/ui_style.dart';
 
 class LivingNetworkMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
-  final String network;
-  final String phone;
 
   const LivingNetworkMobile({
     super.key,
-    required this.network,
-    required this.phone,
   });
 
   @override

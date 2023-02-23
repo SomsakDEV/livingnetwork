@@ -17,7 +17,7 @@ class RouteLivingNetwork {
         return PageRouteBuilder(
           settings: route,
           pageBuilder: (context, animation, secondaryAnimation) =>
-              LivingNetwork(network: args?['network'], phone: args?['phone']),
+              const LivingNetwork(),
         );
       case '/map_direction':
         return PageRouteBuilder(
