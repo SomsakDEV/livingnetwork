@@ -93,7 +93,9 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
                     decoration: TextDecoration.underline,
                   ),
                 ),
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.pushNamed(context, '/map_direction');
+                },
               ),
             );
           },
