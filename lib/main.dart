@@ -152,7 +152,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   title: "Living Network",
                   buttonType: ButtonType.secondaryBtn,
                   onPress: () {
-                    Navigator.pushNamed(context, "/mapdemo");
+                    Navigator.pushNamed(context, "/livingnetwork");
                   },
                 ),
                 UiButton(
