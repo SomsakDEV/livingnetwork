@@ -429,35 +429,34 @@ class _ModeWidgetState extends State<ModeWidget> {
               //   expire:
               //       DateTime.now().add(Duration(days: 1)),
               // ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  ui.UiButton(
-                    title: 'Free trial',
-                    buttonType: ui.ButtonType.primaryBtn,
-                    borderRadius: 8,
-                    onPress: () {
-                      showModalBottomSheet(
-                        context: context,
-                        builder: (BuildContext context) {
-                          return UiBottomSheetCardDialogMode(
-                            title: 'ทดลองใช้ 5G Mode',
-                            desc:
-                                'เชื่อมต่อประสบการณ์ 5G Mode 1 ชั่วโมง ฟรี! \n โดยไม่มีค่าใช้จ่าย หลังจากนั้นจะกลับสู่ความเร็วตามแพ็กเกจ \n เติมของคุณโดยอัตโนมัติ',
-                            textSubmitBtn: 'Start free trial',
-                            onPressedSubmit: (isClicked) {
-                              print("active");
-                              setState(() {});
-                            },
-                            onPressedCancel: (isClicked) =>
-                                Navigator.pop(context),
-                          );
-                        },
-                      );
-                    },
-                  ),
-                ],
-              )
+      
+                ui.UiButton(
+                  title: 'Free trial',
+                  buttonType: ui.ButtonType.primaryBtn,
+                  borderRadius: 8,
+                  height: 54,
+                  width: MediaQuery.of(context).size.width * 0.9,
+                  onPress: () {
+                    showModalBottomSheet(
+                      context: context,
+                      builder: (BuildContext context) {
+                        return UiBottomSheetCardDialogMode(
+                          title: 'ทดลองใช้ 5G Mode',
+                          desc:
+                              'เชื่อมต่อประสบการณ์ 5G Mode 1 ชั่วโมง ฟรี! \n โดยไม่มีค่าใช้จ่าย หลังจากนั้นจะกลับสู่ความเร็วตามแพ็กเกจ \n เติมของคุณโดยอัตโนมัติ',
+                          textSubmitBtn: 'Start free trial',
+                          onPressedSubmit: (isClicked) {
+                            print("active");
+                            setState(() {});
+                          },
+                          onPressedCancel: (isClicked) =>
+                              Navigator.pop(context),
+                        );
+                      },
+                    );
+                  },
+                ),
+              
             ],
           ),
         ),

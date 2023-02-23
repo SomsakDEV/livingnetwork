@@ -77,7 +77,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                   width: 4.33,
                 ),
                 Image.asset(
-                  'packages/living_network/assets/images/Vector.png',
+                  'packages/living_network/assets/images/mode_vector.png',
                   width: 11.44,
                   height: 13,
                 ),
