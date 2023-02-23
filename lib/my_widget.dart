@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/internet_usage/iu_main.dart';
+import 'package:living_network/map_direction/m_testmap.dart';
 import 'package:living_network/map_direction/md_main.dart';
 import 'package:living_network/sale_badge_widget/sb_main.dart';
 import 'package:living_network/speed_comparing/sc_main.dart';
@@ -16,6 +17,7 @@ class MyWidget extends StatefulWidget {
 class _MyWidgetState extends State<MyWidget> {
   @override
   Widget build(BuildContext context) {
+    // return MapSample();
     return Scaffold(
       appBar: AppBar(title: const Text('Web')),
       body: Center(
@@ -25,7 +27,8 @@ class _MyWidgetState extends State<MyWidget> {
                 onPressed: () {
                   Navigator.pushNamed(context, '/map_direction');
                 },
-                child: Text('Direction'))
+                child: Text('Direction')),
+            InternetUsage(),
           ],
         ),
       ),
