@@ -93,6 +93,11 @@ class _ModeWidgetState extends State<ModeWidget> {
     height: 15,
     width: 15,
   );
+  late Image imageInternet = Image.asset(
+    'packages/living_network/assets/images/mode_internet.png',
+    height: 44,
+    width: 44,
+  );
 
   @override
   void initState() {
@@ -128,6 +133,11 @@ class _ModeWidgetState extends State<ModeWidget> {
           height: 15,
           width: 15,
         );
+        imageInternet = Image.asset(
+    'packages/living_network/assets/images/mode_internet_bw.png',
+    height: 44,
+    width: 44,
+  );
       }
     } else if (packageMode == '5G' && packageState == 'active') {
       if (currentMode == 'maxmode') {
@@ -355,11 +365,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               children: [
                 Expanded(
                   child: ListTile(
-                    leading: Image.asset(
-                      'packages/living_network/assets/images/mode_internet.png',
-                      height: 44,
-                      width: 44,
-                    ),
+                    leading: imageInternet,
                     textColor: BaseColorsLN.textColorTabbar,
                     title: Text(
                       '5G Free trial',
