@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/performance_widget/p_card_content_widget.dart';
 import 'package:living_network/performance_widget/p_example_model.dart';
 import 'package:living_network/performance_widget/p_expansion_widget.dart';
+import 'package:living_network/performance_widget/ui_bottomsheet.dart';
+import 'package:living_network/utils/constants.dart';
 
 class PerformanceMain extends StatefulWidget {
   const PerformanceMain({super.key});
@@ -20,7 +21,8 @@ class _PerformanceMainState extends State<PerformanceMain> {
         style: LNBaseTextStyle.header6_1B,
       ),
       iconImage: 'packages/living_network/assets/images/performance_icon_1.png',
-      qualityImage: 'packages/living_network/assets/images/signal_excellent.png',
+      qualityImage:
+          'packages/living_network/assets/images/signal_excellent.png',
     ),
     PerformanceModel(
       text: const Text(
@@ -28,7 +30,8 @@ class _PerformanceMainState extends State<PerformanceMain> {
         style: LNBaseTextStyle.header6_1B,
       ),
       iconImage: 'packages/living_network/assets/images/performance_icon_2.png',
-      qualityImage: 'packages/living_network/assets/images/signal_excellent.png',
+      qualityImage:
+          'packages/living_network/assets/images/signal_excellent.png',
     ),
     PerformanceModel(
       text: const Text(
@@ -36,7 +39,8 @@ class _PerformanceMainState extends State<PerformanceMain> {
         style: LNBaseTextStyle.header6_1B,
       ),
       iconImage: 'packages/living_network/assets/images/performance_icon_3.png',
-      qualityImage: 'packages/living_network/assets/images/signal_excellent.png',
+      qualityImage:
+          'packages/living_network/assets/images/signal_excellent.png',
     ),
     PerformanceModel(
       text: const Text(
@@ -60,10 +64,6 @@ class _PerformanceMainState extends State<PerformanceMain> {
   Widget build(BuildContext context) {
     return Card(
       shadowColor: Colors.transparent,
-      shape: RoundedRectangleBorder(
-        side: const BorderSide(color: BaseColorsLN.lightestGrey),
-        borderRadius: BorderRadius.circular(8),
-      ),
       child: SizedBox(
         width: MediaQuery.of(context).size.width * 0.85,
         child: Padding(
@@ -106,11 +106,25 @@ class _PerformanceMainState extends State<PerformanceMain> {
                                 Icons.info_outline,
                                 size: 16,
                               ),
-                              onPressed: () {},
+                              onPressed: () {
+                                showModalBottomSheet(
+                                  elevation: 0,
+                                  backgroundColor: Colors.transparent,
+                                  context: context,
+                                  builder: (BuildContext context) {
+                                    return UiBottomSheetCardDialogTextMode(
+                                      title: title_preformance,
+                                      subTitle: subTitle_preformance,
+                                      image: image_preformance,
+                                    );
+                                    
+                                  },
+                                );
+                              },
                             ),
                           ],
                         ),
-                        Text(
+                        const Text(
                           'Updated 1 min ago',
                           style: LNBaseTextStyle.caption_1,
                         ),

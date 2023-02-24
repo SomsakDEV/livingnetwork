@@ -20,34 +20,39 @@ class TimeWidget extends StatefulWidget {
 }
 
 class _TimeWidgetState extends State<TimeWidget> {
-  DateTime currentTime = DateTime.now();
   Duration duration = const Duration();
   Timer? timer;
   @override
   void initState() {
     super.initState();
-    startTimer();
   }
 
   startTimer() {
-    DateTime expireTime = widget.expire ?? DateTime.now();
-    int seconds = expireTime.difference(currentTime).inSeconds;
-    duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
-    timer = Timer.periodic(
-        const Duration(seconds: 1),
-        (_) => setState(
-              () {
-                final seconds = duration.inSeconds - 1;
-                if (seconds < 0) {
-                  timer?.cancel();
-                } else {
-                  duration = Duration(seconds: seconds);
-                }
-              },
-            ));
+    DateTime expireTime =
+        widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
+    int seconds = expireTime.difference(DateTime.now()).inSeconds;
+    print(seconds);
+    if (seconds > 0) {
+      duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
+      timer = Timer.periodic(
+          const Duration(seconds: 1),
+          (_) => setState(
+                () {
+                  final seconds = duration.inSeconds - 1;
+                  if (seconds < 0) {
+                    timer?.cancel();
+                  } else {
+                    duration = Duration(seconds: seconds);
+                  }
+                },
+              ));
+    }else{
+      timer?.cancel();
+      duration = const Duration(seconds: 0);
+    }
   }
 
-buildTime() {
+  buildTime() {
     String twoDigits(int n) => n.toString().padLeft(2, '0');
     final hours = twoDigits(duration.inHours);
     final minutes = twoDigits(duration.inMinutes.remainder(60));
@@ -72,7 +77,7 @@ buildTime() {
                   width: 4.33,
                 ),
                 Image.asset(
-                  'packages/living_network/assets/images/Vector.png',
+                  'packages/living_network/assets/images/mode_vector.png',
                   width: 11.44,
                   height: 13,
                 ),
@@ -94,7 +99,7 @@ buildTime() {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 color: Color(0xFFF2F4F6)),
-            width: MediaQuery.of(context).size.width * 0.87,
+            width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -136,6 +141,7 @@ buildTime() {
 
   @override
   Widget build(BuildContext context) {
+    startTimer();
     return buildTime();
   }
 }

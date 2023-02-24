@@ -8,7 +8,6 @@ import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:living_network/mode_screen/time_widget.dart';
 import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
-import 'package:ui_style/ui_style.dart';
 
 class FiveGPhoneFiveGPackage extends StatefulWidget {
   const FiveGPhoneFiveGPackage({super.key});
@@ -28,6 +27,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
   );
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: AppBar(
@@ -101,13 +101,13 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         'packages/living_network/assets/images/mode_max.png',
-                        height: 15,
-                        width: 15,
+                        height: 24,
+                        width: 24,
                       ),
                       title: 'Max Mode',
                       detail: 'default',
                       buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
+                      height: 82,
                       width: 143,
                       borderRadius: 10,
                       borderColor:
@@ -123,7 +123,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
-                                  
+
                                   setState(() {
                                     focusMaxMode = true;
                                     focusEcoMode = false;
@@ -147,13 +147,13 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         'packages/living_network/assets/images/mode_eco.png',
-                        height: 15,
-                        width: 15,
+                        height: 24,
+                        width: 24,
                       ),
                       title: 'Eco Mode',
                       detail: 'Save Battery',
                       buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
+                      height: 82,
                       width: 143,
                       borderRadius: 10,
                       borderColor:
@@ -190,19 +190,18 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                 ],
               ),
               Row(
-                mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         'packages/living_network/assets/images/mode_live.png',
-                        height: 15,
-                        width: 15,
+                        height: 24,
+                        width: 24,
                       ),
                       title: 'Live Mode',
                       detail: 'Stream Smoothly',
                       buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
+                      height: 82,
                       width: 143,
                       borderRadius: 10,
                       borderColor:
@@ -240,13 +239,13 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         'packages/living_network/assets/images/mode_game.png',
-                        height: 15,
-                        width: 15,
+                        height: 24,
+                        width: 24,
                       ),
                       title: 'Game Mode',
                       detail: 'Lower Latency',
                       buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
+                      height: 82,
                       width: 143,
                       borderRadius: 10,
                       borderColor:
@@ -291,7 +290,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                   Expanded(
                     child: ListTile(
                       leading: Image.asset(
-                          'packages/living_network/assets/images/mode_internet.png'),
+                          'packages/living_network/assets/images/mode_Internet.png'),
                       textColor: BaseColorsLN.textColorTabbar,
                       title: Text(
                         '5G Free trial',

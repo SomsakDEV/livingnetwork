@@ -1,5 +1,3 @@
-// ignore_for_file: prefer_const_literals_to_create_immutables, prefer_const_constructors, sized_box_for_whitespace
-
 import 'package:flutter/material.dart';
 import 'package:living_network/map_screen/button_selection.dart';
 import 'package:living_network/map_screen/places_widget.dart';
@@ -23,26 +21,31 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Signal map',
-            style: TextStyle(
-              color: BaseColors.blackColor,
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-            )),
+        title: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          children: const [
+            Text('Signal map',
+                style: TextStyle(
+                  color: BaseColors.blackColor,
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                )),
+          ],
+        ),
         backgroundColor: BaseColors.whiteColor,
         leading: BackButton(color: BaseColors.blackColor),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          Container(
-            height: 300,
+          SizedBox(
+            height: 395,
             child: Stack(
               alignment: Alignment.topCenter,
-              children: [
-                const MapWidget(),
+              children: const [
+                MapWidget(),
                 Padding(
-                  padding: const EdgeInsets.only(top: 5.0),
+                  padding: EdgeInsets.only(top: 15.0),
                   child: ToggleSignal(),
                 ),
               ],
@@ -50,11 +53,11 @@ class _MapScreenState extends State<MapScreen> {
           ),
           getHBox(),
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            padding: const EdgeInsets.only(left: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                const Text('Signal Nearby',
+              children: const [
+                Text('Signal Nearby',
                     style: TextStyle(
                       color: Color(0xFF38454C),
                       fontSize: 26,
