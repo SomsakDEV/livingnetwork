@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/base_color_text/base_text_style.dart';
@@ -15,12 +13,13 @@ class MapCardDetail extends StatefulWidget {
 class _MapCardDetailState extends State<MapCardDetail> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: MediaQuery.of(context).size.width ,
+    return SizedBox(
+      width: MediaQuery.of(context).size.width,
       height: MediaQuery.of(context).size.height,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-      ),
+
+      // decoration: const BoxDecoration(
+      //   color: Colors.transparent,
+      // ),
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Row(
@@ -34,7 +33,8 @@ class _MapCardDetailState extends State<MapCardDetail> {
                 decoration: BoxDecoration(
                     shape: BoxShape.circle,
                     border: Border.all(
-                      color: BaseColorsLN.mapIcon,
+                      // color: BaseColorsLN.mapIcon,
+                      color: Colors.transparent,
                     )),
                 child: Padding(
                   padding: const EdgeInsets.all(5),
@@ -42,84 +42,87 @@ class _MapCardDetailState extends State<MapCardDetail> {
                 ),
               ),
             ),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width: MediaQuery.of(context).size.width*0.72,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      const Text(
-                        'Rawtruckr',
-                        style: LNBaseTextStyle.header6_1,
-                      ),
-                      TextButton(
-                        onPressed: () {},
-                        child: const Text(
-                          'Close',
-                          style: LNBaseTextStyle.mapTextButton,
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.72,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          'Rawtruckr',
+                          style: LNBaseTextStyle.header6_1,
                         ),
-                      ),
-                    ],
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.symmetric(vertical: 10),
-                  child: Text(
-                    'AIS SUPER WIFI (200 m)',
-                    style: LNBaseTextStyle.caption2_1,
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width * 0.6,
-                  child: const Text(
-                    '61 ซอย พหลโยธิน 8 Samsen Nai, Phaya Thai, Bangkok 10400',
-                    style: LNBaseTextStyle.caption_1,
-                    overflow: TextOverflow.clip,
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.symmetric(vertical: 8.0),
-                  child: SizedBox(
-                    width: MediaQuery.of(context).size.width * 0.6,
-                    height: MediaQuery.of(context).size.height / 17.5,
-                    child: ElevatedButton(
-                      onPressed: () {
-                        launchMapsDirection(13.7857215, 100.5812384);
-                      },
-                      style: ElevatedButton.styleFrom(
-                        backgroundColor: BaseColorsLN.kellyGreen500,
-                        shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(8),
-                          side: const BorderSide(
-                            width: 1,
-                            color: BaseColorsLN.kellyGreen500,
+                        TextButton(
+                          onPressed: () {},
+                          child: const Text(
+                            'Close',
+                            style: LNBaseTextStyle.mapTextButton,
                           ),
                         ),
-                      ),
-                      child: Stack(
-                        children: <Widget>[
-                          Align(
-                            alignment: Alignment.centerRight,
-                            child: Transform.rotate(
-                              angle: 45,
-                              child: Icon(Icons.navigation_outlined),
+                      ],
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.symmetric(vertical: 10),
+                    child: Text(
+                      'AIS SUPER WIFI (200 m)',
+                      style: LNBaseTextStyle.caption2_1,
+                    ),
+                  ),
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width * 0.6,
+                    child: const Text(
+                      '61 ซอย พหลโยธิน 8 Samsen Nai, Phaya Thai, Bangkok 10400',
+                      style: LNBaseTextStyle.caption_1,
+                      overflow: TextOverflow.clip,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    child: SizedBox(
+                      width: MediaQuery.of(context).size.width * 0.6,
+                      height: MediaQuery.of(context).size.height / 17.5,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          launchMapsDirection(13.7857215, 100.5812384);
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: BaseColorsLN.kellyGreen500,
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(8),
+                            side: const BorderSide(
+                              width: 1,
+                              color: BaseColorsLN.kellyGreen500,
                             ),
                           ),
-                          const Align(
+                        ),
+                        child: Stack(
+                          children: <Widget>[
+                            Align(
+                              alignment: Alignment.centerRight,
+                              child: Transform.rotate(
+                                angle: 45,
+                                child: const Icon(Icons.navigation_outlined),
+                              ),
+                            ),
+                            const Align(
                               alignment: Alignment.center,
                               child: Text(
                                 "Direction",
                                 style: LNBaseTextStyle.mapButtonDirection,
-                              ))
-                        ],
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
-                ),
-              ],
+                ],
+              ),
             ),
           ],
         ),
@@ -129,7 +132,7 @@ class _MapCardDetailState extends State<MapCardDetail> {
 }
 
 Future<void> launchMapsDirection(double lat, double lng) async {
-  print("called");
+  // print("called");
   String googleUrl = 'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
   if (await canLaunch(googleUrl)) {
     await launch(googleUrl);

@@ -64,12 +64,22 @@ class _SaleBadgeMainState extends State<SaleBadgeMain> {
                         ),
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
+                          mainAxisSize: MainAxisSize.max,
                           children: const [
                             UiButton(
                               title: 'Buy Now',
+                              textStyle: TextStyle(
+                                fontFamily: 'DB Heavent',
+                                color: BaseColorsLN.whiteColor,
+                                fontSize: 12,
+                                fontWeight: FontWeight.w400,
+                                fontStyle: FontStyle.normal,
+                                leadingDistribution: TextLeadingDistribution.even,
+                                overflow: TextOverflow.ellipsis,
+                              ),
                               buttonType: ButtonType.primaryBtn,
                               width: 93,
-                              height: 23,
+                              height: 29,
                               borderRadius: 4,
                             ),
                           ],

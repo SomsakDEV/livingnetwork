@@ -24,7 +24,7 @@ class _MapBottomSheetState extends State<MapBottomSheet> {
             topLeft: Radius.circular(20),
             topRight: Radius.circular(20),
           ),
-          color: Colors.white,
+          color: Colors.transparent,
         ),
         height: 50,
         alignment: Alignment.topCenter,

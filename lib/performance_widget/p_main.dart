@@ -76,19 +76,24 @@ class _PerformanceMainState extends State<PerformanceMain> {
               Expanded(
                 child: Stack(
                   alignment: Alignment.topLeft,
+                  fit: StackFit.passthrough,
                   children: [
-                    CustomExpansionTile(
-                      backgroundColor: Colors.transparent,
-                      collapsedBackgroundColor: Colors.transparent,
-                      children: [
-                        CardContentWidget(
-                          contentList: contentList,
-                        ),
-                      ],
+                    Container(
+                      margin: const EdgeInsets.symmetric(vertical: 6),
+                      child: CustomExpansionTile(
+                        backgroundColor: Colors.transparent,
+                        collapsedBackgroundColor: Colors.transparent,
+                        children: [
+                          CardContentWidget(
+                            contentList: contentList,
+                          ),
+                        ],
+                      ),
                     ),
                     Column(
                       mainAxisAlignment: MainAxisAlignment.start,
                       crossAxisAlignment: CrossAxisAlignment.start,
+                      mainAxisSize: MainAxisSize.max,
                       children: [
                         Row(
                           children: [

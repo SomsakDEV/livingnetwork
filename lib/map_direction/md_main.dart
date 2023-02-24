@@ -3,7 +3,6 @@ import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/map_direction/m_bottom_sheet.dart';
 import 'package:living_network/map_screen/map_widget.dart';
 
-
 class MapDirection extends StatefulWidget {
   const MapDirection({super.key});
 
@@ -30,7 +29,7 @@ class _MapDirectionState extends State<MapDirection> {
           ),
         ],
       ),
-      bottomSheet: MapBottomSheet()
+      bottomSheet: MapBottomSheet(),
     );
   }
 }
