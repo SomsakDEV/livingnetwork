@@ -1,4 +1,3 @@
-// ignore_for_file: sort_child_properties_last, avoid_unnecessary_containers, prefer_const_constructors, dead_code, prefer_const_literals_to_create_immutables, unnecessary_new, unused_label, sized_box_for_whitespace, avoid_init_to_null
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
@@ -6,6 +5,8 @@ import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
+
+import 'time_widget.dart';
 
 class ModeWidget extends StatefulWidget {
   //bool phone, package;
@@ -36,8 +37,9 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool fup = false;
   late double reaminingQuota;
   late DateTime startDate;
-  late DateTime? expireGameMode = null;
-  late DateTime? expireLiveMode = null;
+  DateTime? expireGameMode;
+  DateTime? expireLiveMode;
+  late bool showCountFreeTrial = false;
 
   bool enableLiveMode() {
     return speed > 4 && fup;
@@ -67,15 +69,13 @@ class _ModeWidgetState extends State<ModeWidget> {
       disableTitleColor = 0xFF7B8E98;
       disableColorDetail = 0xFFB0BEC5;
       isDiableMode = true;
-    } else {
-      print('have some problem');
-    }
+    } else {}
     return Card(
       color: Colors.blueGrey,
       child: Container(
         // height: 232,
         // width: 327,
-        decoration: BoxDecoration(color: Color(0xFFFFFFFF)),
+        decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -93,9 +93,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 44,
                       fit: BoxFit.cover,
                     ),
-                    Padding(
+                    const Padding(
                       // padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                      padding: const EdgeInsets.only(left: 8),
+                      padding: EdgeInsets.only(left: 8),
                       child: Text(
                         'Mode',
                         style: TextStyle(
@@ -119,7 +119,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return UiBottomSheetCardDialogTextMode();
+                              return const UiBottomSheetCardDialogTextMode();
                             },
                           );
                         },
@@ -157,8 +157,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       borderColor: isDiableMode
                           ? Color(disableBorderColor!)
                           : isMode('max')
-                              ? Color(0xFF64CA00)
-                              : Color(0xFFEEF8E8),
+                              ? const Color(0xFF64CA00)
+                              : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
                       isDisable: isDiableMode,
@@ -172,7 +172,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: Default Mode',
                                 textSubmitBtn: 'Switch to Max mode',
                                 onPressedSubmit: (isClicked) {
-                                  print("active");
                                   Navigator.pop(context);
                                   setState(() {
                                     mode = 'max';
@@ -210,8 +209,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       borderColor: isDiableMode
                           ? Color(disableBorderColor!)
                           : isMode('eco')
-                              ? Color(0xFF64CA00)
-                              : Color(0xFFEEF8E8),
+                              ? const Color(0xFF64CA00)
+                              : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
                       isDisable: isDiableMode,
@@ -225,7 +224,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
                                 onPressedSubmit: (isClicked) {
-                                  print("active");
                                   Navigator.pop(context);
                                   setState(() {
                                     mode = 'eco';
@@ -268,8 +266,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       borderColor: isDiableMode
                           ? Color(disableBorderColor!)
                           : isMode('live')
-                              ? Color(0xFF64CA00)
-                              : Color(0xFFEEF8E8),
+                              ? const Color(0xFF64CA00)
+                              : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
                       isDisable: isDiableMode,
@@ -284,9 +282,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: smoothly live',
                                 textSubmitBtn: 'Switch to Live mode',
                                 onPressedSubmit: (isClicked) {
-                                  print("active");
                                   if (countLiveModeTimeWidget == 1) {
-                                    print('only once time for use');
                                     isDiableMode = true;
                                   } else {
                                     Navigator.pop(context);
@@ -294,7 +290,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       mode = 'live';
                                       countLiveModeTimeWidget++;
                                       expireLiveMode = DateTime.now()
-                                          .add(Duration(seconds: 5));
+                                          .add(const Duration(seconds: 5));
                                     });
                                   }
                                 },
@@ -330,8 +326,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       borderColor: isDiableMode
                           ? Color(disableBorderColor!)
                           : isMode('game')
-                              ? Color(0xFF64CA00)
-                              : Color(0xFFEEF8E8),
+                              ? const Color(0xFF64CA00)
+                              : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
                       isDisable: isDiableMode,
@@ -346,9 +342,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: Lower Latency',
                                 textSubmitBtn: 'Switch to Game mode',
                                 onPressedSubmit: (isClicked) {
-                                  print("active");
                                   if (countGameModeTimeWidget == 1) {
-                                    print('only once time for use');
                                     isDiableMode = true;
                                   } else {
                                     Navigator.pop(context);
@@ -356,7 +350,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       mode = 'game';
                                       countGameModeTimeWidget++;
                                       expireGameMode = DateTime.now()
-                                          .add(Duration(seconds: 5));
+                                          .add(const Duration(seconds: 5));
                                     });
                                   }
                                 },
@@ -371,7 +365,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   ),
                 ],
               ),
-              SizedBox(
+              const SizedBox(
                 height: 5,
               ),
               Row(
@@ -390,7 +384,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               width: 44,
                             ),
                       textColor: BaseColorsLN.textColorTabbar,
-                      title: Text(
+                      title: const Text(
                         '5G Free trial',
                         style: TextStyle(
                           fontFamily: 'DB Heavent',
@@ -405,7 +399,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         ),
                       ),
                       subtitle: isDiableMode
-                          ? IUWidget(
+                          ? const IUWidget(
                               maxValue: 100,
                               markerValue: 80,
                               barColorGradient: [
@@ -413,7 +407,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 Color(0xFFF2F4F6),
                               ],
                             )
-                          : IUWidget(
+                          : const IUWidget(
                               maxValue: 100,
                               markerValue: 80,
                               barColorGradient: [
@@ -425,98 +419,42 @@ class _ModeWidgetState extends State<ModeWidget> {
                   )
                 ],
               ),
-              // TimeWidget(
-              //   expire:
-              //       DateTime.now().add(Duration(days: 1)),
-              // ),
-      
-                ui.UiButton(
-                  title: 'Free trial',
-                  buttonType: ui.ButtonType.primaryBtn,
-                  borderRadius: 8,
-                  height: 54,
-                  width: MediaQuery.of(context).size.width * 0.9,
-                  onPress: () {
-                    showModalBottomSheet(
-                      context: context,
-                      builder: (BuildContext context) {
-                        return UiBottomSheetCardDialogMode(
-                          title: 'ทดลองใช้ 5G Mode',
-                          desc:
-                              'เชื่อมต่อประสบการณ์ 5G Mode 1 ชั่วโมง ฟรี! \n โดยไม่มีค่าใช้จ่าย หลังจากนั้นจะกลับสู่ความเร็วตามแพ็กเกจ \n เติมของคุณโดยอัตโนมัติ',
-                          textSubmitBtn: 'Start free trial',
-                          onPressedSubmit: (isClicked) {
-                            print("active");
-                            setState(() {});
+              showCountFreeTrial
+                  ? TimeWidget(
+                      expire: DateTime.now().add(
+                        const Duration(seconds: 5),
+                      ),
+                    )
+                  : ui.UiButton(
+                      title: 'Free trial',
+                      buttonType: ui.ButtonType.primaryBtn,
+                      borderRadius: 8,
+                      height: 54,
+                      width: MediaQuery.of(context).size.width * 0.9,
+                      onPress: () {
+                        showModalBottomSheet(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return UiBottomSheetCardDialogMode(
+                              title: 'ทดลองใช้ 5G Mode',
+                              desc:
+                                  'เชื่อมต่อประสบการณ์ 5G Mode 1 ชั่วโมง ฟรี! \n โดยไม่มีค่าใช้จ่าย หลังจากนั้นจะกลับสู่ความเร็วตามแพ็กเกจ \n เติมของคุณโดยอัตโนมัติ',
+                              textSubmitBtn: 'Start free trial',
+                              onPressedSubmit: (isClicked) {
+                                Navigator.pop(context);
+                                setState(() {
+                                  showCountFreeTrial = true;
+                                });
+                              },
+                              onPressedCancel: (isClicked) =>
+                                  Navigator.pop(context),
+                            );
                           },
-                          onPressedCancel: (isClicked) =>
-                              Navigator.pop(context),
                         );
                       },
-                    );
-                  },
-                ),
-              
+                    ),
             ],
           ),
-        ),
-      ),
-    );
-  }
-
-  Widget showFreeTrial() {
-    return Card(
-      child: Container(
-        height: 54,
-        width: 295,
-        decoration: BoxDecoration(color: Color(0xFF64CA00)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Free trial',
-              style: TextStyle(
-                fontFamily: 'DB Heavent',
-                // fontFamilyFallback: ['NotoSansThaiUI'],
-                color: Color(0xFF657884),
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.normal,
-              ),
-            ),
-            // TimeWidget(
-            //     // expire: DateTime.now().add(Duration(seconds: expire)),
-            //     ),
-          ],
-        ),
-      ),
-    );
-  }
-
-  Widget closeFreeTrial() {
-    return Card(
-      child: Container(
-        height: 54,
-        width: 295,
-        decoration: BoxDecoration(color: Color(0xFFF2F4F6)),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            Text(
-              'Free trial will expire:     ',
-              style: TextStyle(
-                fontFamily: 'DB Heavent',
-                // fontFamilyFallback: ['NotoSansThaiUI'],
-                color: Color(0xFF657884),
-                fontSize: 18,
-                fontWeight: FontWeight.w500,
-                fontStyle: FontStyle.normal,
-              ),
-            ),
-            // TimeWidget(
-            //     // expire: DateTime.now().add(Duration(seconds: expire)),
-            //     ),
-          ],
         ),
       ),
     );
