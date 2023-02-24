@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
+import 'package:living_network/living_network/presentation/pages/lvnw_main.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
 
@@ -20,7 +22,11 @@ class ModeWidget extends StatefulWidget {
 }
 
 class _ModeWidgetState extends State<ModeWidget> {
+  final Future<SharedPreferences> _mode = SharedPreferences.getInstance();
+
   String mode = 'max';
+  String? mode_cur;
+
   bool isMode(String value) {
     return value == mode;
   }
@@ -49,33 +55,48 @@ class _ModeWidgetState extends State<ModeWidget> {
     return speed > 4 && fup;
   }
 
-  //For disable Mode 'backgroudcolor'
-  late int disableBackgroudColor = 0xFFEEF8E8;
+  //For disable Mode 'backgroundcolor'
+  late int disableBackgroundColor = 0xFFEEF8E8;
   late int? disableBorderColor = 0xFFEEF8E8;
   late int? disableTitleColor = 0xFF38454C;
   late int? disableColorDetail = 0xFF9EDE3E;
-  late bool isDiableMode = false;
+  late bool isDisableMode = false;
 
   @override
   void initState() {
     super.initState();
+    setMode();
+  }
+
+  void setMode() async {
+    final SharedPreferences mode1 = await _mode;
+    if(mode1.getString('mode') != null){
+      mode1.setString('mode', 'maxmode');
+    }else{
+      mode_cur = mode1.getString('mode');
+    }
+    if(mode1.getString('modeTime')!= null){
+
+    }
+
   }
 
   @override
   Widget build(BuildContext context) {
     if (packageMode == '4G' && packageState == 'disable') {
-      disableBackgroudColor = 0xFFFAFAFA;
+      disableBackgroundColor = 0xFFFAFAFA;
       disableBorderColor = 0xFFFAFAFA;
       disableTitleColor = 0xFF7B8E98;
       disableColorDetail = 0xFFB0BEC5;
-      isDiableMode = true;
+      isDisableMode = true;
     } else {}
     return Card(
       color: Colors.blueGrey,
       child: Container(
         // height: 232,
         // width: 327,
-        decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
+        color: const Color(0xFFFFFFFF),
+        //decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),
           child: Column(
@@ -100,7 +121,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                         'Mode',
                         style: TextStyle(
                           fontFamily: 'DB Heavent',
-                          // fontFamilyFallback: ['NotoSansThaiUI'],
                           color: Color(0xFF38454C),
                           fontSize: 26,
                           fontWeight: FontWeight.w700,
@@ -109,7 +129,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                           //height: 1.5,
                           //letterSpacing: -0.4,
                         ),
-                        //textAlign: TextAlign.center,
                       ),
                     ),
                     IconButton(
@@ -136,7 +155,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 children: [
                   Expanded(
                     child: button.UiButtonMode(
-                      icon: isDiableMode
+                      icon: isDisableMode
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_max_bw.png',
                               height: 24,
@@ -153,15 +172,15 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 82,
                       width: 143,
                       borderRadius: 10,
-                      backgroundColor: Color(disableBackgroudColor),
-                      borderColor: isDiableMode
+                      backgroundColor: Color(disableBackgroundColor),
+                      borderColor: isDisableMode
                           ? Color(disableBorderColor!)
                           : isMode('max')
                               ? const Color(0xFF64CA00)
                               : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
-                      isDisable: isDiableMode,
+                      isDisable: isDisableMode,
                       onPress: () {
                         if (!isMode('max')) {
                           showModalBottomSheet(
@@ -188,7 +207,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   ),
                   Expanded(
                     child: button.UiButtonMode(
-                      icon: isDiableMode
+                      icon: isDisableMode
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_eco_bw.png',
                               height: 24,
@@ -205,15 +224,15 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 82,
                       width: 143,
                       borderRadius: 10,
-                      backgroundColor: Color(disableBackgroudColor),
-                      borderColor: isDiableMode
+                      backgroundColor: Color(disableBackgroundColor),
+                      borderColor: isDisableMode
                           ? Color(disableBorderColor!)
                           : isMode('eco')
                               ? const Color(0xFF64CA00)
                               : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
-                      isDisable: isDiableMode,
+                      isDisable: isDisableMode,
                       onPress: () {
                         if (!isMode('eco')) {
                           showModalBottomSheet(
@@ -245,7 +264,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 children: [
                   Expanded(
                     child: button.UiButtonMode(
-                      icon: isDiableMode
+                      icon: isDisableMode
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_live_bw.png',
                               height: 24,
@@ -262,15 +281,15 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 82,
                       width: 143,
                       borderRadius: 10,
-                      backgroundColor: Color(disableBackgroudColor),
-                      borderColor: isDiableMode
+                      backgroundColor: Color(disableBackgroundColor),
+                      borderColor: isDisableMode
                           ? Color(disableBorderColor!)
                           : isMode('live')
                               ? const Color(0xFF64CA00)
                               : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
-                      isDisable: isDiableMode,
+                      isDisable: isDisableMode,
                       expireDate: expireLiveMode,
                       onPress: () {
                         if (!isMode('live')) {
@@ -281,16 +300,21 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 title: 'Switch to Live mode?',
                                 desc: 'Detail: smoothly live',
                                 textSubmitBtn: 'Switch to Live mode',
-                                onPressedSubmit: (isClicked) {
+                                onPressedSubmit: (isClicked) async {
                                   if (countLiveModeTimeWidget == 1) {
-                                    isDiableMode = true;
+                                    Navigator.popAndPushNamed(context, '/livingnetwork');
+                                    // await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LivingNetwork()));
+                                    setState(() {
+                                      isDisableMode = true;
+                                    });
                                   } else {
                                     Navigator.pop(context);
                                     setState(() {
                                       mode = 'live';
                                       countLiveModeTimeWidget++;
                                       expireLiveMode = DateTime.now()
-                                          .add(const Duration(seconds: 5));
+                                          .add(const Duration(hours: 5));
+                                      expireGameMode = null;
                                     });
                                   }
                                 },
@@ -305,7 +329,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   ),
                   Expanded(
                     child: button.UiButtonMode(
-                      icon: isDiableMode
+                      icon: isDisableMode
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_game_bw.png',
                               height: 24,
@@ -322,15 +346,15 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 82,
                       width: 143,
                       borderRadius: 10,
-                      backgroundColor: Color(disableBackgroudColor),
-                      borderColor: isDiableMode
+                      backgroundColor: Color(disableBackgroundColor),
+                      borderColor: isDisableMode
                           ? Color(disableBorderColor!)
                           : isMode('game')
                               ? const Color(0xFF64CA00)
                               : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
-                      isDisable: isDiableMode,
+                      isDisable: isDisableMode,
                       expireDate: expireGameMode,
                       onPress: () {
                         if (!isMode('game')) {
@@ -343,14 +367,18 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 textSubmitBtn: 'Switch to Game mode',
                                 onPressedSubmit: (isClicked) {
                                   if (countGameModeTimeWidget == 1) {
-                                    isDiableMode = true;
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      isDisableMode = true;
+                                    });
                                   } else {
                                     Navigator.pop(context);
                                     setState(() {
                                       mode = 'game';
                                       countGameModeTimeWidget++;
                                       expireGameMode = DateTime.now()
-                                          .add(const Duration(seconds: 5));
+                                          .add(const Duration(hours: 5));
+                                      expireLiveMode = null;
                                     });
                                   }
                                 },
@@ -372,7 +400,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 children: [
                   Expanded(
                     child: ListTile(
-                      leading: isDiableMode
+                      leading: isDisableMode
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_internet_bw.png',
                               height: 44,
@@ -388,7 +416,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                         '5G Free trial',
                         style: TextStyle(
                           fontFamily: 'DB Heavent',
-                          // fontFamilyFallback: ['NotoSansThaiUI'],
                           color: Color(0xFF38454C),
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
@@ -398,7 +425,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           //letterSpacing: -0.4,
                         ),
                       ),
-                      subtitle: isDiableMode
+                      subtitle: isDisableMode
                           ? const IUWidget(
                               maxValue: 100,
                               markerValue: 80,

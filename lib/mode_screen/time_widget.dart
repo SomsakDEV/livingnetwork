@@ -15,6 +15,7 @@ class TimeWidget extends StatefulWidget {
     this.textStyle,
     this.isFreeTrial = true,
   });
+
   @override
   State<TimeWidget> createState() => _TimeWidgetState();
 }
@@ -22,9 +23,11 @@ class TimeWidget extends StatefulWidget {
 class _TimeWidgetState extends State<TimeWidget> {
   Duration duration = const Duration();
   Timer? timer;
+
   @override
   void initState() {
     super.initState();
+    startTimer();
   }
 
   startTimer() {
@@ -46,7 +49,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                   }
                 },
               ));
-    }else{
+    } else {
       timer?.cancel();
       duration = const Duration(seconds: 0);
     }
@@ -136,12 +139,17 @@ class _TimeWidgetState extends State<TimeWidget> {
   void dispose() {
     // buildTime().dispose();
     timer?.cancel();
+
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
-    startTimer();
+    //startTimer();
+
     return buildTime();
   }
 }
+
+
+

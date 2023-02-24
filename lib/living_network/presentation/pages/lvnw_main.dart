@@ -1,8 +1,8 @@
 // ignore_for_file: prefer_const_constructors , prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_home.dart';
-import 'package:living_network/livingnetwork/presentation/pages/lvnw_main_mobile.dart';
+import 'package:living_network/living_network/presentation/pages/lvnw_main_home.dart';
+import 'package:living_network/living_network/presentation/pages/lvnw_main_mobile.dart';
 
 class LivingNetwork extends StatefulWidget {
 

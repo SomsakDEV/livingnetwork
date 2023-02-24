@@ -46,7 +46,7 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                             topLeft: Radius.circular(10),
                             topRight: Radius.circular(10)),
                         child: Image.asset(
-                          'packages/living_network/assets/images/Image.png',
+                          'packages/living_network/assets/images/image.png',
                           width: 260,
                         ),
                       ),
@@ -164,15 +164,30 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                         child: InternetUsage(),
                       ),
                       _sizedBox,
-                      Container(
-                          alignment: Alignment.center,
-                          decoration: BoxDecoration(
-                              color: Color(0xFFFFFFFF),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                  width: 3, color: Color(0xFFF0F0F0))),
-                          width: MediaQuery.of(context).size.width * 0.93,
-                          child: ModeWidget()),
+                      Stack(
+                        children: <Widget> [
+                          Padding(
+                            padding: const EdgeInsets.only(top: 5.0),
+                            child: Container(
+                                alignment: Alignment.center,
+                                decoration: BoxDecoration(
+                                    color: Color(0xFFFFFFFF),
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        width: 3, color: Color(0xFFF0F0F0))),
+                                width: MediaQuery.of(context).size.width * 0.93,
+                                child: ModeWidget()),
+                          ),
+                          Positioned(
+                            right: 20,
+                            child: Image.asset(
+                              'packages/living_network/assets/images/mode_new_feature.png',
+                              height: 26,
+                              width: 149,
+                            ),
+                          ),
+                        ],
+                      ),
                       _sizedBox
                     ],
                   )),

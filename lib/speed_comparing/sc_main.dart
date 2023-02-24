@@ -45,7 +45,7 @@ class _SpeedComparingMainState extends State<SpeedComparingMain> {
                       value: 80,
                       position: LinearElementPosition.cross,
                       child: Image.asset(
-                        'packages/living_network/assets/images/5G_icon.png',
+                        'packages/living_network/assets/images/icon_5g.png',
                         width: 30,
                         height: 30,
                       ),
@@ -64,7 +64,7 @@ class _SpeedComparingMainState extends State<SpeedComparingMain> {
                       value: 20,
                       position: LinearElementPosition.cross,
                       child: Image.asset(
-                        'packages/living_network/assets/images/4G_icon.png',
+                        'packages/living_network/assets/images/icon_4g.png',
                         width: 30,
                         height: 30,
                       ),

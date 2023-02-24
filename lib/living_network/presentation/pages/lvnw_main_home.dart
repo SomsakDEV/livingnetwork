@@ -19,7 +19,7 @@ class _LivingNetworkHomeState extends State<LivingNetworkHome> {
         decoration: BoxDecoration(
             image: DecorationImage(
                 image:
-                    AssetImage("packages/living_network/assets/images/BG.png"),
+                    AssetImage("packages/living_network/assets/images/background.png"),
                 fit: BoxFit.fill)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,

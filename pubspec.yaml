@@ -37,8 +37,7 @@ dependencies:
   syncfusion_flutter_maps: ^20.4.50
   selectable_container: ^1.0.7
   solid_bottom_sheet: ^0.1.10
-  url_launcher: ^6.0.20
-  
+  url_launcher: ^6.1.9
 
 dev_dependencies:
   flutter_test:
@@ -85,4 +84,3 @@ flutter:
   # https://flutter.dev/custom-fonts/#from-packages
 dependency_overrides:
   intl: ^0.17.0
-  url_launcher: ^6.0.20
