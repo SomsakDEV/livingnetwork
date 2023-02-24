@@ -40,7 +40,7 @@ class _CellTowerInfoMainState extends State<CellTowerInfoMain> {
                         Padding(
                           padding: const EdgeInsets.only(bottom: 8),
                           child: Image.asset(
-                            'packages/living_network/assets/images/signal_Fair.png',
+                            'packages/living_network/assets/images/signal_fair.png',
                             width: 68,
                             height: 18,
                           ),

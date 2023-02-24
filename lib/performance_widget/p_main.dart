@@ -48,7 +48,7 @@ class _PerformanceMainState extends State<PerformanceMain> {
         style: LNBaseTextStyle.header6_1B,
       ),
       iconImage: 'packages/living_network/assets/images/performance_icon_4.png',
-      qualityImage: 'packages/living_network/assets/images/signal_Good.png',
+      qualityImage: 'packages/living_network/assets/images/signal_good.png',
     ),
     PerformanceModel(
       text: const Text(
@@ -56,7 +56,7 @@ class _PerformanceMainState extends State<PerformanceMain> {
         style: LNBaseTextStyle.header6_1B,
       ),
       iconImage: 'packages/living_network/assets/images/performance_icon_5.png',
-      qualityImage: 'packages/living_network/assets/images/signal_Fair.png',
+      qualityImage: 'packages/living_network/assets/images/signal_fair.png',
     ),
   ];
 
