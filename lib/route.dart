@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/livingnetwork/presentation/pages/lvnw_main.dart';
+import 'package:living_network/living_network/presentation/pages/clearData.dart';
+import 'package:living_network/living_network/presentation/pages/lvnw_main.dart';
 import 'package:living_network/map_direction/md_main.dart';
 import 'package:living_network/map_screen/map_screen.dart';
 
@@ -24,6 +25,12 @@ class RouteLivingNetwork {
           settings: route,
           pageBuilder: (context, animation, secondaryAnimation) =>
               const MapDirection(),
+        );
+      case '/livingnetwork/clearData':
+        return PageRouteBuilder(
+          settings: route,
+          pageBuilder: (context, animation, secondaryAnimation) =>
+          const ClearData(),
         );
     }
     return currentRoute;

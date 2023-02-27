@@ -21,6 +21,8 @@ class UiButtonMode extends StatefulWidget {
   final Color? colorTitle;
   final Color? colorDetail;
   final DateTime? expireDate;
+  final String? mode;
+  final bool? check;
   const UiButtonMode({
     Key? key,
     required this.icon,
@@ -40,6 +42,8 @@ class UiButtonMode extends StatefulWidget {
     this.borderColor,
     this.colorTitle,
     this.colorDetail,
+    this.mode,
+    this.check,
   }) : super(key: key);
   @override
   State<UiButtonMode> createState() => _UiButtonModeState();
@@ -93,6 +97,8 @@ class _UiButtonModeState extends State<UiButtonMode> {
                         TimeWidget(
                           expire: widget.expireDate,
                           isFreeTrial: false,
+                          mode: widget.mode,
+                          check: widget.check,
                         )
                       ],
                     ),

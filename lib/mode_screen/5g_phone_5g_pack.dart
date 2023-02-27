@@ -250,7 +250,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                       borderRadius: 10,
                       borderColor:
                           focusGameMode ? ui.BaseColors.kellyGreen500 : null,
-                      expireDate: DateTime.now().add(Duration(days: 1)),
+                      // expireDate: DateTime.now().add(Duration(days: 1)),
                       onPress: () {
                         if (!focusGameMode) {
                           showModalBottomSheet(
@@ -312,7 +312,7 @@ class _FiveGPhoneFiveGPackageState extends State<FiveGPhoneFiveGPackage> {
                 ],
               ),
               TimeWidget(
-                expire: DateTime.now().add(Duration(days: 1)),
+                // expire: DateTime.now().add(Duration(days: 1)),
                 
               )
             ],
