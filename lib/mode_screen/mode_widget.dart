@@ -70,7 +70,6 @@ class _ModeWidgetState extends State<ModeWidget> {
   @override
   void initState() {
     setMode(null);
-    timeMode();
     super.initState();
   }
 
@@ -113,26 +112,6 @@ class _ModeWidgetState extends State<ModeWidget> {
         if (mode1.getString('modeLiveTime') == 'expire') {
           isDisableModeLive = true;
         }
-      }
-    });
-  }
-
-  timeMode() async {
-    final SharedPreferences mode1 = await SharedPreferences.getInstance();
-    // if (mode1.getString('modeLiveTime') == 'expire' ||
-    //     mode1.getString('modeGameTime') == 'expire') {
-    //   isDisableModeGame = true;
-    //   isDisableModeLive = true;
-    // }
-    setState(() {
-      if (mode1.getString('mode') == 'live') {
-        String time = mode1.getString('modeLiveTime') ?? '';
-        expireLiveMode = DateTime.parse(time);
-        isLive = true;
-      } else if (mode1.getString('mode') == 'game') {
-        String time = mode1.getString('modeGameTime') ?? '';
-        expireGameMode = DateTime.parse(time);
-        isGame = true;
       }
     });
   }
