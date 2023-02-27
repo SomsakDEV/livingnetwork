@@ -289,4 +289,13 @@ class LNBaseTextStyle {
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
   );
+
+  static const modeWidgetTitle = TextStyle(
+  fontFamily: 'DB Heavent',
+  color: BaseColorsLN.header6_1,
+  fontSize: 26,
+  fontWeight: FontWeight.w700,
+  fontStyle: FontStyle.normal,
+  leadingDistribution: TextLeadingDistribution.even,
+  );
 }

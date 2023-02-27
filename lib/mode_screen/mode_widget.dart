@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
+import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:ui_style/ui_style.dart' as ui;
 import 'package:living_network/mode_screen/button/ui_button.dart' as button;
 
 import 'time_widget.dart';
@@ -165,16 +165,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       padding: EdgeInsets.only(left: 8),
                       child: Text(
                         'Mode',
-                        style: TextStyle(
-                          fontFamily: 'DB Heavent',
-                          color: Color(0xFF38454C),
-                          fontSize: 26,
-                          fontWeight: FontWeight.w500,
-                          fontStyle: FontStyle.normal,
-                          //leadingDistribution: TextLeadingDistribution.even,
-                          //height: 1.5,
-                          //letterSpacing: -0.4,
-                        ),
+                        style: LNBaseTextStyle.modeWidgetTitle,
                       ),
                     ),
                     IconButton(
@@ -525,41 +516,41 @@ class _ModeWidgetState extends State<ModeWidget> {
                   )
                 ],
               ),
-              showCountFreeTrial
-                  ? TimeWidget(
-                      check: true,
-                      expire: DateTime.now().add(
-                        const Duration(seconds: 5),
-                      ),
-                    )
-                  : ui.UiButton(
-                      title: 'Free trial',
-                      buttonType: ui.ButtonType.primaryBtn,
-                      borderRadius: 8,
-                      height: 54,
-                      width: MediaQuery.of(context).size.width * 0.9,
-                      onPress: () {
-                        showModalBottomSheet(
-                          context: context,
-                          builder: (BuildContext context) {
-                            return UiBottomSheetCardDialogMode(
-                              title: 'ทดลองใช้ 5G Mode',
-                              desc:
-                                  'เชื่อมต่อประสบการณ์ 5G Mode 1 ชั่วโมง ฟรี! \n โดยไม่มีค่าใช้จ่าย หลังจากนั้นจะกลับสู่ความเร็วตามแพ็กเกจ \n เติมของคุณโดยอัตโนมัติ',
-                              textSubmitBtn: 'Start free trial',
-                              onPressedSubmit: (isClicked) {
-                                Navigator.pop(context);
-                                setState(() {
-                                  showCountFreeTrial = true;
-                                });
-                              },
-                              onPressedCancel: (isClicked) =>
-                                  Navigator.pop(context),
-                            );
-                          },
-                        );
-                      },
-                    ),
+              // showCountFreeTrial
+              //     ? TimeWidget(
+              //         check: true,
+              //         expire: DateTime.now().add(
+              //           const Duration(seconds: 5),
+              //         ),
+              //       )
+              //     : ui.UiButton(
+              //         title: 'Free trial',
+              //         buttonType: ui.ButtonType.primaryBtn,
+              //         borderRadius: 8,
+              //         height: 54,
+              //         width: MediaQuery.of(context).size.width * 0.9,
+              //         onPress: () {
+              //           showModalBottomSheet(
+              //             context: context,
+              //             builder: (BuildContext context) {
+              //               return UiBottomSheetCardDialogMode(
+              //                 title: 'ทดลองใช้ 5G Mode',
+              //                 desc:
+              //                     'เชื่อมต่อประสบการณ์ 5G Mode 1 ชั่วโมง ฟรี! \n โดยไม่มีค่าใช้จ่าย หลังจากนั้นจะกลับสู่ความเร็วตามแพ็กเกจ \n เติมของคุณโดยอัตโนมัติ',
+              //                 textSubmitBtn: 'Start free trial',
+              //                 onPressedSubmit: (isClicked) {
+              //                   Navigator.pop(context);
+              //                   setState(() {
+              //                     showCountFreeTrial = true;
+              //                   });
+              //                 },
+              //                 onPressedCancel: (isClicked) =>
+              //                     Navigator.pop(context),
+              //               );
+              //             },
+              //           );
+              //         },
+              //       ),
             ],
           ),
         ),
