@@ -21,9 +21,9 @@ class _MapScreenState extends State<MapScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Row(
+        title: const Row(
           mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
+          children: [
             Text('Signal map',
                 style: TextStyle(
                   color: BaseColors.blackColor,
@@ -33,16 +33,16 @@ class _MapScreenState extends State<MapScreen> {
           ],
         ),
         backgroundColor: BaseColors.whiteColor,
-        leading: BackButton(color: BaseColors.blackColor),
+        leading: const BackButton(color: BaseColors.blackColor),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
-          SizedBox(
+          const SizedBox(
             height: 395,
             child: Stack(
               alignment: Alignment.topCenter,
-              children: const [
+              children: [
                 MapWidget(),
                 Padding(
                   padding: EdgeInsets.only(top: 15.0),
@@ -52,11 +52,11 @@ class _MapScreenState extends State<MapScreen> {
             ),
           ),
           getHBox(),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
+              children: [
                 Text('Signal Nearby',
                     style: TextStyle(
                       color: Color(0xFF38454C),
@@ -88,7 +88,7 @@ class _MapScreenState extends State<MapScreen> {
                         _select1 = newValue;
                       });
                     },
-                    child: buildBotton('AIS Shop', 'packages/living_network/assets/images/ais_shop.png'),
+                    child: buildButton('AIS Shop', 'packages/living_network/assets/images/ais_shop.png'),
                   ),
                 ),
                 getWBox(),
@@ -107,7 +107,7 @@ class _MapScreenState extends State<MapScreen> {
                         _select2 = newValue;
                       });
                     },
-                    child: buildBotton('AIS Wifi', 'packages/living_network/assets/images/ais_wifi.png'),
+                    child: buildButton('AIS Wifi', 'packages/living_network/assets/images/ais_wifi.png'),
                   ),
                 ),
               ],
@@ -124,7 +124,7 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  Widget buildBotton(String title, String image) {
+  Widget buildButton(String title, String image) {
     return Column(children: <Widget>[
       Row(
         mainAxisSize: MainAxisSize.min,

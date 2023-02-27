@@ -184,7 +184,7 @@ class LNBaseTextStyle {
   static const body3 = TextStyle(
     fontFamily: 'DB Heavent',
     color: BaseColorsLN.neutralsBlack,
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
