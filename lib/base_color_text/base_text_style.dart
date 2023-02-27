@@ -300,7 +300,6 @@ class LNBaseTextStyle {
   );
 
   static const app_bar_style = TextStyle(
-    fontFamily: 'DB Heavent',
     color: BaseColorsLN.blackColor,
     fontSize: 24,
     fontStyle: FontStyle.normal,
