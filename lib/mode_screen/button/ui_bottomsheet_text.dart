@@ -1,3 +1,4 @@
+import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/utils/constants.dart';
 import 'package:flutter/material.dart';
 
