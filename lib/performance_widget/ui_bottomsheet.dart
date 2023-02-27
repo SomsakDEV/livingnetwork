@@ -42,11 +42,11 @@ class _UiBottomSheetCardDialogTextModeState
               padding: const EdgeInsets.only(top: 16.0),
               child: Container(
                 // decoration: ,
-                color: Color(0xFFFAFAFA),
+                color: const Color(0xFFFAFAFA),
                 child: ListTile(
                   leading: widget.image[index],
-                  title: Text(widget.title[index]),
-                  subtitle: Text(widget.subTitle[index]),
+                  title: Text(widget.title[index], style: LNBaseTextStyle.uiBottomSheetTextTitle,),
+                  subtitle: Text(widget.subTitle[index], style: LNBaseTextStyle.uiBottomSheetTextDesc,),
                 ),
               ),
             );

@@ -114,7 +114,7 @@ class _UiButtonModeState extends State<UiButtonMode> {
                                 ? widget.colorTitle
                                 : Colors.black,
                             fontSize: widget.fontSize ?? 18,
-                            fontWeight: FontWeight.w500,
+                            fontWeight: FontWeight.w600,
                           ),
                     ),
                     SizedBox(

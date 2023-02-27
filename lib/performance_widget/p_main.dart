@@ -102,9 +102,10 @@ class _PerformanceMainState extends State<PerformanceMain> {
                               style: LNBaseTextStyle.header6_1B,
                             ),
                             IconButton(
-                              icon: const Icon(
-                                Icons.info_outline,
-                                size: 16,
+                              icon: Image.asset(
+                                'packages/living_network/assets/images/information.png',
+                                height: 13.33,
+                                width: 13.33,
                               ),
                               onPressed: () {
                                 showModalBottomSheet(
