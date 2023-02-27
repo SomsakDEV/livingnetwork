@@ -184,7 +184,7 @@ class LNBaseTextStyle {
   static const body3 = TextStyle(
     fontFamily: 'DB Heavent',
     color: BaseColorsLN.neutralsBlack,
-    fontSize: 16,
+    fontSize: 15,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
@@ -290,6 +290,16 @@ class LNBaseTextStyle {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
+  static const saleButton = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.whiteColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    overflow: TextOverflow.clip
+  );
+
   static const modeWidgetTitle = TextStyle(
   fontFamily: 'DB Heavent',
   color: BaseColorsLN.header6_1,
@@ -297,6 +307,23 @@ class LNBaseTextStyle {
   fontWeight: FontWeight.w700,
   fontStyle: FontStyle.normal,
   leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const app_bar_style = TextStyle(
+    color: BaseColorsLN.blackColor,
+    fontSize: 24,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w700,
+  );
+  static const header_map_1 = TextStyle(
+  color: BaseColorsLN.blackColor,
+  fontSize: 26,
+  fontWeight: FontWeight.w700,
+  );
+  static  TextStyle map_button_selection = TextStyle(
+    color: Colors.grey[600],
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
   );
 
   static const uiBottomSheetTextTitle = TextStyle(

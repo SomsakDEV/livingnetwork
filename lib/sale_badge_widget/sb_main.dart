@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:ui_style/ui_style.dart';
 
 class SaleBadgeMain extends StatefulWidget {
   const SaleBadgeMain({super.key});
@@ -65,31 +64,52 @@ class _SaleBadgeMainState extends State<SaleBadgeMain> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.end,
                           mainAxisSize: MainAxisSize.max,
-                          children: const [
-                            UiButton(
-                              title: 'Buy Now',
-                              textStyle: TextStyle(
-                                fontFamily: 'DB Heavent',
-                                color: BaseColorsLN.whiteColor,
-                                fontSize: 12,
-                                fontWeight: FontWeight.w400,
-                                fontStyle: FontStyle.normal,
-                                leadingDistribution: TextLeadingDistribution.even,
-                                overflow: TextOverflow.ellipsis,
+                          children: [
+                            SizedBox(
+                              width: MediaQuery.of(context).size.width * 0.18,
+                              height: 25,
+                              child: ElevatedButton(
+                                onPressed: () {},
+                                style: ElevatedButton.styleFrom(
+                                  backgroundColor: BaseColorsLN.kellyGreen500,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(8),
+                                    side: const BorderSide(
+                                      width: 1,
+                                      color: BaseColorsLN.kellyGreen500,
+                                    ),
+                                  ),
+                                ),
+                                child: Text(
+                                  "Buy Now",
+                                  style: LNBaseTextStyle.saleButton,
+                                ),
                               ),
-                              buttonType: ButtonType.primaryBtn,
-                              width: 93,
-                              height: 29,
-                              borderRadius: 4,
                             ),
                           ],
-                        )
+                        ),
+                        // UiButton(
+                        //   title: 'Buy Now',
+                        //   textStyle: TextStyle(
+                        //     fontFamily: 'DB Heavent',
+                        //     color: BaseColorsLN.whiteColor,
+                        //     fontSize: 12,
+                        //     fontWeight: FontWeight.w400,
+                        //     fontStyle: FontStyle.normal,
+                        //     leadingDistribution: TextLeadingDistribution.even,
+                        //     overflow: TextOverflow.ellipsis,
+                        //   ),
+                        //   buttonType: ButtonType.primaryBtn,
+                        //   width: 93,
+                        //   height: 29,
+                        //   borderRadius: 4,
+                        // ),
                       ],
-                    ),
+                    )
                   ],
                 ),
               ),
-            )
+            ),
           ],
         ),
       ),

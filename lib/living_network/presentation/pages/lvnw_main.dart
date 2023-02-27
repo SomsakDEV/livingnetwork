@@ -1,11 +1,12 @@
 // ignore_for_file: prefer_const_constructors , prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
+import 'package:living_network/base_color_text/base_color_ln.dart';
+import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/living_network/presentation/pages/lvnw_main_home.dart';
 import 'package:living_network/living_network/presentation/pages/lvnw_main_mobile.dart';
 
 class LivingNetwork extends StatefulWidget {
-
   const LivingNetwork({
     Key? key,
   }) : super(key: key);
@@ -19,16 +20,12 @@ class _LivingNetworkState extends State<LivingNetwork> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          backgroundColor: Colors.white,
           elevation: 0,
-          title: const Text(
-            'Living Network',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ),
-          ),
+          centerTitle: false,
+          title: const Text('Living Network',
+              style: LNBaseTextStyle.app_bar_style),
+          backgroundColor: BaseColorsLN.whiteColor,
+          leading: const BackButton(color: BaseColorsLN.blackColor),
         ),
         body: DefaultTabController(
             length: 2,

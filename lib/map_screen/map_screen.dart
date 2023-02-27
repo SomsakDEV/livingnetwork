@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:living_network/base_color_text/base_color_ln.dart';
+import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/map_screen/button_selection.dart';
 import 'package:living_network/map_screen/places_widget.dart';
 import 'package:living_network/map_screen/map_widget.dart';
 import 'package:living_network/map_screen/toggle_signal_widget.dart';
-import 'package:ui_style/base_color.dart';
 
 class MapScreen extends StatefulWidget {
   const MapScreen({super.key});
@@ -15,34 +16,30 @@ class MapScreen extends StatefulWidget {
 class _MapScreenState extends State<MapScreen> {
   bool _select1 = true;
   bool _select2 = true;
-  SizedBox getHBox([double a = 15.0]) => SizedBox(height: a);
-  SizedBox getWBox([double a = 15.0]) => SizedBox(width: a);
+
+  SizedBox getHBox(double a) => SizedBox(height: a);
+
+  SizedBox getWBox(double a) => SizedBox(width: a);
+
   @override
   Widget build(BuildContext context) {
+    var conH = MediaQuery.of(context).size.height;
+    var conW = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: Row(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: const [
-            Text('Signal map',
-                style: TextStyle(
-                  color: BaseColors.blackColor,
-                  fontSize: 24,
-                  fontWeight: FontWeight.w700,
-                )),
-          ],
-        ),
-        backgroundColor: BaseColors.whiteColor,
-        leading: BackButton(color: BaseColors.blackColor),
+        centerTitle: false,
+        title: const Text('Signal map', style: LNBaseTextStyle.app_bar_style),
+        backgroundColor: BaseColorsLN.whiteColor,
+        leading: const BackButton(color: BaseColorsLN.blackColor),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: [
           SizedBox(
-            height: 395,
-            child: Stack(
+            height: conH * 0.4,
+            child: const Stack(
               alignment: Alignment.topCenter,
-              children: const [
+              children: [
                 MapWidget(),
                 Padding(
                   padding: EdgeInsets.only(top: 15.0),
@@ -51,22 +48,17 @@ class _MapScreenState extends State<MapScreen> {
               ],
             ),
           ),
-          getHBox(),
-          Padding(
-            padding: const EdgeInsets.only(left: 20.0),
+          getHBox(conH * 0.02),
+          const Padding(
+            padding: EdgeInsets.only(left: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: const [
-                Text('Signal Nearby',
-                    style: TextStyle(
-                      color: Color(0xFF38454C),
-                      fontSize: 26,
-                      fontWeight: FontWeight.w700,
-                    )),
+              children: [
+                Text('Signal Nearby', style: LNBaseTextStyle.header_map_1)
               ],
             ),
           ),
-          getHBox(),
+          getHBox(conH * 0.01),
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 15.0),
             child: Row(
@@ -75,11 +67,11 @@ class _MapScreenState extends State<MapScreen> {
               children: [
                 Expanded(
                   child: ButtonSelection(
-                    marginColor: BaseColors.greenDark1A,
-                    selectedBackgroundColor: BaseColors.greenColor100,
-                    selectedBorderColor: BaseColors.primaryColor,
-                    unselectedBackgroundColor: BaseColors.neutralsWhite,
-                    unselectedBorderColor: BaseColors.greyBtnColor,
+                    marginColor: BaseColorsLN.greenDark1A,
+                    selectedBackgroundColor: BaseColorsLN.greenColor100,
+                    selectedBorderColor: BaseColorsLN.primaryColor,
+                    unselectedBackgroundColor: BaseColorsLN.neutralsWhite,
+                    unselectedBorderColor: BaseColorsLN.greyBtnColor,
                     unselectedOpacity: 0.5,
                     opacityAnimationDuration: 300,
                     selected: _select1,
@@ -88,17 +80,18 @@ class _MapScreenState extends State<MapScreen> {
                         _select1 = newValue;
                       });
                     },
-                    child: buildBotton('AIS Shop', 'packages/living_network/assets/images/ais_shop.png'),
+                    child: buildButton('AIS Shop',
+                        'packages/living_network/assets/images/ais_shop.png'),
                   ),
                 ),
-                getWBox(),
+                getWBox(conW * 0.05),
                 Expanded(
                   child: ButtonSelection(
-                    marginColor: BaseColors.greenDark1A,
-                    selectedBackgroundColor: BaseColors.greenColor100,
-                    selectedBorderColor: BaseColors.primaryColor,
-                    unselectedBackgroundColor: BaseColors.neutralsWhite,
-                    unselectedBorderColor: BaseColors.greyBtnColor,
+                    marginColor: BaseColorsLN.greenDark1A,
+                    selectedBackgroundColor: BaseColorsLN.greenColor100,
+                    selectedBorderColor: BaseColorsLN.primaryColor,
+                    unselectedBackgroundColor: BaseColorsLN.neutralsWhite,
+                    unselectedBorderColor: BaseColorsLN.greyBtnColor,
                     unselectedOpacity: 0.5,
                     opacityAnimationDuration: 300,
                     selected: _select2,
@@ -107,13 +100,14 @@ class _MapScreenState extends State<MapScreen> {
                         _select2 = newValue;
                       });
                     },
-                    child: buildBotton('AIS Wifi', 'packages/living_network/assets/images/ais_wifi.png'),
+                    child: buildButton('AIS Wifi',
+                        'packages/living_network/assets/images/ais_wifi.png'),
                   ),
                 ),
               ],
             ),
           ),
-          getWBox(),
+          getHBox(conH * 0.02),
           // FutureBuilder(builder: builder)
           ListPlaceDetail(
             select1: _select1,
@@ -124,7 +118,7 @@ class _MapScreenState extends State<MapScreen> {
     );
   }
 
-  Widget buildBotton(String title, String image) {
+  Widget buildButton(String title, String image) {
     return Column(children: <Widget>[
       Row(
         mainAxisSize: MainAxisSize.min,
@@ -133,18 +127,16 @@ class _MapScreenState extends State<MapScreen> {
             height: 45,
             width: 45,
             decoration: BoxDecoration(
-              image: DecorationImage(image: AssetImage(image), fit: BoxFit.contain, alignment: Alignment.center),
+              image: DecorationImage(
+                  image: AssetImage(image),
+                  fit: BoxFit.contain,
+                  alignment: Alignment.center),
             ),
           ),
           const SizedBox(
             width: 8.0,
           ),
-          Text(title,
-              style: TextStyle(
-                color: Colors.grey[600],
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              )),
+          Text(title, style: LNBaseTextStyle.map_button_selection)
         ],
       )
     ]);
