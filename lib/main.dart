@@ -2,13 +2,12 @@ import 'dart:developer';
 
 import 'package:core/config/cache_config.dart';
 import 'package:core/core.dart';
-import 'package:core/network/utils/constant.dart';
 // import 'package:example/example.dart';
 import 'package:flutter/material.dart';
 import 'package:template/constance.dart';
 import 'package:template/route.dart';
-// ignore: depend_on_referenced_packages
 import 'package:ui_style/ui_style.dart';
+// ignore: depend_on_referenced_packages
 
 var localePref;
 late BaseSharedPreference baseSharedPreference;
@@ -138,7 +137,8 @@ class _MyHomePageState extends State<MyHomePage> {
           )
         ],
       ),
-      body: SingleChildScrollView(
+      body: 
+      SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
@@ -153,6 +153,13 @@ class _MyHomePageState extends State<MyHomePage> {
                   buttonType: ButtonType.secondaryBtn,
                   onPress: () {
                     Navigator.pushNamed(context, "/livingnetwork");
+                  },
+                ),
+                UiButton(
+                  title: "Clear Living Network",
+                  buttonType: ButtonType.secondaryBtn,
+                  onPress: () {
+                    Navigator.pushNamed(context, "/livingnetwork/clearData");
                   },
                 ),
                 UiButton(
