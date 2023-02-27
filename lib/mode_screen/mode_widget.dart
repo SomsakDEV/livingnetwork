@@ -169,7 +169,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           fontFamily: 'DB Heavent',
                           color: Color(0xFF38454C),
                           fontSize: 26,
-                          fontWeight: FontWeight.w700,
+                          fontWeight: FontWeight.w500,
                           fontStyle: FontStyle.normal,
                           //leadingDistribution: TextLeadingDistribution.even,
                           //height: 1.5,
