@@ -316,4 +316,22 @@ class LNBaseTextStyle {
     fontSize: 18,
     fontWeight: FontWeight.w700,
   );
+
+  static const uiBottomSheetTextTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.header6_1,
+    fontSize: 24,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const uiBottomSheetTextDesc = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.header6_1,
+    fontSize: 16,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
 }

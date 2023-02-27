@@ -1,3 +1,4 @@
+import 'package:living_network/base_color_text/base_text_style.dart';
 import 'package:living_network/utils/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -34,11 +35,11 @@ class _UiBottomSheetCardDialogTextModeState
               padding: const EdgeInsets.only(top: 16.0),
               child: Container(
                 // decoration: ,
-                color: Color(0xFFFAFAFA),
+                color: const Color(0xFFFAFAFA),
                 child: ListTile(
                   leading: image[index],
-                  title: Text(title[index]),
-                  subtitle: Text(subTitle[index]),
+                  title: Text(title[index], style: LNBaseTextStyle.uiBottomSheetTextTitle,),
+                  subtitle: Text(subTitle[index], style: LNBaseTextStyle.uiBottomSheetTextDesc,),
                 ),
               ),
             );
