@@ -1,5 +1,7 @@
-import 'package:ui_style/ui_style.dart';
+
 import 'package:flutter/material.dart';
+import 'package:living_network/base_color_text/base_color_ln.dart';
+import 'package:living_network/mode_screen/button/ui_button.dart';
 
 class UiBottomSheetCardDialogMode extends StatefulWidget {
   final String title;
@@ -56,7 +58,7 @@ class _UiBottomSheetCardDialogModeState
                   Text(
                     widget.title,
                     style: const TextStyle(
-                      color: BaseColors.kellyGreen500,
+                      color: BaseColorsLN.kellyGreen500,
                       fontSize: 32,
                       fontWeight: FontWeight.bold,
                     ),
@@ -91,7 +93,7 @@ class _UiBottomSheetCardDialogModeState
                   ),
                   UiButton(
                     title: widget.textSubmitBtn,
-                    backgroundColor: BaseColors.kellyGreen500,
+                    backgroundColor: BaseColorsLN.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
                     height: 58,

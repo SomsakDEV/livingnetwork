@@ -35,11 +35,14 @@ class BaseColorsLN {
   static const blackColorA40 = Color(0x66000000);
   static const textColorTabbar = Color(0xFF657884);
   static const verticalDivider = Color(0xFFB0BEC5);
+  static const greenColor10 = Color(0xFF9EDE3E);
+  static const greenColor20 = Color(0xFF64CA00);
 
   // below code is new base colors
 
   // Neutrals
   static const neutralsWhite = Color(0xFFFFFFFF);
+  static const neutralsWhiteMixGrey = Color(0xFFFAFAFA);
   static const neutralsLightestGrey = Color(0xFFF5F5F5);
   static const neutralsLightGrey = Color(0xFFE9E9E9);
   static const neutralsGrey = Color(0xFFD9D9D9);

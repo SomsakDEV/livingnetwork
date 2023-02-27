@@ -5,9 +5,8 @@ import 'package:living_network/internet_usage/iu_widget.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:living_network/mode_screen/button/ui_button.dart' as button;
+import 'package:living_network/mode_screen/button/ui_button_mode.dart' as button;
 
-import 'time_widget.dart';
 
 class ModeWidget extends StatefulWidget {
   //bool phone, package;
@@ -141,7 +140,7 @@ class _ModeWidgetState extends State<ModeWidget> {
       child: Container(
         // height: 232,
         // width: 327,
-        color: const Color(0xFFFFFFFF),
+        color: BaseColorsLN.whiteColor,
         //decoration: const BoxDecoration(color: Color(0xFFFFFFFF)),
         child: Padding(
           padding: const EdgeInsets.all(10.0),

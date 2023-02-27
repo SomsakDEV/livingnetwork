@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:ui_style/base_color.dart';
+import 'package:living_network/base_color_text/base_color_ln.dart';
 
 class TimeWidget extends StatefulWidget {
   // final Duration countDownTime;
@@ -82,7 +82,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                   gradient: LinearGradient(
                       begin: FractionalOffset.centerLeft,
                       end: FractionalOffset.centerRight,
-                      colors: [Color(0xFF9EDE3E), Color(0xFF64CA00)])),
+                      colors: [BaseColorsLN.greenColor10, BaseColorsLN.greenColor20])),
               width: 68,
               height: 24,
               child: Row(children: [
@@ -102,7 +102,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                   style: widget.textStyle ??
                       const TextStyle(
                           fontWeight: FontWeight.w700,
-                          color: BaseColors.whiteColor,
+                          color: BaseColorsLN.whiteColor,
                           fontSize: 14),
                 )
               ])),
@@ -111,7 +111,7 @@ class _TimeWidgetState extends State<TimeWidget> {
         return Container(
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                color: Color(0xFFF2F4F6)),
+                color: BaseColorsLN.neutralsLightGrey),
             width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
             child: Row(
@@ -125,7 +125,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
-                          color: BaseColors.textColorTabbar),
+                          color: BaseColorsLN.textColorTabbar),
                     ),
                   ),
                   Padding(
@@ -136,7 +136,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                       style: widget.textStyle ??
                           const TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: BaseColors.greyBlue,
+                              color: BaseColorsLN.greyBlue,
                               fontSize: 22),
                     ),
                   ),
