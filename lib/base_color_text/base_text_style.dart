@@ -290,6 +290,16 @@ class LNBaseTextStyle {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
+  static const saleButton = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.whiteColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    overflow: TextOverflow.clip
+  );
+
   static const modeWidgetTitle = TextStyle(
   fontFamily: 'DB Heavent',
   color: BaseColorsLN.header6_1,
