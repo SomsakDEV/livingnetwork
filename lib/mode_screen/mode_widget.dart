@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/base_color_text/base_color_ln.dart';
 import 'package:living_network/internet_usage/iu_widget.dart';
-import 'package:living_network/living_network/presentation/pages/lvnw_main.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
 import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -24,8 +23,9 @@ class ModeWidget extends StatefulWidget {
 class _ModeWidgetState extends State<ModeWidget> {
   final Future<SharedPreferences> _mode = SharedPreferences.getInstance();
 
-  String mode = 'max';
-  String? mode_cur;
+  String? mode;
+  DateTime? expireLiveMode;
+  DateTime? expireGameMode;
 
   bool isMode(String value) {
     return value == mode;
@@ -43,8 +43,9 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool fup = false;
   late double reaminingQuota;
   late DateTime startDate;
-  DateTime? expireGameMode;
-  DateTime? expireLiveMode;
+
+  // DateTime? expireGameMode;
+  // DateTime? expireLiveMode;
   late bool showCountFreeTrial = false;
 
   bool enableLiveMode() {
@@ -61,24 +62,69 @@ class _ModeWidgetState extends State<ModeWidget> {
   late int? disableTitleColor = 0xFF38454C;
   late int? disableColorDetail = 0xFF9EDE3E;
   late bool isDisableMode = false;
+  late bool isDisableModeLive = false;
+  late bool isDisableModeGame = false;
+  late bool isLive = false;
+  late bool isGame = false;
 
   @override
   void initState() {
+    setMode(null);
     super.initState();
-    setMode();
   }
 
-  void setMode() async {
+  setMode(String? setMode) async {
     final SharedPreferences mode1 = await _mode;
-    if(mode1.getString('mode') != null){
-      mode1.setString('mode', 'maxmode');
-    }else{
-      mode_cur = mode1.getString('mode');
-    }
-    if(mode1.getString('modeTime')!= null){
+    setState(() {
+      if (setMode != null) {
+        if (mode1.getString('mode') == 'live' && setMode != 'live') {
+          mode1.setString('modeLiveTime', 'expire');
+          expireLiveMode = null;
+          isDisableModeLive = true;
+          isLive = false;
+        } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
+          mode1.setString('modeGameTime', 'expire');
+          expireGameMode = null;
+          isDisableModeGame = true;
+          isGame = false;
+        }
+        mode1.setString('mode', setMode);
+        mode = setMode;
+      } else {
+        if (mode1.getString('mode') != null) {
+          mode = mode1.getString('mode')!;
+        } else {
+          mode1.setString('mode', 'max');
+          mode = 'max';
+        }
+        if (mode1.getString('mode') == 'live') {
+          String time = mode1.getString('modeLiveTime') ?? '';
+          expireLiveMode = DateTime.parse(time);
+          isLive = true;
+        } else if (mode1.getString('mode') == 'game') {
+          String time = mode1.getString('modeGameTime') ?? '';
+          expireGameMode = DateTime.parse(time);
+          isGame = true;
+        }
+        if (mode1.getString('modeGameTime') == 'expire') {
+          isDisableModeGame = true;
+        }
+        if (mode1.getString('modeLiveTime') == 'expire') {
+          isDisableModeLive = true;
+        }
+      }
+    });
+  }
 
+  timeCountdown(String mode) async {
+    final SharedPreferences mode1 = await _mode;
+    if (mode == 'live') {
+      expireLiveMode = DateTime.now().add(const Duration(hours: 3));
+      mode1.setString('modeLiveTime', expireLiveMode.toString());
+    } else if (mode == 'game') {
+      expireGameMode = DateTime.now().add(const Duration(hours: 3));
+      mode1.setString('modeGameTime', expireGameMode.toString());
     }
-
   }
 
   @override
@@ -193,8 +239,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
                                   setState(() {
-                                    mode = 'max';
+                                    setMode('max');
                                   });
+                                  // Navigator.popAndPushNamed(
+                                  //     context, '/livingnetwork');
+                                  // Navigator.pop(context);
+                                  // setState(() {
+                                  //   mode = 'max';
+                                  // });
                                 },
                                 onPressedCancel: (isClicked) =>
                                     Navigator.pop(context),
@@ -245,8 +297,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
                                   setState(() {
-                                    mode = 'eco';
+                                    setMode('eco');
                                   });
+                                  // Navigator.pushReplacementNamed(
+                                  //     context, '/livingnetwork');
+                                  // Navigator.pop(context);
+                                  // setState(() {
+                                  //   mode = 'eco';
+                                  // });
                                 },
                                 onPressedCancel: (isClicked) =>
                                     Navigator.pop(context),
@@ -264,7 +322,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 children: [
                   Expanded(
                     child: button.UiButtonMode(
-                      icon: isDisableMode
+                      icon: isDisableMode || isDisableModeLive
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_live_bw.png',
                               height: 24,
@@ -282,15 +340,17 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       backgroundColor: Color(disableBackgroundColor),
-                      borderColor: isDisableMode
+                      borderColor: isDisableMode || isDisableModeLive
                           ? Color(disableBorderColor!)
                           : isMode('live')
                               ? const Color(0xFF64CA00)
                               : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
-                      isDisable: isDisableMode,
+                      isDisable: isDisableMode || isDisableModeLive,
                       expireDate: expireLiveMode,
+                      mode: 'modeLiveTime',
+                      check: isLive,
                       onPress: () {
                         if (!isMode('live')) {
                           showModalBottomSheet(
@@ -301,22 +361,31 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: smoothly live',
                                 textSubmitBtn: 'Switch to Live mode',
                                 onPressedSubmit: (isClicked) async {
-                                  if (countLiveModeTimeWidget == 1) {
-                                    Navigator.popAndPushNamed(context, '/livingnetwork');
-                                    // await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LivingNetwork()));
-                                    setState(() {
-                                      isDisableMode = true;
-                                    });
-                                  } else {
-                                    Navigator.pop(context);
-                                    setState(() {
-                                      mode = 'live';
-                                      countLiveModeTimeWidget++;
-                                      expireLiveMode = DateTime.now()
-                                          .add(const Duration(hours: 5));
-                                      expireGameMode = null;
-                                    });
-                                  }
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    isLive = true;
+                                    setMode('live');
+                                    timeCountdown('live');
+                                  });
+                                  // Navigator.pushReplacementNamed(
+                                  //     context, '/livingnetwork');
+                                  // if (countLiveModeTimeWidget == 1) {
+                                  //   Navigator.popAndPushNamed(
+                                  //       context, '/livingnetwork');
+                                  //   // await Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => LivingNetwork()));
+                                  //   setState(() {
+                                  //     isDisableMode = true;
+                                  //   });
+                                  // } else {
+                                  //   Navigator.pop(context);
+                                  //   setState(() {
+                                  //     mode = 'live';
+                                  //     countLiveModeTimeWidget++;
+                                  //     expireLiveMode = DateTime.now()
+                                  //         .add(const Duration(hours: 5));
+                                  //     expireGameMode = null;
+                                  //   });
+                                  // }
                                 },
                                 onPressedCancel: (isClicked) =>
                                     Navigator.pop(context),
@@ -329,7 +398,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   ),
                   Expanded(
                     child: button.UiButtonMode(
-                      icon: isDisableMode
+                      icon: isDisableMode || isDisableModeGame
                           ? Image.asset(
                               'packages/living_network/assets/images/mode_game_bw.png',
                               height: 24,
@@ -347,15 +416,17 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       backgroundColor: Color(disableBackgroundColor),
-                      borderColor: isDisableMode
+                      borderColor: isDisableMode || isDisableModeGame
                           ? Color(disableBorderColor!)
                           : isMode('game')
                               ? const Color(0xFF64CA00)
                               : const Color(0xFFEEF8E8),
                       colorTitle: Color(disableTitleColor!),
                       colorDetail: Color(disableColorDetail!),
-                      isDisable: isDisableMode,
+                      isDisable: isDisableMode || isDisableModeGame,
                       expireDate: expireGameMode,
+                      mode: 'modeGameTime',
+                      check: isGame,
                       onPress: () {
                         if (!isMode('game')) {
                           showModalBottomSheet(
@@ -366,21 +437,29 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 desc: 'Detail: Lower Latency',
                                 textSubmitBtn: 'Switch to Game mode',
                                 onPressedSubmit: (isClicked) {
-                                  if (countGameModeTimeWidget == 1) {
-                                    Navigator.pop(context);
-                                    setState(() {
-                                      isDisableMode = true;
-                                    });
-                                  } else {
-                                    Navigator.pop(context);
-                                    setState(() {
-                                      mode = 'game';
-                                      countGameModeTimeWidget++;
-                                      expireGameMode = DateTime.now()
-                                          .add(const Duration(hours: 5));
-                                      expireLiveMode = null;
-                                    });
-                                  }
+                                  Navigator.pop(context);
+                                  setState(() {
+                                    isGame = true;
+                                    setMode('game');
+                                    timeCountdown('game');
+                                  });
+                                  // Navigator.popAndPushNamed(
+                                  //     context, '/livingnetwork');
+                                  // if (countGameModeTimeWidget == 1) {
+                                  //   Navigator.pop(context);
+                                  //   setState(() {
+                                  //     isDisableMode = true;
+                                  //   });
+                                  // } else {
+                                  //   Navigator.pop(context);
+                                  //   setState(() {
+                                  //     mode = 'game';
+                                  //     countGameModeTimeWidget++;
+                                  //     expireGameMode = DateTime.now()
+                                  //         .add(const Duration(hours: 5));
+                                  //     expireLiveMode = null;
+                                  //   });
+                                  // }
                                 },
                                 onPressedCancel: (isClicked) =>
                                     Navigator.pop(context),
@@ -448,6 +527,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               ),
               showCountFreeTrial
                   ? TimeWidget(
+                      check: true,
                       expire: DateTime.now().add(
                         const Duration(seconds: 5),
                       ),

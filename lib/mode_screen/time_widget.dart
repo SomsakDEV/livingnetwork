@@ -7,6 +7,9 @@ class TimeWidget extends StatefulWidget {
   final DateTime? expire;
   final TextStyle? textStyle;
   final bool isFreeTrial;
+  final String? mode;
+  final bool? check;
+
   // final String title;
   const TimeWidget({
     super.key,
@@ -14,6 +17,8 @@ class TimeWidget extends StatefulWidget {
     this.expire,
     this.textStyle,
     this.isFreeTrial = true,
+    this.mode,
+    this.check,
   });
 
   @override
@@ -23,35 +28,40 @@ class TimeWidget extends StatefulWidget {
 class _TimeWidgetState extends State<TimeWidget> {
   Duration duration = const Duration();
   Timer? timer;
+  bool checkTimerStart = true;
 
   @override
   void initState() {
     super.initState();
-    startTimer();
+    // startTimer();
   }
 
-  startTimer() {
-    DateTime expireTime =
-        widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
-    int seconds = expireTime.difference(DateTime.now()).inSeconds;
-    print(seconds);
-    if (seconds > 0) {
-      duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
-      timer = Timer.periodic(
-          const Duration(seconds: 1),
-          (_) => setState(
-                () {
-                  final seconds = duration.inSeconds - 1;
-                  if (seconds < 0) {
-                    timer?.cancel();
-                  } else {
-                    duration = Duration(seconds: seconds);
-                  }
-                },
-              ));
-    } else {
+  void startTimer() {
+    if ((widget.check ?? false) && checkTimerStart) {
+      DateTime expireTime =
+          widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
+      int seconds = expireTime.difference(DateTime.now()).inSeconds;
+      if (seconds > 0) {
+        duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
+        timer = Timer.periodic(
+            const Duration(seconds: 1),
+            (_) => setState(
+                  () {
+                    timeState(widget.mode);
+                  },
+                ));
+        checkTimerStart = false;
+      }
+    }
+  }
+
+  timeState(String? mode) {
+    final seconds = duration.inSeconds - 1;
+    if (seconds < 0 || !(widget.check ?? true)) {
+      duration = const Duration(seconds: 0, hours: 0, minutes: 0);
       timer?.cancel();
-      duration = const Duration(seconds: 0);
+    } else {
+      duration = Duration(seconds: seconds);
     }
   }
 
@@ -145,11 +155,7 @@ class _TimeWidgetState extends State<TimeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    //startTimer();
-
+    startTimer();
     return buildTime();
   }
 }
-
-
-
