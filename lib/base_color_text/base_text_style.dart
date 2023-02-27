@@ -298,4 +298,22 @@ class LNBaseTextStyle {
   fontStyle: FontStyle.normal,
   leadingDistribution: TextLeadingDistribution.even,
   );
+
+  static const app_bar_style = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.blackColor,
+    fontSize: 24,
+    fontStyle: FontStyle.normal,
+    fontWeight: FontWeight.w700,
+  );
+  static const header_map_1 = TextStyle(
+  color: BaseColorsLN.blackColor,
+  fontSize: 26,
+  fontWeight: FontWeight.w700,
+  );
+  static  TextStyle map_button_selection = TextStyle(
+    color: Colors.grey[600],
+    fontSize: 18,
+    fontWeight: FontWeight.w700,
+  );
 }
