@@ -154,16 +154,6 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                         child: SpeedComparingMain(),
                       ),
                       _sizedBox,
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xFFFFFFFF),
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                        width: MediaQuery.of(context).size.width * 0.93,
-                        child: InternetUsage(),
-                      ),
-                      _sizedBox,
                       Stack(
                         children: <Widget> [
                           Padding(
@@ -187,6 +177,16 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                             ),
                           ),
                         ],
+                      ),
+                      _sizedBox,
+                      Container(
+                        decoration: BoxDecoration(
+                            color: Color(0xFFFFFFFF),
+                            borderRadius: BorderRadius.circular(8),
+                            border:
+                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        child: InternetUsage(),
                       ),
                       _sizedBox
                     ],
