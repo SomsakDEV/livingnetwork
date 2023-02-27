@@ -9,31 +9,12 @@ import 'package:living_network/mode_screen/button/ui_button.dart' as button;
 
 import 'time_widget.dart';
 
-DateTime? expireLiveMode;
-DateTime? expireGameMode;
-
 class ModeWidget extends StatefulWidget {
   //bool phone, package;
   const ModeWidget({
     super.key,
     /*required this.phone, required this.package*/
   });
-
-  timeMode() async {
-    final SharedPreferences mode1 = await SharedPreferences.getInstance();
-    // if (mode1.getString('modeLiveTime') == 'expire' ||
-    //     mode1.getString('modeGameTime') == 'expire') {
-    //   isDisableModeGame = true;
-    //   isDisableModeLive = true;
-    // }
-    if (mode1.getString('mode') == 'live') {
-      String time = mode1.getString('modeLiveTime') ?? '';
-      expireLiveMode = DateTime.parse(time);
-    } else if (mode1.getString('mode') == 'game') {
-      String time = mode1.getString('modeGameTime') ?? '';
-      expireGameMode = DateTime.parse(time);
-    }
-  }
 
   @override
   State<ModeWidget> createState() => _ModeWidgetState();
@@ -43,6 +24,8 @@ class _ModeWidgetState extends State<ModeWidget> {
   final Future<SharedPreferences> _mode = SharedPreferences.getInstance();
 
   String? mode;
+  DateTime? expireLiveMode;
+  DateTime? expireGameMode;
 
   bool isMode(String value) {
     return value == mode;
@@ -87,6 +70,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   @override
   void initState() {
     setMode(null);
+    timeMode();
     super.initState();
   }
 
@@ -114,12 +98,41 @@ class _ModeWidgetState extends State<ModeWidget> {
           mode1.setString('mode', 'max');
           mode = 'max';
         }
+        if (mode1.getString('mode') == 'live') {
+          String time = mode1.getString('modeLiveTime') ?? '';
+          expireLiveMode = DateTime.parse(time);
+          isLive = true;
+        } else if (mode1.getString('mode') == 'game') {
+          String time = mode1.getString('modeGameTime') ?? '';
+          expireGameMode = DateTime.parse(time);
+          isGame = true;
+        }
         if (mode1.getString('modeGameTime') == 'expire') {
           isDisableModeGame = true;
         }
         if (mode1.getString('modeLiveTime') == 'expire') {
           isDisableModeLive = true;
         }
+      }
+    });
+  }
+
+  timeMode() async {
+    final SharedPreferences mode1 = await SharedPreferences.getInstance();
+    // if (mode1.getString('modeLiveTime') == 'expire' ||
+    //     mode1.getString('modeGameTime') == 'expire') {
+    //   isDisableModeGame = true;
+    //   isDisableModeLive = true;
+    // }
+    setState(() {
+      if (mode1.getString('mode') == 'live') {
+        String time = mode1.getString('modeLiveTime') ?? '';
+        expireLiveMode = DateTime.parse(time);
+        isLive = true;
+      } else if (mode1.getString('mode') == 'game') {
+        String time = mode1.getString('modeGameTime') ?? '';
+        expireGameMode = DateTime.parse(time);
+        isGame = true;
       }
     });
   }
