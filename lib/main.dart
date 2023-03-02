@@ -46,6 +46,7 @@ class _LivingNetworkmainState extends State<LivingNetworkmain> {
     // ignore: prefer_const_constructors
     return MaterialApp(
       initialRoute: LivingNetworkMobile.ROUTE_NAME,
+      theme: ThemeData(fontFamily: 'DB Heavent'),
       // initialRoute: '/livingnetwork/map',
       onGenerateRoute: (route) => RouteLivingNetwork().generateRoute(route),
     );
