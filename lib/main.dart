@@ -10,6 +10,8 @@ class LivingNetworkmain extends StatefulWidget {
   State<LivingNetworkmain> createState() => _LivingNetworkmainState();
 }
 
+bool verify = false;
+
 class _LivingNetworkmainState extends State<LivingNetworkmain> {
   static const platform = MethodChannel('LIVING_NETWORK');
   String? token;
@@ -27,7 +29,6 @@ class _LivingNetworkmainState extends State<LivingNetworkmain> {
         if (call.method == 'open' && call.arguments != null) {
           print("Input data : ${call.arguments}");
           token = call.arguments;
-          platform.invokeMethod('open', ['Success : $token']);
         } else {
           throw MissingPluginException();
         }
@@ -37,6 +38,13 @@ class _LivingNetworkmainState extends State<LivingNetworkmain> {
         print('Missing plugin : $e');
       } catch (e) {
         print('Other error : $e');
+      } finally {
+        if (verify) {
+          platform.invokeMethod('open', ['Success : $token']);
+        } else {
+          platform.invokeMethod('open', ['Page cant not open']);
+          Navigator.pop(context);
+        }
       }
     });
   }

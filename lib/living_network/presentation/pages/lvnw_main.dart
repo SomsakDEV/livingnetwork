@@ -22,10 +22,12 @@ class _LivingNetworkState extends State<LivingNetwork> {
         appBar: AppBar(
           elevation: 0,
           centerTitle: false,
-          title: const Text('Living Network',
-              style: LNBaseTextStyle.app_bar_style),
+          title: const Text('Living Network', style: LNBaseTextStyle.app_bar_style),
           backgroundColor: BaseColorsLN.whiteColor,
-          leading: const BackButton(color: BaseColorsLN.blackColor),
+          leading: BackButton(
+            color: BaseColorsLN.blackColor,
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
         body: DefaultTabController(
             length: 2,
