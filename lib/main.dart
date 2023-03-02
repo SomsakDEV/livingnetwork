@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:living_network/living_network/presentation/pages/lvnw_main_mobile.dart';
 import 'package:living_network/route.dart';
 
 void main() => runApp(LivingNetworkmain());
@@ -10,36 +11,42 @@ class LivingNetworkmain extends StatefulWidget {
 }
 
 class _LivingNetworkmainState extends State<LivingNetworkmain> {
-  static const platform = const MethodChannel('tonative');
+  static const platform = MethodChannel('LIVING_NETWORK');
+  String? token;
 
   @override
   void initState() {
     super.initState();
-    // _wRequest();
+    _wRequest();
   }
 
   void _wRequest() async {
-    Map<String, dynamic> data = <String, dynamic>{};
     platform.setMethodCallHandler((MethodCall call) async {
-      print("Command : ${call.method}");
-      switch (call.method.toLowerCase()) {
-        case 'open':
-          Navigator.pushNamed(context, '/livingnetwork');
-          return '';
-        // default:
-        //   throw MissingPluginException();
+      try {
+        print("Command : ${call.method}");
+        if (call.method == 'open' && call.arguments != null) {
+          print("Input data : ${call.arguments}");
+          token = call.arguments;
+          platform.invokeMethod('open', ['Success : $token']);
+        } else {
+          throw MissingPluginException();
+        }
+      } on PlatformException catch (e) {
+        print('Error Platform : $e');
+      } on MissingPluginException catch (e) {
+        print('Missing plugin : $e');
+      } catch (e) {
+        print('Other error : $e');
       }
     });
-
-    final res = await platform.invokeMethod('open');
-    // data = Map<String,dynamic>.from(res);
-    // todoResponse
   }
 
   @override
   Widget build(BuildContext context) {
+    // ignore: prefer_const_constructors
     return MaterialApp(
-      initialRoute: '/livingnetwork/map',
+      initialRoute: LivingNetworkMobile.ROUTE_NAME,
+      // initialRoute: '/livingnetwork/map',
       onGenerateRoute: (route) => RouteLivingNetwork().generateRoute(route),
     );
   }

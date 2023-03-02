@@ -37,6 +37,8 @@ class BaseColorsLN {
   static const verticalDivider = Color(0xFFB0BEC5);
   static const greenColor10 = Color(0xFF9EDE3E);
   static const greenColor20 = Color(0xFF64CA00);
+  static const greenColorClose = Color(0xFF5FBB1C);
+  static const whiteSpeedCompare = Color(0xFFF2F4F6);
 
   // below code is new base colors
 

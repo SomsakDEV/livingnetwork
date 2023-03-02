@@ -291,22 +291,21 @@ class LNBaseTextStyle {
   );
 
   static const saleButton = TextStyle(
-    fontFamily: 'DB Heavent',
-    color: BaseColorsLN.whiteColor,
-    fontSize: 18,
-    fontWeight: FontWeight.w500,
-    fontStyle: FontStyle.normal,
-    leadingDistribution: TextLeadingDistribution.even,
-    overflow: TextOverflow.clip
-  );
+      fontFamily: 'DB Heavent',
+      color: BaseColorsLN.whiteColor,
+      fontSize: 18,
+      fontWeight: FontWeight.w500,
+      fontStyle: FontStyle.normal,
+      leadingDistribution: TextLeadingDistribution.even,
+      overflow: TextOverflow.clip);
 
   static const modeWidgetTitle = TextStyle(
-  fontFamily: 'DB Heavent',
-  color: BaseColorsLN.header6_1,
-  fontSize: 26,
-  fontWeight: FontWeight.w700,
-  fontStyle: FontStyle.normal,
-  leadingDistribution: TextLeadingDistribution.even,
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.header6_1,
+    fontSize: 26,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
   );
 
   static const app_bar_style = TextStyle(
@@ -316,11 +315,11 @@ class LNBaseTextStyle {
     fontWeight: FontWeight.w700,
   );
   static const header_map_1 = TextStyle(
-  color: BaseColorsLN.blackColor,
-  fontSize: 26,
-  fontWeight: FontWeight.w700,
+    color: BaseColorsLN.blackColor,
+    fontSize: 26,
+    fontWeight: FontWeight.w700,
   );
-  static  TextStyle map_button_selection = TextStyle(
+  static TextStyle map_button_selection = TextStyle(
     color: Colors.grey[600],
     fontSize: 18,
     fontWeight: FontWeight.w700,
@@ -342,5 +341,93 @@ class LNBaseTextStyle {
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const buttonSheetTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.kellyGreen500,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetDesc = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.bgToastColor,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTextButtonClose = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.greenColorClose,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const timeWidgetNumber = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.whiteColor,
+    fontSize: 14,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const dialogHeader = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.greyBlue,
+    fontSize: 24,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const dialogTitleText = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    color: BaseColorsLN.textColorTabbar,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const dialogButtonText = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    color: BaseColorsLN.whiteColor,
+    fontStyle: FontStyle.normal,
+  );
+
+  static const homeTitleText = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontSize: 20,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+  );
+
+  static const homeButtonText = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontSize: 18,
+    fontStyle: FontStyle.normal,
+  );
+
+  static const warningMessage = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    color: BaseColorsLN.speedCompare1,
   );
 }
