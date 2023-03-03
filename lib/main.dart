@@ -29,6 +29,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
         if (call.method == 'open' && call.arguments != null) {
           print("[LIVING_NETWORK] Input data : ${call.arguments}");
           token = call.arguments;
+          verify = true;
         } else {
           throw MissingPluginException();
         }
