@@ -1,4 +1,3 @@
-import 'package:flutter/material.dart';
 
 class ImageUtils {
   static String getImagePath(String path, [bool boo = true]) {

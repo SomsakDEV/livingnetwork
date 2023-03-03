@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/living_network/presentation/pages/lvnw_main.dart';
+import 'package:living_network/presentation/home/homepage.dart';
+
 // import 'package:living_network/map_screen/map_screen.dart';
 
 class RouteLivingNetwork {
@@ -31,10 +32,10 @@ class RouteLivingNetwork {
       //     pageBuilder: (context, animation, secondaryAnimation) => const MapScreen(),
       //   );
       case '/livingnetwork':
-        final args = route.arguments as Map?;
+        // final args = route.arguments as Map?;
         return PageRouteBuilder(
           settings: route,
-          pageBuilder: (context, animation, secondaryAnimation) => const LivingNetwork(),
+          pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
         );
       // case '/map_direction':
       //   return PageRouteBuilder(

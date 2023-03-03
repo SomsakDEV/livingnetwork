@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/mode_screen/button/ui_button.dart';
+import 'package:living_network/component/mode/ui_button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClearData extends StatefulWidget {

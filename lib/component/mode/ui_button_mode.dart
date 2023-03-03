@@ -1,8 +1,8 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, unnecessary_null_comparison, prefer_if_null_operators
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
-// import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:living_network/mode_screen/time_widget.dart';
+import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/model/mode/time_widget.dart';
+
 enum ButtonType { primaryBtn, secondaryBtn }
 class UiButtonMode extends StatefulWidget {
   final Image icon;

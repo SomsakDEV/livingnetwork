@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:living_network/living_network/presentation/pages/lvnw_main_mobile.dart';
+import 'package:living_network/presentation/home/tab_mobile.dart';
 import 'package:living_network/route.dart';
 
-void main() => runApp(LivingNetworkmain());
+void main() => runApp(LivingNetwork());
 
-class LivingNetworkmain extends StatefulWidget {
+class LivingNetwork extends StatefulWidget {
   @override
-  State<LivingNetworkmain> createState() => _LivingNetworkmainState();
+  State<LivingNetwork> createState() => _LivingNetworkState();
 }
 
 bool verify = false;
 
-class _LivingNetworkmainState extends State<LivingNetworkmain> {
+class _LivingNetworkState extends State<LivingNetwork> {
   static const platform = MethodChannel('LIVING_NETWORK');
   String? token;
 
@@ -25,25 +25,25 @@ class _LivingNetworkmainState extends State<LivingNetworkmain> {
   void _wRequest() async {
     platform.setMethodCallHandler((MethodCall call) async {
       try {
-        print("Command : ${call.method}");
+        print("[LIVING_NETWORK] Command : ${call.method}");
         if (call.method == 'open' && call.arguments != null) {
-          print("Input data : ${call.arguments}");
+          print("[LIVING_NETWORK] Input data : ${call.arguments}");
           token = call.arguments;
         } else {
           throw MissingPluginException();
         }
       } on PlatformException catch (e) {
-        print('Error Platform : $e');
+        print('[LIVING_NETWORK] Error Platform : $e');
       } on MissingPluginException catch (e) {
-        print('Missing plugin : $e');
+        print('[LIVING_NETWORK] Missing plugin : $e');
       } catch (e) {
-        print('Other error : $e');
+        print('[LIVING_NETWORK] Other error : $e');
       } finally {
         if (verify) {
           platform.invokeMethod('open', ['Success : $token']);
         } else {
           platform.invokeMethod('open', ['Page cant not open']);
-          Navigator.pop(context);
+          SystemNavigator.pop();
         }
       }
     });
@@ -53,7 +53,8 @@ class _LivingNetworkmainState extends State<LivingNetworkmain> {
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
     return MaterialApp(
-      initialRoute: LivingNetworkMobile.ROUTE_NAME,
+      debugShowCheckedModeBanner: false,
+      initialRoute: TabMobile.ROUTE_NAME,
       theme: ThemeData(fontFamily: 'DB Heavent'),
       // initialRoute: '/livingnetwork/map',
       onGenerateRoute: (route) => RouteLivingNetwork().generateRoute(route),

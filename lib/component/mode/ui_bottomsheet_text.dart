@@ -1,7 +1,7 @@
-import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
+import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/constance/LNStyle.dart';
 import 'package:flutter/material.dart';
-import 'package:living_network/utility/constants.dart';
+import 'package:living_network/constance/constants.dart';
 
 class UiBottomSheetCardDialogTextMode extends StatefulWidget {
   const UiBottomSheetCardDialogTextMode({
@@ -41,11 +41,11 @@ class _UiBottomSheetCardDialogTextModeState extends State<UiBottomSheetCardDialo
                   leading: image[index],
                   title: Text(
                     title[index],
-                    style: LNBaseTextStyle.uiBottomSheetTextTitle,
+                    style: LNStyle.uiBottomSheetTextTitle,
                   ),
                   subtitle: Text(
                     subTitle[index],
-                    style: LNBaseTextStyle.uiBottomSheetTextDesc,
+                    style: LNStyle.uiBottomSheetTextDesc,
                   ),
                 ),
               ),

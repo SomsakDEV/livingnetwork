@@ -22,11 +22,11 @@
         //     "type": "dart",
         //     "flutterMode": "release"
         // },
-        // {
-        //     "name": "attach_living_network",
-        //     "request": "attach",
-        //     "type": "dart",
-        // }
+         {
+             "name": "attach_living_network",
+             "request": "attach",
+             "type": "dart"
+         }
           
     ]
 }

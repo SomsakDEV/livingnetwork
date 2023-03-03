@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:living_network/internet_usage/iu_widget.dart';
-import 'package:living_network/mode_screen/button/ui_bottomsheet_decision.dart';
-import 'package:living_network/mode_screen/button/ui_bottomsheet_text.dart';
+import 'package:living_network/component/mode/ui_bottomsheet_text.dart';
+import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/component/mode/ui_bottomsheet_decision.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:living_network/mode_screen/button/ui_button_mode.dart' as button;
+import 'package:living_network/component/mode/ui_button_mode.dart' as button;
 
 class ModeWidget extends StatefulWidget {
   String network;
@@ -151,7 +149,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       padding: EdgeInsets.only(left: 8),
                       child: Text(
                         'Mode',
-                        style: LNBaseTextStyle.modeWidgetTitle,
+                        style: LNStyle.modeWidgetTitle,
                       ),
                     ),
                     IconButton(
@@ -387,7 +385,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         // ),
                         title: Text(
                           warningMessage,
-                          style: LNBaseTextStyle.warningMessage,
+                          style: LNStyle.warningMessage,
                         ),
                       ),
                     ),

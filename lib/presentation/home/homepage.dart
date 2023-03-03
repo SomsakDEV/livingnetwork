@@ -1,32 +1,33 @@
 // ignore_for_file: prefer_const_constructors , prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:living_network/living_network/presentation/pages/lvnw_main_home.dart';
-import 'package:living_network/living_network/presentation/pages/lvnw_main_mobile.dart';
+import 'package:flutter/services.dart';
+import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/presentation/home/tab_home.dart';
+import 'package:living_network/presentation/home/tab_mobile.dart';
 
-class LivingNetwork extends StatefulWidget {
-  const LivingNetwork({
+class HomePage extends StatefulWidget {
+  const HomePage({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<LivingNetwork> createState() => _LivingNetworkState();
+  State<HomePage> createState() => _HomePageState();
 }
 
-class _LivingNetworkState extends State<LivingNetwork> {
+class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
           centerTitle: false,
-          title: const Text('Living Network', style: LNBaseTextStyle.app_bar_style),
+          title: const Text('Living Network', style: LNStyle.app_bar_style),
           backgroundColor: BaseColorsLN.whiteColor,
           leading: BackButton(
             color: BaseColorsLN.blackColor,
-            onPressed: () => Navigator.pop(context),
+            onPressed: () => SystemNavigator.pop(),
           ),
         ),
         body: DefaultTabController(
@@ -51,8 +52,8 @@ class _LivingNetworkState extends State<LivingNetwork> {
               ),
               body: TabBarView(
                 children: [
-                  LivingNetworkMobile(),
-                  LivingNetworkHome(),
+                  TabMobile(),
+                  TabHome(),
                 ],
               ),
             )));

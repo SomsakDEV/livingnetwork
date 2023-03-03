@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:living_network/mode_screen/button/ui_button.dart';
+import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/component/mode/ui_button.dart';
 
 class UiBottomSheetCardDialogMode extends StatefulWidget {
   final String title;
@@ -68,7 +68,7 @@ class _UiBottomSheetCardDialogModeState
                           },
                           child: Text(
                             widget.textCancelBtn,
-                            style: LNBaseTextStyle.buttonSheetTextButtonClose,
+                            style: LNStyle.buttonSheetTextButtonClose,
                           ),
                         ),
                       ],
@@ -76,7 +76,7 @@ class _UiBottomSheetCardDialogModeState
                   ),
                   Text(
                     widget.title,
-                    style: LNBaseTextStyle.buttonSheetTitle,
+                    style: LNStyle.buttonSheetTitle,
                   ),
                   Padding(
                     padding:
@@ -86,7 +86,7 @@ class _UiBottomSheetCardDialogModeState
                       widget.desc,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: LNBaseTextStyle.buttonSheetDesc,
+                      style: LNStyle.buttonSheetDesc,
                     ),
                   ),
                   Container(

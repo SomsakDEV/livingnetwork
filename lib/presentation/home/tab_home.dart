@@ -1,19 +1,20 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:living_network/mode_screen/button/ui_button.dart';
+import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/utility/image_utils.dart';
 
-class LivingNetworkHome extends StatefulWidget {
+import '../../component/mode/ui_button.dart';
+
+class TabHome extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork/home';
-  const LivingNetworkHome({super.key});
+  const TabHome({super.key});
 
   @override
-  State<LivingNetworkHome> createState() => _LivingNetworkHomeState();
+  State<TabHome> createState() => _TabHomeState();
 }
 
-class _LivingNetworkHomeState extends State<LivingNetworkHome> {
+class _TabHomeState extends State<TabHome> {
   @override
   Widget build(BuildContext context) {
     return SingleChildScrollView(
@@ -38,7 +39,7 @@ class _LivingNetworkHomeState extends State<LivingNetworkHome> {
             Text(
                 'Network Quality Assurance network signal with real-time\n information to answer every aspect Let customers use\n home internet with peace of mind.',
                 textAlign: TextAlign.center,
-                style: LNBaseTextStyle.homeTitleText),
+                style: LNStyle.homeTitleText),
             SizedBox(
               height: 32,
             ),
@@ -59,7 +60,7 @@ class _LivingNetworkHomeState extends State<LivingNetworkHome> {
                     Text(
                       'Solve the\nproblem in 24\nhours.',
                       textAlign: TextAlign.center,
-                      style: LNBaseTextStyle.homeButtonText,
+                      style: LNStyle.homeButtonText,
                     ),
                   ],
                 ),
@@ -76,7 +77,7 @@ class _LivingNetworkHomeState extends State<LivingNetworkHome> {
                     Text(
                       'fast\ninstallation\n',
                       textAlign: TextAlign.center,
-                      style: LNBaseTextStyle.homeButtonText,
+                      style: LNStyle.homeButtonText,
                     ),
                   ],
                 ),
@@ -93,7 +94,7 @@ class _LivingNetworkHomeState extends State<LivingNetworkHome> {
                     Text(
                       'appointment\ntechnician on\ntime',
                       textAlign: TextAlign.center,
-                      style: LNBaseTextStyle.homeButtonText,
+                      style: LNStyle.homeButtonText,
                     ),
                   ],
                 ),

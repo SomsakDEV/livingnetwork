@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
-import 'package:living_network/internet_usage/iu_widget.dart';
-import 'package:living_network/sale_badge_widget/sb_main.dart';
+import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/component/internet/usage_sub.dart';
+import 'package:living_network/component/sale/sale_badge_widget.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:syncfusion_flutter_gauges/gauges.dart';
 
@@ -40,7 +40,7 @@ class _InternetUsageState extends State<InternetUsage> {
                     children: [
                       const Text(
                         'Internet',
-                        style: LNBaseTextStyle.header6_1,
+                        style: LNStyle.header6_1,
                       ),
                       const IUWidget(
                         maxValue: 100,
@@ -60,17 +60,17 @@ class _InternetUsageState extends State<InternetUsage> {
                               children: const [
                                 Text(
                                   '4 GB',
-                                  style: LNBaseTextStyle.internetUsageLow,
+                                  style: LNStyle.internetUsageLow,
                                 ),
                                 Text(
                                   ' remaining',
-                                  style: LNBaseTextStyle.caption2,
+                                  style: LNStyle.caption2,
                                 ),
                               ],
                             ),
                             const Text(
                               '50 GB',
-                              style: LNBaseTextStyle.caption2,
+                              style: LNStyle.caption2,
                             ),
                           ],
                         ),
@@ -81,7 +81,7 @@ class _InternetUsageState extends State<InternetUsage> {
               ],
             ),
           ),
-          SaleBadgeMain()
+          SaleBadgeWidget()
         ],
       ),
     );

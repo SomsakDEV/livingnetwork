@@ -1,29 +1,29 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:living_network/base_color_text/base_color_ln.dart';
-import 'package:living_network/base_color_text/base_text_style.dart';
+import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/constance/LNStyle.dart';
 // import 'package:living_network/cell_tower_info/ct_main.dart';
-import 'package:living_network/internet_usage/iu_main.dart';
+import 'package:living_network/component/internet/usage.dart';
 // import 'package:living_network/map_screen/map_widget.dart';
-import 'package:living_network/mode_screen/button/ui_button.dart';
-import 'package:living_network/mode_screen/mode_widget.dart';
+import 'package:living_network/component/mode/ui_button.dart';
+import 'package:living_network/model/mode/mode_widget.dart';
 import 'package:living_network/utility/image_utils.dart';
 // import 'package:living_network/performance_widget/p_main.dart';
 // import 'package:living_network/speed_comparing/sc_main.dart';
 
-class LivingNetworkMobile extends StatefulWidget {
+class TabMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
 
-  const LivingNetworkMobile({
+  const TabMobile({
     super.key,
   });
 
   @override
-  State<LivingNetworkMobile> createState() => _LivingNetworkMobileState();
+  State<TabMobile> createState() => _TabMobileState();
 }
 
-class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
+class _TabMobileState extends State<TabMobile> {
   final SizedBox _sizedBox = SizedBox(
     height: 12,
   );
@@ -54,17 +54,17 @@ class _LivingNetworkMobileState extends State<LivingNetworkMobile> {
                       SizedBox(
                         height: 16,
                       ),
-                      Text('5G Modes!', style: LNBaseTextStyle.dialogHeader),
+                      Text('5G Modes!', style: LNStyle.dialogHeader),
                       SizedBox(
                         height: 8,
                       ),
                       Text('Switch your connection mode to suite\nyour demand the most.',
-                          textAlign: TextAlign.center, style: LNBaseTextStyle.dialogTitleText),
+                          textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
                       SizedBox(
                         height: 16,
                       ),
                       UiButton(
-                        textStyle: LNBaseTextStyle.dialogButtonText,
+                        textStyle: LNStyle.dialogButtonText,
                         title: "Got it",
                         buttonType: ButtonType.primaryBtn,
                         onPress: () {

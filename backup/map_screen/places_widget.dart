@@ -1,5 +1,5 @@
 // import 'package:flutter/material.dart';
-// import 'package:living_network/base_color_text/base_color_ln.dart';
+// import 'package:living_network/base_color_text/LNColor.dart';
 // import 'package:living_network/utility/image_utils.dart';
 
 // class ListPlaceDetail extends StatefulWidget {
