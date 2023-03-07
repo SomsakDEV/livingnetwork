@@ -4,7 +4,7 @@ import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:living_network/utility/ui_button_mode.dart' as button;
+import 'package:living_network/component/mode/button_mode.dart' as button;
 
 bool timeout = false;
 
@@ -227,7 +227,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: button.UiButtonMode(
+                    child: button.ButtonMode(
                       icon: Image.asset(
                         isDisableMode
                             ? ImageUtils.getImagePath(
@@ -272,7 +272,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     ),
                   ),
                   Expanded(
-                    child: button.UiButtonMode(
+                    child: button.ButtonMode(
                       icon: Image.asset(
                         isDisableMode || isDisableModeEco
                             ? ImageUtils.getImagePath(
@@ -323,7 +323,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
                   Expanded(
-                    child: button.UiButtonMode(
+                    child: button.ButtonMode(
                       icon: Image.asset(
                         isDisableMode || isDisableModeLive
                             ? ImageUtils.getImagePath(
@@ -376,7 +376,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     ),
                   ),
                   Expanded(
-                    child: button.UiButtonMode(
+                    child: button.ButtonMode(
                       icon: Image.asset(
                         isDisableMode || isDisableModeGame
                             ? ImageUtils.getImagePath(
