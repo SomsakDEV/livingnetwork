@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/component/mode/ui_button.dart';
+import 'package:living_network/component/mode/button.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ClearData extends StatefulWidget {
@@ -26,7 +26,7 @@ class _ClearDataState extends State<ClearData> {
         title: const Text('Clear Data'),
       ),
       body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-        UiButton(
+        Button(
           width: MediaQuery.of(context).size.width,
           height: 300,
           title: 'Clear Data',

@@ -4,7 +4,7 @@ import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/model/mode/time_widget.dart';
 
 enum ButtonType { primaryBtn, secondaryBtn }
-class UiButtonMode extends StatefulWidget {
+class ButtonMode extends StatefulWidget {
   final Image icon;
   final String title;
   final String detail;
@@ -26,7 +26,7 @@ class UiButtonMode extends StatefulWidget {
   final bool isDisable;
   final bool isMode;
 
-  const UiButtonMode({
+  const ButtonMode({
     Key? key,
     required this.icon,
     required this.title,
@@ -50,9 +50,9 @@ class UiButtonMode extends StatefulWidget {
     this.check,
   }) : super(key: key);
   @override
-  State<UiButtonMode> createState() => _UiButtonModeState();
+  State<ButtonMode> createState() => _ButtonModeState();
 }
-class _UiButtonModeState extends State<UiButtonMode> {
+class _ButtonModeState extends State<ButtonMode> {
   @override
   Widget build(BuildContext context) {
     bool clickEnable = true;

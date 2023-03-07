@@ -4,7 +4,7 @@ import 'package:living_network/constance/LNColor.dart';
 
 enum ButtonType { primaryBtn, secondaryBtn }
 
-class UiButton extends StatefulWidget {
+class Button extends StatefulWidget {
   final String title;
   final ButtonType buttonType;
   final Icon? prefixIcon;
@@ -20,7 +20,7 @@ class UiButton extends StatefulWidget {
   final double? borderRadius;
   final FontWeight? fontWeight;
 
-  const UiButton({
+  const Button({
     Key? key,
     required this.title,
     required this.buttonType,
@@ -39,10 +39,10 @@ class UiButton extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  State<UiButton> createState() => _UiButtonState();
+  State<Button> createState() => _ButtonState();
 }
 
-class _UiButtonState extends State<UiButton> {
+class _ButtonState extends State<Button> {
   @override
   Widget build(BuildContext context) {
     bool clickEnable = true;

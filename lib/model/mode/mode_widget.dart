@@ -1,25 +1,24 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/component/mode/ui_bottomsheet_decision.dart';
-import 'package:living_network/component/mode/ui_bottomsheet_text.dart';
+import 'package:living_network/component/mode/bottomsheet_decision.dart';
+import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:living_network/utility/ui_button_mode.dart'
-    as button;
+import 'package:living_network/utility/ui_button_mode.dart' as button;
 
 bool timeout = false;
 
 class ModeWidget extends StatefulWidget {
   String network;
-  String package;
-  bool soc, faultManagement, ds4;
+  String currentType;
+  bool cellId, alarm, eco;
 
   ModeWidget({
     required this.network,
-    required this.package,
-    required this.soc,
-    required this.faultManagement,
-    required this.ds4,
+    required this.currentType,
+    required this.cellId,
+    required this.alarm,
+    required this.eco,
     super.key,
   });
 
@@ -29,6 +28,9 @@ class ModeWidget extends StatefulWidget {
 
 class _ModeWidgetState extends State<ModeWidget> {
   final Future<SharedPreferences> _mode = SharedPreferences.getInstance();
+  final SizedBox _sizedBox = const SizedBox(
+    height: 8,
+  );
 
   String? mode;
   DateTime? expireLiveMode;
@@ -38,11 +40,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     return value == mode;
   }
 
-  //For disable Mode 'backgroundcolor'
-  late int disableBackgroundColor = 0xFFEEF8E8;
-  late int? disableBorderColor = 0xFFEEF8E8;
-  late int? disableTitleColor = 0xFF38454C;
-  late int? disableDetailColor = 0xFF9EDE3E;
+  //For disable Mode
   late bool isDisableMode = false;
   late bool isDisableModeEco = false;
   late bool isDisableModeLive = false;
@@ -52,10 +50,6 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   String warningMessage =
       'You are currently using 4G. Because it is outside the 5G service area.';
-
-  SizedBox betweenBox = const SizedBox(
-    height: 8,
-  );
 
   @override
   void initState() {
@@ -93,7 +87,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   setMode(String? setMode) async {
     final SharedPreferences mode1 = await _mode;
     setState(() {
-      if (widget.network == '5G' && widget.package == 'Pack5G') {
+      if (widget.network == '5G' && widget.currentType == 'Pack5G') {
         int ecoMode = mode1.getInt('ecoMode') ?? 0;
         if (setMode != null) {
           if (mode1.getString('mode') == 'live' && setMode != 'live') {
@@ -208,26 +202,27 @@ class _ModeWidgetState extends State<ModeWidget> {
                       ),
                     ),
                     IconButton(
-                        onPressed: () {
-                          showModalBottomSheet(
-                            elevation: 0,
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (BuildContext context) {
-                              return const UiBottomSheetCardDialogTextMode();
-                            },
-                          );
-                        },
-                        icon: Image.asset(
-                          ImageUtils.getImagePath(
-                              'assets/images/information.png'),
-                          height: 13.33,
-                          width: 13.33,
-                        ))
+                      onPressed: () {
+                        showModalBottomSheet(
+                          elevation: 0,
+                          backgroundColor: Colors.transparent,
+                          context: context,
+                          builder: (BuildContext context) {
+                            return const BottomSheetCardDialogTextMode();
+                          },
+                        );
+                      },
+                      icon: Image.asset(
+                        ImageUtils.getImagePath(
+                            'assets/images/information.png'),
+                        height: 13.33,
+                        width: 13.33,
+                      ),
+                    ),
                   ],
                 ),
               ),
-              betweenBox,
+              _sizedBox,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -256,7 +251,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return UiBottomSheetCardDialogMode(
+                              return BottomSheetCardDialogMode(
                                 title: 'Switch to Max mode?',
                                 desc: 'Detail: Default Mode',
                                 textSubmitBtn: 'Switch to Max mode',
@@ -301,7 +296,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return UiBottomSheetCardDialogMode(
+                              return BottomSheetCardDialogMode(
                                 title: 'Switch to Eco mode?',
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
@@ -323,7 +318,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   ),
                 ],
               ),
-              betweenBox,
+              _sizedBox,
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
@@ -356,7 +351,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return UiBottomSheetCardDialogMode(
+                              return BottomSheetCardDialogMode(
                                 title: 'Switch to Live mode?',
                                 desc: 'Detail: smoothly live',
                                 textCancelBtn: 'Close',
@@ -409,7 +404,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return UiBottomSheetCardDialogMode(
+                              return BottomSheetCardDialogMode(
                                 title: 'Switch to Game mode?',
                                 desc: 'Detail: Lower Latency',
                                 textSubmitBtn: 'Switch to Game mode',
@@ -435,7 +430,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   ),
                 ],
               ),
-              betweenBox,
+              _sizedBox,
               Container(
                 width: MediaQuery.of(context).size.width * 0.85,
                 height: 52,

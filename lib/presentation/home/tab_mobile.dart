@@ -6,7 +6,7 @@ import 'package:living_network/constance/LNStyle.dart';
 // import 'package:living_network/cell_tower_info/ct_main.dart';
 import 'package:living_network/component/internet/usage.dart';
 // import 'package:living_network/map_screen/map_widget.dart';
-import 'package:living_network/component/mode/ui_button.dart';
+import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/model/mode/mode_widget.dart';
 import 'package:living_network/utility/image_utils.dart';
 // import 'package:living_network/performance_widget/p_main.dart';
@@ -63,7 +63,7 @@ class _TabMobileState extends State<TabMobile> {
                       SizedBox(
                         height: 16,
                       ),
-                      UiButton(
+                      Button(
                         textStyle: LNStyle.dialogButtonText,
                         title: "Got it",
                         buttonType: ButtonType.primaryBtn,
@@ -84,11 +84,11 @@ class _TabMobileState extends State<TabMobile> {
 
   @override
   Widget build(BuildContext context) {
-    String network = '5G'; //wifi, 4G, 5G
-    String package = 'Pack5G'; //Pack4G, Pack5G
-    bool soc = true; //CallId ว่าง หรือ ไม่ว่าง
-    bool faultManagement = true; // มี alarm ไม่มี alarm
-    bool ds4 = true; // ECO ว่าง หรือ ไม่ว่าง
+    String network = '5G';
+    String package = 'Pack5G';
+    bool cellId = true;
+    bool alarm = true;
+    bool eco = true;
 
     return SingleChildScrollView(
       child: Stack(
@@ -160,10 +160,10 @@ class _TabMobileState extends State<TabMobile> {
                                 width: MediaQuery.of(context).size.width * 0.93,
                                 child: ModeWidget(
                                   network: network,
-                                  package: package,
-                                  soc: soc,
-                                  faultManagement: faultManagement,
-                                  ds4: ds4,
+                                  currentType: package,
+                                  cellId: cellId,
+                                  alarm: alarm,
+                                  eco: eco,
                                 )),
                           ),
                           // Positioned(

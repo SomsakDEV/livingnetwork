@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
-import 'package:living_network/component/mode/ui_button.dart';
+import 'package:living_network/component/mode/button.dart';
 
-class UiBottomSheetCardDialogMode extends StatefulWidget {
+class BottomSheetCardDialogMode extends StatefulWidget {
   final String title;
   final String desc;
   final String? imagePath;
@@ -13,7 +13,7 @@ class UiBottomSheetCardDialogMode extends StatefulWidget {
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const UiBottomSheetCardDialogMode(
+  const BottomSheetCardDialogMode(
       {Key? key,
       required this.title,
       required this.desc,
@@ -26,12 +26,12 @@ class UiBottomSheetCardDialogMode extends StatefulWidget {
       : super(key: key);
 
   @override
-  State<UiBottomSheetCardDialogMode> createState() =>
-      _UiBottomSheetCardDialogModeState();
+  State<BottomSheetCardDialogMode> createState() =>
+      _BottomSheetCardDialogModeState();
 }
 
-class _UiBottomSheetCardDialogModeState
-    extends State<UiBottomSheetCardDialogMode> {
+class _BottomSheetCardDialogModeState
+    extends State<BottomSheetCardDialogMode> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -103,7 +103,7 @@ class _UiBottomSheetCardDialogModeState
                             ),
                           ),
                   ),
-                  UiButton(
+                  Button(
                     title: widget.textSubmitBtn,
                     backgroundColor: BaseColorsLN.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,

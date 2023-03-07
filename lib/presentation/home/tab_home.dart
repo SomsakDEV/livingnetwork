@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/utility/image_utils.dart';
 
-import '../../component/mode/ui_button.dart';
+import '../../component/mode/button.dart';
 
 class TabHome extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork/home';
@@ -104,7 +104,7 @@ class _TabHomeState extends State<TabHome> {
             SizedBox(
               height: 32,
             ),
-            UiButton(
+            Button(
               title: 'Coming Soon',
               buttonType: ButtonType.primaryBtn,
               isDisable: true,

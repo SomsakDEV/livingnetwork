@@ -3,16 +3,16 @@ import 'package:living_network/constance/LNStyle.dart';
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/constants.dart';
 
-class UiBottomSheetCardDialogTextMode extends StatefulWidget {
-  const UiBottomSheetCardDialogTextMode({
+class BottomSheetCardDialogTextMode extends StatefulWidget {
+  const BottomSheetCardDialogTextMode({
     Key? key,
   }) : super(key: key);
 
   @override
-  State<UiBottomSheetCardDialogTextMode> createState() => _UiBottomSheetCardDialogTextModeState();
+  State<BottomSheetCardDialogTextMode> createState() => _BottomSheetCardDialogTextModeState();
 }
 
-class _UiBottomSheetCardDialogTextModeState extends State<UiBottomSheetCardDialogTextMode> {
+class _BottomSheetCardDialogTextModeState extends State<BottomSheetCardDialogTextMode> {
   @override
   Widget build(BuildContext context) {
     return Container(
