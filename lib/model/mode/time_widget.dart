@@ -11,11 +11,13 @@ class TimeWidget extends StatefulWidget {
   final bool isFreeTrial;
   final String? mode;
   final bool? check;
+  final Function? setMode;
 
   // final String title;
   const TimeWidget({
     super.key,
     // required this.countDownTime,
+    this.setMode,
     this.expire,
     this.textStyle,
     this.isFreeTrial = true,
@@ -31,16 +33,12 @@ class _TimeWidgetState extends State<TimeWidget> {
   Duration duration = const Duration();
   Timer? timer;
   bool checkTimerStart = true;
-
-  @override
-  void initState() {
-    super.initState();
-    // startTimer();
-  }
+  bool checkTimerStop = true;
 
   void startTimer() {
     if ((widget.check ?? false) && checkTimerStart) {
-      DateTime expireTime = widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
+      DateTime expireTime =
+          widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
       int seconds = expireTime.difference(DateTime.now()).inSeconds;
       if (seconds > 0) {
         duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
@@ -53,6 +51,8 @@ class _TimeWidgetState extends State<TimeWidget> {
                 ));
         checkTimerStart = false;
       }
+    } else if (checkTimerStart) {
+      duration = const Duration(seconds: -2);
     }
   }
 
@@ -61,6 +61,10 @@ class _TimeWidgetState extends State<TimeWidget> {
     if (seconds < 0 || !(widget.check ?? true)) {
       duration = const Duration(seconds: 0, hours: 0, minutes: 0);
       timer?.cancel();
+      setState(() {
+        widget.setMode!();
+      });
+      checkTimerStop = false;
     } else {
       duration = Duration(seconds: seconds);
     }
@@ -71,7 +75,7 @@ class _TimeWidgetState extends State<TimeWidget> {
     final hours = twoDigits(duration.inHours);
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
-    if (hours == '00' && minutes == '00' && seconds == '00') {
+    if (duration.inSeconds < -1 || !checkTimerStop) {
       return const SizedBox();
     } else {
       if (!widget.isFreeTrial) {
@@ -83,7 +87,10 @@ class _TimeWidgetState extends State<TimeWidget> {
                 gradient: LinearGradient(
                     begin: FractionalOffset.centerLeft,
                     end: FractionalOffset.centerRight,
-                    colors: [BaseColorsLN.greenColor10, BaseColorsLN.greenColor20])),
+                    colors: [
+                      BaseColorsLN.greenColor10,
+                      BaseColorsLN.greenColor20
+                    ])),
             width: 68,
             height: 24,
             child: Row(
@@ -110,28 +117,37 @@ class _TimeWidgetState extends State<TimeWidget> {
       } else {
         return Container(
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(4)), color: BaseColorsLN.neutralsLightGrey),
+                borderRadius: BorderRadius.all(Radius.circular(4)),
+                color: BaseColorsLN.neutralsLightGrey),
             width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
-            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              const Padding(
-                padding: EdgeInsets.only(left: 12),
-                child: Text(
-                  'Free trial will expire:',
-                  textAlign: TextAlign.left,
-                  style: TextStyle(fontWeight: FontWeight.w500, fontSize: 18, color: BaseColorsLN.textColorTabbar),
-                ),
-              ),
-              Padding(
-                padding: const EdgeInsets.only(right: 12),
-                child: Text(
-                  '$hours : $minutes : $seconds',
-                  textAlign: TextAlign.right,
-                  style: widget.textStyle ??
-                      const TextStyle(fontWeight: FontWeight.w500, color: BaseColorsLN.greyBlue, fontSize: 22),
-                ),
-              ),
-            ]));
+            child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  const Padding(
+                    padding: EdgeInsets.only(left: 12),
+                    child: Text(
+                      'Free trial will expire:',
+                      textAlign: TextAlign.left,
+                      style: TextStyle(
+                          fontWeight: FontWeight.w500,
+                          fontSize: 18,
+                          color: BaseColorsLN.textColorTabbar),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(right: 12),
+                    child: Text(
+                      '$hours : $minutes : $seconds',
+                      textAlign: TextAlign.right,
+                      style: widget.textStyle ??
+                          const TextStyle(
+                              fontWeight: FontWeight.w500,
+                              color: BaseColorsLN.greyBlue,
+                              fontSize: 22),
+                    ),
+                  ),
+                ]));
       }
     }
   }
@@ -140,7 +156,6 @@ class _TimeWidgetState extends State<TimeWidget> {
   void dispose() {
     // buildTime().dispose();
     timer?.cancel();
-
     super.dispose();
   }
 

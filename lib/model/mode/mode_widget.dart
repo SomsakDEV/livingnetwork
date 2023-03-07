@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:living_network/component/mode/ui_bottomsheet_decision.dart';
 import 'package:living_network/component/mode/ui_bottomsheet_text.dart';
 import 'package:living_network/constance/LNStyle.dart';
-import 'package:living_network/component/mode/ui_bottomsheet_decision.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:living_network/component/mode/ui_button_mode.dart' as button;
+import 'package:living_network/utility/ui_button_mode.dart'
+    as button;
+
+bool timeout = false;
 
 class ModeWidget extends StatefulWidget {
   String network;
@@ -41,12 +44,14 @@ class _ModeWidgetState extends State<ModeWidget> {
   late int? disableTitleColor = 0xFF38454C;
   late int? disableDetailColor = 0xFF9EDE3E;
   late bool isDisableMode = false;
+  late bool isDisableModeEco = false;
   late bool isDisableModeLive = false;
   late bool isDisableModeGame = false;
   late bool isLive = false;
   late bool isGame = false;
 
-  String warningMessage = 'You are currently using 4G. Because it is outside the 5G service area.';
+  String warningMessage =
+      'You are currently using 4G. Because it is outside the 5G service area.';
 
   SizedBox betweenBox = const SizedBox(
     height: 8,
@@ -54,14 +59,42 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   @override
   void initState() {
+    checkNetwork('5G', 'Pack5G', true, true, true);
     setMode(null);
     super.initState();
+  }
+
+  checkNetwork(String networkType, String currentType, bool callID, bool alarm,
+      bool eco) {
+    if (networkType == '5G' && currentType == 'Pack5G') {
+      if (eco) {
+        if (callID && alarm) {
+          isDisableModeLive = true;
+        } else {
+          isDisableModeGame = true;
+          isDisableModeLive = true;
+        }
+      } else {
+        isDisableModeGame = true;
+        isDisableModeEco = true;
+        isDisableModeLive = true;
+      }
+    } else {
+      isDisableMode = true;
+    }
+  }
+
+  callback() {
+    setState(() {
+      setMode('max');
+    });
   }
 
   setMode(String? setMode) async {
     final SharedPreferences mode1 = await _mode;
     setState(() {
       if (widget.network == '5G' && widget.package == 'Pack5G') {
+        int ecoMode = mode1.getInt('ecoMode') ?? 0;
         if (setMode != null) {
           if (mode1.getString('mode') == 'live' && setMode != 'live') {
             mode1.setString('modeLiveTime', 'expire');
@@ -74,6 +107,13 @@ class _ModeWidgetState extends State<ModeWidget> {
             isDisableModeGame = true;
             isGame = false;
           }
+          if (setMode == 'eco') {
+            mode1.setInt('ecoMode', ++ecoMode);
+          } else if (mode1.getString('mode') == 'eco') {
+            if (ecoMode >= 5) {
+              isDisableModeEco = true;
+            }
+          }
           mode1.setString('mode', setMode);
           mode = setMode;
         } else {
@@ -85,12 +125,31 @@ class _ModeWidgetState extends State<ModeWidget> {
           }
           if (mode1.getString('mode') == 'live') {
             String time = mode1.getString('modeLiveTime') ?? '';
-            expireLiveMode = DateTime.parse(time);
-            isLive = true;
+            DateTime dateLive = DateTime.parse(time);
+            DateTime dateNow = DateTime.now();
+            if (dateLive.difference(dateNow).inSeconds < 0) {
+              print('test');
+              mode1.setString('modeLiveTime', 'expire');
+              mode1.setString('mode', 'max');
+              mode = 'max';
+              isDisableModeLive = true;
+            } else {
+              expireLiveMode = DateTime.parse(time);
+              isLive = true;
+            }
           } else if (mode1.getString('mode') == 'game') {
             String time = mode1.getString('modeGameTime') ?? '';
-            expireGameMode = DateTime.parse(time);
-            isGame = true;
+            DateTime dateGame = DateTime.parse(time);
+            DateTime dateNow = DateTime.now();
+            if (dateGame.difference(dateNow).inSeconds < 0) {
+              mode1.setString('modeGameTime', 'expire');
+              mode1.setString('mode', 'max');
+              mode = 'max';
+              isDisableModeGame = true;
+            } else {
+              expireGameMode = DateTime.parse(time);
+              isGame = true;
+            }
           }
           if (mode1.getString('modeGameTime') == 'expire') {
             isDisableModeGame = true;
@@ -98,14 +157,9 @@ class _ModeWidgetState extends State<ModeWidget> {
           if (mode1.getString('modeLiveTime') == 'expire') {
             isDisableModeLive = true;
           }
-          // if (widget.fup < 4 || widget.count > 0) {
-          //   isDisableModeLive = true;
-          //   isLive = false;
-          // }
-          // if (widget.fup < 1 || widget.count > 0) {
-          //   isDisableModeGame = true;
-          //   isGame = false;
-          // }
+          if (ecoMode >= 5) {
+            isDisableModeEco = true;
+          }
         }
       } else {
         isDisableMode = true;
@@ -119,13 +173,14 @@ class _ModeWidgetState extends State<ModeWidget> {
       expireLiveMode = DateTime.now().add(const Duration(hours: 3));
       mode1.setString('modeLiveTime', expireLiveMode.toString());
     } else if (mode == 'game') {
-      expireGameMode = DateTime.now().add(const Duration(hours: 3));
+      expireGameMode = DateTime.now().add(const Duration(seconds: 3));
       mode1.setString('modeGameTime', expireGameMode.toString());
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    // setMode(null);
     return Card(
       shadowColor: Colors.transparent,
       child: Container(
@@ -164,7 +219,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                           );
                         },
                         icon: Image.asset(
-                          ImageUtils.getImagePath('assets/images/information.png'),
+                          ImageUtils.getImagePath(
+                              'assets/images/information.png'),
                           height: 13.33,
                           width: 13.33,
                         ))
@@ -179,8 +235,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         isDisableMode
-                            ? ImageUtils.getImagePath('assets/images/mode_max_bw.png')
-                            : ImageUtils.getImagePath('assets/images/mode_max.png'),
+                            ? ImageUtils.getImagePath(
+                                'assets/images/mode_max_bw.png')
+                            : ImageUtils.getImagePath(
+                                'assets/images/mode_max.png'),
                         height: 24,
                         width: 24,
                       ),
@@ -209,7 +267,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                     setMode('max');
                                   });
                                 },
-                                onPressedCancel: (isClicked) => Navigator.pop(context),
+                                onPressedCancel: (isClicked) =>
+                                    Navigator.pop(context),
                               );
                             },
                           );
@@ -220,9 +279,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.UiButtonMode(
                       icon: Image.asset(
-                        isDisableMode
-                            ? ImageUtils.getImagePath('assets/images/mode_eco_bw.png')
-                            : ImageUtils.getImagePath('assets/images/mode_eco.png'),
+                        isDisableMode || isDisableModeEco
+                            ? ImageUtils.getImagePath(
+                                'assets/images/mode_eco_bw.png')
+                            : ImageUtils.getImagePath(
+                                'assets/images/mode_eco.png'),
                         height: 24,
                         width: 24,
                       ),
@@ -233,7 +294,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('eco'),
-                      isDisable: isDisableMode,
+                      isDisable: isDisableMode || isDisableModeEco,
                       onPress: () {
                         if (!isMode('eco')) {
                           showModalBottomSheet(
@@ -251,7 +312,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                     setMode('eco');
                                   });
                                 },
-                                onPressedCancel: (isClicked) => Navigator.pop(context),
+                                onPressedCancel: (isClicked) =>
+                                    Navigator.pop(context),
                               );
                             },
                           );
@@ -269,8 +331,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         isDisableMode || isDisableModeLive
-                            ? ImageUtils.getImagePath('assets/images/mode_live_bw.png')
-                            : ImageUtils.getImagePath('assets/images/mode_live.png'),
+                            ? ImageUtils.getImagePath(
+                                'assets/images/mode_live_bw.png')
+                            : ImageUtils.getImagePath(
+                                'assets/images/mode_live.png'),
                         height: 24,
                         width: 24,
                       ),
@@ -284,6 +348,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       isDisable: isDisableMode || isDisableModeLive,
                       expireDate: expireLiveMode,
                       mode: 'modeLiveTime',
+                      setMode: callback,
                       check: isLive,
                       onPress: () {
                         if (!isMode('live')) {
@@ -306,7 +371,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                     },
                                   );
                                 },
-                                onPressedCancel: (isClicked) => Navigator.pop(context),
+                                onPressedCancel: (isClicked) =>
+                                    Navigator.pop(context),
                               );
                             },
                           );
@@ -318,8 +384,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                     child: button.UiButtonMode(
                       icon: Image.asset(
                         isDisableMode || isDisableModeGame
-                            ? ImageUtils.getImagePath('assets/images/mode_game_bw.png')
-                            : ImageUtils.getImagePath('assets/images/mode_game.png'),
+                            ? ImageUtils.getImagePath(
+                                'assets/images/mode_game_bw.png')
+                            : ImageUtils.getImagePath(
+                                'assets/images/mode_game.png'),
                         height: 24,
                         width: 24,
                       ),
@@ -333,6 +401,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       isDisable: isDisableMode || isDisableModeGame,
                       expireDate: expireGameMode,
                       mode: 'modeGameTime',
+                      setMode: callback,
                       check: isGame,
                       onPress: () {
                         if (!isMode('game')) {
@@ -355,7 +424,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                     },
                                   );
                                 },
-                                onPressedCancel: (isClicked) => Navigator.pop(context),
+                                onPressedCancel: (isClicked) =>
+                                    Navigator.pop(context),
                               );
                             },
                           );
@@ -378,11 +448,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                     Expanded(
                       child: ListTile(
                         minLeadingWidth: 12,
-                        // leading: Image.asset(
-                        //   ImageUtils.getImagePath('assets/images/warning.png'),
-                        //   width: 20,
-                        //   height: 20,
-                        // ),
+                        leading: Image.asset(
+                          ImageUtils.getImagePath('assets/images/warning.png'),
+                          width: 20,
+                          height: 20,
+                        ),
                         title: Text(
                           warningMessage,
                           style: LNStyle.warningMessage,
@@ -401,12 +471,12 @@ class _ModeWidgetState extends State<ModeWidget> {
               //       child: ListTile(
               //         leading: isDisableMode
               //             ? Image.asset(
-              //           ImageUtils.getImagePath('assets/images/mode_internet_bw.png'),
+              //           ImageUtils.getImagePath('assets/images/mode_internet_bw.png',
               //           height: 44,
               //           width: 44,
               //         )
               //             : Image.asset(
-              //           ImageUtils.getImagePath('assets/images/mode_internet.png'),
+              //           ImageUtils.getImagePath('assets/images/mode_internet.png',
               //           height: 44,
               //           width: 44,
               //         ),

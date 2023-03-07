@@ -21,7 +21,7 @@ class _TabHomeState extends State<TabHome> {
       child: Container(
         decoration: BoxDecoration(
             image: DecorationImage(
-                image: AssetImage("packages/living_network/assets/images/background.png"), fit: BoxFit.fill)),
+                image: AssetImage(ImageUtils.getImagePath('assets/images/background.png')), fit: BoxFit.fill)),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
