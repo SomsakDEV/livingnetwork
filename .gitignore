@@ -49,4 +49,5 @@ app.*.symbols
 # Obfuscation related
 app.*.map.json
 
-ios_living_network
+ios_living_network/
+pubspec.lock
