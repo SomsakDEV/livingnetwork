@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:living_network/component/map/map_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 // import 'package:living_network/cell_tower_info/ct_main.dart';
@@ -101,15 +102,15 @@ class _TabMobileState extends State<TabMobile> {
           //   color: Colors.amber,
           //   child: MapWidget(),
           // ),
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/livingnetwork/map');
-            },
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
+          // InkWell(
+          //   onTap: () {
+          //     Navigator.pushNamed(context, '/livingnetwork/map');
+          //   },
+          //   child: SizedBox(
+          //     height: MediaQuery.of(context).size.height * 0.35,
+          //     width: MediaQuery.of(context).size.width,
+          //   ),
+          // ),
           Column(
             children: [
               SizedBox(

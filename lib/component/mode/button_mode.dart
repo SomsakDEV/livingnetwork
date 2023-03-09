@@ -25,6 +25,7 @@ class ButtonMode extends StatefulWidget {
   final bool? check;
   final bool isDisable;
   final bool isMode;
+  final Function? setMode;
 
   const ButtonMode({
     Key? key,
@@ -34,6 +35,7 @@ class ButtonMode extends StatefulWidget {
     required this.buttonType,
     required this.isDisable,
     required this.isMode,
+    this.setMode,
     this.expireDate,
     this.backgroundColor,
     this.onPress,
@@ -108,6 +110,7 @@ class _ButtonModeState extends State<ButtonMode> {
                           isFreeTrial: false,
                           mode: widget.mode,
                           check: widget.check,
+                          setMode: widget.setMode,
                         )
                       ],
                     ),

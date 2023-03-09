@@ -17,7 +17,7 @@ dependencies:
       ref: develop
 
   cupertino_icons: ^1.0.2
-  # google_maps_flutter: ^2.2.4
+#  google_maps_flutter: ^2.2.4
   syncfusion_flutter_gauges: ^20.4.52
   shared_preferences: ^2.0.18
   realm: ^1.0.2
