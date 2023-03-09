@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/utility/clearData.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
@@ -456,8 +457,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     ),
                   ],
                 ),
-              )
-
+              ),
               //============================== Free Trial : Next Phase ===================
               // betweenBox,
               // Row(
