@@ -7,6 +7,7 @@ import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/component/internet/usage.dart';
 // import 'package:living_network/map_screen/map_widget.dart';
 import 'package:living_network/component/mode/button.dart';
+import 'package:living_network/model/mode/mode_customer.dart';
 import 'package:living_network/model/mode/mode_widget.dart';
 import 'package:living_network/utility/image_utils.dart';
 // import 'package:living_network/performance_widget/p_main.dart';
@@ -14,8 +15,9 @@ import 'package:living_network/utility/image_utils.dart';
 
 class TabMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
-
-  const TabMobile({
+  late UserData userData;
+  TabMobile({
+    required this.userData,
     super.key,
   });
 
@@ -159,11 +161,12 @@ class _TabMobileState extends State<TabMobile> {
                                     border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                                 width: MediaQuery.of(context).size.width * 0.93,
                                 child: ModeWidget(
-                                  network: network,
-                                  currentType: package,
-                                  cellId: cellId,
-                                  alarm: alarm,
-                                  eco: eco,
+                                  msisdn: widget.userData.msisdn,
+                                  network: widget.userData.networkType,
+                                  currentType: widget.userData.modelType,
+                                  cellId: widget.userData.cellId == 'true' ? true : false,
+                                  alarm: widget.userData.alarm == 'true' ? true : false,
+                                  eco: widget.userData.eco == 'true' ? true : false,
                                 )),
                           ),
                           // Positioned(

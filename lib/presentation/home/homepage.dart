@@ -4,11 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/model/mode/mode_customer.dart';
 import 'package:living_network/presentation/home/tab_home.dart';
 import 'package:living_network/presentation/home/tab_mobile.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({
+  late UserData userData;
+  HomePage({
+    required this.userData,
     Key? key,
   }) : super(key: key);
 
@@ -52,7 +55,7 @@ class _HomePageState extends State<HomePage> {
               ),
               body: TabBarView(
                 children: [
-                  TabMobile(),
+                  TabMobile(userData: widget.userData,),
                   TabHome(),
                 ],
               ),

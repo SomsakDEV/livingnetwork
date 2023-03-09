@@ -33,10 +33,10 @@ class RouteLivingNetwork {
       //   );
       case '/livingnetwork':
         // final args = route.arguments as Map?;
-        return PageRouteBuilder(
-          settings: route,
-          pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
-        );
+        // return PageRouteBuilder(
+        //   settings: route,
+        //   pageBuilder: (context, animation, secondaryAnimation) => const HomePage(),
+        // );
       // case '/map_direction':
       //   return PageRouteBuilder(
       //     settings: route,

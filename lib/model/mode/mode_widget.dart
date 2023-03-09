@@ -9,11 +9,11 @@ import 'package:living_network/utility/ui_button_mode.dart' as button;
 bool timeout = false;
 
 class ModeWidget extends StatefulWidget {
-  String network;
-  String currentType;
+  String msisdn, network, currentType;
   bool cellId, alarm, eco;
 
   ModeWidget({
+    required this.msisdn,
     required this.network,
     required this.currentType,
     required this.cellId,
@@ -53,14 +53,14 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   @override
   void initState() {
-    checkNetwork('5G', 'Pack5G', true, true, true);
+    checkNetwork(widget.network, widget.currentType, widget.cellId, widget.alarm, widget.eco);
     setMode(null);
     super.initState();
   }
 
   checkNetwork(String networkType, String currentType, bool callID, bool alarm,
       bool eco) {
-    if (networkType == '5G' && currentType == 'Pack5G') {
+    if (networkType == '5G' && currentType == '5G') {
       if (eco) {
         if (callID && alarm) {
           isDisableModeLive = true;
@@ -87,7 +87,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   setMode(String? setMode) async {
     final SharedPreferences mode1 = await _mode;
     setState(() {
-      if (widget.network == '5G' && widget.currentType == 'Pack5G') {
+      if (widget.network == '5G' && widget.currentType == '5G') {
         int ecoMode = mode1.getInt('ecoMode') ?? 0;
         if (setMode != null) {
           if (mode1.getString('mode') == 'live' && setMode != 'live') {
