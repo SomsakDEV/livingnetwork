@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:living_network/component/map/map_widget.dart';
+import 'package:living_network/component/problem/problem.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 // import 'package:living_network/cell_tower_info/ct_main.dart';
@@ -61,8 +62,7 @@ class _TabMobileState extends State<TabMobile> {
                       SizedBox(
                         height: 8,
                       ),
-                      Text('Switch your connection mode to suite\nyour demand the most.',
-                          textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                      Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
                       SizedBox(
                         height: 16,
                       ),
@@ -122,6 +122,13 @@ class _TabMobileState extends State<TabMobile> {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
+                      Container(
+                        decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        width: MediaQuery.of(context).size.width * 0.93,
+                        child: ProblemAlert(),
+                      ),
                       // Container(
                       //   decoration: BoxDecoration(
                       //       color: Color(0xFFFFFFFF),
@@ -156,10 +163,7 @@ class _TabMobileState extends State<TabMobile> {
                             padding: const EdgeInsets.only(top: 5.0),
                             child: Container(
                                 alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFFFFFFF),
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                                decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                                 width: MediaQuery.of(context).size.width * 0.93,
                                 child: ModeWidget(
                                   msisdn: widget.userData.msisdn,
@@ -182,10 +186,7 @@ class _TabMobileState extends State<TabMobile> {
                       ),
                       _sizedBox,
                       Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xFFFFFFFF),
-                            borderRadius: BorderRadius.circular(8),
-                            border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                        decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                         width: MediaQuery.of(context).size.width * 0.93,
                         child: InternetUsage(),
                       ),
