@@ -32,7 +32,7 @@ class _ProblemAlertState extends State<ProblemAlert> {
             },
             options: CarouselOptions(
               height: monitorheigth,
-              // autoPlay: true,
+              autoPlay: true,
               viewportFraction: 1,
               onPageChanged: (index, reason) => setState(() => activeIndex = index),
             ),

@@ -93,19 +93,17 @@ class _CardAlertState extends State<CardAlert> {
                             alignment: Alignment.centerRight,
                             overlayColor: MaterialStateProperty.all(BaseColorsLN.buttonOverlay),
                           ),
-                          child: Flexible(
-                            child: Row(
-                              children: const [
-                                Text(
-                                  'ดูเพิ่มเติม',
-                                  style: LNStyle.body2_1,
-                                ),
-                                Icon(
-                                  Icons.navigate_next,
-                                  color: Colors.black,
-                                )
-                              ],
-                            ),
+                          child: Row(
+                            children: const [
+                              Text(
+                                'ดูเพิ่มเติม',
+                                style: LNStyle.body2_1,
+                              ),
+                              Icon(
+                                Icons.navigate_next,
+                                color: Colors.black,
+                              )
+                            ],
                           ),
                         ),
                 ),
