@@ -85,6 +85,7 @@ class _TabMobileState extends State<TabMobile> {
         }));
   }
 
+
   @override
   Widget build(BuildContext context) {
     String network = '5G';

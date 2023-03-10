@@ -3,6 +3,7 @@ import 'package:flutter/services.dart';
 import 'package:living_network/model/mode/mode_customer.dart';
 import 'package:living_network/presentation/home/homepage.dart';
 import 'package:living_network/presentation/home/tab_home.dart';
+
 // import 'package:living_network_repository/data/repositories/repositories_impl.dart';
 // import 'package:living_network_repository/domain/usecase/get_data_catalog_usecase.dart';
 // import 'package:living_network_repository/main.reflectable.dart';
@@ -28,7 +29,17 @@ class _LivingNetworkState extends State<LivingNetwork> {
   // GetDataCatalogUseCase? usecase = GetDataCatalogUseCase(RepositoriesImpl());
   late final customer;
   String? token;
-  late UserData userData;
+  late UserData userData = UserData(
+    msisdn: "08123456789",
+    networkType: "5G",
+    cellId: "true",
+    paymentType: "postpaid",
+    modelType: "5G",
+    customerState: "active",
+    bssrule: "5G package",
+    alarm: "true",
+    eco: "true",
+  );
 
   @override
   void initState() {
@@ -97,10 +108,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
       theme: ThemeData(fontFamily: 'DB Heavent'),
       initialRoute: '/',
       routes: {
-    '/': (context) => TabHome()
-        // '/': (context) => HomePage(
-        //       userData: userData,
-        //     ),
+        '/': (context) => HomePage(
+              userData: userData,
+            ),
       },
     );
   }
