@@ -4,21 +4,26 @@ import 'package:flutter/material.dart';
 import 'package:living_network/component/map/map_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
+
 // import 'package:living_network/cell_tower_info/ct_main.dart';
 import 'package:living_network/component/internet/usage.dart';
+
 // import 'package:living_network/map_screen/map_widget.dart';
 import 'package:living_network/component/mode/button.dart';
-import 'package:living_network/model/mode/mode_customer.dart';
-import 'package:living_network/model/mode/mode_widget.dart';
+import 'package:living_network/component/mode/mode_widget.dart';
+import 'package:living_network/utility/clearData.dart';
 import 'package:living_network/utility/image_utils.dart';
+import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
+
 // import 'package:living_network/performance_widget/p_main.dart';
 // import 'package:living_network/speed_comparing/sc_main.dart';
 
 class TabMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
-  late UserData userData;
+  late DisplayModeWidget display;
+
   TabMobile({
-    required this.userData,
+    required this.display,
     super.key,
   });
 
@@ -31,16 +36,8 @@ class _TabMobileState extends State<TabMobile> {
     height: 12,
   );
 
-
-
   @override
   Widget build(BuildContext context) {
-    String network = '5G';
-    String package = 'Pack5G';
-    bool cellId = true;
-    bool alarm = true;
-    bool eco = true;
-
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
@@ -103,20 +100,17 @@ class _TabMobileState extends State<TabMobile> {
                           Padding(
                             padding: const EdgeInsets.only(top: 5.0),
                             child: Container(
-                                alignment: Alignment.center,
-                                decoration: BoxDecoration(
-                                    color: Color(0xFFFFFFFF),
-                                    borderRadius: BorderRadius.circular(8),
-                                    border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                                width: MediaQuery.of(context).size.width * 0.93,
-                                child: ModeWidget(
-                                  msisdn: widget.userData.msisdn,
-                                  network: widget.userData.networkType,
-                                  currentType: widget.userData.modelType,
-                                  cellId: widget.userData.cellId == 'true' ? true : false,
-                                  alarm: widget.userData.alarm == 'true' ? true : false,
-                                  eco: widget.userData.eco == 'true' ? true : false,
-                                )),
+                              alignment: Alignment.center,
+                              decoration: BoxDecoration(
+                                  color: Color(0xFFFFFFFF),
+                                  borderRadius: BorderRadius.circular(8),
+                                  border: Border.all(
+                                      width: 3, color: Color(0xFFF0F0F0))),
+                              width: MediaQuery.of(context).size.width * 0.93,
+                              child: ModeWidget(
+                               display: widget.display,
+                              ),
+                            ),
                           ),
                           // Positioned(
                           //   right: 20,
@@ -133,11 +127,13 @@ class _TabMobileState extends State<TabMobile> {
                         decoration: BoxDecoration(
                             color: Color(0xFFFFFFFF),
                             borderRadius: BorderRadius.circular(8),
-                            border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                            border:
+                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
                         width: MediaQuery.of(context).size.width * 0.93,
                         child: InternetUsage(),
                       ),
-                      _sizedBox
+                      _sizedBox,
+                      ClearData(),
                     ],
                   )),
             ],
