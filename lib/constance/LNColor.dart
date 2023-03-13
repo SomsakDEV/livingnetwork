@@ -121,6 +121,12 @@ class BaseColorsLN {
 
   //Map Direction
   static const mapIcon = Color(0xFFE6E6E6);
+
+  //Problem Alert
+  static const inActive = Color(0xFFDAE1E6);
+  static const bgProblem = Color.fromRGBO(252, 246, 229, 1);
+  static const bgGreen = Color(0xFFDAF7BD);
+  static const buttonOverlay = Color(0x0D000000);
 }
 
 

@@ -4,6 +4,18 @@ import 'package:living_network/constance/LNColor.dart';
 class LNStyle {
   LNStyle._();
 
+  static const headProblem = TextStyle(
+    fontFamily: 'DB Heavent',
+    // fontFamilyFallback: ['NotoSansThaiUI'],
+    color: BaseColorsLN.kellyGreen500,
+    fontSize: 26,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1.5,
+    letterSpacing: -0.4,
+  );
+
   static const head1Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
@@ -181,10 +193,33 @@ class LNStyle {
     height: 1.2,
     // letterSpacing: -0.4,
   );
+
+  static const body2_1 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.neutralsBlack,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1.2,
+    // letterSpacing: -0.4,
+  );
+
   static const body3 = TextStyle(
     fontFamily: 'DB Heavent',
     color: BaseColorsLN.neutralsBlack,
     fontSize: 15,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1.2,
+    // letterSpacing: -0.4,
+  );
+
+  static const body4 = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.neutralsBlack,
+    fontSize: 18,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
@@ -298,6 +333,15 @@ class LNStyle {
       fontStyle: FontStyle.normal,
       leadingDistribution: TextLeadingDistribution.even,
       overflow: TextOverflow.clip);
+
+  static const freeWifiButton = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: BaseColorsLN.whiteColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
 
   static const modeWidgetTitle = TextStyle(
     fontFamily: 'DB Heavent',
