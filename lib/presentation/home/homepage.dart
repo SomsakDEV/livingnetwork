@@ -7,11 +7,13 @@ import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/model/mode/mode_customer.dart';
 import 'package:living_network/presentation/home/tab_home.dart';
 import 'package:living_network/presentation/home/tab_mobile.dart';
+import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
 
 class HomePage extends StatefulWidget {
-  late UserData userData;
+  late DisplayModeWidget display;
+
   HomePage({
-    required this.userData,
+    required this.display,
     Key? key,
   }) : super(key: key);
 
@@ -55,7 +57,9 @@ class _HomePageState extends State<HomePage> {
               ),
               body: TabBarView(
                 children: [
-                  TabMobile(userData: widget.userData,),
+                  TabMobile(
+                    display: widget.display,
+                  ),
                   TabHome(),
                 ],
               ),

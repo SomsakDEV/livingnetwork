@@ -11,14 +11,16 @@ import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/model/mode/mode_customer.dart';
 import 'package:living_network/model/mode/mode_widget.dart';
 import 'package:living_network/utility/image_utils.dart';
+import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
 // import 'package:living_network/performance_widget/p_main.dart';
 // import 'package:living_network/speed_comparing/sc_main.dart';
 
 class TabMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
-  late UserData userData;
+  late DisplayModeWidget display;
+
   TabMobile({
-    required this.userData,
+    required this.display,
     super.key,
   });
 
@@ -34,6 +36,7 @@ class _TabMobileState extends State<TabMobile> {
   @override
   void initState() {
     super.initState();
+    print('PIGKOKOKOKOKOKKOKOKOKOKOKO');
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
         barrierDismissible: false,
@@ -162,12 +165,8 @@ class _TabMobileState extends State<TabMobile> {
                                     border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                                 width: MediaQuery.of(context).size.width * 0.93,
                                 child: ModeWidget(
-                                  msisdn: widget.userData.msisdn,
-                                  network: widget.userData.networkType,
-                                  currentType: widget.userData.modelType,
-                                  cellId: widget.userData.cellId == 'true' ? true : false,
-                                  alarm: widget.userData.alarm == 'true' ? true : false,
-                                  eco: widget.userData.eco == 'true' ? true : false,
+                                  display: widget.display,
+
                                 )),
                           ),
                           // Positioned(
