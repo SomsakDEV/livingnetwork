@@ -7,6 +7,7 @@ import 'package:living_network/presentation/map/map_screen.dart';
 
 import 'package:living_network_repository/data/repositories/repositories_impl.dart';
 import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
+import 'package:living_network_repository/domain/entities/mock_up_data.dart';
 import 'package:living_network_repository/domain/usecase/get_data_usecase.dart';
 
 import 'package:provider/provider.dart';
@@ -44,10 +45,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
       print("[LIVING_NETWORK] usecase : ${usecase.toString()}");
       final data = await usecase?.getMockupData();
 
-      print("mode ${data?.perform}");
-      print("[LIVING_NETWORK] data : ${data.toString()}");
+    //   print("mode ${data?.perform}");
+    //   print("[LIVING_NETWORK] data : ${data.toString()}");
 
-      MainProvider().getData(data);
     } on PlatformException catch (e) {
       print('[LIVING_NETWORK] Error Platform : $e');
     } on MissingPluginException catch (e) {
@@ -62,7 +62,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
     // ignore: prefer_const_constructors
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => MainProvider()),
+        ChangeNotifierProvider(
+            create: (context) =>
+                MainProvider(displayScreen1: usecase?.getMockupData())),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -71,8 +73,8 @@ class _LivingNetworkState extends State<LivingNetwork> {
         routes: {
           // '/': (context) => TabHome()
           '/': (context) => HomePage(),
-          '/map' : (context) => MapScreen(),
-          '/map/direction' : (context) => MapDirection(), // wait shiwly
+          '/map': (context) => MapScreen(),
+          '/map/direction': (context) => MapDirection(), // wait shiwly
         },
       ),
     );

@@ -13,9 +13,11 @@ import 'package:living_network/component/internet/usage.dart';
 // import 'package:living_network/map_screen/map_widget.dart';
 import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
+import 'package:living_network/provider/main_provider.dart';
 import 'package:living_network/utility/clearData.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
+import 'package:provider/provider.dart';
 
 // import 'package:living_network/performance_widget/p_main.dart';
 // import 'package:living_network/speed_comparing/sc_main.dart';
@@ -38,6 +40,7 @@ class _TabMobileState extends State<TabMobile> {
 
   @override
   Widget build(BuildContext context) {
+    MainProvider mainProvider = Provider.of<MainProvider>(context);
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
