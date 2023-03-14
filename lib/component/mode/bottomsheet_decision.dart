@@ -105,7 +105,7 @@ class _BottomSheetCardDialogModeState
                   ),
                   Button(
                     title: widget.textSubmitBtn,
-                    backgroundColor: BaseColorsLN.kellyGreen500,
+                    backgroundColor: LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
                     height: 54,

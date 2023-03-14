@@ -47,8 +47,8 @@ class _InternetUsageState extends State<InternetUsage> {
                         markerValue: 6,
                         barPointerEdgeStyle: LinearEdgeStyle.startCurve,
                         barColorGradient: [
-                          BaseColorsLN.lowInternet1,
-                          BaseColorsLN.lowInternet2,
+                          LNColor.lowInternet1,
+                          LNColor.lowInternet2,
                         ],
                       ),
                       Padding(

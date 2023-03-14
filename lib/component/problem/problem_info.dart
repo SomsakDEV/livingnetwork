@@ -23,7 +23,7 @@ class _ProblemInfoState extends State<ProblemInfo> {
         backgroundColor: Colors.white,
         shadowColor: Colors.transparent,
         leading: const BackButton(
-          color: BaseColorsLN.blackColor,
+          color: LNColor.blackColor,
         ),
       ),
       body: Padding(

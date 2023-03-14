@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/presentation/home/homepage.dart';
 import 'package:living_network/provider/main_provider.dart';
+import 'package:living_network/presentation/map/map_screen.dart';
 
 import 'package:living_network_repository/data/repositories/repositories_impl.dart';
 import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
@@ -69,6 +70,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
         routes: {
           // '/': (context) => TabHome()
           '/': (context) => HomePage(),
+          '/map' : (context) => MapScreen(),
+          '/map/direction' : (context) => MapScreen(), // wait shiwly
+
         },
       ),
     );

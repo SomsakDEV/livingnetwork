@@ -28,11 +28,11 @@ class _HomePageState extends State<HomePage> {
         barrierDismissible: false,
         builder: (context) {
           return Dialog(
-              backgroundColor: BaseColorsLN.transparent,
+              backgroundColor: LNColor.transparent,
               child: Wrap(children: [
                 Container(
                     decoration: const BoxDecoration(
-                      color: BaseColorsLN.neutralsWhite,
+                      color: LNColor.neutralsWhite,
                       borderRadius: BorderRadius.all(Radius.circular(10)),
                     ),
                     child: Column(children: [
@@ -80,9 +80,9 @@ class _HomePageState extends State<HomePage> {
           elevation: 0,
           centerTitle: false,
           title: const Text('Living Network', style: LNStyle.app_bar_style),
-          backgroundColor: BaseColorsLN.whiteColor,
+          backgroundColor: LNColor.whiteColor,
           leading: BackButton(
-            color: BaseColorsLN.blackColor,
+            color: LNColor.blackColor,
             onPressed: () => SystemNavigator.pop(),
           ),
         ),

@@ -57,14 +57,14 @@ class _ButtonState extends State<Button> {
     }
 
     final Color? backgroundColor = isPrimary == true && clickEnable == false
-        ? BaseColorsLN.neutralsMediumGrey
+        ? LNColor.neutralsMediumGrey
         : isPrimary == true
-        ? widget.backgroundColor ?? BaseColorsLN.kellyGreen500
+        ? widget.backgroundColor ?? LNColor.kellyGreen500
         : null;
 
     final Color borderColor = clickEnable == false
-        ? BaseColorsLN.neutralsMediumGrey
-        : widget.backgroundColor ?? BaseColorsLN.kellyGreen500;
+        ? LNColor.neutralsMediumGrey
+        : widget.backgroundColor ?? LNColor.kellyGreen500;
 
     return Container(
       margin: const EdgeInsets.only(bottom: 10, top: 5),
@@ -103,11 +103,11 @@ class _ButtonState extends State<Button> {
                     style: widget.textStyle ??
                         TextStyle(
                           color: isPrimary == true && clickEnable
-                              ? BaseColorsLN.neutralsWhite
+                              ? LNColor.neutralsWhite
                               : !clickEnable
-                              ? BaseColorsLN.musGreen900
+                              ? LNColor.musGreen900
                               : widget.backgroundColor ??
-                              BaseColorsLN.kellyGreen500,
+                              LNColor.kellyGreen500,
                           fontSize: widget.fontSize ?? 20,
                           fontWeight: widget.fontWeight ?? FontWeight.bold,
                           fontStyle: FontStyle.normal,
