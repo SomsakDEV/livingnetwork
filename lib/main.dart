@@ -43,7 +43,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
   void _wRequest() async {
     try {
       print("[LIVING_NETWORK] usecase : ${usecase.toString()}");
-      final data = await usecase?.getMockupData();
+
 
     //   print("mode ${data?.perform}");
     //   print("[LIVING_NETWORK] data : ${data.toString()}");
