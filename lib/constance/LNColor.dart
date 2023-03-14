@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class BaseColorsLN {
-  BaseColorsLN._();
+class LNColor {
+  LNColor._();
 
   static const primaryColor = Color(0xFF73C23A); // change to kellyGreen500
   static const secondaryColor = Color(0xFF25584F); // change to musGreen800

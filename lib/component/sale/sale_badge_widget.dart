@@ -14,10 +14,10 @@ class _SaleBadgeWidgetState extends State<SaleBadgeWidget> {
   @override
   Widget build(BuildContext context) {
     return Card(
-      color: BaseColorsLN.primaryColor100,
+      color: LNColor.primaryColor100,
       shadowColor: Colors.transparent,
       shape: RoundedRectangleBorder(
-        side: const BorderSide(color: BaseColorsLN.lightestGrey),
+        side: const BorderSide(color: LNColor.lightestGrey),
         borderRadius: BorderRadius.circular(8),
       ),
       child: Padding(
@@ -72,12 +72,12 @@ class _SaleBadgeWidgetState extends State<SaleBadgeWidget> {
                               child: ElevatedButton(
                                 onPressed: () {},
                                 style: ElevatedButton.styleFrom(
-                                  backgroundColor: BaseColorsLN.kellyGreen500,
+                                  backgroundColor: LNColor.kellyGreen500,
                                   shape: RoundedRectangleBorder(
                                     borderRadius: BorderRadius.circular(8),
                                     side: const BorderSide(
                                       width: 1,
-                                      color: BaseColorsLN.kellyGreen500,
+                                      color: LNColor.kellyGreen500,
                                     ),
                                   ),
                                 ),

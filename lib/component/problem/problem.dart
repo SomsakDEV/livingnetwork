@@ -58,7 +58,7 @@ List<Widget> cards = [
   ),
   CardAlert(
     text: 'ขณะนี้สัญญาณมีปัญหาจะกลับมาใช้งานภาย ใน 60 นาทีคุณสามารถเชื่อมต่อ Super WiFi ฟรี ในพื้นที่ใกล้เคียงได้',
-    color: BaseColorsLN.bgGreen,
+    color: LNColor.bgGreen,
     style: true,
   ),
 ];
@@ -73,5 +73,5 @@ Widget buildIndicator(BuildContext context, int index) => AnimatedContainer(
       height: 10,
       margin: const EdgeInsets.symmetric(horizontal: 6, vertical: 10),
       width: activeIndex == index ? monitorWidth * 0.09 : monitorWidth * 0.024,
-      decoration: BoxDecoration(color: index == activeIndex ? BaseColorsLN.verticalDivider : BaseColorsLN.inActive, borderRadius: BorderRadius.circular(5)),
+      decoration: BoxDecoration(color: index == activeIndex ? LNColor.verticalDivider : LNColor.inActive, borderRadius: BorderRadius.circular(5)),
     );

@@ -52,7 +52,7 @@ class _IUWidgetState extends State<IUWidget> {
                 axisTrackStyle: LinearAxisTrackStyle(
                   thickness: widget.thickness ?? 10,
                   edgeStyle: LinearEdgeStyle.bothCurve,
-                  color: BaseColorsLN.neutralsLightestGrey,
+                  color: LNColor.neutralsLightestGrey,
                 ),
                 //Value
                 barPointers: [
@@ -75,8 +75,8 @@ class _IUWidgetState extends State<IUWidget> {
     return LinearGradient(
         colors: widget.barColorGradient ??
             [
-              BaseColorsLN.speedCompare1,
-              BaseColorsLN.speedCompare2,
+              LNColor.speedCompare1,
+              LNColor.speedCompare2,
             ],
         stops: const [0, 0.3]).createShader(bounds);
   }

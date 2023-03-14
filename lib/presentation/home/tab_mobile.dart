@@ -41,21 +41,21 @@ class _TabMobileState extends State<TabMobile> {
     return SingleChildScrollView(
       child: Stack(
         children: <Widget>[
-          // Container(
-          //   height: MediaQuery.of(context).size.height * 0.35,
-          //   width: MediaQuery.of(context).size.width,
-          //   color: Colors.amber,
-          //   child: MapWidget(),
-          // ),
-          // InkWell(
-          //   onTap: () {
-          //     Navigator.pushNamed(context, '/livingnetwork/map');
-          //   },
-          //   child: SizedBox(
-          //     height: MediaQuery.of(context).size.height * 0.35,
-          //     width: MediaQuery.of(context).size.width,
-          //   ),
-          // ),
+          Container(
+            height: MediaQuery.of(context).size.height * 0.35,
+            width: MediaQuery.of(context).size.width,
+            color: Colors.amber,
+            child: MapWidget(),
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, '/map');
+            },
+            child: SizedBox(
+              height: MediaQuery.of(context).size.height * 0.35,
+              width: MediaQuery.of(context).size.width,
+            ),
+          ),
           Column(
             children: [
               SizedBox(

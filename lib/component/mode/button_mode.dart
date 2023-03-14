@@ -66,15 +66,15 @@ class _ButtonModeState extends State<ButtonMode> {
       isPrimary = !isPrimary;
     }
     final Color? backgroundColor = isPrimary == true && clickEnable == false
-        ? BaseColorsLN.neutralsWhiteMixGrey
+        ? LNColor.neutralsWhiteMixGrey
         : isPrimary == true
             ? widget.isDisable
         ? const Color(0xFFFAFAFA)
-        : const Color(0xFFEEF8E8) ?? BaseColorsLN.kellyGreen100
+        : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100
             : null;
     final Color borderColor = clickEnable == false
-        ? BaseColorsLN.neutralsMediumGrey
-        : widget.backgroundColor ?? BaseColorsLN.kellyGreen100;
+        ? LNColor.neutralsMediumGrey
+        : widget.backgroundColor ?? LNColor.kellyGreen100;
     return InkWell(
       onTap: !clickEnable ? () {} : () => widget.onPress!(),
       child: Card(
@@ -85,7 +85,7 @@ class _ButtonModeState extends State<ButtonMode> {
                       ? const Color(0xFFFAFAFA)
                       : widget.isMode
                       ? const Color(0xFF64CA00)
-                      : const Color(0xFFEEF8E8) ?? BaseColorsLN.kellyGreen100,
+                      : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100,
                   width: 2),
               borderRadius: BorderRadius.circular(10.0)),
           color: backgroundColor,
