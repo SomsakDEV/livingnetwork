@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/component/mode/time_widget.dart';
 
-enum ButtonType { primaryBtn, secondaryBtn }
+enum ButtonType { primaryBtn, secondaryBtn, empty}
 class ButtonMode extends StatefulWidget {
   final Image icon;
   final String title;
@@ -126,7 +126,7 @@ class _ButtonModeState extends State<ButtonMode> {
                             color: widget.isDisable
                                 ? const Color(0xFF7B8E98)
                                 : const Color(0xFF38454C),
-                            fontSize: widget.fontSize ?? 18,
+                            fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             leadingDistribution: TextLeadingDistribution.even,
@@ -144,7 +144,7 @@ class _ButtonModeState extends State<ButtonMode> {
                             color: widget.isDisable
                                 ? const Color(0xFFB0BEC5)
                                 : const Color(0xFF9EDE3E),
-                            fontSize: widget.fontSize ?? 18,
+                            fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             leadingDistribution: TextLeadingDistribution.even,

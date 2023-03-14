@@ -7,8 +7,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
 
 bool timeout = false;
-
+// BACKUP !!!! 4 Button : Max, Eco, Live, Game
 class ModeWidget extends StatefulWidget {
+
   ModeWidget({
     super.key,
   });
@@ -39,7 +40,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool isDisableModeEco = false;
   late bool isDisableModeLive = false;
   late bool isDisableModeGame = false;
-  late bool isPower = false;
+  late bool isLive = false;
   late bool isGame = false;
 
   String warningMessage =
@@ -83,11 +84,11 @@ class _ModeWidgetState extends State<ModeWidget> {
       if (network == '5G' && currentType == '5G') {
         int ecoMode = mode1.getInt('ecoMode') ?? 0;
         if (setMode != null) {
-          if (mode1.getString('mode') == 'power' && setMode != 'power') {
-            mode1.setString('modePowerTime', 'expire');
+          if (mode1.getString('mode') == 'live' && setMode != 'live') {
+            mode1.setString('modeLiveTime', 'expire');
             expireLiveMode = null;
             isDisableModeLive = true;
-            isPower = false;
+            isLive = false;
           } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
             mode1.setString('modeGameTime', 'expire');
             expireGameMode = null;
@@ -122,7 +123,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               isDisableModeLive = true;
             } else {
               expireLiveMode = DateTime.parse(time);
-              isPower = true;
+              isLive = true;
             }
           } else if (mode1.getString('mode') == 'game') {
             String time = mode1.getString('modeGameTime') ?? '';
@@ -141,7 +142,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           if (mode1.getString('modeGameTime') == 'expire') {
             isDisableModeGame = true;
           }
-          if (mode1.getString('modePowerTime') == 'expire') {
+          if (mode1.getString('modeLiveTime') == 'expire') {
             isDisableModeLive = true;
           }
           if (ecoMode >= 5) {
@@ -180,7 +181,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 padding: const EdgeInsets.only(left: 10),
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.start,
-                  // crossAxisAlignment: CrossAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
                     Image.asset(
                       ImageUtils.getImagePath('assets/images/mode_title.png'),
@@ -207,12 +208,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                       },
                       icon: Image.asset(
                         ImageUtils.getImagePath(
-                            'assets/images/information_green.png'),
-                        height: 16.67,
-                        width: 16.67,
+                            'assets/images/information.png'),
+                        height: 13.33,
+                        width: 13.33,
                       ),
-                      padding: const EdgeInsets.only(left: 5.67),
-                      alignment: Alignment.centerLeft,
                     ),
                   ],
                 ),
@@ -224,104 +223,38 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || false
-                            // widget.display.isDisableModeLive
+                        isDisableMode
                             ? ImageUtils.getImagePath(
-                                'assets/images/mode_power_bw.png')
+                            'assets/images/mode_max_bw.png')
                             : ImageUtils.getImagePath(
-                                'assets/images/mode_power.png'),
+                            'assets/images/mode_max.png'),
                         height: 24,
                         width: 24,
                       ),
-                      title: 'Power / Boost Mode',
-                      detail: 'Description',
+                      title: 'Max Mode',
+                      detail: 'default',
                       buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
+                      height: 82,
                       width: 143,
                       borderRadius: 10,
-                      isMode: isMode('live'),
-                      isDisable: isDisableMode || false,
-                      // widget.display.isDisableModeLive,
-                      expireDate: expireLiveMode,
-                      mode: 'modePowerTime',
-                      setMode: callback,
-                      check: isPower,
+                      isMode: isMode('max'),
+                      isDisable: isDisableMode,
                       onPress: () {
-                        if (!isMode('Power')) {
+                        if (!isMode('max')) {
                           showModalBottomSheet(
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
                               return BottomSheetCardDialogMode(
-                                title: 'Switch to Power / Boost mode?',
-                                desc: 'Detail: smoothly live',
-                                textCancelBtn: 'Close',
-                                textSubmitBtn: 'Switch to Live mode',
-                                onPressedSubmit: (isClicked) async {
-                                  Navigator.pop(context);
-                                  setState(
-                                    () {
-                                      isPower = true;
-                                      setMode('power');
-                                      timeCountdown('power');
-                                    },
-                                  );
-                                },
-                                onPressedCancel: (isClicked) =>
-                                    Navigator.pop(context),
-                              );
-                            },
-                          );
-                        }
-                      },
-                    ),
-                  ),
-                  Expanded(
-                    child: button.ButtonMode(
-                      icon: Image.asset(
-                        isDisableMode || false
-                            // widget.display.isDisableModeGame
-                            ? ImageUtils.getImagePath(
-                                'assets/images/mode_game_bw.png')
-                            : ImageUtils.getImagePath(
-                                'assets/images/mode_game.png'),
-                        height: 24,
-                        width: 24,
-                      ),
-                      title: 'Game Mode',
-                      detail: 'Server is currently full',
-                      buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
-                      width: 143,
-                      borderRadius: 10,
-                      isMode: isMode('game'),
-                      isDisable: isDisableMode || false,
-                      // widget.display.isDisableModeGame,
-                      expireDate: expireGameMode,
-                      mode: 'modeGameTime',
-                      setMode: callback,
-                      check: isGame,
-                      onPress: () {
-                        if (!isMode('game')) {
-                          showModalBottomSheet(
-                            backgroundColor: Colors.transparent,
-                            context: context,
-                            builder: (BuildContext context) {
-                              return BottomSheetCardDialogMode(
-                                title: 'Switch to Game mode?',
-                                desc: 'เล่นฟรีได้ 30 นาที ใช้ได้ 1 ครั้ง \n'
-                                    'ถ้าออกก่อนก็จะหมดสิทธิแล้ว...',
-                                textSubmitBtn: 'Switch to Game mode',
+                                title: 'Switch to Max mode?',
+                                desc: 'Detail: Default Mode',
+                                textSubmitBtn: 'Switch to Max mode',
                                 textCancelBtn: 'Close',
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
-                                  setState(
-                                    () {
-                                      isGame = true;
-                                      setMode('game');
-                                      timeCountdown('game');
-                                    },
-                                  );
+                                  setState(() {
+                                    setMode('max');
+                                  });
                                 },
                                 onPressedCancel: (isClicked) =>
                                     Navigator.pop(context),
@@ -332,28 +265,22 @@ class _ModeWidgetState extends State<ModeWidget> {
                       },
                     ),
                   ),
-                ],
-              ),
-              _sizedBox,
-              Row(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children: [
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
                         isDisableMode || false
-                            // widget.display.isDisableModeEco
+                        // widget.display.isDisableModeEco
                             ? ImageUtils.getImagePath(
-                                'assets/images/mode_eco_bw.png')
+                            'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
-                                'assets/images/mode_eco.png'),
+                            'assets/images/mode_eco.png'),
                         height: 24,
                         width: 24,
                       ),
                       title: 'Eco Mode',
                       detail: 'Save Battery',
                       buttonType: button.ButtonType.primaryBtn,
-                      height: 70,
+                      height: 82,
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('eco'),
@@ -385,10 +312,120 @@ class _ModeWidgetState extends State<ModeWidget> {
                       },
                     ),
                   ),
-                  const Expanded(
-                    child: SizedBox(
+                ],
+              ),
+              _sizedBox,
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: button.ButtonMode(
+                      icon: Image.asset(
+                        isDisableMode || false
+                        // widget.display.isDisableModeLive
+                            ? ImageUtils.getImagePath(
+                            'assets/images/mode_live_bw.png')
+                            : ImageUtils.getImagePath(
+                            'assets/images/mode_live.png'),
+                        height: 24,
+                        width: 24,
+                      ),
+                      title: 'Live Mode',
+                      detail: 'Stream Smoothly',
+                      buttonType: button.ButtonType.primaryBtn,
                       height: 82,
                       width: 143,
+                      borderRadius: 10,
+                      isMode: isMode('live'),
+                      isDisable: isDisableMode || false,
+                      // widget.display.isDisableModeLive,
+                      expireDate: expireLiveMode,
+                      mode: 'modeLiveTime',
+                      setMode: callback,
+                      check: isLive,
+                      onPress: () {
+                        if (!isMode('live')) {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return BottomSheetCardDialogMode(
+                                title: 'Switch to Live mode?',
+                                desc: 'Detail: smoothly live',
+                                textCancelBtn: 'Close',
+                                textSubmitBtn: 'Switch to Live mode',
+                                onPressedSubmit: (isClicked) async {
+                                  Navigator.pop(context);
+                                  setState(
+                                        () {
+                                      isLive = true;
+                                      setMode('live');
+                                      timeCountdown('live');
+                                    },
+                                  );
+                                },
+                                onPressedCancel: (isClicked) =>
+                                    Navigator.pop(context),
+                              );
+                            },
+                          );
+                        }
+                      },
+                    ),
+                  ),
+                  Expanded(
+                    child: button.ButtonMode(
+                      icon: Image.asset(
+                        isDisableMode || false
+                        // widget.display.isDisableModeGame
+                            ? ImageUtils.getImagePath(
+                            'assets/images/mode_game_bw.png')
+                            : ImageUtils.getImagePath(
+                            'assets/images/mode_game.png'),
+                        height: 24,
+                        width: 24,
+                      ),
+                      title: 'Game Mode',
+                      detail: 'Lower Latency',
+                      buttonType: button.ButtonType.primaryBtn,
+                      height: 82,
+                      width: 143,
+                      borderRadius: 10,
+                      isMode: isMode('game'),
+                      isDisable: isDisableMode || false,
+                      // widget.display.isDisableModeGame,
+                      expireDate: expireGameMode,
+                      mode: 'modeGameTime',
+                      setMode: callback,
+                      check: isGame,
+                      onPress: () {
+                        if (!isMode('game')) {
+                          showModalBottomSheet(
+                            backgroundColor: Colors.transparent,
+                            context: context,
+                            builder: (BuildContext context) {
+                              return BottomSheetCardDialogMode(
+                                title: 'Switch to Game mode?',
+                                desc: 'Detail: Lower Latency',
+                                textSubmitBtn: 'Switch to Game mode',
+                                textCancelBtn: 'Close',
+                                onPressedSubmit: (isClicked) {
+                                  Navigator.pop(context);
+                                  setState(
+                                        () {
+                                      isGame = true;
+                                      setMode('game');
+                                      timeCountdown('game');
+                                    },
+                                  );
+                                },
+                                onPressedCancel: (isClicked) =>
+                                    Navigator.pop(context),
+                              );
+                            },
+                          );
+                        }
+                      },
                     ),
                   ),
                 ],
