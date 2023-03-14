@@ -1,7 +1,7 @@
 // ignore_for_file: sort_child_properties_last, prefer_const_constructors, unnecessary_null_comparison, prefer_if_null_operators
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
-import 'package:living_network/model/mode/time_widget.dart';
+import 'package:living_network/component/mode/time_widget.dart';
 
 enum ButtonType { primaryBtn, secondaryBtn }
 class ButtonMode extends StatefulWidget {

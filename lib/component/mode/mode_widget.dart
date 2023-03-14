@@ -2,24 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/constance/LNStyle.dart';
-import 'package:living_network/utility/clearData.dart';
 import 'package:living_network/utility/image_utils.dart';
+import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
 
 bool timeout = false;
 
 class ModeWidget extends StatefulWidget {
-  String msisdn, network, currentType;
-  bool cellId, alarm, eco;
+  late DisplayModeWidget display;
 
   ModeWidget({
-    required this.msisdn,
-    required this.network,
-    required this.currentType,
-    required this.cellId,
-    required this.alarm,
-    required this.eco,
+    required this.display,
     super.key,
   });
 
@@ -36,6 +30,9 @@ class _ModeWidgetState extends State<ModeWidget> {
   String? mode;
   DateTime? expireLiveMode;
   DateTime? expireGameMode;
+
+  String network = '5G';
+  String currentType = '5G';
 
   bool isMode(String value) {
     return value == mode;
@@ -54,30 +51,29 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   @override
   void initState() {
-    checkNetwork(widget.network, widget.currentType, widget.cellId, widget.alarm, widget.eco);
     setMode(null);
     super.initState();
   }
 
-  checkNetwork(String networkType, String currentType, bool callID, bool alarm,
-      bool eco) {
-    if (networkType == '5G' && currentType == '5G') {
-      if (eco) {
-        if (callID && alarm) {
-          isDisableModeLive = true;
-        } else {
-          isDisableModeGame = true;
-          isDisableModeLive = true;
-        }
-      } else {
-        isDisableModeGame = true;
-        isDisableModeEco = true;
-        isDisableModeLive = true;
-      }
-    } else {
-      isDisableMode = true;
-    }
-  }
+  // checkNetwork(String networkType, String currentType, bool callID, bool alarm,
+  //     bool eco) {
+  //   if (networkType == '5G' && currentType == '5G') {
+  //     if (eco) {
+  //       if (callID && alarm) {
+  //         isDisableModeLive = true;
+  //       } else {
+  //         isDisableModeGame = true;
+  //         isDisableModeLive = true;
+  //       }
+  //     } else {
+  //       isDisableModeGame = true;
+  //       isDisableModeEco = true;
+  //       isDisableModeLive = true;
+  //     }
+  //   } else {
+  //     isDisableMode = true;
+  //   }
+  // }
 
   callback() {
     setState(() {
@@ -88,7 +84,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   setMode(String? setMode) async {
     final SharedPreferences mode1 = await _mode;
     setState(() {
-      if (widget.network == '5G' && widget.currentType == '5G') {
+      if (network == '5G' && currentType == '5G') {
         int ecoMode = mode1.getInt('ecoMode') ?? 0;
         if (setMode != null) {
           if (mode1.getString('mode') == 'live' && setMode != 'live') {
@@ -275,7 +271,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || isDisableModeEco
+                        isDisableMode || widget.display.isDisableModeEco
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -290,7 +286,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('eco'),
-                      isDisable: isDisableMode || isDisableModeEco,
+                      isDisable: isDisableMode || widget.display.isDisableModeEco,
                       onPress: () {
                         if (!isMode('eco')) {
                           showModalBottomSheet(
@@ -326,7 +322,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || isDisableModeLive
+                        isDisableMode || widget.display.isDisableModeLive
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_live_bw.png')
                             : ImageUtils.getImagePath(
@@ -341,7 +337,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('live'),
-                      isDisable: isDisableMode || isDisableModeLive,
+                      isDisable: isDisableMode || widget.display.isDisableModeLive,
                       expireDate: expireLiveMode,
                       mode: 'modeLiveTime',
                       setMode: callback,
@@ -379,7 +375,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || isDisableModeGame
+                        isDisableMode || widget.display.isDisableModeGame
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_game_bw.png')
                             : ImageUtils.getImagePath(
@@ -394,7 +390,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('game'),
-                      isDisable: isDisableMode || isDisableModeGame,
+                      isDisable: isDisableMode || widget.display.isDisableModeGame,
                       expireDate: expireGameMode,
                       mode: 'modeGameTime',
                       setMode: callback,

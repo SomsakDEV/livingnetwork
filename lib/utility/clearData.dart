@@ -21,14 +21,16 @@ class _ClearDataState extends State<ClearData> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Clear Data'),
-      ),
-      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+    return
+        // Scaffold(
+        // appBar: AppBar(
+        //   title: const Text('Clear Data'),
+        // ),
+        Card(
+      child: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Button(
-          width: MediaQuery.of(context).size.width,
-          height: 300,
+          width: MediaQuery.of(context).size.width * 0.95,
+          height: 45,
           title: 'Clear Data',
           buttonType: ButtonType.primaryBtn,
           onPress: () {
