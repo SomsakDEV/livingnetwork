@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/presentation/home/homepage.dart';
-import 'package:living_network/provider/performance_provider.dart';
+import 'package:living_network/provider/main_provider.dart';
 
 import 'package:living_network_repository/data/repositories/repositories_impl.dart';
 import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
@@ -45,7 +45,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
       print("mode ${data?.perform}");
       print("[LIVING_NETWORK] data : ${data.toString()}");
 
-      PerformanceProvider().getData(data);
+      MainProvider().getData(data);
     } on PlatformException catch (e) {
       print('[LIVING_NETWORK] Error Platform : $e');
     } on MissingPluginException catch (e) {
@@ -60,7 +60,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
     // ignore: prefer_const_constructors
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => PerformanceProvider()),
+        ChangeNotifierProvider(create: (context) => MainProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
