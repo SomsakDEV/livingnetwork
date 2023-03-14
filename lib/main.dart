@@ -3,7 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:living_network/model/mode/mode_customer.dart';
 import 'package:living_network/presentation/home/homepage.dart';
 import 'package:living_network/presentation/home/tab_home.dart';
-
 // import 'package:living_network_repository/data/repositories/repositories_impl.dart';
 // import 'package:living_network_repository/domain/usecase/get_data_catalog_usecase.dart';
 // import 'package:living_network_repository/main.reflectable.dart';
@@ -108,6 +107,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
       theme: ThemeData(fontFamily: 'DB Heavent'),
       initialRoute: '/',
       routes: {
+        // '/': (context) => TabHome()
         '/': (context) => HomePage(
               userData: userData,
             ),
