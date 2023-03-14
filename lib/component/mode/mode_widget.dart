@@ -10,10 +10,8 @@ import 'package:living_network/component/mode/button_mode.dart' as button;
 bool timeout = false;
 
 class ModeWidget extends StatefulWidget {
-  late DisplayModeWidget display;
 
   ModeWidget({
-    required this.display,
     super.key,
   });
 
@@ -271,7 +269,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || widget.display.isDisableModeEco
+                        isDisableMode || false
+                        // widget.display.isDisableModeEco
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -286,7 +285,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('eco'),
-                      isDisable: isDisableMode || widget.display.isDisableModeEco,
+                      isDisable: isDisableMode || false,
+                      // widget.display.isDisableModeEco,
                       onPress: () {
                         if (!isMode('eco')) {
                           showModalBottomSheet(
@@ -322,7 +322,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || widget.display.isDisableModeLive
+                        isDisableMode || false
+                        // widget.display.isDisableModeLive
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_live_bw.png')
                             : ImageUtils.getImagePath(
@@ -337,7 +338,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('live'),
-                      isDisable: isDisableMode || widget.display.isDisableModeLive,
+                      isDisable: isDisableMode || false,
+                      // widget.display.isDisableModeLive,
                       expireDate: expireLiveMode,
                       mode: 'modeLiveTime',
                       setMode: callback,
@@ -375,7 +377,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        isDisableMode || widget.display.isDisableModeGame
+                        isDisableMode || false
+                        // widget.display.isDisableModeGame
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_game_bw.png')
                             : ImageUtils.getImagePath(
@@ -390,7 +393,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('game'),
-                      isDisable: isDisableMode || widget.display.isDisableModeGame,
+                      isDisable: isDisableMode || false,
+                      // widget.display.isDisableModeGame,
                       expireDate: expireGameMode,
                       mode: 'modeGameTime',
                       setMode: callback,

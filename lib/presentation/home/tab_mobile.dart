@@ -22,10 +22,8 @@ import 'package:living_network_repository/domain/entities/display_mode_widget.da
 
 class TabMobile extends StatefulWidget {
   static const ROUTE_NAME = '/livingnetwork';
-  late DisplayModeWidget display;
 
   TabMobile({
-    required this.display,
     super.key,
   });
 
@@ -109,9 +107,7 @@ class _TabMobileState extends State<TabMobile> {
                                   border: Border.all(
                                       width: 3, color: Color(0xFFF0F0F0))),
                               width: MediaQuery.of(context).size.width * 0.93,
-                              child: ModeWidget(
-                               display: widget.display,
-                              ),
+                              child: ModeWidget(),
                             ),
                           ),
                           // Positioned(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:living_network_repository/domain/entities/display_screen.dart';
 
 class PerformanceProvider with ChangeNotifier {
   int? social;
@@ -15,7 +16,7 @@ class PerformanceProvider with ChangeNotifier {
     this.game,
   });
 
-  getData() {
+  getData(DisplayScreen? data) {
     
   }
 }
