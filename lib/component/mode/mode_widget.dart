@@ -51,7 +51,6 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   @override
   void initState() {
-    // checkNetwork(widget.network, widget.currentType, widget.cellId, widget.alarm, widget.eco);
     setMode(null);
     super.initState();
   }
@@ -454,8 +453,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     ),
                   ],
                 ),
-              )
-
+              ),
               //============================== Free Trial : Next Phase ===================
               // betweenBox,
               // Row(
