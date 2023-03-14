@@ -12,7 +12,8 @@ dependencies:
   flutter:
     sdk: flutter
     
-  living_network_repository:  
+  living_network_repository:
+    # path: /Users/pipap/Desktop/mfaf/living_network_repository
     git:    
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git    
       ref: develop
@@ -22,6 +23,7 @@ dependencies:
   shared_preferences: ^2.0.18
   syncfusion_flutter_gauges: ^20.4.53
   carousel_slider: ^4.2.1
+  provider: ^6.0.5
 
 dev_dependencies:
   flutter_test:

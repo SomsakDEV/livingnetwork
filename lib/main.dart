@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/presentation/home/homepage.dart';
+import 'package:living_network/provider/performance_provider.dart';
 import 'package:living_network_repository/data/model/userdata.dart';
 
 import 'package:living_network_repository/data/repositories/repositories_impl.dart';
@@ -9,15 +10,14 @@ import 'package:living_network_repository/domain/usecase/get_data_usecase.dart';
 
 import 'package:living_network_repository/main.reflectable.dart';
 import 'package:core/core.dart';
+import 'package:provider/provider.dart';
 import 'package:realm/realm.dart';
 
 void main() async {
   initializeReflectable();
   WidgetsFlutterBinding.ensureInitialized();
   var coreConfig = CoreConfig(mode: Mode.debug);
-  await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig()
-      .setInitAppConfig()
-      .whenComplete(() => coreConfig.checkCacheConfig()));
+  await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
   runApp(LivingNetwork());
 }
 
@@ -57,6 +57,21 @@ class _LivingNetworkState extends State<LivingNetwork> {
 
   void _wRequest() async {
     // platform.setMethodCallHandler((MethodCall call) async {
+    // usecase?.getAddUserData(UserData(
+    //   '08123456789',
+    //   '5G',
+    //   'true',
+    //   'postpaid',
+    //   '5G',
+    //   'active',
+    //   '5G package',
+    //   'true',
+    //   'true',
+    //   '30000',
+    //   '30000',
+    //   '8',
+    //   isTemp: false,
+    // ));
     // usecase?.getAddUserData(UserData('08123456789', '5G', 'true', 'postpaid',
     //     '5G', 'active', '5G package', 'true', 'true',
     //     isTemp: false));
@@ -65,30 +80,33 @@ class _LivingNetworkState extends State<LivingNetwork> {
       // if (call.method == 'open' && call.arguments != null) {
       //   print("[LIVING_NETWORK] Input data : ${call.arguments}");
       //   token = call.arguments;
-      if (usecase != null) {
-        //for token query
-        print("[LIVING_NETWORK] usecase : ${usecase.toString()}");
-        final data =
-            await usecase?.getDataAllUserDataWithRealmModel('08123456789');
-        customer = data!;
-        print("mode ${data.mode}");
-        print("expireLiveMode ${data.expireLiveMode}");
-        print("expireGameMode ${data.expireGameMode}");
-        print("isDisableMode ${data.isDisableMode}");
-        print("isDisableModeEco ${data.isDisableModeEco}");
-        print("isDisableModeLive ${data.isDisableModeLive}");
-        print("isDisableModeGame ${data.isDisableModeGame}");
-        print("isLive ${data.isLive}");
-        print("isGame ${data.isGame}");
-        print("[LIVING_NETWORK] data : ${data.toString()}");
+      // if (usecase != null) {
+      //for token query
+      print("[LIVING_NETWORK] usecase : ${usecase.toString()}");
+      // final data = await usecase?.getDataAllUserDataWithRealmModel('08123456789');
+      final data = await usecase?.getMockupData();
+      // customer = data!;
 
-        verify = true;
-        // } else {
-        //   print('[LIVING_NETWORK] getDataAllUserDataWithRealmModel query fail');
-        // }
-      } else {
-        print('[LIVING_NETWORK] GetDataCatalogUseCase is not define');
-      }
+      print("mode ${data?.perform}");
+      // print("expireLiveMode ${data.expireLiveMode}");
+      // print("expireGameMode ${data.expireGameMode}");
+      // print("isDisableMode ${data.isDisableMode}");
+      // print("isDisableModeEco ${data.isDisableModeEco}");
+      // print("isDisableModeLive ${data.isDisableModeLive}");
+      // print("isDisableModeGame ${data.isDisableModeGame}");
+      // print("isLive ${data.isLive}");
+      // print("isGame ${data.isGame}");
+      print("[LIVING_NETWORK] data : ${data.toString()}");
+
+      PerformanceProvider();
+
+      verify = true;
+      // } else {
+      //   print('[LIVING_NETWORK] getDataAllUserDataWithRealmModel query fail');
+      // }
+      // } else {
+      //   print('[LIVING_NETWORK] GetDataCatalogUseCase is not define');
+      // }
       // } else {
       //   print('[LIVING_NETWORK] check method or arg');
       // }
@@ -106,22 +124,28 @@ class _LivingNetworkState extends State<LivingNetwork> {
         SystemNavigator.pop();
       }
     }
-    // });
+    // }
+    // );
   }
 
   @override
   Widget build(BuildContext context) {
     // ignore: prefer_const_constructors
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(fontFamily: 'DB Heavent'),
-      initialRoute: '/',
-      routes: {
-        // '/': (context) => TabHome()
-        '/': (context) => HomePage(
-              display: customer,
-            ),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => PerformanceProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(fontFamily: 'DB Heavent'),
+        initialRoute: '/',
+        routes: {
+          // '/': (context) => TabHome()
+          '/': (context) => HomePage(
+                display: customer,
+              ),
+        },
+      ),
     );
   }
 }
