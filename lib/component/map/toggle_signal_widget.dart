@@ -29,7 +29,7 @@ class _ToggleSignalState extends State<ToggleSignal> {
           });
         },
         textStyle: const TextStyle(
-            fontSize: 22, color: LNColor.textColorTabbar, fontWeight: FontWeight.w500, fontFamily: 'DB Heaven'),
+            fontSize: 22, color: LNColor.textColorTabbar, fontWeight: FontWeight.w500, fontFamily: 'DB Heavent'),
         borderRadius: const BorderRadius.all(Radius.circular(8)),
         selectedBorderColor: LNColor.kellyGreen100,
         selectedColor: LNColor.whiteColor,
