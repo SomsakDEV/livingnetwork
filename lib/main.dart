@@ -13,7 +13,12 @@ import 'package:provider/provider.dart';
 import 'package:realm/realm.dart';
 
 void main() async {
-  runApp(LivingNetwork());
+  runApp(
+    MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context) => MainProvider())],
+      child: LivingNetwork(),
+    ),
+  );
 }
 
 // ignore: use_key_in_widget_constructors
@@ -42,12 +47,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
   void _wRequest() async {
     try {
       print("[LIVING_NETWORK] usecase : ${usecase.toString()}");
-      final data = await usecase?.getMockupData();
 
-      print("mode ${data?.perform}");
-      print("[LIVING_NETWORK] data : ${data.toString()}");
-
-      MainProvider().getData(data);
+      // print("mode ${data?.perform}");
+      // print("[LIVING_NETWORK] data : ${data.toString()}");
     } on PlatformException catch (e) {
       print('[LIVING_NETWORK] Error Platform : $e');
     } on MissingPluginException catch (e) {
@@ -59,22 +61,20 @@ class _LivingNetworkState extends State<LivingNetwork> {
 
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return MultiProvider(
-      providers: [
-        ChangeNotifierProvider(create: (context) => MainProvider()),
-      ],
-      child: MaterialApp(
-        debugShowCheckedModeBanner: false,
-        theme: ThemeData(fontFamily: 'DB Heavent'),
-        initialRoute: '/',
-        routes: {
-          // '/': (context) => TabHome()
-          '/': (context) => HomePage(),
-          '/map' : (context) => MapScreen(),
-          '/map/direction' : (context) => MapDirection(), // wait shiwly
-        },
-      ),
+    return Consumer<MainProvider>(
+      builder: (context, provide, child) {
+        return MaterialApp(
+          debugShowCheckedModeBanner: false,
+          theme: ThemeData(fontFamily: 'DB Heavent'),
+          initialRoute: '/',
+          routes: {
+            // '/': (context) => TabHome()
+            '/': (context) => HomePage(),
+            '/map': (context) => MapScreen(),
+            '/map/direction': (context) => MapDirection(), // wait shiwly
+          },
+        );
+      },
     );
   }
 }
