@@ -3,8 +3,6 @@ import 'package:living_network/presentation/home/homepage.dart';
 import 'package:living_network/presentation/map/map_direction.dart';
 import 'package:living_network/presentation/map/map_screen.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network_repository/data/repositories/repositories_impl.dart';
-import 'package:living_network_repository/domain/usecase/get_data_usecase.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -17,7 +15,6 @@ class LivingNetwork extends StatefulWidget {
 }
 
 class _LivingNetworkState extends State<LivingNetwork> {
-  GetDataCatalogUseCase? repo = GetDataCatalogUseCase(RepositoriesImpl());
   String? token;
 
   @override
@@ -26,7 +23,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
     return MultiProvider(
       providers: [
         // ChangeNotifierProvider(create: (context) => MainProvider(repo: repo, tmp: repo?.getMockupData())),
-        ChangeNotifierProvider(create: (context) => LnProvider(repo: repo)),
+        ChangeNotifierProvider(create: (context) => LnProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
