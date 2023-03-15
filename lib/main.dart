@@ -7,7 +7,6 @@ import 'package:living_network/presentation/map/map_screen.dart';
 
 import 'package:living_network_repository/data/repositories/repositories_impl.dart';
 import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
-import 'package:living_network_repository/domain/entities/mock_up_data.dart';
 import 'package:living_network_repository/domain/usecase/get_data_usecase.dart';
 
 import 'package:provider/provider.dart';
