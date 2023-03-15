@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:living_network/component/cell_tower/cell_tower_widget.dart';
+
 // import 'package:living_network/cell_tower_info/ct_main.dart';
 import 'package:living_network/component/internet/usage.dart';
 import 'package:living_network/component/map/map_widget.dart';
@@ -27,7 +29,7 @@ class TabMobile extends StatefulWidget {
 
 class _TabMobileState extends State<TabMobile> {
   final SizedBox _sizedBox = SizedBox(
-    height: 12,
+    height: 8,
   );
 
   @override
@@ -36,7 +38,7 @@ class _TabMobileState extends State<TabMobile> {
     double w = MediaQuery.of(context).size.width;
     return Consumer<LnProvider>(
       builder: (context, data, _) => RefreshIndicator(
-        color: LNColor.primaryColor,
+          color: LNColor.primaryColor,
           onRefresh: () => data.loadData(),
           child: SingleChildScrollView(
             child: Stack(
@@ -44,7 +46,6 @@ class _TabMobileState extends State<TabMobile> {
                 Container(
                   height: h * 0.35,
                   width: w,
-                  color: Colors.amber,
                   child: MapWidget(),
                 ),
                 InkWell(
@@ -59,7 +60,7 @@ class _TabMobileState extends State<TabMobile> {
                 Column(
                   children: [
                     SizedBox(
-                      height: h * 0.30,
+                      height: h * 0.29,
                       width: w,
                     ),
                     SizedBox(
@@ -79,8 +80,15 @@ class _TabMobileState extends State<TabMobile> {
                             Container(
                               decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                               width: w * 0.93,
+                              child: CellTowerWidget(),
+                            ),
+                            _sizedBox,
+                            Container(
+                              decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                              width: w * 0.93,
                               child: PerformanceMain(),
                             ),
+                            _sizedBox,
                             // Container(
                             //   decoration: BoxDecoration(
                             //       color: Color(0xFFFFFFFF),
