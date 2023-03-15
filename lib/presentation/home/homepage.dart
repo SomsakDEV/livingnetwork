@@ -7,10 +7,8 @@ import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/presentation/home/tab_home.dart';
 import 'package:living_network/presentation/home/tab_mobile.dart';
-import 'package:living_network/provider/main_provider.dart';
+import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
-import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
-import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -78,6 +76,7 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
+    Provider.of<LnProvider>(context, listen: false).loadData();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -89,8 +88,8 @@ class _HomePageState extends State<HomePage> {
           onPressed: () => SystemNavigator.pop(),
         ),
       ),
-      body: Consumer<MainProvider>(
-        builder: (context, myDataProvider, _) => DefaultTabController(
+      body: Consumer<LnProvider>(
+        builder: (context, data, _) => DefaultTabController(
           length: 2,
           child: Scaffold(
             appBar: PreferredSize(
