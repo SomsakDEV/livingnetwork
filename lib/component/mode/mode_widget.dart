@@ -26,7 +26,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   );
 
   String? mode;
-  DateTime? expirePowerMode;
+  DateTime? expireLiveMode;
   DateTime? expireGameMode;
 
   String network = '5G';
@@ -39,9 +39,9 @@ class _ModeWidgetState extends State<ModeWidget> {
   //For disable Mode
   late bool isDisableMode = false;
   late bool isDisableModeEco = false;
-  late bool isDisableModePower = false;
+  late bool isDisableModeLive = false;
   late bool isDisableModeGame = false;
-  late bool isPower = false;
+  late bool isLive = false;
   late bool isGame = false;
 
   String warningMessage =
@@ -52,26 +52,6 @@ class _ModeWidgetState extends State<ModeWidget> {
     setMode(null);
     super.initState();
   }
-
-  // checkNetwork(String networkType, String currentType, bool callID, bool alarm,
-  //     bool eco) {
-  //   if (networkType == '5G' && currentType == '5G') {
-  //     if (eco) {
-  //       if (callID && alarm) {
-  //         isDisableModeLive = true;
-  //       } else {
-  //         isDisableModeGame = true;
-  //         isDisableModeLive = true;
-  //       }
-  //     } else {
-  //       isDisableModeGame = true;
-  //       isDisableModeEco = true;
-  //       isDisableModeLive = true;
-  //     }
-  //   } else {
-  //     isDisableMode = true;
-  //   }
-  // }
 
   callback() {
     setState(() {
@@ -85,11 +65,11 @@ class _ModeWidgetState extends State<ModeWidget> {
       if (network == '5G' && currentType == '5G') {
         int ecoMode = mode1.getInt('ecoMode') ?? 0;
         if (setMode != null) {
-          if (mode1.getString('mode') == 'power' && setMode != 'power') {
-            mode1.setString('modePowerTime', 'expire');
-            expirePowerMode = null;
-            isDisableModePower = true;
-            isPower = false;
+          if (mode1.getString('mode') == 'live' && setMode != 'live') {
+            mode1.setString('modeLiveTime', 'expire');
+            expireLiveMode = null;
+            isDisableModeLive = true;
+            isLive = false;
           } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
             mode1.setString('modeGameTime', 'expire');
             expireGameMode = null;
@@ -121,10 +101,10 @@ class _ModeWidgetState extends State<ModeWidget> {
               mode1.setString('modeLiveTime', 'expire');
               mode1.setString('mode', 'max');
               mode = 'max';
-              isDisableModePower = true;
+              isDisableModeLive = true;
             } else {
-              expirePowerMode = DateTime.parse(time);
-              isPower = true;
+              expireLiveMode = DateTime.parse(time);
+              isLive = true;
             }
           } else if (mode1.getString('mode') == 'game') {
             String time = mode1.getString('modeGameTime') ?? '';
@@ -144,7 +124,7 @@ class _ModeWidgetState extends State<ModeWidget> {
             isDisableModeGame = true;
           }
           if (mode1.getString('modePowerTime') == 'expire') {
-            isDisableModePower = true;
+            isDisableModeLive = true;
           }
           if (ecoMode >= 5) {
             isDisableModeEco = true;
@@ -158,9 +138,9 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   timeCountdown(String mode) async {
     final SharedPreferences mode1 = await _mode;
-    if (mode == 'power') {
-      expirePowerMode = DateTime.now().add(const Duration(seconds: 3));
-      mode1.setString('modePowerTime', expirePowerMode.toString());
+    if (mode == 'live') {
+      expireLiveMode = DateTime.now().add(const Duration(seconds: 3));
+      mode1.setString('modeLiveTime', expireLiveMode.toString());
     } else if (mode == 'game') {
       expireGameMode = DateTime.now().add(const Duration(seconds: 3));
       mode1.setString('modeGameTime', expireGameMode.toString());
@@ -169,7 +149,6 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // setMode(null);
     return Consumer<LnProvider>(
       builder: (context, data, _) => Card(
         shadowColor: Colors.transparent,
@@ -182,8 +161,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                 Padding(
                   padding: const EdgeInsets.only(left: 10),
                   child: Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    // crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
                       Image.asset(
                         ImageUtils.getImagePath('assets/images/mode_title.png'),
@@ -210,9 +187,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                         },
                         icon: Image.asset(
                           ImageUtils.getImagePath(
-                              'assets/images/information_green.png'),
-                          height: 16.67,
-                          width: 16.67,
+                              'assets/images/exclamation_green.png'),
+                          height: 13.33,
+                          width: 13.33,
                         ),
                         padding: const EdgeInsets.only(left: 5.67),
                         alignment: Alignment.centerLeft,
@@ -242,33 +219,56 @@ class _ModeWidgetState extends State<ModeWidget> {
                         height: 70,
                         width: 143,
                         borderRadius: 10,
-                        isMode: isMode('power'),
+                        isMode: isMode('live'),
                         isDisable: isDisableMode || false,
                         // widget.display.isDisableModeLive,
-                        expireDate: expirePowerMode,
-                        mode: 'modePowerTime',
+                        expireDate: expireLiveMode,
+                        mode: 'modeLiveTime',
                         setMode: callback,
-                        check: isPower,
+                        check: isLive,
                         onPress: () {
-                          if (!isMode('Power')) {
+                          if (!isMode('live')) {
                             showModalBottomSheet(
+                              isDismissible: false,
                               backgroundColor: Colors.transparent,
                               context: context,
                               builder: (BuildContext context) {
                                 return BottomSheetCardDialogMode(
                                   title: 'Switch to Power / Boost mode?',
                                   desc: 'Detail: smoothly live',
-                                  textCancelBtn: 'Close',
                                   textSubmitBtn: 'Switch to Live mode',
+                                  textCancelBtn: 'Close',
                                   onPressedSubmit: (isClicked) async {
                                     Navigator.pop(context);
                                     setState(
                                       () {
-                                        isPower = true;
-                                        setMode('power');
-                                        timeCountdown('power');
+                                        isLive = true;
+                                        setMode('live');
+                                        timeCountdown('live');
                                       },
                                     );
+                                  },
+                                  onPressedCancel: (isClicked) =>
+                                      Navigator.pop(context),
+                                );
+                              },
+                            );
+                          } else {
+                            showModalBottomSheet(
+                              isDismissible: false,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return BottomSheetCardDialogMode(
+                                  title: 'Exit From Power/Boost mode?',
+                                  desc: 'Detail: exit from power/boost mode',
+                                  textSubmitBtn: 'Exit',
+                                  textCancelBtn: 'Close',
+                                  onPressedSubmit: (isClicked) {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      setMode('nofocus');
+                                    });
                                   },
                                   onPressedCancel: (isClicked) =>
                                       Navigator.pop(context),
@@ -307,13 +307,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                         onPress: () {
                           if (!isMode('game')) {
                             showModalBottomSheet(
+                              isDismissible: false,
                               backgroundColor: Colors.transparent,
                               context: context,
                               builder: (BuildContext context) {
                                 return BottomSheetCardDialogMode(
                                   title: 'Switch to Game mode?',
-                                  desc: 'เล่นฟรีได้ 30 นาที ใช้ได้ 1 ครั้ง \n'
-                                      'ถ้าออกก่อนก็จะหมดสิทธิแล้ว...',
+                                  desc:
+                                      'เล่นฟรีได้ 30 นาที ใช้ได้ 1 ครั้ง \n ถ้าออกก่อนก็จะหมดสิทธิแล้ว...',
                                   textSubmitBtn: 'Switch to Game mode',
                                   textCancelBtn: 'Close',
                                   onPressedSubmit: (isClicked) {
@@ -325,6 +326,28 @@ class _ModeWidgetState extends State<ModeWidget> {
                                         timeCountdown('game');
                                       },
                                     );
+                                  },
+                                  onPressedCancel: (isClicked) =>
+                                      Navigator.pop(context),
+                                );
+                              },
+                            );
+                          } else {
+                            showModalBottomSheet(
+                              isDismissible: false,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return BottomSheetCardDialogMode(
+                                  title: 'Exit From Game mode?',
+                                  desc: 'Detail: exit from game mode',
+                                  textSubmitBtn: 'Exit',
+                                  textCancelBtn: 'Close',
+                                  onPressedSubmit: (isClicked) {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      setMode('nofocus');
+                                    });
                                   },
                                   onPressedCancel: (isClicked) =>
                                       Navigator.pop(context),
@@ -365,6 +388,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         onPress: () {
                           if (!isMode('eco')) {
                             showModalBottomSheet(
+                              isDismissible: false,
                               backgroundColor: Colors.transparent,
                               context: context,
                               builder: (BuildContext context) {
@@ -377,6 +401,28 @@ class _ModeWidgetState extends State<ModeWidget> {
                                     Navigator.pop(context);
                                     setState(() {
                                       setMode('eco');
+                                    });
+                                  },
+                                  onPressedCancel: (isClicked) =>
+                                      Navigator.pop(context),
+                                );
+                              },
+                            );
+                          } else {
+                            showModalBottomSheet(
+                              isDismissible: false,
+                              backgroundColor: Colors.transparent,
+                              context: context,
+                              builder: (BuildContext context) {
+                                return BottomSheetCardDialogMode(
+                                  title: 'Exit From Eco mode?',
+                                  desc: 'Detail: exit from eco mode',
+                                  textSubmitBtn: 'Exit',
+                                  textCancelBtn: 'Close',
+                                  onPressedSubmit: (isClicked) {
+                                    Navigator.pop(context);
+                                    setState(() {
+                                      setMode('nofocus');
                                     });
                                   },
                                   onPressedCancel: (isClicked) =>
@@ -410,7 +456,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                         child: ListTile(
                           minLeadingWidth: 12,
                           leading: Image.asset(
-                            ImageUtils.getImagePath('assets/images/warning.png'),
+                            ImageUtils.getImagePath(
+                                'assets/images/warning.png'),
                             width: 20,
                             height: 20,
                           ),
