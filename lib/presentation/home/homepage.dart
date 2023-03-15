@@ -23,6 +23,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   void initState() {
+    Provider.of<LnProvider>(context, listen: false).loadData();
     super.initState();
     WidgetsBinding.instance.addPostFrameCallback((_) => showDialog(
         context: context,
@@ -76,7 +77,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    Provider.of<LnProvider>(context, listen: false).loadData();
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
