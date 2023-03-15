@@ -24,7 +24,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   );
 
   String? mode;
-  DateTime? expireLiveMode;
+  DateTime? expirePowerMode;
   DateTime? expireGameMode;
 
   String network = '5G';
@@ -37,7 +37,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   //For disable Mode
   late bool isDisableMode = false;
   late bool isDisableModeEco = false;
-  late bool isDisableModeLive = false;
+  late bool isDisableModePower = false;
   late bool isDisableModeGame = false;
   late bool isPower = false;
   late bool isGame = false;
@@ -85,8 +85,8 @@ class _ModeWidgetState extends State<ModeWidget> {
         if (setMode != null) {
           if (mode1.getString('mode') == 'power' && setMode != 'power') {
             mode1.setString('modePowerTime', 'expire');
-            expireLiveMode = null;
-            isDisableModeLive = true;
+            expirePowerMode = null;
+            isDisableModePower = true;
             isPower = false;
           } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
             mode1.setString('modeGameTime', 'expire');
@@ -119,9 +119,9 @@ class _ModeWidgetState extends State<ModeWidget> {
               mode1.setString('modeLiveTime', 'expire');
               mode1.setString('mode', 'max');
               mode = 'max';
-              isDisableModeLive = true;
+              isDisableModePower = true;
             } else {
-              expireLiveMode = DateTime.parse(time);
+              expirePowerMode = DateTime.parse(time);
               isPower = true;
             }
           } else if (mode1.getString('mode') == 'game') {
@@ -142,7 +142,7 @@ class _ModeWidgetState extends State<ModeWidget> {
             isDisableModeGame = true;
           }
           if (mode1.getString('modePowerTime') == 'expire') {
-            isDisableModeLive = true;
+            isDisableModePower = true;
           }
           if (ecoMode >= 5) {
             isDisableModeEco = true;
@@ -156,9 +156,9 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   timeCountdown(String mode) async {
     final SharedPreferences mode1 = await _mode;
-    if (mode == 'live') {
-      expireLiveMode = DateTime.now().add(const Duration(hours: 3));
-      mode1.setString('modeLiveTime', expireLiveMode.toString());
+    if (mode == 'power') {
+      expirePowerMode = DateTime.now().add(const Duration(seconds: 3));
+      mode1.setString('modePowerTime', expirePowerMode.toString());
     } else if (mode == 'game') {
       expireGameMode = DateTime.now().add(const Duration(seconds: 3));
       mode1.setString('modeGameTime', expireGameMode.toString());
@@ -239,10 +239,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      isMode: isMode('live'),
+                      isMode: isMode('power'),
                       isDisable: isDisableMode || false,
                       // widget.display.isDisableModeLive,
-                      expireDate: expireLiveMode,
+                      expireDate: expirePowerMode,
                       mode: 'modePowerTime',
                       setMode: callback,
                       check: isPower,
