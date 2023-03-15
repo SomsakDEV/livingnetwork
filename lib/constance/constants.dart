@@ -9,10 +9,10 @@ List subTitle = [
   '5G Game Mode สนุกเต็มแม็กซ์ ไม่มีกระตุกให้อารมณ์เสียไปกับความเร็วแรงของ 5G ที่เหมือนกับอินเทอร์เน็ตบรอดแบนด์'
 ];
 List<Image> image = [
-  Image.asset(ImageUtils.getImagePath('assets/images/mode_max.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/mode_eco.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/mode_live.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/mode_game.png'))
+  Image.asset(ImageUtils.getImagePath('assets/images/mode_max.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/mode_eco.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/mode_live.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/mode_game.png'), width: 40, height: 40, alignment: Alignment.topCenter,)
 ];
 
 List title_preformance = ['Browsing / Social', 'Live', 'Video streaming', 'Music streaming', 'Game'];
@@ -24,9 +24,9 @@ List subTitle_preformance = [
   'Detail : At vero eos et accusamus et iusto odio\ne.g. ROV, Pub G, Among Us, Candy Crush'
 ];
 List<Image> image_preformance = [
-  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_1.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_2.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_3.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_4.png')),
-  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_5.png'))
+  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_1.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_2.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_3.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_4.png'), width: 40, height: 40, alignment: Alignment.topCenter,),
+  Image.asset(ImageUtils.getImagePath('assets/images/performance_icon_5.png'), width: 40, height: 40, alignment: Alignment.topCenter,)
 ];
