@@ -40,107 +40,98 @@ class _TabMobileState extends State<TabMobile> {
 
   @override
   Widget build(BuildContext context) {
-    MainProvider mainProvider = Provider.of<MainProvider>(context);
-    return SingleChildScrollView(
-      child: Stack(
-        children: <Widget>[
-          Container(
-            height: MediaQuery.of(context).size.height * 0.35,
-            width: MediaQuery.of(context).size.width,
-            color: Colors.amber,
-            child: MapWidget(),
-          ),
-          InkWell(
-            onTap: () {
-              Navigator.pushNamed(context, '/map');
-            },
-            child: SizedBox(
-              height: MediaQuery.of(context).size.height * 0.35,
-              width: MediaQuery.of(context).size.width,
-            ),
-          ),
-          Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.30,
-                width: MediaQuery.of(context).size.width,
-              ),
-              SizedBox(
+    return Consumer<MainProvider>(
+      builder: (context, myDataProvider, _) => RefreshIndicator(
+          onRefresh: () => myDataProvider.loadData(),
+          child: SingleChildScrollView(
+            child: Stack(
+              children: <Widget>[
+                Container(
+                  height: MediaQuery.of(context).size.height * 0.35,
                   width: MediaQuery.of(context).size.width,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //       color: Color(0xFFFFFFFF),
-                      //       borderRadius: BorderRadius.circular(8),
-                      //       border:
-                      //           Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                      //   width: MediaQuery.of(context).size.width * 0.93,
-                      //   child: CellTowerInfoMain(),
-                      // ),
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xFFFFFFFF),
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                        width: MediaQuery.of(context).size.width * 0.93,
-                        child: PerformanceMain(),
-                      ),
-                      // Container(
-                      //   decoration: BoxDecoration(
-                      //       color: Color(0xFFFFFFFF),
-                      //       borderRadius: BorderRadius.circular(8),
-                      //       border:
-                      //           Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                      //   width: MediaQuery.of(context).size.width * 0.93,
-                      //   child: SpeedComparingMain(),
-                      // ),
-                      _sizedBox,
-                      Stack(
-                        children: <Widget>[
-                          Padding(
-                            padding: const EdgeInsets.only(top: 5.0),
-                            child: Container(
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  color: Color(0xFFFFFFFF),
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                      width: 3, color: Color(0xFFF0F0F0))),
+                  color: Colors.amber,
+                  child: MapWidget(),
+                ),
+                InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, '/map');
+                  },
+                  child: SizedBox(
+                    height: MediaQuery.of(context).size.height * 0.35,
+                    width: MediaQuery.of(context).size.width,
+                  ),
+                ),
+                Column(
+                  children: [
+                    SizedBox(
+                      height: MediaQuery.of(context).size.height * 0.30,
+                      width: MediaQuery.of(context).size.width,
+                    ),
+                    SizedBox(
+                        width: MediaQuery.of(context).size.width,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //       color: Color(0xFFFFFFFF),
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       border:
+                            //           Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                            //   width: MediaQuery.of(context).size.width * 0.93,
+                            //   child: CellTowerInfoMain(),
+                            // ),
+                            Container(
+                              decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
                               width: MediaQuery.of(context).size.width * 0.93,
-                              child: ModeWidget(),
+                              child: PerformanceMain(),
                             ),
-                          ),
-                          // Positioned(
-                          //   right: 20,
-                          //   child: Image.asset(
-                          //     ImageUtils.getImagePath('assets/images/mode_new_feature.png'),
-                          //     height: 26,
-                          //     width: 149,
-                          //   ),
-                          // ),
-                        ],
-                      ),
-                      _sizedBox,
-                      Container(
-                        decoration: BoxDecoration(
-                            color: Color(0xFFFFFFFF),
-                            borderRadius: BorderRadius.circular(8),
-                            border:
-                                Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                        width: MediaQuery.of(context).size.width * 0.93,
-                        child: InternetUsage(),
-                      ),
-                      _sizedBox,
-                      ClearData(),
-                    ],
-                  )),
-            ],
-          )
-        ],
-      ),
+                            // Container(
+                            //   decoration: BoxDecoration(
+                            //       color: Color(0xFFFFFFFF),
+                            //       borderRadius: BorderRadius.circular(8),
+                            //       border:
+                            //           Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                            //   width: MediaQuery.of(context).size.width * 0.93,
+                            //   child: SpeedComparingMain(),
+                            // ),
+                            _sizedBox,
+                            Stack(
+                              children: <Widget>[
+                                Padding(
+                                  padding: const EdgeInsets.only(top: 5.0),
+                                  child: Container(
+                                    alignment: Alignment.center,
+                                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                                    width: MediaQuery.of(context).size.width * 0.93,
+                                    child: ModeWidget(),
+                                  ),
+                                ),
+                                // Positioned(
+                                //   right: 20,
+                                //   child: Image.asset(
+                                //     ImageUtils.getImagePath('assets/images/mode_new_feature.png'),
+                                //     height: 26,
+                                //     width: 149,
+                                //   ),
+                                // ),
+                              ],
+                            ),
+                            _sizedBox,
+                            Container(
+                              decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                              width: MediaQuery.of(context).size.width * 0.93,
+                              child: InternetUsage(),
+                            ),
+                            _sizedBox,
+                            ClearData(),
+                          ],
+                        )),
+                  ],
+                )
+              ],
+            ),
+          )),
     );
   }
 }

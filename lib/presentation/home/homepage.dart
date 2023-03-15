@@ -40,9 +40,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                     child: Column(children: [
                       ClipRRect(
-                        borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(10),
-                            topRight: Radius.circular(10)),
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
                         child: Image.asset(
                           ImageUtils.getImagePath('assets/images/image.png'),
                           width: 260,
@@ -55,10 +53,7 @@ class _HomePageState extends State<HomePage> {
                       SizedBox(
                         height: 8,
                       ),
-                      Text(
-                          'Switch your connection mode to suite\nyour demand the most.',
-                          textAlign: TextAlign.center,
-                          style: LNStyle.dialogTitleText),
+                      Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
                       SizedBox(
                         height: 16,
                       ),
@@ -83,53 +78,47 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    MainProvider mainProvider = Provider.of<MainProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          elevation: 0,
-          centerTitle: false,
-          title: const Text('Living Network', style: LNStyle.app_bar_style),
-          backgroundColor: LNColor.whiteColor,
-          leading: BackButton(
-            color: LNColor.blackColor,
-            onPressed: () => SystemNavigator.pop(),
+      appBar: AppBar(
+        elevation: 0,
+        centerTitle: false,
+        title: const Text('Living Network', style: LNStyle.app_bar_style),
+        backgroundColor: LNColor.whiteColor,
+        leading: BackButton(
+          color: LNColor.blackColor,
+          onPressed: () => SystemNavigator.pop(),
+        ),
+      ),
+      body: Consumer<MainProvider>(
+        builder: (context, myDataProvider, _) => DefaultTabController(
+          length: 2,
+          child: Scaffold(
+            appBar: PreferredSize(
+              preferredSize: Size.fromHeight(50),
+              child: AppBar(
+                backgroundColor: Colors.white,
+                bottom: TabBar(
+                  indicatorWeight: 4,
+                  indicatorColor: Color(0xFF64CA00),
+                  labelStyle: TextStyle(fontSize: 22),
+                  labelColor: Color(0xFF64CA00),
+                  unselectedLabelColor: Color(0xFF657884),
+                  tabs: [
+                    Tab(text: 'MOBILE'),
+                    Tab(text: 'HOME'),
+                  ],
+                ),
+              ),
+            ),
+            body: TabBarView(
+              children: [
+                TabMobile(),
+                TabHome(),
+              ],
+            ),
           ),
         ),
-        body: FutureBuilder(
-          future: mainProvider.getGame(),
-          builder: (context, snapshot) {
-            if (snapshot.hasData) {
-              return DefaultTabController(
-                  length: 2,
-                  child: Scaffold(
-                    appBar: PreferredSize(
-                      preferredSize: Size.fromHeight(50),
-                      child: AppBar(
-                        backgroundColor: Colors.white,
-                        bottom: TabBar(
-                          indicatorWeight: 4,
-                          indicatorColor: Color(0xFF64CA00),
-                          labelStyle: TextStyle(fontSize: 22),
-                          labelColor: Color(0xFF64CA00),
-                          unselectedLabelColor: Color(0xFF657884),
-                          tabs: [
-                            Tab(text: 'MOBILE'),
-                            Tab(text: 'HOME'),
-                          ],
-                        ),
-                      ),
-                    ),
-                    body: TabBarView(
-                      children: [
-                        TabMobile(),
-                        TabHome(),
-                      ],
-                    ),
-                  ));
-            } else {
-              return Container();
-            }
-          },
-        ));
+      ),
+    );
   }
 }
