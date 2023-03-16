@@ -110,6 +110,7 @@ class _HomePageState extends State<HomePage> {
                               title: "Exit",
                               buttonType: ButtonType.primaryBtn,
                               onPress: () {
+                                // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
                                 SystemNavigator.pop();
                               },
                               borderRadius: 6,
