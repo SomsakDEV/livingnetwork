@@ -6,7 +6,7 @@ import 'dart:ui' as ui;
 
 import 'package:living_network/utility/image_utils.dart';
 
-const LatLng current = LatLng(13.783436694916446, 100.5466938454706);
+const LatLng current = LatLng(13.731946300000061, 100.56913540000005);
 
 class MapWidget extends StatefulWidget {
   const MapWidget({super.key});
@@ -26,11 +26,14 @@ class _MapWidgetState extends State<MapWidget> {
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
         targetWidth: width, allowUpscaling: true, targetHeight: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
+        .buffer
+        .asUint8List();
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
     final googleOffices = await locations.getGoogleOffices();
+
     _markers.clear();
     for (final office in googleOffices.offices) {
       String img = office.image;
