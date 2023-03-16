@@ -104,7 +104,7 @@ class _PerformanceMainState extends State<PerformanceMain> {
                             ),
                             IconButton(
                               icon: Image.asset(
-                                ImageUtils.getImagePath('assets/images/exclamation_green.png'),
+                                ImageUtils.getImagePath('assets/images/exclamation_green2.png'),
                                 height: 13.33,
                                 width: 13.33,
                               ),

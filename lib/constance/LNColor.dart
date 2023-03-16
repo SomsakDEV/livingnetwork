@@ -33,7 +33,7 @@ class LNColor {
   static const greyBlue = Color(0xFF38454C);
   static const greenDark1A = Color(0x1A64CA00);
   static const blackColorA40 = Color(0x66000000);
-  static const textColorTabbar = Color(0xFF657884);
+  static const textColorTabBar = Color(0xFF657884);
   static const verticalDivider = Color(0xFFB0BEC5);
   static const greenColor10 = Color(0xFF9EDE3E);
   static const greenColor20 = Color(0xFF64CA00);
@@ -51,8 +51,10 @@ class LNColor {
   static const neutralsMediumGrey = Color(0xFF9D9D9D);
   static const neutralsDarkGrey = Color(0xFF7B7B7B);
   static const neutralsBoldGrey = Color(0xFF555555);
+  static const neutralsGrey800 = Color(0xFF586A74);
   static const neutralsDarkestGrey = Color(0xFF262626);
   static const neutralsBlack = Color(0xFF000000);
+  static const neutralsBlackSixtyPercent = Color(0x99000000);
 
   // Kelly Green
   static const kellyGreen50 = Color(0xFFEEF8E8);
