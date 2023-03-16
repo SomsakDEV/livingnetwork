@@ -186,7 +186,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       },
                       icon: Image.asset(
                         ImageUtils.getImagePath(
-                            'assets/images/exclamation_green.png'),
+                            'assets/images/exclamation_green2.png'),
                         height: 13.33,
                         width: 13.33,
                       ),
@@ -297,8 +297,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('game'),
-                      isDisable: data.displayScreen!.mode!.isDisableMode ||
-                          data.displayScreen!.mode!.isDisableModeGame,
+                      isDisable: true,
+                      // data.displayScreen!.mode!.isDisableMode ||
+                      //     data.displayScreen!.mode!.isDisableModeGame,
                       expireDate: expireGameMode,
                       mode: 'modeGameTime',
                       setMode: callback,
