@@ -132,7 +132,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
-                          color: LNColor.textColorTabbar),
+                          color: LNColor.textColorTabBar),
                     ),
                   ),
                   Padding(

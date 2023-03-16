@@ -164,7 +164,7 @@ class LNStyle {
 
   static const discountText = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -240,7 +240,7 @@ class LNStyle {
 
   static const caption = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 18,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -251,7 +251,7 @@ class LNStyle {
 
   static const caption_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -262,7 +262,7 @@ class LNStyle {
 
   static const caption2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 22,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -271,7 +271,7 @@ class LNStyle {
 
   static const caption2_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -280,7 +280,7 @@ class LNStyle {
 
   static const caption3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 14,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -442,7 +442,7 @@ class LNStyle {
     fontFamily: 'DB Heavent',
     fontSize: 22,
     fontWeight: FontWeight.w500,
-    color: LNColor.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
   );
@@ -473,5 +473,40 @@ class LNStyle {
     fontSize: 18,
     fontWeight: FontWeight.w500,
     color: LNColor.speedCompare1,
+  );
+
+  static const notificationMyAIS = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    letterSpacing: -0.01,
+  );
+
+  static const notificationTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.neutralsBlack,
+    fontSize: 22,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const notificationSubTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const messageDefault = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.neutralsGrey800,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
   );
 }
