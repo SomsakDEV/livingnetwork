@@ -100,14 +100,16 @@ class _PerformanceMainState extends State<PerformanceMain> {
                           children: [
                             const Text(
                               'Performance',
-                              style: LNStyle.header6_1B,
+                              style: LNStyle.modeWidgetTitle,
                             ),
                             IconButton(
                               icon: Image.asset(
-                                ImageUtils.getImagePath('assets/images/information.png'),
+                                ImageUtils.getImagePath('assets/images/exclamation_green2.png'),
                                 height: 13.33,
                                 width: 13.33,
                               ),
+                              padding: const EdgeInsets.only(left: 5.33),
+                              alignment: Alignment.centerLeft,
                               onPressed: () {
                                 showModalBottomSheet(
                                   elevation: 0,
