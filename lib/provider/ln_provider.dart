@@ -57,7 +57,7 @@ class LnProvider with ChangeNotifier {
 
   Future<void> loadData() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    DisplayScreen? tmp = await repo?.getMockupData('6412c106d0cefc3a4583db11');
+    DisplayScreen? tmp = await repo?.getMockupData('08123456789');
     _displayScreen = tmp ?? _displayScreen;
     print('Mode : ${_displayScreen?.mode?.toJson()}');
     print('perform : ${_displayScreen?.perform?.toJson()}');
