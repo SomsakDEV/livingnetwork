@@ -203,8 +203,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        true
-                            // data.displayScreen!.mode!.isDisableMode || data.displayScreen!.mode!.isDisableModeLive
+                        (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                                (data.displayScreen?.mode?.isDisableModeLive ??
+                                    false)
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_power_bw.png')
                             : ImageUtils.getImagePath(
@@ -219,8 +220,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('live'),
-                      isDisable: true,
-                      // isDisableMode || data.displayScreen!.mode!.isDisableModeLive,
+                      isDisable:
+                          (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                              (data.displayScreen?.mode?.isDisableModeLive ??
+                                  false),
                       expireDate: expireLiveMode,
                       mode: 'modeLiveTime',
                       setMode: callback,
@@ -281,8 +284,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        true
-                            // isDisableMode || data.displayScreen!.mode!.isDisableModeGame
+                        (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                                (data.displayScreen?.mode?.isDisableModeGame ??
+                                    false)
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_game_bw.png')
                             : ImageUtils.getImagePath(
@@ -297,9 +301,10 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('game'),
-                      isDisable: true,
-                      // data.displayScreen!.mode!.isDisableMode ||
-                      //     data.displayScreen!.mode!.isDisableModeGame,
+                      isDisable:
+                          (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                              (data.displayScreen?.mode?.isDisableModeGame ??
+                                  false),
                       expireDate: expireGameMode,
                       mode: 'modeGameTime',
                       setMode: callback,
@@ -367,9 +372,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        true
-                            // isDisableMode || data.displayScreen!.mode!.isDisableModeEco
-                            // widget.display.isDisableModeEco
+                        (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                                (data.displayScreen?.mode?.isDisableModeEco ??
+                                    false)
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -384,8 +389,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('eco'),
-                      isDisable: true,
-                      // data.displayScreen!.mode!.isDisableMode || data.displayScreen!.mode!.isDisableModeEco,
+                      isDisable: (data.displayScreen?.mode?.isDisableMode ??
+                              false) ||
+                          (data.displayScreen?.mode?.isDisableModeEco ?? false),
                       onPress: () {
                         if (!isMode('eco')) {
                           showModalBottomSheet(
