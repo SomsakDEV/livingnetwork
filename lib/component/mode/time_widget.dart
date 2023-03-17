@@ -88,8 +88,8 @@ class _TimeWidgetState extends State<TimeWidget> {
                     begin: FractionalOffset.centerLeft,
                     end: FractionalOffset.centerRight,
                     colors: [
-                      BaseColorsLN.greenColor10,
-                      BaseColorsLN.greenColor20
+                      LNColor.greenColor10,
+                      LNColor.greenColor20
                     ])),
             width: 68,
             height: 24,
@@ -118,7 +118,7 @@ class _TimeWidgetState extends State<TimeWidget> {
         return Container(
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
-                color: BaseColorsLN.neutralsLightGrey),
+                color: LNColor.neutralsLightGrey),
             width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
             child: Row(
@@ -132,7 +132,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                       style: TextStyle(
                           fontWeight: FontWeight.w500,
                           fontSize: 18,
-                          color: BaseColorsLN.textColorTabbar),
+                          color: LNColor.textColorTabBar),
                     ),
                   ),
                   Padding(
@@ -143,7 +143,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                       style: widget.textStyle ??
                           const TextStyle(
                               fontWeight: FontWeight.w500,
-                              color: BaseColorsLN.greyBlue,
+                              color: LNColor.greyBlue,
                               fontSize: 22),
                     ),
                   ),

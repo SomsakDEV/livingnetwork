@@ -25,7 +25,7 @@ class _CardAlertState extends State<CardAlert> {
   Widget build(BuildContext context) {
     double monitorWidth = MediaQuery.of(context).size.width;
     return Card(
-      color: widget.color ?? BaseColorsLN.bgProblem,
+      color: widget.color ?? LNColor.bgProblem,
       shadowColor: Colors.transparent,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -68,12 +68,12 @@ class _CardAlertState extends State<CardAlert> {
                       ? ElevatedButton(
                           onPressed: () {},
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: BaseColorsLN.kellyGreen500,
+                            backgroundColor: LNColor.kellyGreen500,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(8),
                               side: const BorderSide(
                                 width: 1,
-                                color: BaseColorsLN.kellyGreen500,
+                                color: LNColor.kellyGreen500,
                               ),
                             ),
                           ),
@@ -91,7 +91,7 @@ class _CardAlertState extends State<CardAlert> {
                           },
                           style: ButtonStyle(
                             alignment: Alignment.centerRight,
-                            overlayColor: MaterialStateProperty.all(BaseColorsLN.buttonOverlay),
+                            overlayColor: MaterialStateProperty.all(LNColor.buttonOverlay),
                           ),
                           child: Row(
                             children: const [

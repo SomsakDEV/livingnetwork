@@ -7,7 +7,7 @@ class LNStyle {
   static const headProblem = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColorsLN.kellyGreen500,
+    color: LNColor.kellyGreen500,
     fontSize: 26,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -19,7 +19,7 @@ class LNStyle {
   static const head1Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.normal,
@@ -31,7 +31,7 @@ class LNStyle {
   static const head2Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w600,
     fontStyle: FontStyle.normal,
@@ -42,7 +42,7 @@ class LNStyle {
   static const head4Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -53,7 +53,7 @@ class LNStyle {
   static const body1Text = TextStyle(
     fontFamily: 'DB Heavent',
     // fontFamilyFallback: ['NotoSansThaiUI'],
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 14,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -66,7 +66,7 @@ class LNStyle {
 
   static const header1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 62,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -77,7 +77,7 @@ class LNStyle {
 
   static const header2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 56,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -88,7 +88,7 @@ class LNStyle {
 
   static const header3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 40,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -99,7 +99,7 @@ class LNStyle {
 
   static const header4 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 32,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -110,7 +110,7 @@ class LNStyle {
 
   static const header5 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 28,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -121,7 +121,7 @@ class LNStyle {
 
   static const header6 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 24,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -132,7 +132,7 @@ class LNStyle {
 
   static const header6_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -142,7 +142,7 @@ class LNStyle {
   );
   static const header6_1B = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -153,7 +153,7 @@ class LNStyle {
 
   static const header6_2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.primaryColor,
+    color: LNColor.primaryColor,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -164,7 +164,7 @@ class LNStyle {
 
   static const discountText = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -174,7 +174,7 @@ class LNStyle {
 
   static const body1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 24,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -185,7 +185,7 @@ class LNStyle {
 
   static const body2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 20,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -196,7 +196,7 @@ class LNStyle {
 
   static const body2_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 18,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -207,7 +207,7 @@ class LNStyle {
 
   static const body3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 15,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -218,7 +218,7 @@ class LNStyle {
 
   static const body4 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 18,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -229,7 +229,7 @@ class LNStyle {
 
   static const keywords = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.neutralsBlack,
+    color: LNColor.neutralsBlack,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -240,7 +240,7 @@ class LNStyle {
 
   static const caption = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 18,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -251,7 +251,7 @@ class LNStyle {
 
   static const caption_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 12,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -262,7 +262,7 @@ class LNStyle {
 
   static const caption2 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 22,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -271,7 +271,7 @@ class LNStyle {
 
   static const caption2_1 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -280,7 +280,7 @@ class LNStyle {
 
   static const caption3 = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontSize: 14,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -289,7 +289,7 @@ class LNStyle {
 
   static const speedCompare5G = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.primaryColor,
+    color: LNColor.primaryColor,
     fontSize: 18,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -300,7 +300,7 @@ class LNStyle {
 
   static const internetUsageLow = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.lowInternet1,
+    color: LNColor.lowInternet1,
     fontSize: 28,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -309,7 +309,7 @@ class LNStyle {
 
   static const mapTextButton = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.kellyGreen500,
+    color: LNColor.kellyGreen500,
     fontSize: 20,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -318,7 +318,7 @@ class LNStyle {
 
   static const mapButtonDirection = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.whiteColor,
+    color: LNColor.whiteColor,
     fontSize: 20,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -327,7 +327,7 @@ class LNStyle {
 
   static const saleButton = TextStyle(
       fontFamily: 'DB Heavent',
-      color: BaseColorsLN.whiteColor,
+      color: LNColor.whiteColor,
       fontSize: 18,
       fontWeight: FontWeight.w500,
       fontStyle: FontStyle.normal,
@@ -336,7 +336,7 @@ class LNStyle {
 
   static const freeWifiButton = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.whiteColor,
+    color: LNColor.whiteColor,
     fontSize: 18,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -345,7 +345,7 @@ class LNStyle {
 
   static const modeWidgetTitle = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.header6_1,
+    color: LNColor.header6_1,
     fontSize: 26,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -353,13 +353,13 @@ class LNStyle {
   );
 
   static const app_bar_style = TextStyle(
-    color: BaseColorsLN.blackColor,
+    color: LNColor.blackColor,
     fontSize: 24,
     fontStyle: FontStyle.normal,
     fontWeight: FontWeight.w700,
   );
   static const header_map_1 = TextStyle(
-    color: BaseColorsLN.blackColor,
+    color: LNColor.blackColor,
     fontSize: 26,
     fontWeight: FontWeight.w700,
   );
@@ -371,7 +371,7 @@ class LNStyle {
 
   static const uiBottomSheetTextTitle = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.header6_1,
+    color: LNColor.header6_1,
     fontSize: 24,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -380,7 +380,7 @@ class LNStyle {
 
   static const uiBottomSheetTextDesc = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.header6_1,
+    color: LNColor.header6_1,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -389,7 +389,7 @@ class LNStyle {
 
   static const buttonSheetTitle = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.kellyGreen500,
+    color: LNColor.kellyGreen500,
     fontSize: 32,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -400,7 +400,7 @@ class LNStyle {
 
   static const buttonSheetDesc = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.bgToastColor,
+    color: LNColor.bgToastColor,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -411,7 +411,7 @@ class LNStyle {
 
   static const buttonSheetTextButtonClose = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.greenColorClose,
+    color: LNColor.greenColorClose,
     fontSize: 22,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -422,7 +422,7 @@ class LNStyle {
 
   static const timeWidgetNumber = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.whiteColor,
+    color: LNColor.whiteColor,
     fontSize: 14,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -431,7 +431,7 @@ class LNStyle {
 
   static const dialogHeader = TextStyle(
     fontFamily: 'DB Heavent',
-    color: BaseColorsLN.greyBlue,
+    color: LNColor.greyBlue,
     fontSize: 24,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -442,7 +442,7 @@ class LNStyle {
     fontFamily: 'DB Heavent',
     fontSize: 22,
     fontWeight: FontWeight.w500,
-    color: BaseColorsLN.textColorTabbar,
+    color: LNColor.textColorTabBar,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
   );
@@ -451,7 +451,7 @@ class LNStyle {
     fontFamily: 'DB Heavent',
     fontSize: 22,
     fontWeight: FontWeight.w500,
-    color: BaseColorsLN.whiteColor,
+    color: LNColor.whiteColor,
     fontStyle: FontStyle.normal,
   );
 
@@ -472,6 +472,41 @@ class LNStyle {
     fontFamily: 'DB Heavent',
     fontSize: 18,
     fontWeight: FontWeight.w500,
-    color: BaseColorsLN.speedCompare1,
+    color: LNColor.speedCompare1,
+  );
+
+  static const notificationMyAIS = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 12,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    letterSpacing: -0.01,
+  );
+
+  static const notificationTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.neutralsBlack,
+    fontSize: 22,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const notificationSubTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 18,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+  );
+
+  static const messageDefault = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.neutralsGrey800,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
   );
 }

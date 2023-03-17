@@ -36,7 +36,7 @@ class _BottomSheetCardDialogTextModeState extends State<BottomSheetCardDialogTex
               padding: const EdgeInsets.only(top: 16.0),
               child: Container(
                 // decoration: ,
-                color: BaseColorsLN.neutralsWhiteMixGrey,
+                color: LNColor.neutralsWhiteMixGrey,
                 child: ListTile(
                   leading: image[index],
                   title: Text(

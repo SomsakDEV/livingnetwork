@@ -16,11 +16,14 @@ dependencies:
       ref: develop
 
   cupertino_icons: ^1.0.2
-#  google_maps_flutter: ^2.2.4
+  google_maps_flutter: ^2.2.4
   syncfusion_flutter_gauges: ^20.4.52
   shared_preferences: ^2.0.18
   realm: ^1.0.2
   carousel_slider: ^4.2.1
+  solid_bottom_sheet: ^0.1.10
+  provider: ^6.0.5
+  url_launcher: ^6.1.10
 
 dev_dependencies:
   flutter_test:

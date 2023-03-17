@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/component/mode/time_widget.dart';
 
-enum ButtonType { primaryBtn, secondaryBtn }
+enum ButtonType { primaryBtn, secondaryBtn, empty}
 class ButtonMode extends StatefulWidget {
   final Image icon;
   final String title;
@@ -66,15 +66,15 @@ class _ButtonModeState extends State<ButtonMode> {
       isPrimary = !isPrimary;
     }
     final Color? backgroundColor = isPrimary == true && clickEnable == false
-        ? BaseColorsLN.neutralsWhiteMixGrey
+        ? LNColor.neutralsWhiteMixGrey
         : isPrimary == true
             ? widget.isDisable
         ? const Color(0xFFFAFAFA)
-        : const Color(0xFFEEF8E8) ?? BaseColorsLN.kellyGreen100
+        : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100
             : null;
     final Color borderColor = clickEnable == false
-        ? BaseColorsLN.neutralsMediumGrey
-        : widget.backgroundColor ?? BaseColorsLN.kellyGreen100;
+        ? LNColor.neutralsMediumGrey
+        : widget.backgroundColor ?? LNColor.kellyGreen100;
     return InkWell(
       onTap: !clickEnable ? () {} : () => widget.onPress!(),
       child: Card(
@@ -85,7 +85,7 @@ class _ButtonModeState extends State<ButtonMode> {
                       ? const Color(0xFFFAFAFA)
                       : widget.isMode
                       ? const Color(0xFF64CA00)
-                      : const Color(0xFFEEF8E8) ?? BaseColorsLN.kellyGreen100,
+                      : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100,
                   width: 2),
               borderRadius: BorderRadius.circular(10.0)),
           color: backgroundColor,
@@ -126,7 +126,7 @@ class _ButtonModeState extends State<ButtonMode> {
                             color: widget.isDisable
                                 ? const Color(0xFF7B8E98)
                                 : const Color(0xFF38454C),
-                            fontSize: widget.fontSize ?? 18,
+                            fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             leadingDistribution: TextLeadingDistribution.even,
@@ -144,7 +144,7 @@ class _ButtonModeState extends State<ButtonMode> {
                             color: widget.isDisable
                                 ? const Color(0xFFB0BEC5)
                                 : const Color(0xFF9EDE3E),
-                            fontSize: widget.fontSize ?? 18,
+                            fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
                             leadingDistribution: TextLeadingDistribution.even,
