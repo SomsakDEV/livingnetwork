@@ -52,13 +52,12 @@ class _TabMobileState extends State<TabMobile> {
                       width: w,
                     ),
                   ),
+                  Container(
+                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                    width: w * 0.93,
+                    child: PerformanceMain(),
+                  ),
                 ],
-              ),
-              _sizedBox,
-              Container(
-                decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                width: w * 0.93,
-                child: PerformanceMain(),
               ),
               _sizedBox,
               // Container(
