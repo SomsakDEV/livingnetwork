@@ -9,21 +9,34 @@ class LnProvider with ChangeNotifier {
   DisplayScreen? _displayScreen;
   Perform? _perform;
   Mode5G? _mode;
-  List<Location>? _locations;
+  LocationWifi? _locationWifi;
+
+  LocationWifi? get locationWifi => _locationWifi;
+  LocationShop? _locationShop;
+
+  LocationShop? get locationShop => _locationShop;
 
   bool get verify => _verify;
+
   DisplayScreen? get displayScreen => _displayScreen;
+
   Mode5G? get mode => _mode;
+
   Perform? get perform => _perform;
-  List<Location>? get locations => _locations;
 
   Future<bool> prepareData() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _displayScreen = await repo?.getMockupData('6412c106d0cefc3a4583db11');
-    if (_verify = (_displayScreen != null)) {
-      _perform = _displayScreen?.perform;
-      _mode = _displayScreen?.mode;
-      _locations = _displayScreen?.location;
+    try {
+      repo?.getCleanCache();
+      _displayScreen = await repo?.getMockupData('08123456789');
+      if (_verify = (_displayScreen != null)) {
+        _perform = _displayScreen?.perform;
+        _mode = _displayScreen?.mode;
+        _locationWifi = _displayScreen?.locationWifi;
+        _locationShop = _displayScreen?.locationShop;
+      }
+    } catch (e, st) {
+      print('ERROR : $e  : $st');
     }
     print('_verify Data : $_verify');
     notifyListeners();
@@ -38,13 +51,7 @@ class LnProvider with ChangeNotifier {
 
   Future<void> loadMode5G() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _locations = await repo?.getLocation();
-    notifyListeners();
-  }
-
-  Future<void> loadLocation() async {
-    repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _locations = await repo?.getLocation();
+    // _locations = await repo?.getLocation();
     notifyListeners();
   }
 
@@ -54,11 +61,8 @@ class LnProvider with ChangeNotifier {
     _displayScreen = tmp ?? _displayScreen;
     print('Mode : ${_displayScreen?.mode?.toJson()}');
     print('perform : ${_displayScreen?.perform?.toJson()}');
-    _displayScreen?.location?.forEach((value) {
-      print('location : ${value.toJson()}');
-    });
+    print('perform : ${_displayScreen?.locationWifi?.toJson()}');
+    print('perform : ${_displayScreen?.locationShop?.toJson()}');
     notifyListeners();
   }
-
-
 }
