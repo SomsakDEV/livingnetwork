@@ -45,7 +45,7 @@ class LnProvider with ChangeNotifier {
 
   Future<void> loadPerformance() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _perform = await repo?.getPerformance();
+    _perform = await repo?.getPerformance('08123456789');
     notifyListeners();
   }
 
@@ -57,8 +57,18 @@ class LnProvider with ChangeNotifier {
 
   Future<void> loadData() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    DisplayScreen? tmp = await repo?.getMockupData('6412c106d0cefc3a4583db11');
-    _displayScreen = tmp ?? _displayScreen;
+    try {
+      repo?.getCleanCache();
+      _displayScreen = await repo?.getMockupData('08123456789');
+      if (_verify = (_displayScreen != null)) {
+        _perform = _displayScreen?.perform;
+        _mode = _displayScreen?.mode;
+        _locationWifi = _displayScreen?.locationWifi;
+        _locationShop = _displayScreen?.locationShop;
+      }
+    } catch (e, st) {
+      print('ERROR : $e  : $st');
+    }
     print('Mode : ${_displayScreen?.mode?.toJson()}');
     print('perform : ${_displayScreen?.perform?.toJson()}');
     print('perform : ${_displayScreen?.locationWifi?.toJson()}');

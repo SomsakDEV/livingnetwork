@@ -85,49 +85,6 @@ class _PerformanceMainState extends State<PerformanceMain> {
     }
   }
 
-  // List<PerformanceModel> contentList = [
-  //   PerformanceModel(
-  //     text: const Text(
-  //       'Browsing/Social',
-  //       style: LNStyle.header6_1B,
-  //     ),
-  //     iconImage: ImageUtils.getImagePath('assets/images/performance_icon_1.png'),
-  //     qualityImage: ImageUtils.getImagePath('assets/images/signal_excellent.png'),
-  //   ),
-  //   PerformanceModel(
-  //     text: const Text(
-  //       'Live',
-  //       style: LNStyle.header6_1B,
-  //     ),
-  //     iconImage: ImageUtils.getImagePath('assets/images/performance_icon_2.png'),
-  //     qualityImage: ImageUtils.getImagePath('assets/images/signal_excellent.png'),
-  //   ),
-  //   PerformanceModel(
-  //     text: const Text(
-  //       'Video streaming',
-  //       style: LNStyle.header6_1B,
-  //     ),
-  //     iconImage: ImageUtils.getImagePath('assets/images/performance_icon_3.png'),
-  //     qualityImage: ImageUtils.getImagePath('assets/images/signal_excellent.png'),
-  //   ),
-  //   PerformanceModel(
-  //     text: const Text(
-  //       'Music streaming',
-  //       style: LNStyle.header6_1B,
-  //     ),
-  //     iconImage: ImageUtils.getImagePath('assets/images/performance_icon_4.png'),
-  //     qualityImage: ImageUtils.getImagePath('assets/images/signal_good.png'),
-  //   ),
-  //   PerformanceModel(
-  //     text: const Text(
-  //       'Game',
-  //       style: LNStyle.header6_1B,
-  //     ),
-  //     iconImage: ImageUtils.getImagePath('assets/images/performance_icon_5.png'),
-  //     qualityImage: ImageUtils.getImagePath('assets/images/signal_fair.png'),
-  //   ),
-  // ];
-
   @override
   Widget build(BuildContext context) {
     return Consumer<LnProvider>(
