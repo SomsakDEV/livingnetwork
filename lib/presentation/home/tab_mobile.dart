@@ -8,7 +8,6 @@ import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/component/performance_widget/p_main.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network/utility/clearData.dart';
 import 'package:provider/provider.dart';
 
 class TabMobile extends StatefulWidget {
@@ -102,7 +101,6 @@ class _TabMobileState extends State<TabMobile> {
                 child: InternetUsage(),
               ),
               _sizedBox,
-              ClearData(),
             ],
           ),
         ),
