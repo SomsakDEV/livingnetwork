@@ -1,7 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
-import 'package:living_network/component/cell_tower/cell_tower_widget.dart';
 import 'package:living_network/component/internet/usage.dart';
 import 'package:living_network/component/map/map_widget.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
@@ -12,7 +11,6 @@ import 'package:living_network/utility/clearData.dart';
 import 'package:provider/provider.dart';
 
 class TabMobile extends StatefulWidget {
-
   TabMobile({
     super.key,
   });
@@ -40,20 +38,19 @@ class _TabMobileState extends State<TabMobile> {
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
+                  Container(
+                    height: h * 0.35,
+                    width: w,
+                    child: MapWidget(),
+                  ),
                   InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, '/map');
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: h * 0.35,
                       width: w,
-                      child: MapWidget(),
                     ),
-                  ),
-                  Container(
-                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: w * 0.93,
-                    child: CellTowerWidget(),
                   ),
                 ],
               ),
@@ -103,10 +100,9 @@ class _TabMobileState extends State<TabMobile> {
               ),
               _sizedBox,
               ClearData(),
-            ],
+              ],
+            ),
           ),
-        ),
-      ),
-    );
+    ),);
   }
 }
