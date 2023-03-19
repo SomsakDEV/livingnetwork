@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:living_network/model/map/locations.dart' as locations;
+import 'package:living_network/provider/ln_provider.dart';
 import 'dart:ui' as ui;
 
 import 'package:living_network/utility/image_utils.dart';
+import 'package:provider/provider.dart';
 
 const LatLng current = LatLng(13.731946300000061, 100.56913540000005);
 
@@ -20,7 +22,7 @@ class _MapWidgetState extends State<MapWidget> {
   final Map<MarkerId, Marker> _markers = {};
   // LatLng? _markerPosition;
   MarkerId? selectedMarker;
-
+  var appstate;
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(ImageUtils.getImagePath(path));
     ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
@@ -32,11 +34,14 @@ class _MapWidgetState extends State<MapWidget> {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    final googleOffices = await locations.getGoogleOffices();
+    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    print(appstate.locationShop?.features[0].properties.lmLat);
+
+    // final googleOffices = await locations.getGoogleOffices();
 
     _markers.clear();
-    for (final office in googleOffices.offices) {
-      String img = office.image;
+    for (final office in appstate.locationShop!.features) {
+      String img = 'assets/images/ais_shop.png';
       int size = 200;
       if ('assets/images/cellular_other.png' == img) {
         size = 100;
@@ -44,26 +49,34 @@ class _MapWidgetState extends State<MapWidget> {
         size = 100;
       }
       final Uint8List markerIcon = await getBytesFromAsset(img, size);
-      final MarkerId markerId = MarkerId(office.id);
+      final MarkerId markerId =  MarkerId('${office.properties.ccsmLocationCode}');
       final marker = Marker(
         markerId: markerId,
-        position: LatLng(office.lat, office.lng),
+        position: LatLng(office.properties.lmLat!.toDouble(),
+            office.properties.lmLong!.toDouble()),
         infoWindow: InfoWindow(
-          title: office.id,
+          title: '${office.properties.ccsmLocationCode}',
           snippet: 'add this $size',
         ),
         icon: BitmapDescriptor.fromBytes(markerIcon),
-        // icon: BitmapDescriptor.defaultMarker,
-        // onTap: () => _onMarkerTapped(markerId),
-      );
+        // icon: BitmapDescriptor.defaultMarker,        // onTap: () => _onMarkerTapped(markerId),      
+        );
       setState(() {
         _markers[markerId] = marker;
       });
     }
   }
+  
+  
 
   @override
   Widget build(BuildContext context) {
+    appstate = context.watch<LnProvider>();
+    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    // print(context.watch<LnProvider>().locationShop?.toJson());
+    // print(
+    //     context.watch<LnProvider>().locationShop?.features[0].properties.ccsmLocationCode);
+    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     return GoogleMap(
       initialCameraPosition: const CameraPosition(
         target: current,
