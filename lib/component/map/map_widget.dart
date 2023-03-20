@@ -34,8 +34,8 @@ class _MapWidgetState extends State<MapWidget> {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    print(appstate.locationShop?.features[0].properties.lmLat);
+    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+    // print(appstate.locationShop?.features[0].properties.lmLat);
 
     // final googleOffices = await locations.getGoogleOffices();
 

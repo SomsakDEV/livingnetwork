@@ -3,6 +3,9 @@ import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:living_network/model/map/locations.dart' as locations;
 import 'package:living_network/model/map/signal_nearby.dart' as signal_nearby;
+import 'package:living_network/provider/ln_provider.dart';
+import 'package:living_network_repository/domain/entities/location_shop.dart';
+import 'package:provider/provider.dart';
 
 import '../../model/map/signal_nearby.dart';
 
@@ -19,34 +22,60 @@ class ListPlaceDetail extends StatefulWidget {
 
 class _ListPlaceDetailState extends State<ListPlaceDetail> {
   double testval = 0;
+  var appstate;
   late AssetImage shop_img =
       AssetImage(ImageUtils.getImagePath('assets/images/ais_shop.png'));
   late AssetImage wifi_img =
       AssetImage(ImageUtils.getImagePath('assets/images/ais_wifi.png'));
-  Future<List<SignalNearBy>> _getItems(bool a, bool b) async {
-    
-    List<SignalNearBy> signal_list = [];
+
+  Future<List<Feature>> _getItems(bool a, bool b) async {
+    List<Feature> signal_list = [];
+
     if (a && b) {
-      signal_list = await signal_nearby.getSignalNearBy();
+      signal_list = appstate.locationShop!.features;
+      signal_list.addAll(appstate.locationWifi!.features);
     } else {
       if (a) {
-        signal_list = await signal_nearby.getSignalNearByShop();
+        signal_list = appstate.locationShop!.features;
+
+        // for (final test in appstate.locationShop!.features) {
+        //   print("?????????????????????");
+
+        //   print(test.properties.lmProvNamt);
+        //   print("?????????????????????");
+
+        //   // signal_list = await signal_nearby.getSignalNearByShop();
+        // }
       } else if (b) {
-        signal_list = await signal_nearby.getSignalNearByWifi();
+        signal_list = appstate.locationWifi!.features;
+
+        // signal_list = await signal_nearby.getSignalNearByWifi();
       } else {
         signal_list.clear();
       }
+    }
+    // for (var item in signal_list) {
+    //   print(item);
+    //   // Do something with index and item
+    // }
+    for (var item in signal_list) {
+      print(item.properties.ccsmLocationCode);
     }
     return signal_list;
   }
 
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<SignalNearBy>>(
+    appstate = context.watch<LnProvider>();
+
+    return FutureBuilder<List<Feature>>(
       future: _getItems(widget.select1, widget.select2),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<SignalNearBy> items = snapshot.data!;
+          List<Feature> items = snapshot.data!;
+          print("*************************************");
+          print(items[0].properties);
+          print("*************************************");
 
           if (items.isEmpty) {
             return Container();
@@ -111,6 +140,14 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/map/direction');
+
+                        // print(
+                        //     ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        // print(items[index].id);
+                        // print(context);
+                        // print(
+                        //     ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
+                        // String itemId = items[index].id;
                       },
                     ),
                   );
