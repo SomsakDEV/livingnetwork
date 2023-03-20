@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/constance/constants.dart';
 import 'package:living_network/utility/image_utils.dart';
 
 class ModeWarning extends StatefulWidget {
-  const ModeWarning({Key? key}) : super(key: key);
+  final int warningNumber;
+
+  const ModeWarning({
+    Key? key,
+    required this.warningNumber,
+  }) : super(key: key);
 
   @override
   State<ModeWarning> createState() => _ModeWarningState();
@@ -44,7 +48,7 @@ String conditionShowMessage(int num) {
 class _ModeWarningState extends State<ModeWarning> {
   @override
   Widget build(BuildContext context) {
-    return   Container(
+    return Container(
       width: MediaQuery.of(context).size.width * 0.85,
       height: 52,
       decoration: const BoxDecoration(
@@ -62,7 +66,7 @@ class _ModeWarningState extends State<ModeWarning> {
                 height: 20,
               ),
               title: Text(
-                conditionShowMessage(5),
+                conditionShowMessage(widget.warningNumber),
                 style: LNStyle.warningMessage,
               ),
             ),
