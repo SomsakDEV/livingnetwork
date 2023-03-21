@@ -24,6 +24,8 @@ class LnProvider with ChangeNotifier {
 
   Perform? get perform => _perform;
 
+  final String token = "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IjlVeTRLUjlzOEoifQ.eyJpc3MiOiJzcmYuYWlzLmNvLnRoL2FkbWQiLCJzdWIiOiJ0b2tlbl9jbGllbnRfY3JlZGVudGlhbHMiLCJhdWQiOiJTVzhMaUdGd3dqQmJ0eDd0d2c3Z2dhZHVxL2VlZzhFM2c3dmtrVlNCVis5aVpxZkRsbERqMnc9PSIsImV4cCI6MTk4NzI3MTE2MywiaWF0IjoxNjcxNzAxNjQzLCJqdGkiOiI0RjhBaUM1S1VzT3gyeDQ3UzhlOGJKIiwiY2xpZW50IjoiT1RBd01EQXdNREF3TURBd05qWXpMRzE1WVdsemZFSmhZMnRsYm1SOE1TNHdMakE9Iiwic3NpZCI6IjNxNGlmMWVaMTF4NkdDSzRPWGQ4VUIifQ.d64EmMj1NQEE1yciOZwVrdS7gAeD6A-gQb3SOHkAuap2vgcBTi07G_WvX5Q2gVlGlttq-j05S1Qp6LNKl3vo-DqKXhc5PpmYK6pMxDiur_97OBB2ePAdcJJRpMNQUBmLOXIFPKxKN4WP6mRTVCkayqso1G_v0cILtIpPokvFHOc";
+
   Future<bool> prepareData() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
     try {
@@ -43,15 +45,24 @@ class LnProvider with ChangeNotifier {
     return _verify;
   }
 
-  Future<void> loadPerformance() async {
+  Future<bool> internalPrepare() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _perform = await repo?.getPerformance('08123456789');
+    _mode = await repo?.getMode(token);
+    print('Mode : ${_mode?.toJson()}');
     notifyListeners();
+    return _verify = (_mode != null);
   }
 
   Future<void> loadMode5G() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    // _locations = await repo?.getLocation();
+    _mode =  await repo?.getMode(token);
+    print('Mode reload  : ${_displayScreen?.mode?.toJson()}');
+    notifyListeners();
+  }
+
+  Future<void> loadPerformance() async {
+    repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
+    _perform = await repo?.getPerformance('08123456789');
     notifyListeners();
   }
 
