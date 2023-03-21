@@ -40,12 +40,12 @@ class LnProvider with ChangeNotifier {
     }
     print('_verify Data : $_verify');
     notifyListeners();
-    return _verify;
+    return true;
   }
 
   Future<void> loadPerformance() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _perform = await repo?.getPerformance();
+    _perform = await repo?.getPerformance('08123456789');
     notifyListeners();
   }
 
