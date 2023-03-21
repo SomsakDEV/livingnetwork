@@ -20,7 +20,6 @@ class MapWidget extends StatefulWidget {
 class _MapWidgetState extends State<MapWidget> {
   late GoogleMapController mapController;
   final Map<MarkerId, Marker> _markers = {};
-  // LatLng? _markerPosition;
   MarkerId? selectedMarker;
   var appstate;
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
@@ -34,11 +33,6 @@ class _MapWidgetState extends State<MapWidget> {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    // print(appstate.locationShop?.features[0].properties.lmLat);
-
-    // final googleOffices = await locations.getGoogleOffices();
-
     _markers.clear();
     for (final office in appstate.locationShop!.features) {
       String img = 'assets/images/ais_shop.png';
@@ -58,8 +52,7 @@ class _MapWidgetState extends State<MapWidget> {
           title: '${office.properties.ccsmLocationCode}',
           snippet: 'add this $size',
         ),
-        icon: BitmapDescriptor.fromBytes(markerIcon),
-        // icon: BitmapDescriptor.defaultMarker,        // onTap: () => _onMarkerTapped(markerId),      
+        icon: BitmapDescriptor.fromBytes(markerIcon),  
         );
       setState(() {
         _markers[markerId] = marker;
@@ -72,11 +65,6 @@ class _MapWidgetState extends State<MapWidget> {
   @override
   Widget build(BuildContext context) {
     appstate = context.watch<LnProvider>();
-    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    // print(context.watch<LnProvider>().locationShop?.toJson());
-    // print(
-    //     context.watch<LnProvider>().locationShop?.features[0].properties.ccsmLocationCode);
-    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
     return GoogleMap(
       initialCameraPosition: const CameraPosition(
         target: current,

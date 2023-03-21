@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/utility/image_utils.dart';
-import 'package:living_network/model/map/locations.dart' as locations;
-import 'package:living_network/model/map/signal_nearby.dart' as signal_nearby;
+import 'package:living_network/model/map/location_nearby.dart';
 import 'package:living_network/provider/ln_provider.dart';
+import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/domain/entities/location_shop.dart';
+import 'package:living_network_repository/domain/entities/location_wifi.dart';
 import 'package:provider/provider.dart';
 
-import '../../model/map/signal_nearby.dart';
+
 
 class ListPlaceDetail extends StatefulWidget {
   final bool select1, select2;
@@ -22,61 +23,69 @@ class ListPlaceDetail extends StatefulWidget {
 
 class _ListPlaceDetailState extends State<ListPlaceDetail> {
   double testval = 0;
-  var appstate;
   late AssetImage shop_img =
       AssetImage(ImageUtils.getImagePath('assets/images/ais_shop.png'));
   late AssetImage wifi_img =
       AssetImage(ImageUtils.getImagePath('assets/images/ais_wifi.png'));
 
-  Future<List<Feature>> _getItems(bool a, bool b) async {
-    List<Feature> signal_list = [];
+  Future<List<LocationNearBy>> _getItems(bool a, bool b) async {
+    List<LocationNearBy> signal_list = [];
+    DisplayScreen? appstate = Provider.of<LnProvider>(context, listen: false).displayScreen;
 
     if (a && b) {
-      signal_list = appstate.locationShop!.features;
-      signal_list.addAll(appstate.locationWifi!.features);
+      for (Feature data in appstate!.locationShop!.features) {
+        signal_list.add(LocationNearBy(
+            id: "${data.properties.ccsmLocationCode}",
+            name: "${data.properties.ccsmPartnername}",
+            imagetype: "shop",
+            lat: data.properties.lmLat ?? 0.0,
+            lng: data.properties.lmLong ?? 0.0,
+            dist: 100));
+      }
+      for (FeatureShop data in appstate.locationWifi!.features) {
+        signal_list.add(LocationNearBy(
+            id: "${data.properties.slmServiceAreaCode}",
+            name: "${data.properties.lmAmpNamt}",
+            imagetype: "wifi",
+            lat: data.properties.lmLat ?? 0.0,
+            lng: data.properties.lmLong ?? 0.0,
+            dist: 100));
+      }
     } else {
       if (a) {
-        signal_list = appstate.locationShop!.features;
-
-        // for (final test in appstate.locationShop!.features) {
-        //   print("?????????????????????");
-
-        //   print(test.properties.lmProvNamt);
-        //   print("?????????????????????");
-
-        //   // signal_list = await signal_nearby.getSignalNearByShop();
-        // }
+        for (Feature data in appstate!.locationShop!.features) {
+          signal_list.add(LocationNearBy(
+              id: "${data.properties.ccsmLocationCode}",
+              name: "${data.properties.ccsmPartnername}",
+              imagetype: "shop",
+              lat: data.properties.lmLat ?? 0.0,
+              lng: data.properties.lmLong ?? 0.0,
+              dist: 100));
+        }
       } else if (b) {
-        signal_list = appstate.locationWifi!.features;
-
-        // signal_list = await signal_nearby.getSignalNearByWifi();
+        for (FeatureShop data in appstate!.locationWifi!.features) {
+          signal_list.add(LocationNearBy(
+              id: "${data.properties.slmServiceAreaCode}",
+              name: "${data.properties.lmAmpNamt}",
+              imagetype: "wifi",
+              lat: data.properties.lmLat ?? 0.0,
+              lng: data.properties.lmLong ?? 0.0,
+              dist: 100));
+        }
       } else {
         signal_list.clear();
       }
-    }
-    // for (var item in signal_list) {
-    //   print(item);
-    //   // Do something with index and item
-    // }
-    for (var item in signal_list) {
-      print(item.properties.ccsmLocationCode);
     }
     return signal_list;
   }
 
   @override
   Widget build(BuildContext context) {
-    appstate = context.watch<LnProvider>();
-
-    return FutureBuilder<List<Feature>>(
+    return FutureBuilder<List<LocationNearBy>>(
       future: _getItems(widget.select1, widget.select2),
       builder: (context, snapshot) {
         if (snapshot.hasData) {
-          List<Feature> items = snapshot.data!;
-          print("*************************************");
-          print(items[0].properties);
-          print("*************************************");
-
+          List<LocationNearBy> items = snapshot.data!;
           if (items.isEmpty) {
             return Container();
           } else {
@@ -85,7 +94,7 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
                 shrinkWrap: true,
                 itemCount: items.length,
                 prototypeItem: ListTile(
-                  title: Text(items.first.id),
+                  title: Text(items.first.name),
                 ),
                 itemBuilder: (context, index) {
                   return ListTile(
@@ -113,7 +122,7 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
                       ),
                     ),
                     title: Text(
-                      items[index].id,
+                      items[index].name,
                       style: const TextStyle(
                         color: Color(0xFF555555),
                         fontSize: 18,
@@ -140,14 +149,6 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
                       ),
                       onPressed: () {
                         Navigator.pushNamed(context, '/map/direction');
-
-                        // print(
-                        //     ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        // print(items[index].id);
-                        // print(context);
-                        // print(
-                        //     ">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-                        // String itemId = items[index].id;
                       },
                     ),
                   );
