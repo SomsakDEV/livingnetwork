@@ -45,7 +45,7 @@ class LnProvider with ChangeNotifier {
 
   Future<void> loadPerformance() async {
     repo = repo ?? GetDataCatalogUseCase(RepositoriesImpl());
-    _perform = await repo?.getPerformance('08123456789');
+    _perform = await repo?.getPerformance("08123456789");
     notifyListeners();
   }
 

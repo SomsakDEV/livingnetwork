@@ -1,11 +1,5 @@
-// To parse this JSON data, do
-//
-//     final location = locationFromJson(jsonString);
-
 import 'dart:convert';
 import 'package:flutter/services.dart' show rootBundle;
-import 'package:living_network/model/map/locations_test_shop.dart';
-import 'package:living_network/model/map/locations_test_wifi.dart';
 
 PlaceLocation locationFromJson(String str) =>
     PlaceLocation.fromJson(json.decode(str));
@@ -17,11 +11,11 @@ class PlaceLocation {
     required this.signal_nearby,
   });
 
-  List<SignalNearBy> signal_nearby;
+  List<LocationNearBy> signal_nearby;
 
   factory PlaceLocation.fromJson(Map<String, dynamic> json) => PlaceLocation(
-        signal_nearby: List<SignalNearBy>.from(
-            json["signal_nearby"].map((x) => SignalNearBy.fromJson(x))),
+        signal_nearby: List<LocationNearBy>.from(
+            json["signal_nearby"].map((x) => LocationNearBy.fromJson(x))),
       );
 
   Map<String, dynamic> toJson() => {
@@ -30,9 +24,10 @@ class PlaceLocation {
       };
 }
 
-class SignalNearBy {
-  SignalNearBy({
+class LocationNearBy {
+  LocationNearBy({
     required this.id,
+    required this.name,
     required this.imagetype,
     required this.lat,
     required this.lng,
@@ -40,13 +35,15 @@ class SignalNearBy {
   });
 
   String id;
+  String name;
   String imagetype;
   double lat;
   double lng;
   double dist;
 
-  factory SignalNearBy.fromJson(Map<String, dynamic> json) => SignalNearBy(
+  factory LocationNearBy.fromJson(Map<String, dynamic> json) => LocationNearBy(
         id: json["id"],
+        name: json["name"],
         imagetype: json["imagetype"],
         lat: json["lat"]?.toDouble(),
         lng: json["lng"]?.toDouble(),
@@ -55,6 +52,7 @@ class SignalNearBy {
 
   Map<String, dynamic> toJson() => {
         "id": id,
+        "name": name,
         "imagetype": imagetype,
         "lat": lat,
         "lng": lng,
@@ -62,24 +60,23 @@ class SignalNearBy {
       };
 }
 
-Future<List<SignalNearBy>> getSignalNearBy() async {
+Future<List<LocationNearBy>> getSignalNearBy() async {
   PlaceLocation lonearby = locationFromJson(
       '{"signal_nearby":[{"id":"ais building1","imagetype":"shop","lat":13.783889514456709,"lng":100.5471371883403,"dist":100},{"id":"bangmot","imagetype":"wifi","lat":13.783889514456709,"lng":100.5471371883403,"dist":100}]}');
 
   return lonearby.signal_nearby;
 }
 
-Future<List<SignalNearBy>> getSignalNearByShop() async {
+Future<List<LocationNearBy>> getSignalNearByShop() async {
   PlaceLocation lonearby = locationFromJson(
       '{"signal_nearby":[{"id":"ais building1","imagetype":"shop","lat":13.783889514456709,"lng":100.5471371883403,"dist":100}]}');
 
   return lonearby.signal_nearby;
 }
 
-Future<List<SignalNearBy>> getSignalNearByWifi() async {
+Future<List<LocationNearBy>> getSignalNearByWifi() async {
   PlaceLocation lonearby = locationFromJson(
       '{"signal_nearby":[{"id":"bangmot","imagetype":"wifi","lat":13.783889514456709,"lng":100.5471371883403,"dist":100}]}');
 
   return lonearby.signal_nearby;
 }
-
