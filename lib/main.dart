@@ -1,12 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/presentation/home/homepage.dart';
-import 'package:living_network/presentation/map/map_direction.dart';
-import 'package:living_network/presentation/map/map_screen.dart';
+import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network_repository/data/repositories/repositories_impl.dart';
-import 'package:living_network_repository/domain/entities/display_mode_widget.dart';
-import 'package:living_network_repository/domain/usecase/get_data_usecase.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -66,15 +62,17 @@ class _LivingNetworkState extends State<LivingNetwork> {
       providers: [
         // ChangeNotifierProvider(create: (context) => MainProvider(repo: repo, tmp: repo?.getMockupData())),
         ChangeNotifierProvider(create: (context) => LnProvider()),
+        ChangeNotifierProvider(create: (context) => InternalProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'DB Heavent'),
-        initialRoute: '/',
+        initialRoute: '/internal_test',
         routes: {
-          '/': (context) => HomePage(),
-          '/map': (context) => MapScreen(),
-          '/map/direction': (context) => MapDirection(),
+          // '/': (context) => HomePage(),
+          // '/map': (context) => MapScreen(),
+          // '/map/direction': (context) => MapDirection(),
+          '/internal_test': (context) => HomePage(),
         },
       ),
     );

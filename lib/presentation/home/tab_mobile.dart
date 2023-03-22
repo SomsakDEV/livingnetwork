@@ -8,11 +8,9 @@ import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/component/performance_widget/p_main.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network/utility/clearData.dart';
 import 'package:provider/provider.dart';
 
 class TabMobile extends StatefulWidget {
-
   TabMobile({
     super.key,
   });
@@ -40,14 +38,18 @@ class _TabMobileState extends State<TabMobile> {
               Stack(
                 alignment: Alignment.bottomCenter,
                 children: <Widget>[
+                  Container(
+                    height: h * 0.35,
+                    width: w,
+                    child: MapWidget(),
+                  ),
                   InkWell(
                     onTap: () {
                       Navigator.pushNamed(context, '/map');
                     },
-                    child: Container(
+                    child: SizedBox(
                       height: h * 0.35,
                       width: w,
-                      child: MapWidget(),
                     ),
                   ),
                   Container(
@@ -102,7 +104,6 @@ class _TabMobileState extends State<TabMobile> {
                 child: InternetUsage(),
               ),
               _sizedBox,
-              ClearData(),
             ],
           ),
         ),

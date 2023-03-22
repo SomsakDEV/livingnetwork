@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
+import 'package:living_network/component/mode/button_mode.dart' as button;
+import 'package:living_network/component/notification/mode_5G_default.dart';
+import 'package:living_network/component/notification/mode_warning.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:living_network/component/mode/button_mode.dart' as button;
 
 bool timeout = false;
 
@@ -28,124 +30,125 @@ class _ModeWidgetState extends State<ModeWidget> {
   String? mode;
   DateTime? expireLiveMode;
   DateTime? expireGameMode;
-
-  String network = '5G';
-  String currentType = '5G';
+  //
+  // String network = '5G';
+  // String currentType = '5G';
 
   bool isMode(String value) {
     return value == mode;
   }
 
+  late bool error = true;
   //For disable Mode
-  late bool isDisableMode = false;
-  late bool isDisableModeEco = false;
-  late bool isDisableModeLive = false;
-  late bool isDisableModeGame = false;
-  late bool isLive = false;
-  late bool isGame = false;
+  // late bool isDisableMode = true;
+  // late bool isDisableModeEco = false;
+  // late bool isDisableModeLive = false;
+  // late bool isDisableModeGame = false;
+  // late bool isLive = false;
+  // late bool isGame = false;
 
   String warningMessage =
       'You are currently using 4G. Because it is outside the 5G service area.';
 
   @override
   void initState() {
-    setMode(null);
+    // setMode(null);
     super.initState();
   }
 
-  callback() {
-    setState(() {
-      setMode('max');
-    });
-  }
+  // callback() {
+  //   setState(() {
+  //     setMode('max');
+  //   });
+  // }
 
-  setMode(String? setMode) async {
-    final SharedPreferences mode1 = await _mode;
-    setState(() {
-      if (network == '5G' && currentType == '5G') {
-        int ecoMode = mode1.getInt('ecoMode') ?? 0;
-        if (setMode != null) {
-          if (mode1.getString('mode') == 'live' && setMode != 'live') {
-            mode1.setString('modeLiveTime', 'expire');
-            expireLiveMode = null;
-            isDisableModeLive = true;
-            isLive = false;
-          } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
-            mode1.setString('modeGameTime', 'expire');
-            expireGameMode = null;
-            isDisableModeGame = true;
-            isGame = false;
-          }
-          if (setMode == 'eco') {
-            mode1.setInt('ecoMode', ++ecoMode);
-          } else if (mode1.getString('mode') == 'eco') {
-            if (ecoMode >= 5) {
-              isDisableModeEco = true;
-            }
-          }
-          mode1.setString('mode', setMode);
-          mode = setMode;
-        } else {
-          if (mode1.getString('mode') != null) {
-            mode = mode1.getString('mode')!;
-          } else {
-            mode1.setString('mode', 'max');
-            mode = 'max';
-          }
-          if (mode1.getString('mode') == 'live') {
-            String time = mode1.getString('modeLiveTime') ?? '';
-            DateTime dateLive = DateTime.parse(time);
-            DateTime dateNow = DateTime.now();
-            if (dateLive.difference(dateNow).inSeconds < 0) {
-              print('test');
-              mode1.setString('modeLiveTime', 'expire');
-              mode1.setString('mode', 'max');
-              mode = 'max';
-              isDisableModeLive = true;
-            } else {
-              expireLiveMode = DateTime.parse(time);
-              isLive = true;
-            }
-          } else if (mode1.getString('mode') == 'game') {
-            String time = mode1.getString('modeGameTime') ?? '';
-            DateTime dateGame = DateTime.parse(time);
-            DateTime dateNow = DateTime.now();
-            if (dateGame.difference(dateNow).inSeconds < 0) {
-              mode1.setString('modeGameTime', 'expire');
-              mode1.setString('mode', 'max');
-              mode = 'max';
-              isDisableModeGame = true;
-            } else {
-              expireGameMode = DateTime.parse(time);
-              isGame = true;
-            }
-          }
-          if (mode1.getString('modeGameTime') == 'expire') {
-            isDisableModeGame = true;
-          }
-          if (mode1.getString('modePowerTime') == 'expire') {
-            isDisableModeLive = true;
-          }
-          if (ecoMode >= 5) {
-            isDisableModeEco = true;
-          }
-        }
-      } else {
-        isDisableMode = true;
-      }
-    });
-  }
+  // setMode(String? setMode) async {
+  //   final SharedPreferences mode1 = await _mode;
+  //   setState(() {
+  //     if (network == '5G' && currentType == '5G') {
+  //       int ecoMode = mode1.getInt('ecoMode') ?? 0;
+  //       if (setMode != null) {
+  //         if (mode1.getString('mode') == 'live' && setMode != 'live') {
+  //           mode1.setString('modeLiveTime', 'expire');
+  //           expireLiveMode = null;
+  //           isDisableModeLive = true;
+  //           isLive = false;
+  //         } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
+  //           mode1.setString('modeGameTime', 'expire');
+  //           expireGameMode = null;
+  //           isDisableModeGame = true;
+  //           isGame = false;
+  //         }
+  //         if (setMode == 'eco') {
+  //           mode1.setInt('ecoMode', ++ecoMode);
+  //         } else if (mode1.getString('mode') == 'eco') {
+  //           if (ecoMode >= 5) {
+  //             isDisableModeEco = true;
+  //           }
+  //         }
+  //         mode1.setString('mode', setMode);
+  //         mode = setMode;
+  //       } else {
+  //         if (mode1.getString('mode') != null) {
+  //           mode = mode1.getString('mode')!;
+  //         } else {
+  //           mode1.setString('mode', 'max');
+  //           mode = 'max';
+  //         }
+  //         if (mode1.getString('mode') == 'live') {
+  //           String time = mode1.getString('modeLiveTime') ?? '';
+  //           DateTime dateLive = DateTime.parse(time);
+  //           DateTime dateNow = DateTime.now();
+  //           if (dateLive.difference(dateNow).inSeconds < 0) {
+  //             print('test');
+  //             mode1.setString('modeLiveTime', 'expire');
+  //             mode1.setString('mode', 'max');
+  //             mode = 'max';
+  //             isDisableModeLive = true;
+  //           } else {
+  //             expireLiveMode = DateTime.parse(time);
+  //             isLive = true;
+  //           }
+  //         } else if (mode1.getString('mode') == 'game') {
+  //           String time = mode1.getString('modeGameTime') ?? '';
+  //           DateTime dateGame = DateTime.parse(time);
+  //           DateTime dateNow = DateTime.now();
+  //           if (dateGame.difference(dateNow).inSeconds < 0) {
+  //             mode1.setString('modeGameTime', 'expire');
+  //             mode1.setString('mode', 'max');
+  //             mode = 'max';
+  //             isDisableModeGame = true;
+  //           } else {
+  //             expireGameMode = DateTime.parse(time);
+  //             isGame = true;
+  //           }
+  //         }
+  //         if (mode1.getString('modeGameTime') == 'expire') {
+  //           isDisableModeGame = true;
+  //         }
+  //         if (mode1.getString('modePowerTime') == 'expire') {
+  //           isDisableModeLive = true;
+  //         }
+  //         if (ecoMode >= 5) {
+  //           isDisableModeEco = true;
+  //         }
+  //       }
+  //     } else {
+  //       isDisableMode = true;
+  //     }
+  //   });
+  // }
 
-  timeCountdown(String mode) async {
-    final SharedPreferences mode1 = await _mode;
-    if (mode == 'live') {
-      expireLiveMode = DateTime.now().add(const Duration(seconds: 30));
-      mode1.setString('modeLiveTime', expireLiveMode.toString());
-    } else if (mode == 'game') {
-      expireGameMode = DateTime.now().add(const Duration(seconds: 30));
-      mode1.setString('modeGameTime', expireGameMode.toString());
-    }
-  }
+  // timeCountdown(String mode) async {
+  //   final SharedPreferences mode1 = await _mode;
+  //   if (mode == 'live') {
+  //     expireLiveMode = DateTime.now().add(const Duration(seconds: 30));
+  //     mode1.setString('modeLiveTime', expireLiveMode.toString());
+  //   } else if (mode == 'game') {
+  //     expireGameMode = DateTime.now().add(const Duration(seconds: 30));
+  //     mode1.setString('modeGameTime', expireGameMode.toString());
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -203,8 +206,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        true
-                            // data.displayScreen!.mode!.isDisableMode || data.displayScreen!.mode!.isDisableModeLive
+                        (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                                (data.displayScreen?.mode?.isDisableModeLive ??
+                                    false)
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_power_bw.png')
                             : ImageUtils.getImagePath(
@@ -219,12 +223,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('live'),
-                      isDisable: true,
-                      // isDisableMode || data.displayScreen!.mode!.isDisableModeLive,
+                      isDisable:
+                          (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                              (data.displayScreen?.mode?.isDisableModeLive ??
+                                  false),
                       expireDate: expireLiveMode,
                       mode: 'modeLiveTime',
-                      setMode: callback,
-                      check: isLive,
+                      //setMode: callback,
+                      //check: isLive,
                       onPress: () {
                         if (!isMode('live')) {
                           showModalBottomSheet(
@@ -241,9 +247,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   Navigator.pop(context);
                                   setState(
                                     () {
-                                      isLive = true;
-                                      setMode('live');
-                                      timeCountdown('live');
+                                      // isLive = true;
+                                      // setMode('live');
+                                      // timeCountdown('live');
                                     },
                                   );
                                 },
@@ -266,7 +272,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
                                   setState(() {
-                                    setMode('nofocus');
+                                    // setMode('nofocus');
                                   });
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -281,8 +287,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        true
-                            // isDisableMode || data.displayScreen!.mode!.isDisableModeGame
+                        (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                                (data.displayScreen?.mode?.isDisableModeGame ??
+                                    false)
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_game_bw.png')
                             : ImageUtils.getImagePath(
@@ -297,13 +304,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('game'),
-                      isDisable: true,
-                      // data.displayScreen!.mode!.isDisableMode ||
-                      //     data.displayScreen!.mode!.isDisableModeGame,
+                      isDisable:
+                          (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                              (data.displayScreen?.mode?.isDisableModeGame ??
+                                  false),
                       expireDate: expireGameMode,
                       mode: 'modeGameTime',
-                      setMode: callback,
-                      check: isGame,
+                      //setMode: callback,
+                      //check: isGame,
                       onPress: () {
                         if (!isMode('game')) {
                           showModalBottomSheet(
@@ -321,9 +329,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   Navigator.pop(context);
                                   setState(
                                     () {
-                                      isGame = true;
-                                      setMode('game');
-                                      timeCountdown('game');
+                                      // isGame = true;
+                                      // setMode('game');
+                                      // timeCountdown('game');
                                     },
                                   );
                                 },
@@ -346,7 +354,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
                                   setState(() {
-                                    setMode('nofocus');
+                                    // setMode('nofocus');
                                   });
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -367,9 +375,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        true
-                            // isDisableMode || data.displayScreen!.mode!.isDisableModeEco
-                            // widget.display.isDisableModeEco
+                        (data.displayScreen?.mode?.isDisableMode ?? false) ||
+                                (data.displayScreen?.mode?.isDisableModeEco ??
+                                    false)
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -384,8 +392,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: isMode('eco'),
-                      isDisable: true,
-                      // data.displayScreen!.mode!.isDisableMode || data.displayScreen!.mode!.isDisableModeEco,
+                      isDisable: (data.displayScreen?.mode?.isDisableMode ??
+                              false) ||
+                          (data.displayScreen?.mode?.isDisableModeEco ?? false),
                       onPress: () {
                         if (!isMode('eco')) {
                           showModalBottomSheet(
@@ -401,7 +410,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
                                   setState(() {
-                                    setMode('eco');
+                                    // setMode('eco');
                                   });
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -423,7 +432,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
                                   setState(() {
-                                    setMode('nofocus');
+                                    // setMode('nofocus');
                                   });
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -444,50 +453,51 @@ class _ModeWidgetState extends State<ModeWidget> {
                 ],
               ),
               _sizedBox,
-              Container(
-                width: MediaQuery.of(context).size.width * 0.85,
-                height: 52,
-                decoration: const BoxDecoration(
-                  color: Color(0x66FFE9BD),
-                  borderRadius: BorderRadius.all(Radius.circular(8)),
-                ),
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: ListTile(
-                        minLeadingWidth: 12,
-                        leading: Image.asset(
-                          ImageUtils.getImagePath('assets/images/warning.png'),
-                          width: 20,
-                          height: 20,
-                        ),
-                        title: Text(
-                          warningMessage,
-                          style: LNStyle.warningMessage,
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ),
+              error ? const ModeWarning(warningNumber: 2) : const Mode5GDefault(),
+              // Container(
+              //   width: MediaQuery.of(context).size.width * 0.85,
+              //   height: 52,
+              //   decoration: const BoxDecoration(
+              //     color: Color(0x66FFE9BD),
+              //     borderRadius: BorderRadius.all(Radius.circular(8)),
+              //   ),
+              //   child: Row(
+              //     children: [
+              //       Expanded(
+              //         child: ListTile(
+              //           minLeadingWidth: 12,
+              //           leading: Image.asset(
+              //             ImageUtils.getImagePath('assets/images/warning.png'),
+              //             width: 20,
+              //             height: 20,
+              //           ),
+              //           title: Text(
+              //             warningMessage,
+              //             style: LNStyle.warningMessage,
+              //           ),
+              //         ),
+              //       ),
+              //     ],
+              //   ),
+              // ),
               //============================== Free Trial : Next Phase ===================
-              // betweenBox,
+              // _sizedBox,
               // Row(
               //   children: [
               //     Expanded(
               //       child: ListTile(
               //         leading: isDisableMode
               //             ? Image.asset(
-              //           ImageUtils.getImagePath('assets/images/mode_internet_bw.png',
+              //           ImageUtils.getImagePath('assets/images/mode_internet_bw.png',),
               //           height: 44,
               //           width: 44,
               //         )
               //             : Image.asset(
-              //           ImageUtils.getImagePath('assets/images/mode_internet.png',
+              //           ImageUtils.getImagePath('assets/images/mode_internet.png',),
               //           height: 44,
               //           width: 44,
               //         ),
-              //         textColor: BaseColorsLN.textColorTabbar,
+              //         textColor: LNColor.textColorTabBar,
               //         title: const Text(
               //           '5G Free trial',
               //           style: TextStyle(
@@ -505,8 +515,8 @@ class _ModeWidgetState extends State<ModeWidget> {
               //           maxValue: 100,
               //           markerValue: 80,
               //           barColorGradient: [
-              //             BaseColorsLN.whiteSpeedCompare,
-              //             BaseColorsLN.whiteSpeedCompare,
+              //             LNColor.whiteSpeedCompare,
+              //             LNColor.whiteSpeedCompare,
               //           ],
               //         )
               //             : const IUWidget(
@@ -514,8 +524,8 @@ class _ModeWidgetState extends State<ModeWidget> {
               //           maxValue: 100,
               //           markerValue: 80,
               //           barColorGradient: [
-              //             BaseColorsLN.speedCompare2,
-              //             BaseColorsLN.speedCompare2,
+              //             LNColor.speedCompare2,
+              //             LNColor.speedCompare2,
               //           ],
               //         ),
               //       ),
