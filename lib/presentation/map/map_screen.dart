@@ -55,7 +55,7 @@ class _MapScreenState extends State<MapScreen> {
             padding: EdgeInsets.only(left: 20.0),
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
-              children: [Text('Signal Nearby', style: LNStyle.header_map_1)],
+              children: [Text('Location', style: LNStyle.header_map_1)],
             ),
           ),
           getHBox(conH * 0.01),

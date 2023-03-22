@@ -39,41 +39,6 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         .asUint8List();
   }
 
-  Future<void> _onMapCreated(GoogleMapController controller) async {
-    // print(">>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>");
-    // print(appstate.locationShop?.features[0].properties.lmLat);
-
-    // final googleOffices = await locations.getGoogleOffices();
-
-    // _markers.clear();
-    // for (final office in appstate.locationShop!.features) {
-    //   String img = 'assets/images/ais_shop.png';
-    //   int size = 200;
-    //   if ('assets/images/cellular_other.png' == img) {
-    //     size = 100;
-    //   } else if ('assets/images/cellular_bad.png' == img) {
-    //     size = 100;
-    //   }
-    //   final Uint8List markerIcon = await getBytesFromAsset(img, size);
-    //   final MarkerId markerId =
-    //       MarkerId('${office.properties.ccsmLocationCode}');
-    //   final marker = Marker(
-    //     markerId: markerId,
-    //     position: LatLng(office.properties.lmLat!.toDouble(),
-    //         office.properties.lmLong!.toDouble()),
-    //     infoWindow: InfoWindow(
-    //       title: '${office.properties.ccsmLocationCode}',
-    //       snippet: 'add this $size',
-    //     ),
-    //     icon: BitmapDescriptor.fromBytes(markerIcon),
-    //     // icon: BitmapDescriptor.defaultMarker,        // onTap: () => _onMarkerTapped(markerId),
-    //   );
-    //   setState(() {
-    //     _markers[markerId] = marker;
-    //   });
-    // }
-  }
-
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<bool>(
