@@ -21,14 +21,16 @@ class _PerformanceMainState extends State<PerformanceMain> {
   List<PerformanceModel> createContentList(Perform? perform) {
     List<PerformanceModel> contentList = [];
     perform?.toJson().forEach((key, value) {
-      contentList.add(PerformanceModel(
-        text: Text(
-          getName(key),
-          style: LNStyle.header6_1B,
-        ),
-        iconImage: ImageUtils.getImagePath('assets/images/${getIconImage(key)}'),
-        qualityImage: ImageUtils.getImagePath('assets/images/${getQualityImage(value)}'),
-      ));
+      if (key != "cellTower") {
+        contentList.add(PerformanceModel(
+          text: Text(
+            getName(key),
+            style: LNStyle.header6_1B,
+          ),
+          iconImage: ImageUtils.getImagePath('assets/images/${getIconImage(key)}'),
+          qualityImage: ImageUtils.getImagePath('assets/images/${getQualityImage(value)}'),
+        ));
+      }
     });
     return contentList;
   }

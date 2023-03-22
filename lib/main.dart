@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:living_network/presentation/home/homepage.dart';
 import 'package:living_network/presentation/home/internal_test.dart';
 import 'package:living_network/provider/ln_provider.dart';
 import 'package:provider/provider.dart';
@@ -26,13 +27,13 @@ class _LivingNetworkState extends State<LivingNetwork> {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         theme: ThemeData(fontFamily: 'DB Heavent'),
-        initialRoute: '/internal_test',
+        initialRoute: '/',
         routes: {
           // '/': (context) => TabHome()
-          // '/': (context) => HomePage(),
+          '/': (context) => HomePage(),
           // '/map': (context) => MapScreen(),
           // '/map/direction': (context) => MapDirection(),
-          '/internal_test': (context) => Mode5GInternal(),
+          // '/internal_test': (context) => Mode5GInternal(),
         },
       ),
     );
