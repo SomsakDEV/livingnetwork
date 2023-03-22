@@ -27,7 +27,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         barrierDismissible: false,
         builder: (context) {
           return FutureBuilder(
-            future: Provider.of<LnProvider>(context, listen: false).prepareData(),
+            future: Provider.of<LnProvider>(context, listen: false).internalPrepare(),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
                 return Dialog(
@@ -117,7 +117,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
               } else {
                 return Dialog(
                   backgroundColor: LNColor.transparent,
-                  child: SizedBox(),
+                  child: Image.asset('assets/piggy.gif'),
                 );
               }
             },
@@ -134,6 +134,10 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     double w = MediaQuery.of(context).size.width;
     return Consumer<LnProvider>(
       builder: (context, data, _) => Scaffold(
+        appBar: AppBar(
+          title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
+          backgroundColor: Colors.white,
+        ),
         body: RefreshIndicator(
           color: LNColor.primaryColor,
           onRefresh: () => data.loadData(),
@@ -143,13 +147,8 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
-                    // Text('Living Gokogo Network room studio YEAHHHH',style: LNStyle.header1,),
-                    // Container(
-                    //   height: h * 0.35,
-                    //   child: ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), child: Image.asset(ImageUtils.getImagePath('assets/images/image.png'))),
-                    // ),
                     SizedBox(
-                      height: h * 0.3,
+                      height: h * 0.13,
                     ),
                     Container(
                       alignment: Alignment.topCenter,
