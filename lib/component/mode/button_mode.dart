@@ -108,7 +108,6 @@ class _ButtonModeState extends State<ButtonMode> {
                         TimeWidget(
                           expire: widget.expireDate,
                           isFreeTrial: false,
-                          mode: widget.mode,
                           check: widget.check,
                           setMode: widget.setMode,
                         )

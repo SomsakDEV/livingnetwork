@@ -3,17 +3,18 @@ import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/component/mode/button.dart';
 
-class BottomSheetCardDialogMode extends StatefulWidget {
+class BottomSheetDecisionCardDialogMode extends StatefulWidget {
   final String title;
   final String desc;
   final String? imagePath;
+  final bool? isDisable;
   final String textSubmitBtn;
   final String textCancelBtn;
   final bool? hasBorderCancelBtn;
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetCardDialogMode(
+  const BottomSheetDecisionCardDialogMode(
       {Key? key,
       required this.title,
       required this.desc,
@@ -22,16 +23,17 @@ class BottomSheetCardDialogMode extends StatefulWidget {
       required this.onPressedSubmit,
       required this.onPressedCancel,
       this.imagePath,
+      this.isDisable,
       this.hasBorderCancelBtn})
       : super(key: key);
 
   @override
-  State<BottomSheetCardDialogMode> createState() =>
-      _BottomSheetCardDialogModeState();
+  State<BottomSheetDecisionCardDialogMode> createState() =>
+      _BottomSheetDecisionCardDialogModeState();
 }
 
-class _BottomSheetCardDialogModeState
-    extends State<BottomSheetCardDialogMode> {
+class _BottomSheetDecisionCardDialogModeState
+    extends State<BottomSheetDecisionCardDialogMode> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -66,21 +68,27 @@ class _BottomSheetCardDialogModeState
                           onPressed: () {
                             widget.onPressedCancel(true);
                           },
-                          child: Text(
-                            widget.textCancelBtn,
-                            style: LNStyle.buttonSheetTextButtonClose,
+                          child: Padding(
+                            padding: const EdgeInsets.all(16),
+                            child: Text(
+                              widget.textCancelBtn,
+                              style: LNStyle.buttonSheetTextButtonClose,
+                            ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Text(
-                    widget.title,
-                    style: LNStyle.buttonSheetTitle,
+                  Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: Text(
+                      widget.title,
+                      style: LNStyle.buttonSheetTitle,
+                    ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 18.0, top: 8, right: 18.0),
+                        const EdgeInsets.only(left: 16.0, top: 8, right: 16.0, bottom: 40),
                     child: Text(
                       textAlign: TextAlign.center,
                       widget.desc,
@@ -89,25 +97,26 @@ class _BottomSheetCardDialogModeState
                       style: LNStyle.buttonSheetDesc,
                     ),
                   ),
-                  Container(
-                    child: widget.imagePath == null
-                        ? const SizedBox(height: 45)
-                        : Padding(
-                            padding:
-                                const EdgeInsets.only(top: 24.0, bottom: 33),
-                            child: Image.asset(
-                              widget.imagePath!,
-                              fit: BoxFit.fill,
-                              height: 72,
-                              width: 72,
-                            ),
-                          ),
-                  ),
+                  // Container(
+                  //   child: widget.imagePath == null
+                  //       ? const SizedBox(height: 45)
+                  //       : Padding(
+                  //           padding:
+                  //               const EdgeInsets.only(top: 24.0, bottom: 33),
+                  //           child: Image.asset(
+                  //             widget.imagePath!,
+                  //             fit: BoxFit.fill,
+                  //             height: 72,
+                  //             width: 72,
+                  //           ),
+                  //         ),
+                  // ),
                   Button(
                     title: widget.textSubmitBtn,
                     backgroundColor: LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
+                    isDisable: widget.isDisable ?? false,
                     height: 54,
                     borderRadius: 8,
                     fontSize: 28,

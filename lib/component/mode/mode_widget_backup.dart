@@ -245,7 +245,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return BottomSheetCardDialogMode(
+                              return BottomSheetDecisionCardDialogMode(
                                 title: 'Switch to Max mode?',
                                 desc: 'Detail: Default Mode',
                                 textSubmitBtn: 'Switch to Max mode',
@@ -292,7 +292,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return BottomSheetCardDialogMode(
+                              return BottomSheetDecisionCardDialogMode(
                                 title: 'Switch to Eco mode?',
                                 desc: 'Detail: save battery',
                                 textSubmitBtn: 'Switch to Eco mode',
@@ -349,7 +349,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return BottomSheetCardDialogMode(
+                              return BottomSheetDecisionCardDialogMode(
                                 title: 'Switch to Live mode?',
                                 desc: 'Detail: smoothly live',
                                 textCancelBtn: 'Close',
@@ -404,7 +404,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                             backgroundColor: Colors.transparent,
                             context: context,
                             builder: (BuildContext context) {
-                              return BottomSheetCardDialogMode(
+                              return BottomSheetDecisionCardDialogMode(
                                 title: 'Switch to Game mode?',
                                 desc: 'Detail: Lower Latency',
                                 textSubmitBtn: 'Switch to Game mode',

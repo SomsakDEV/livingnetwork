@@ -17,11 +17,11 @@ class Mode5GInternal extends StatefulWidget {
 }
 
 class _Mode5GInternalState extends State<Mode5GInternal> {
-  @override
-  void initState() {
-    print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
+  //   super.initState();
+  // }
 
   /*@override
   void initState() {
