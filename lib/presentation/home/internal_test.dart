@@ -1,12 +1,10 @@
 // ignore_for_file: prefer_const_constructors , prefer_const_literals_to_create_immutables
 
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
-import 'package:living_network/provider/ln_provider.dart';
+import 'package:living_network/provider/internal_provider.dart';
 import 'package:provider/provider.dart';
 
 class Mode5GInternal extends StatefulWidget {
@@ -21,13 +19,19 @@ class Mode5GInternal extends StatefulWidget {
 class _Mode5GInternalState extends State<Mode5GInternal> {
   @override
   void initState() {
+    print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
+    super.initState();
+  }
+
+  /*@override
+  void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
           return FutureBuilder(
-            future: Provider.of<LnProvider>(context, listen: false).internalPrepare(),
+            future: Provider.of<InternalProvider>(context, listen: false).internalPrepare(),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
                 return Dialog(
@@ -117,7 +121,17 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
               } else {
                 return Dialog(
                   backgroundColor: LNColor.transparent,
-                  child: Image.asset('assets/piggy.gif'),
+                  child: Container(
+                    width: 30,
+                    height: 30,
+                    decoration: BoxDecoration(
+                      color: LNColor.transparent,
+                      image: DecorationImage(
+                        image: AssetImage('assets/test.gif'),
+                        fit: BoxFit.fill,
+                      ),
+                    ),
+                  ),
                 );
               }
             },
@@ -126,41 +140,39 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
       ),
     );
     super.initState();
-  }
+  }*/
 
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
-    return Consumer<LnProvider>(
-      builder: (context, data, _) => Scaffold(
-        appBar: AppBar(
-          title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
-          backgroundColor: Colors.white,
-        ),
-        body: RefreshIndicator(
-          color: LNColor.primaryColor,
-          onRefresh: () => data.loadData(),
-          child: SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    SizedBox(
-                      height: h * 0.13,
-                    ),
-                    Container(
-                      alignment: Alignment.topCenter,
-                      decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                      width: w * 0.93,
-                      child: ModeWidget(),
-                    ),
-                    SizedBox(
-                      height: h * 0.4,
-                    ),
-                  ],
-                ),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
+        backgroundColor: Colors.white,
+      ),
+      body: RefreshIndicator(
+        color: LNColor.primaryColor,
+        onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(),
+        child: SafeArea(
+          child: Center(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  SizedBox(
+                    height: h * 0.13,
+                  ),
+                  Container(
+                    alignment: Alignment.topCenter,
+                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                    width: w * 0.93,
+                    child: ModeWidget(),
+                  ),
+                  SizedBox(
+                    height: h * 0.4,
+                  ),
+                ],
               ),
             ),
           ),
