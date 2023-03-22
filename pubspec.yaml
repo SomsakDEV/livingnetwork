@@ -35,6 +35,7 @@ flutter:
 
   assets:
     - assets/images/
+    - assets/piggy.gif
 
   fonts:
   - family: DB Heavent
