@@ -17,11 +17,11 @@ class Mode5GInternal extends StatefulWidget {
 }
 
 class _Mode5GInternalState extends State<Mode5GInternal> {
-  @override
-  void initState() {
-    print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
+  //   super.initState();
+  // }
 
   /*@override
   void initState() {
@@ -151,33 +151,54 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
         backgroundColor: Colors.white,
       ),
-      body: RefreshIndicator(
-        color: LNColor.primaryColor,
-        onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(),
-        child: SafeArea(
-          child: Center(
-            child: SingleChildScrollView(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  SizedBox(
-                    height: h * 0.13,
+      body: FutureBuilder(
+          future: Provider.of<InternalProvider>(context, listen: false)
+              .internalPrepare(),
+          builder: (context, snap) {
+            if (snap.hasData) {
+              return RefreshIndicator(
+                color: LNColor.primaryColor,
+                onRefresh: () =>
+                    Provider.of<InternalProvider>(context, listen: false)
+                        .internalPrepare(),
+                child: SafeArea(
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          SizedBox(
+                            height: h * 0.13,
+                          ),
+                          Container(
+                            alignment: Alignment.topCenter,
+                            decoration: BoxDecoration(
+                                color: Color(0xFFFFFFFF),
+                                borderRadius: BorderRadius.circular(8),
+                                border: Border.all(
+                                    width: 3, color: Color(0xFFF0F0F0))),
+                            width: w * 0.93,
+                            child: ModeWidget(),
+                          ),
+                          SizedBox(
+                            height: h * 0.4,
+                          ),
+                        ],
+                      ),
+                    ),
                   ),
-                  Container(
-                    alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
-                    width: w * 0.93,
-                    child: ModeWidget(),
-                  ),
-                  SizedBox(
-                    height: h * 0.4,
-                  ),
-                ],
-              ),
-            ),
-          ),
-        ),
-      ),
+                ),
+              );
+            } else {
+              return Center(
+                child: SizedBox(
+                  width: 300,
+                  height: 300,
+                  child: Image.asset('assets/pig.gif'),
+                ),
+              );
+            }
+          }),
     );
   }
 }

@@ -2,14 +2,16 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/provider/internal_provider.dart';
+import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
+import 'package:provider/provider.dart';
 
 class TimeWidget extends StatefulWidget {
   // final Duration countDownTime;
   final DateTime? expire;
   final TextStyle? textStyle;
   final bool isFreeTrial;
-  final String? mode;
   final bool? check;
   final Function? setMode;
 
@@ -21,7 +23,6 @@ class TimeWidget extends StatefulWidget {
     this.expire,
     this.textStyle,
     this.isFreeTrial = true,
-    this.mode,
     this.check,
   });
 
@@ -33,38 +34,54 @@ class _TimeWidgetState extends State<TimeWidget> {
   Duration duration = const Duration();
   Timer? timer;
   bool checkTimerStart = true;
-  bool checkTimerStop = true;
 
-  void startTimer() {
-    if ((widget.check ?? false) && checkTimerStart) {
-      DateTime expireTime =
-          widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
-      int seconds = expireTime.difference(DateTime.now()).inSeconds;
-      if (seconds > 0) {
-        duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
-        timer = Timer.periodic(
-            const Duration(seconds: 1),
-            (_) => setState(
-                  () {
-                    timeState(widget.mode);
-                  },
-                ));
-        checkTimerStart = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
+
+  void startTimer(InternalProvider data) {
+    if (widget.expire != null) {
+      if (checkTimerStart) {
+        DateTime expireTime =
+            widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
+        int seconds = expireTime.difference(DateTime.now()).inSeconds;
+        if (seconds > 0) {
+          duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
+          timer = Timer.periodic(
+              const Duration(seconds: 1),
+              (_) => setState(
+                    () {
+                      timeState(data);
+                    },
+                  ));
+          checkTimerStart = false;
+        }
+      } else if (checkTimerStart) {
+        duration = const Duration(seconds: -2);
       }
-    } else if (checkTimerStart) {
-      duration = const Duration(seconds: -2);
     }
   }
 
-  timeState(String? mode) {
+  timeState(InternalProvider data) {
     final seconds = duration.inSeconds - 1;
     if (seconds < 0 || !(widget.check ?? true)) {
-      duration = const Duration(seconds: 0, hours: 0, minutes: 0);
       timer?.cancel();
-      setState(() {
-        widget.setMode!();
-      });
-      checkTimerStop = false;
+      if(seconds < 0) {
+        String lastMode =
+            data.mode?.modeUpdate?.mode5G.lastDefaultMode ?? 'max_mode';
+        bool fk = (lastMode == 'boost_mode' || lastMode == 'game_mode');
+        data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+        fk ? 'max_mode' : lastMode;
+        data.mode?.modeUpdate?.mode5G.lastDefaultMode =
+            data.mode?.mode ?? 'max_mode';
+        data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
+        data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+        widget.setMode!(data);
+      }
+      checkTimerStart = true;
+      duration = const Duration(seconds: 0, hours: 0, minutes: 0);
     } else {
       duration = Duration(seconds: seconds);
     }
@@ -75,7 +92,7 @@ class _TimeWidgetState extends State<TimeWidget> {
     final hours = twoDigits(duration.inHours);
     final minutes = twoDigits(duration.inMinutes.remainder(60));
     final seconds = twoDigits(duration.inSeconds.remainder(60));
-    if (duration.inSeconds < -1 || !checkTimerStop) {
+    if (duration.inSeconds < -1 || widget.expire == null) {
       return const SizedBox();
     } else {
       if (!widget.isFreeTrial) {
@@ -87,10 +104,7 @@ class _TimeWidgetState extends State<TimeWidget> {
                 gradient: LinearGradient(
                     begin: FractionalOffset.centerLeft,
                     end: FractionalOffset.centerRight,
-                    colors: [
-                      LNColor.greenColor10,
-                      LNColor.greenColor20
-                    ])),
+                    colors: [LNColor.greenColor10, LNColor.greenColor20])),
             width: 68,
             height: 24,
             child: Row(
@@ -161,7 +175,9 @@ class _TimeWidgetState extends State<TimeWidget> {
 
   @override
   Widget build(BuildContext context) {
-    startTimer();
-    return buildTime();
+    return Consumer<InternalProvider>(builder: (context, data, _) {
+      startTimer(data);
+      return buildTime();
+    });
   }
 }

@@ -409,6 +409,50 @@ class LNStyle {
     // letterSpacing: -0.4,
   );
 
+  static const buttonSheetPriceTime = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.greenColorClose,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetVat = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.textColorTabBar,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTermTitle = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 28,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTermDesc = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.textColorTabBar,
+    fontSize: 24,
+    fontWeight: FontWeight.w400,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
   static const buttonSheetTextButtonClose = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.greenColorClose,

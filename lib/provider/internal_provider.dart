@@ -18,4 +18,14 @@ class InternalProvider with ChangeNotifier {
     notifyListeners();
     return _verify;
   }
+
+
+  Future<String> updateMode5G(
+      MsisdnDB? msisdnDB, CheckModeProfile? checkModeProfile) async {
+    repo = repo ?? InitialInternal();
+    _mode = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
+    print('Mode reload  : ${_mode?.toJson()}');
+    notifyListeners();
+    return "Success";
+  }
 }

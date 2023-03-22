@@ -107,6 +107,14 @@ String notificationTitleLiveModeExpired =
 String notificationSubTitleLiveModeExpired =
     'การเชื่อมต่อ 5G ของคุณจะกลับเข้าสู่  Max Mode โดย\nอัตโนมัติ';
 
+//switch mode payment
+String titlePayment = 'สลับเป็นเกมโหมด!';
+String descPayment = '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';
+String priceTime = '10 บาท | 1 ชั่วโมง';
+String vat = 'VAT Included';
+String termsConditionsTitle = 'Terms & Conditions';
+String termsConditionsDesc = 'The exceas unago ratea are 1.50 Baht minute for voice and video calis to anry retwork (Secande are rounded up to the next minutel, 2.50 Baht/Sh/S and 4 Baht/MMS. AISsupor WIFi: The Wifi sorvice systom will gend a Wifi userrame and password autoraticaly via SMS. For more information, please go to www aie.co.towiti Exiating custorers can aubacribe to this package with an initial subscription fee of 30 Baht per subscription. limited to 3 subecriotion per month.';
+
 //Performance
 // List<PerformanceModel> contentList = [
 //   PerformanceModel(
