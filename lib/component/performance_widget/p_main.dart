@@ -36,54 +36,51 @@ class _PerformanceMainState extends State<PerformanceMain> {
   }
 
   String getIconImage(String value) {
-    String iconImage;
     switch (value) {
       case "social":
-        return iconImage = "performance_icon_1.png";
+        return "performance_icon_1.png";
       case "live":
-        return iconImage = "performance_icon_2.png";
+        return "performance_icon_2.png";
       case "videoStreaming":
-        return iconImage = "performance_icon_3.png";
+        return "performance_icon_3.png";
       case "music":
-        return iconImage = "performance_icon_4.png";
+        return "performance_icon_4.png";
       case "game":
-        return iconImage = "performance_icon_5.png";
+        return "performance_icon_5.png";
       default:
-        return iconImage = "mode_Internet_bw.png";
+        return "mode_Internet_bw.png";
     }
   }
 
   String getName(String value) {
-    String name;
     switch (value) {
       case "social":
-        return name = "Browsing/Social";
+        return "Browsing/Social";
       case "live":
-        return name = "Live";
+        return "Live";
       case "videoStreaming":
-        return name = "Video streaming";
+        return "Video streaming";
       case "music":
-        return name = "Music streaming";
+        return "Music streaming";
       case "game":
-        return name = "Game";
+        return "Game";
       default:
-        return name = "Unknown";
+        return "Unknown";
     }
   }
 
   String getQualityImage(int value) {
-    String qualityImage;
     switch (value) {
       case 1:
-        return qualityImage = "signal_excellent.png";
+        return "signal_excellent.png";
       case 2:
-        return qualityImage = "signal_good.png";
+        return "signal_good.png";
       case 3:
-        return qualityImage = "signal_fair.png";
+        return "signal_fair.png";
       case 4:
-        return qualityImage = "signal_poor.png";
+        return "signal_poor.png";
       default:
-        return qualityImage = "signal_unavailable.png";
+        return "signal_unavailable.png";
     }
   }
 
