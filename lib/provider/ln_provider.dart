@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
-import 'package:living_network_repository/domain/repositories/internal_repo.dart';
 import 'package:living_network_repository/living_network_repository.dart';
 
 class LnProvider with ChangeNotifier {
