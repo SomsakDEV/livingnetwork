@@ -5,12 +5,12 @@ import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/constance/constants.dart';
 
 class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
-  // final String title;
-  // final String desc;
-  // final String priceTime;
-  // final String vat;
-  // final String termsConditionsTitle;
-  // final String termsConditionsDesc;
+  final String title;
+  final String desc;
+  final String priceTime;
+  final String vat;
+  final String termsConditionsTitle;
+  final String termsConditionsDesc;
   final String? imagePath;
   final String textSubmitBtn;
   final String textCancelBtn;
@@ -20,12 +20,12 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 
   const BottomSheetDecisionPaymentCardDialogMode(
       {Key? key,
-      // required this.title,
-      // required this.desc,
-      // required this.priceTime,
-      // required this.vat,
-      // required this.termsConditionsTitle,
-      // required this.termsConditionsDesc,
+      required this.title,
+      required this.desc,
+      required this.priceTime,
+      required this.vat,
+      required this.termsConditionsTitle,
+      required this.termsConditionsDesc,
       required this.textSubmitBtn,
       required this.textCancelBtn,
       required this.onPressedSubmit,
@@ -79,7 +79,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
                               widget.textCancelBtn,
-                              style: LNStyle.buttonSheetTextButtonClose,
+                              style: LNStyle.buttonSheetTextButtonCloseAdd,
                             ),
                           ),
                         ),
@@ -89,8 +89,8 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                   Padding(
                     padding: const EdgeInsets.only(left: 16.64, right: 16.64),
                     child: Text(
-                      titlePayment,
-                      style: LNStyle.buttonSheetTitle,
+                      widget.title,
+                      style: LNStyle.buttonSheetTitlePayment ,
                     ),
                   ),
                   Padding(
@@ -98,17 +98,17 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                         left: 16.0, top: 8, right: 16.0, bottom: 8),
                     child: Text(
                       textAlign: TextAlign.center,
-                      descPayment,
+                      widget.desc,
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
-                      style: LNStyle.buttonSheetDesc,
+                      style: LNStyle.buttonSheetDescPayment,
                     ),
                   ),
                   Padding(
                     padding: const EdgeInsets.only(
                         left: 95.5, right: 95.5, bottom: 8),
                     child: Text(
-                      priceTime,
+                      widget.priceTime,
                       style: LNStyle.buttonSheetPriceTime,
                     ),
                   ),
@@ -120,7 +120,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                       child: Padding(
                         padding: const EdgeInsets.only(left: 4, right: 4),
                         child: Text(
-                          vat,
+                          widget.vat,
                           style: LNStyle.buttonSheetVat,
                         ),
                       ),
@@ -134,11 +134,18 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                   //     style: LNStyle.buttonSheetTermTitle,
                   //   ),
                   // ),
-
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
+                    child: Container(
+                      color: LNColor.whiteSpeedCompare,
+                      child: SizedBox(height: 4, width: MediaQuery.of(context).size.width * 0.85,
+                      ),
+                    ),
+                  ),
                   Center(
                     child: Container(
-                      // margin: EdgeInsets.only(left: 40, right: 40),
-                      padding: const EdgeInsets.only(left: 40, right: 40),
+                      // margin: const EdgeInsets.only(left: 40, right: 40),
+                      padding: const EdgeInsets.only(left: 40, right: 40, top: 16, bottom: 16),
                       height: 140,
                       child: Scrollbar(
                         thickness: 8,
@@ -151,11 +158,11 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  termsConditionsTitle,
+                                  widget.termsConditionsTitle,
                                   style: LNStyle.buttonSheetTermTitle,
                                 ),
                                 Text(
-                                  termsConditionsDesc,
+                                  widget.termsConditionsDesc,
                                   style: LNStyle.buttonSheetTermDesc,
                                   // maxLines: 3,
                                   // overflow: TextOverflow.visible,
@@ -170,11 +177,13 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                     backgroundColor: LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
+                    width: MediaQuery.of(context).size.width * 0.8,
                     height: 54,
                     borderRadius: 8,
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
                   ),
+                  const SizedBox(height: 34,),
                 ],
               ),
             ),

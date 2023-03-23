@@ -387,9 +387,20 @@ class LNStyle {
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static const buttonSheetTitle = TextStyle(
+  static const buttonSheetTitleAdd = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.kellyGreen500,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTitleExit = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.speedCompare1,
     fontSize: 32,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -401,6 +412,28 @@ class LNStyle {
   static const buttonSheetDesc = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.bgToastColor,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTitlePayment = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetDescPayment = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.textColorTabBar,
     fontSize: 20,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -453,9 +486,20 @@ class LNStyle {
     // letterSpacing: -0.4,
   );
 
-  static const buttonSheetTextButtonClose = TextStyle(
+  static const buttonSheetTextButtonCloseAdd = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.greenColorClose,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTextButtonCloseExit = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.speedCompare1,
     fontSize: 22,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,

@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
-import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/notification/mode_5G_default.dart';
 import 'package:living_network/component/notification/mode_warning.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/constance/constants.dart';
 import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
@@ -36,10 +36,6 @@ class _ModeWidgetState extends State<ModeWidget> {
   DateTime? expireLiveMode;
   DateTime? expireGameMode;
 
-  //
-  // String network = '5G';
-  // String currentType = '5G';
-
   bool isMode(String value) {
     return value == mode;
   }
@@ -48,114 +44,12 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool defaultMessage = true;
 
   late bool isDisableButtonSheet = false;
-
-  //For disable Mode
-  // late bool isDisableMode = true;
-  // late bool isDisableModeEco = false;
-  // late bool isDisableModeLive = false;
-  // late bool isDisableModeGame = false;
-  // late bool isLive = false;
-  // late bool isGame = false;
+  late bool exitMode = false;
 
   @override
   void initState() {
-    // setMode(null);
     super.initState();
   }
-
-  // callback() {
-  //   setState(() {
-  //     setMode('max');
-  //   });
-  // }
-
-  // setMode(String? setMode) async {
-  //   final SharedPreferences mode1 = await _mode;
-  //   setState(() {
-  //     if (network == '5G' && currentType == '5G') {
-  //       int ecoMode = mode1.getInt('ecoMode') ?? 0;
-  //       if (setMode != null) {
-  //         if (mode1.getString('mode') == 'live' && setMode != 'live') {
-  //           mode1.setString('modeLiveTime', 'expire');
-  //           expireLiveMode = null;
-  //           isDisableModeLive = true;
-  //           isLive = false;
-  //         } else if (mode1.getString('mode') == 'game' && setMode != 'game') {
-  //           mode1.setString('modeGameTime', 'expire');
-  //           expireGameMode = null;
-  //           isDisableModeGame = true;
-  //           isGame = false;
-  //         }
-  //         if (setMode == 'eco') {
-  //           mode1.setInt('ecoMode', ++ecoMode);
-  //         } else if (mode1.getString('mode') == 'eco') {
-  //           if (ecoMode >= 5) {
-  //             isDisableModeEco = true;
-  //           }
-  //         }
-  //         mode1.setString('mode', setMode);
-  //         mode = setMode;
-  //       } else {
-  //         if (mode1.getString('mode') != null) {
-  //           mode = mode1.getString('mode')!;
-  //         } else {
-  //           mode1.setString('mode', 'max');
-  //           mode = 'max';
-  //         }
-  //         if (mode1.getString('mode') == 'live') {
-  //           String time = mode1.getString('modeLiveTime') ?? '';
-  //           DateTime dateLive = DateTime.parse(time);
-  //           DateTime dateNow = DateTime.now();
-  //           if (dateLive.difference(dateNow).inSeconds < 0) {
-  //             print('test');
-  //             mode1.setString('modeLiveTime', 'expire');
-  //             mode1.setString('mode', 'max');
-  //             mode = 'max';
-  //             isDisableModeLive = true;
-  //           } else {
-  //             expireLiveMode = DateTime.parse(time);
-  //             isLive = true;
-  //           }
-  //         } else if (mode1.getString('mode') == 'game') {
-  //           String time = mode1.getString('modeGameTime') ?? '';
-  //           DateTime dateGame = DateTime.parse(time);
-  //           DateTime dateNow = DateTime.now();
-  //           if (dateGame.difference(dateNow).inSeconds < 0) {
-  //             mode1.setString('modeGameTime', 'expire');
-  //             mode1.setString('mode', 'max');
-  //             mode = 'max';
-  //             isDisableModeGame = true;
-  //           } else {
-  //             expireGameMode = DateTime.parse(time);
-  //             isGame = true;
-  //           }
-  //         }
-  //         if (mode1.getString('modeGameTime') == 'expire') {
-  //           isDisableModeGame = true;
-  //         }
-  //         if (mode1.getString('modePowerTime') == 'expire') {
-  //           isDisableModeLive = true;
-  //         }
-  //         if (ecoMode >= 5) {
-  //           isDisableModeEco = true;
-  //         }
-  //       }
-  //     } else {
-  //       isDisableMode = true;
-  //     }
-  //   });
-  // }
-
-  // timeCountdown(String mode) async {
-  //   final SharedPreferences mode1 = await _mode;
-  //   if (mode == 'live') {
-  //     expireLiveMode = DateTime.now().add(const Duration(seconds: 30));
-  //     mode1.setString('modeLiveTime', expireLiveMode.toString());
-  //   } else if (mode == 'game') {
-  //     expireGameMode = DateTime.now().add(const Duration(seconds: 30));
-  //     mode1.setString('modeGameTime', expireGameMode.toString());
-  //   }
-  // }
   Future<bool> isDisable(bool value) async {
     return value;
   }
@@ -277,12 +171,17 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 showModalBottomSheet(
                                   isDismissible: false,
                                   backgroundColor: Colors.transparent,
+                                  isScrollControlled:true,
                                   context: context,
                                   builder: (BuildContext context) {
                                     return BottomSheetDecisionPaymentCardDialogMode(
-                                      // title: 'Switch to Power / Boost mode?',
-                                      // desc: 'Detail: smoothly live',
-                                      textSubmitBtn: 'Switch to Live mode',
+                                      title: titlePaymentL,
+                                      desc: descPaymentL,
+                                      priceTime: priceTimeL,
+                                      vat: vatL,
+                                      termsConditionsTitle: termsConditionsTitleL,
+                                      termsConditionsDesc: termsConditionsDescL,
+                                      textSubmitBtn: 'Confirm',
                                       textCancelBtn: 'Close',
                                       onPressedSubmit: (isClicked) async {
                                         Navigator.pop(context);
@@ -390,13 +289,20 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 showModalBottomSheet(
                                   isDismissible: false,
                                   backgroundColor: Colors.transparent,
+                                  isScrollControlled:true,
                                   context: context,
                                   builder: (BuildContext context) {
-                                    return BottomSheetDecisionCardDialogMode(
-                                      title: 'Switch to Game mode?',
-                                      desc:
-                                          'เล่นฟรีได้ 30 นาที ใช้ได้ 1 ครั้ง \n ถ้าออกก่อนก็จะหมดสิทธิแล้ว...',
-                                      textSubmitBtn: 'Switch to Game mode',
+                                    return BottomSheetDecisionPaymentCardDialogMode(
+                                      // title: 'Switch to Game mode?',
+                                      // desc:
+                                      //     'เล่นฟรีได้ 30 นาที ใช้ได้ 1 ครั้ง \n ถ้าออกก่อนก็จะหมดสิทธิแล้ว...',
+                                      title: titlePaymentG,
+                                      desc: descPaymentG,
+                                      priceTime: priceTimeG,
+                                      vat: vatG,
+                                      termsConditionsTitle: termsConditionsTitleG,
+                                      termsConditionsDesc: termsConditionsDescG,
+                                      textSubmitBtn: 'Confirm',
                                       textCancelBtn: 'Close',
                                       onPressedSubmit: (isClicked) {
                                         Navigator.pop(context);
@@ -540,6 +446,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       desc: 'Detail: exit from eco mode',
                                       textSubmitBtn: 'Exit',
                                       textCancelBtn: 'Close',
+                                      exitMode: true,
                                       onPressedSubmit: (isClicked) async {
                                         Navigator.pop(context);
                                         data.mode?.modeUpdate?.mode5G

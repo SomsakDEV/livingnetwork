@@ -8,23 +8,24 @@ class BottomSheetDecisionCardDialogMode extends StatefulWidget {
   final String desc;
   final String? imagePath;
   final bool? isDisable;
+  final bool? exitMode;
   final String textSubmitBtn;
   final String textCancelBtn;
   final bool? hasBorderCancelBtn;
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetDecisionCardDialogMode(
-      {Key? key,
-      required this.title,
-      required this.desc,
-      required this.textSubmitBtn,
-      required this.textCancelBtn,
-      required this.onPressedSubmit,
-      required this.onPressedCancel,
-      this.imagePath,
-      this.isDisable,
-      this.hasBorderCancelBtn})
+  const BottomSheetDecisionCardDialogMode({Key? key,
+    required this.title,
+    required this.desc,
+    required this.textSubmitBtn,
+    required this.textCancelBtn,
+    required this.onPressedSubmit,
+    required this.onPressedCancel,
+    this.imagePath,
+    this.isDisable,
+    this.exitMode,
+    this.hasBorderCancelBtn})
       : super(key: key);
 
   @override
@@ -52,7 +53,10 @@ class _BottomSheetDecisionCardDialogModeState
             child: Padding(
               padding: EdgeInsets.only(
                   top: 16.0,
-                  bottom: MediaQuery.of(context).size.height * 0.053,
+                  bottom: MediaQuery
+                      .of(context)
+                      .size
+                      .height * 0.053,
                   left: 16.0,
                   right: 16.0),
               child: Column(
@@ -72,7 +76,7 @@ class _BottomSheetDecisionCardDialogModeState
                             padding: const EdgeInsets.all(16),
                             child: Text(
                               widget.textCancelBtn,
-                              style: LNStyle.buttonSheetTextButtonClose,
+                              style: widget.exitMode ?? false ? LNStyle.buttonSheetTextButtonCloseExit : LNStyle.buttonSheetTextButtonCloseAdd,
                             ),
                           ),
                         ),
@@ -83,12 +87,13 @@ class _BottomSheetDecisionCardDialogModeState
                     padding: const EdgeInsets.only(left: 16, right: 16),
                     child: Text(
                       widget.title,
-                      style: LNStyle.buttonSheetTitle,
+                      style: widget.exitMode ?? false ? LNStyle.buttonSheetTitleExit : LNStyle.buttonSheetTitleAdd,
                     ),
                   ),
                   Padding(
                     padding:
-                        const EdgeInsets.only(left: 16.0, top: 8, right: 16.0, bottom: 40),
+                    const EdgeInsets.only(
+                        left: 16.0, top: 8, right: 16.0, bottom: 40),
                     child: Text(
                       textAlign: TextAlign.center,
                       widget.desc,
@@ -113,7 +118,7 @@ class _BottomSheetDecisionCardDialogModeState
                   // ),
                   Button(
                     title: widget.textSubmitBtn,
-                    backgroundColor: LNColor.kellyGreen500,
+                    backgroundColor: widget.exitMode ?? false ? LNColor.speedCompare1 : LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
                     isDisable: widget.isDisable ?? false,
