@@ -1,5 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/component/mode/button.dart';
@@ -20,6 +22,74 @@ class Mode5GInternal extends StatefulWidget {
 }
 
 class _Mode5GInternalState extends State<Mode5GInternal> {
+  late Duration duration;
+  late Timer timer;
+
+  timeState() {
+    final seconds = duration.inSeconds - 1;
+    print(seconds);
+    // seconds < 0 ? waitUpdate() & timer.cancel() : duration = Duration(seconds: seconds);
+    if (seconds < 0) {
+      waitUpdate();
+      timer.cancel();
+    } else {
+      duration = Duration(seconds: seconds);
+    }
+  }
+
+  waitUpdate() {
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: LNColor.transparent,
+            child: Wrap(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: LNColor.neutralsWhite,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                        child: Image.asset(ImageUtils.getImagePath('assets/piggy.gif')),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text('Please Login again!!!!!', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Button(
+                        textStyle: LNStyle.dialogButtonText,
+                        title: "OK",
+                        buttonType: ButtonType.primaryBtn,
+                        onPress: () {
+                          SystemNavigator.pop();
+                        },
+                        borderRadius: 6,
+                        width: 236,
+                        height: 36,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
@@ -31,6 +101,13 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
             future: Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
+                int sec = DateTime.now().add(Duration(hours: 1)).difference(DateTime.now()).inSeconds;
+                duration = Duration(seconds: sec <= 0 ? 0 : sec);
+                timer = Timer.periodic(
+                    const Duration(seconds: 1),
+                    (_) => setState(() {
+                          timeState();
+                        }));
                 return Dialog(
                   backgroundColor: LNColor.transparent,
                   child: Wrap(
