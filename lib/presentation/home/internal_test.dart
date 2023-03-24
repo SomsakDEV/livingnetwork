@@ -1,10 +1,13 @@
-// ignore_for_file: prefer_const_constructors , prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/provider/internal_provider.dart';
+import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 
 class Mode5GInternal extends StatefulWidget {
@@ -19,7 +22,120 @@ class Mode5GInternal extends StatefulWidget {
 class _Mode5GInternalState extends State<Mode5GInternal> {
   @override
   void initState() {
-    print('[LIVING_NETWORK] Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token)}');
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return FutureBuilder(
+            future: Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
+            builder: (context, snap) {
+              if (snap.hasData && 'true' == snap.data.toString()) {
+                return Dialog(
+                  backgroundColor: LNColor.transparent,
+                  child: Wrap(
+                    children: [
+                      Container(
+                        decoration: const BoxDecoration(
+                          color: LNColor.neutralsWhite,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                              child: Image.asset(
+                                ImageUtils.getImagePath('assets/images/image.png'),
+                                width: 260,
+                              ),
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text('5G Modes!', style: LNStyle.dialogHeader),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Button(
+                              textStyle: LNStyle.dialogButtonText,
+                              title: "Got it",
+                              buttonType: ButtonType.primaryBtn,
+                              onPress: () {
+                                Navigator.pop(context);
+                              },
+                              borderRadius: 6,
+                              width: 236,
+                              height: 36,
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              } else if (snap.hasError || 'false' == snap.data.toString()) {
+                return Dialog(
+                  backgroundColor: LNColor.transparent,
+                  child: Wrap(
+                    children: [
+                      Container(
+                        padding: EdgeInsets.all(10),
+                        decoration: const BoxDecoration(
+                          color: LNColor.neutralsWhite,
+                          borderRadius: BorderRadius.all(Radius.circular(10)),
+                        ),
+                        child: Column(
+                          children: [
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Text('Something wrong !!!', style: LNStyle.dialogHeader),
+                            SizedBox(
+                              height: 8,
+                            ),
+                            Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                            SizedBox(
+                              height: 16,
+                            ),
+                            Button(
+                              textStyle: LNStyle.dialogButtonText,
+                              title: "Exit",
+                              buttonType: ButtonType.primaryBtn,
+                              onPress: () {
+                                // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+                                SystemNavigator.pop();
+                              },
+                              borderRadius: 6,
+                              width: 236,
+                              height: 36,
+                            ),
+                            SizedBox(
+                              height: 16,
+                            ),
+                          ],
+                        ),
+                      )
+                    ],
+                  ),
+                );
+              } else {
+                return Dialog(
+                  backgroundColor: LNColor.transparent,
+                  child: SizedBox(),
+                );
+              }
+            },
+          );
+        },
+      ),
+    );
     super.initState();
   }
 
@@ -31,6 +147,11 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
       appBar: AppBar(
         title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
         backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: BackButton(
+          color: LNColor.blackColor,
+          onPressed: () => SystemNavigator.pop(),
+        ),
       ),
       body: RefreshIndicator(
         color: LNColor.primaryColor,
@@ -59,13 +180,13 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                   Text(
                     'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).status}',
-                    style: const TextStyle(color: LNColor.failColor, fontSize: 20),
+                    style: TextStyle(color: LNColor.failColor, fontSize: 20),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(left : 15.0),
+                    padding: EdgeInsets.all(15.0),
                     child: Text(
-                      'Data : ${Provider.of<InternalProvider>(context, listen: true).mode == null ? "" : Provider.of<InternalProvider>(context, listen: true).mode!.toJson()}',
-                      style: const TextStyle(color: LNColor.failColor, fontSize: 15),
+                      'Data : ${Provider.of<InternalProvider>(context, listen: true).mode == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode!.toJson()}',
+                      style: TextStyle(color: LNColor.failColor, fontSize: 17),
                     ),
                   ),
                   SizedBox(
