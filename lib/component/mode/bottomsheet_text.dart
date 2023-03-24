@@ -16,7 +16,7 @@ class _BottomSheetCardDialogTextModeState extends State<BottomSheetCardDialogTex
   @override
   Widget build(BuildContext context) {
     return Container(
-      padding: EdgeInsets.symmetric(vertical: 20),
+      padding: const EdgeInsets.symmetric(vertical: 20),
       // height: widget.imagePath == null ? 386 : 455,
       // height: 200,
       decoration: const BoxDecoration(

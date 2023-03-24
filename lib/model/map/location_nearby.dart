@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/services.dart' show rootBundle;
 
 PlaceLocation locationFromJson(String str) =>
     PlaceLocation.fromJson(json.decode(str));

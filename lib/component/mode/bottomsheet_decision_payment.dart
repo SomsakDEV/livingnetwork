@@ -5,12 +5,14 @@ import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/constance/constants.dart';
 
 class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
-  // final String title;
-  // final String desc;
-  // final String priceTime;
-  // final String vat;
-  // final String termsConditionsTitle;
-  // final String termsConditionsDesc;
+  final String title;
+  final String desc;
+  final String price;
+  final String seperate;
+  final String time;
+  final String vat;
+  final String termsConditionsTitle;
+  final String termsConditionsDesc;
   final String? imagePath;
   final String textSubmitBtn;
   final String textCancelBtn;
@@ -20,12 +22,14 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 
   const BottomSheetDecisionPaymentCardDialogMode(
       {Key? key,
-      // required this.title,
-      // required this.desc,
-      // required this.priceTime,
-      // required this.vat,
-      // required this.termsConditionsTitle,
-      // required this.termsConditionsDesc,
+      required this.title,
+      required this.desc,
+      required this.price,
+      required this.seperate,
+      required this.time,
+      required this.vat,
+      required this.termsConditionsTitle,
+      required this.termsConditionsDesc,
       required this.textSubmitBtn,
       required this.textCancelBtn,
       required this.onPressedSubmit,
@@ -41,6 +45,39 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 
 class _BottomSheetDecisionPaymentCardDialogModeState
     extends State<BottomSheetDecisionPaymentCardDialogMode> {
+  Widget? termConditionDesc() {
+    Map<String, dynamic> koko = termsConditionsDescG;
+    return ListView.builder(
+      scrollDirection: Axis.vertical,
+      shrinkWrap: true,
+      itemCount: koko.length,
+      itemBuilder: (context, index) {
+        int s = index + 1;
+        return Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Expanded(
+                flex: 1,
+                child: Text(
+                  "${s.toString()}.",
+                  textAlign: TextAlign.center,
+                  style: LNStyle.buttonSheetTermDesc,
+                )),
+            Expanded(
+                flex: 5,
+                child: Padding(
+                  padding: const EdgeInsets.only(right: 5),
+                  child: Text(
+                    koko["$s"].toString(),
+                    style: LNStyle.buttonSheetTermDesc,
+                  ),
+                ))
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -58,7 +95,6 @@ class _BottomSheetDecisionPaymentCardDialogModeState
             ),
             child: Padding(
               padding: EdgeInsets.only(
-                  top: 16.0,
                   bottom: MediaQuery.of(context).size.height * 0.053,
                   left: 16.0,
                   right: 16.0),
@@ -79,101 +115,137 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                             padding: const EdgeInsets.all(16.0),
                             child: Text(
                               widget.textCancelBtn,
-                              style: LNStyle.buttonSheetTextButtonClose,
+                              style: LNStyle.buttonSheetTextButtonCloseAdd,
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16.64, right: 16.64),
-                    child: Text(
-                      titlePayment,
-                      style: LNStyle.buttonSheetTitle,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 10),
+                      child: Text(
+                        widget.title,
+                        style: LNStyle.buttonSheetTitlePayment,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(top: 8, bottom: 8),
+                      child: Text(
+                        textAlign: TextAlign.center,
+                        widget.desc,
+                        maxLines: 2,
+                        overflow: TextOverflow.ellipsis,
+                        style: LNStyle.buttonSheetDescPayment,
+                      ),
                     ),
                   ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        left: 16.0, top: 8, right: 16.0, bottom: 8),
-                    child: Text(
-                      textAlign: TextAlign.center,
-                      descPayment,
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: LNStyle.buttonSheetDesc,
+                    padding: const EdgeInsets.only(bottom: 8),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        Text(
+                          widget.price,
+                          style: LNStyle.buttonSheetPriceTime,
+                        ),
+                        Text(widget.seperate, style: LNStyle.buttonSheetSeperate,),
+                        Text(
+                          widget.time,
+                          style: LNStyle.buttonSheetPriceTime,
+                        )
+                      ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 95.5, right: 95.5, bottom: 8),
-                    child: Text(
-                      priceTime,
-                      style: LNStyle.buttonSheetPriceTime,
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(
-                        left: 130.5, right: 130.5, bottom: 16),
-                    child: Container(
-                      color: LNColor.whiteSpeedCompare,
-                      child: Padding(
-                        padding: const EdgeInsets.only(left: 4, right: 4),
-                        child: Text(
-                          vat,
-                          style: LNStyle.buttonSheetVat,
+                  Align(
+                    alignment: Alignment.center,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 16),
+                      child: Container(
+                        color: LNColor.whiteSpeedCompare,
+                        child: Padding(
+                          padding: const EdgeInsets.only(left: 4, right: 4),
+                          child: Text(
+                            widget.vat,
+                            style: LNStyle.buttonSheetVat,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       left: 16, right: 16, bottom: 8, top: 20),
-                  //   child: Text(
-                  //     termsConditionsTitle,
-                  //     style: LNStyle.buttonSheetTermTitle,
-                  //   ),
-                  // ),
-
-                  Center(
+                  Padding(
+                    padding: const EdgeInsets.only(top: 16),
                     child: Container(
-                      // margin: EdgeInsets.only(left: 40, right: 40),
-                      padding: const EdgeInsets.only(left: 40, right: 40),
-                      height: 140,
-                      child: Scrollbar(
-                        thickness: 8,
-                        isAlwaysShown: true,
-                        showTrackOnHover: true,
-                        scrollbarOrientation: ScrollbarOrientation.right,
-                        child: SingleChildScrollView(
+                      color: LNColor.whiteSpeedCompare,
+                      child: SizedBox(
+                        height: 4,
+                        width: MediaQuery.of(context).size.width * 0.90,
+                      ),
+                    ),
+                  ),
+                  Align(
+                    alignment: Alignment.center,
+                    child: Center(
+                      child: Container(
+                        padding: const EdgeInsets.only(
+                            top: 16, bottom: 16, left: 15, right: 5),
+                        height: 140,
+                        child: Scrollbar(
+                          thickness: 5,
+                          isAlwaysShown: true,
+                          showTrackOnHover: true,
+                          scrollbarOrientation: ScrollbarOrientation.right,
+                          child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  termsConditionsTitle,
+                                  widget.termsConditionsTitle,
                                   style: LNStyle.buttonSheetTermTitle,
                                 ),
-                                Text(
-                                  termsConditionsDesc,
-                                  style: LNStyle.buttonSheetTermDesc,
-                                  // maxLines: 3,
-                                  // overflow: TextOverflow.visible,
-                                ),
+                                Container(child: termConditionDesc()),
                               ],
-                            )),
+                            ),
+
+                            // Column(
+                            //   crossAxisAlignment: CrossAxisAlignment.start,
+                            //   children: [
+                            //     Text(
+                            //       widget.termsConditionsTitle,
+                            //       style: LNStyle.buttonSheetTermTitle,
+                            //     ),
+                            // Text(
+                            //   widget.termsConditionsDesc,
+                            //   style: LNStyle.buttonSheetTermDesc,
+                            //   // maxLines: 3,
+                            //   // overflow: TextOverflow.visible,
+                            // ),
+                            // ],
+                          ),
+                        ),
                       ),
                     ),
                   ),
+                  // ),
                   Button(
                     title: widget.textSubmitBtn,
                     backgroundColor: LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
+                    width: MediaQuery.of(context).size.width * 0.9,
                     height: 54,
                     borderRadius: 8,
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
+                  ),
+                  const SizedBox(
+                    height: 34,
                   ),
                 ],
               ),

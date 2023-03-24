@@ -380,16 +380,27 @@ class LNStyle {
 
   static const uiBottomSheetTextDesc = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.header6_1,
+    color: LNColor.textColorTabBar,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
   );
 
-  static const buttonSheetTitle = TextStyle(
+  static const buttonSheetTitleAdd = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.kellyGreen500,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTitleExit = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.speedCompare1,
     fontSize: 32,
     fontWeight: FontWeight.w700,
     fontStyle: FontStyle.normal,
@@ -409,11 +420,44 @@ class LNStyle {
     // letterSpacing: -0.4,
   );
 
+  static const buttonSheetTitlePayment = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.header6_1,
+    fontSize: 32,
+    fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetDescPayment = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.textColorTabBar,
+    fontSize: 20,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
   static const buttonSheetPriceTime = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.greenColorClose,
     fontSize: 32,
     fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetSeperate = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.greenColorClose,
+    fontSize: 32,
+    fontWeight: FontWeight.w100,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
     height: 1,
@@ -453,9 +497,20 @@ class LNStyle {
     // letterSpacing: -0.4,
   );
 
-  static const buttonSheetTextButtonClose = TextStyle(
+  static const buttonSheetTextButtonCloseAdd = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.greenColorClose,
+    fontSize: 22,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetTextButtonCloseExit = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.speedCompare1,
     fontSize: 22,
     fontWeight: FontWeight.w500,
     fontStyle: FontStyle.normal,
@@ -552,5 +607,12 @@ class LNStyle {
     color: LNColor.neutralsGrey800,
     fontSize: 18,
     fontWeight: FontWeight.w500,
+  );
+
+  static const messageSwitchedSuccess = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.neutralsWhite,
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
   );
 }

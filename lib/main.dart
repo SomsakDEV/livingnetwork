@@ -18,7 +18,7 @@ bool verify = false;
 
 class _LivingNetworkState extends State<LivingNetwork> {
   static const platform = MethodChannel('LIVING_NETWORK');
-  String? token;
+  String token = "UNKNOWN";
 
   @override
   void initState() {
@@ -31,9 +31,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
       try {
         print("[LIVING_NETWORK] Command : ${call.method}");
         if (call.method == 'open' && call.arguments != null) {
-          print("[LIVING_NETWORK] Input data : ${call.arguments}");
           token = call.arguments;
           verify = true;
+          print("[LIVING_NETWORK] Input data : $token");
         } else {
           print('[LIVING_NETWORK] check method or arg');
         }
@@ -48,7 +48,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
           platform.invokeMethod('open', ['Success : $token']);
         } else {
           platform.invokeMethod('open', ['Page cant not open']);
-          // SystemNavigator.pop();
+          SystemNavigator.pop();
         }
       }
     });
@@ -71,7 +71,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
           // '/': (context) => HomePage(),
           // '/map': (context) => MapScreen(),
           // '/map/direction': (context) => MapDirection(),
-          '/internal_test': (context) => Mode5GInternal(),
+          '/internal_test': (context) => Mode5GInternal(token: token),
         },
       ),
     );

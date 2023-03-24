@@ -24,6 +24,8 @@ class MapNearByWidget extends StatefulWidget {
 
 class _MapNearByWidgetState extends State<MapNearByWidget> {
   late GoogleMapController mapController;
+  final Completer<GoogleMapController> _controller =
+      Completer<GoogleMapController>();
   final Map<MarkerId, Marker> _markers = {};
   // LatLng? _markerPosition;
   MarkerId? selectedMarker;

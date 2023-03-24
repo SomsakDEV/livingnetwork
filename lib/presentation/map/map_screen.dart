@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/component/map/button_selection.dart';
 import 'package:living_network/component/map/map_location_widget.dart';
+import 'package:living_network/component/map/map_widget.dart';
 import 'package:living_network/component/map/places_widget.dart';
 import 'package:living_network/component/map/toggle_signal_widget.dart';
-import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/utility/image_utils.dart';
 
 class MapScreen extends StatefulWidget {
