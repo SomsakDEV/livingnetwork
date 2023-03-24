@@ -10,18 +10,21 @@ class InternalProvider with ChangeNotifier {
 
   Mode5G? get mode => _mode;
 
+  String? _status;
+
+  String? get status => _status;
+
   Future<bool> internalPrepare() async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.getMode(token);
+    _status = await repo?.getCurrentNetworkStatus();
     print('Mode : ${_mode?.toJson()}');
     _verify = (_mode != null);
     notifyListeners();
     return _verify;
   }
 
-
-  Future<String> updateMode5G(
-      MsisdnDB? msisdnDB, CheckModeProfile? checkModeProfile) async {
+  Future<String> updateMode5G(MsisdnDB? msisdnDB, CheckModeProfile? checkModeProfile) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
     print('Mode reload  : ${_mode?.toJson()}');

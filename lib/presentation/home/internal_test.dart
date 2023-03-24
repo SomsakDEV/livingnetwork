@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/provider/internal_provider.dart';
+import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 
 class Mode5GInternal extends StatefulWidget {
@@ -15,13 +18,7 @@ class Mode5GInternal extends StatefulWidget {
 }
 
 class _Mode5GInternalState extends State<Mode5GInternal> {
-  // @override
-  // void initState() {
-  //   print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
-  //   super.initState();
-  // }
-
-  /*@override
+  @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
@@ -37,23 +34,33 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   child: Wrap(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                           color: LNColor.neutralsWhite,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Column(
                           children: [
-                            SizedBox(
+                            ClipRRect(
+                              borderRadius: const BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                              child: Image.asset(
+                                ImageUtils.getImagePath('assets/images/image.png'),
+                                width: 260,
+                              ),
+                            ),
+                            const SizedBox(
                               height: 16,
                             ),
-                            Text('Initial Success', style: LNStyle.dialogHeader),
-                            SizedBox(
+                            const Text('5G Modes!', style: LNStyle.dialogHeader),
+                            const SizedBox(
                               height: 8,
+                            ),
+                            const Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                            const SizedBox(
+                              height: 16,
                             ),
                             Button(
                               textStyle: LNStyle.dialogButtonText,
-                              title: "OK",
+                              title: "Got it",
                               buttonType: ButtonType.primaryBtn,
                               onPress: () {
                                 Navigator.pop(context);
@@ -62,7 +69,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                               width: 236,
                               height: 36,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                           ],
@@ -77,22 +84,22 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   child: Wrap(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
+                        padding: const EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                           color: LNColor.neutralsWhite,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Column(
                           children: [
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
-                            Text('Something wrong !!!', style: LNStyle.dialogHeader),
-                            SizedBox(
+                            const Text('Something wrong !!!', style: LNStyle.dialogHeader),
+                            const SizedBox(
                               height: 8,
                             ),
-                            Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                            SizedBox(
+                            const Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                            const SizedBox(
                               height: 16,
                             ),
                             Button(
@@ -107,7 +114,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                               width: 236,
                               height: 36,
                             ),
-                            SizedBox(
+                            const SizedBox(
                               height: 16,
                             ),
                           ],
@@ -117,19 +124,9 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                 );
               } else {
-                return Dialog(
+                return const Dialog(
                   backgroundColor: LNColor.transparent,
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: LNColor.transparent,
-                      image: DecorationImage(
-                        image: AssetImage('assets/test.gif'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
+                  child: SizedBox(),
                 );
               }
             },
@@ -138,7 +135,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
       ),
     );
     super.initState();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -163,9 +160,20 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                   Container(
                     alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                    decoration: BoxDecoration(color: const Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: const Color(0xFFF0F0F0))),
                     width: w * 0.93,
                     child: ModeWidget(),
+                  ),
+                  Text(
+                    'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).status}',
+                    style: const TextStyle(color: LNColor.failColor, fontSize: 20),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.only(left : 15.0),
+                    child: Text(
+                      'Data : ${Provider.of<InternalProvider>(context, listen: true).mode == null ? "" : Provider.of<InternalProvider>(context, listen: true).mode!.toJson()}',
+                      style: const TextStyle(color: LNColor.failColor, fontSize: 15),
+                    ),
                   ),
                   SizedBox(
                     height: h * 0.4,

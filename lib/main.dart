@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/presentation/home/internal_test.dart';
-import 'package:living_network/presentation/home/homepage.dart';
-import 'package:living_network/presentation/map/map_direction.dart';
-import 'package:living_network/presentation/map/map_screen.dart';
 import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/provider/ln_provider.dart';
 import 'package:provider/provider.dart';
@@ -34,7 +31,6 @@ class _LivingNetworkState extends State<LivingNetwork> {
       try {
         print("[LIVING_NETWORK] Command : ${call.method}");
         if (call.method == 'open' && call.arguments != null) {
-          print('Yo3');
           print("[LIVING_NETWORK] Input data : ${call.arguments}");
           token = call.arguments;
           verify = true;
