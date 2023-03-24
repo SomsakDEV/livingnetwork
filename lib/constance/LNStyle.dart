@@ -597,4 +597,11 @@ class LNStyle {
     fontSize: 18,
     fontWeight: FontWeight.w500,
   );
+
+  static const messageSwitchedSuccess = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.neutralsWhite,
+    fontSize: 20,
+    fontWeight: FontWeight.w400,
+  );
 }

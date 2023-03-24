@@ -75,6 +75,15 @@ List<Image> image_preformance = [
   )
 ];
 
+//Mode Widget
+String modeWidgetTitle = 'Mode';
+String powerTitle = 'Power / Boost Mode';
+String powerDesc = 'Description';
+String gameTitle = 'Game Mode';
+String gameDesc = 'Server is currently full';
+String ecoTitle = 'Eco Mode';
+String ecoDesc = 'Save Battery';
+
 //5G Mode (warning)
 String warning1 =
     'Unable to use 5G mode because you have\nturned off cellular 5G. Please check your\nsetting menu on your phone';
@@ -107,7 +116,24 @@ String notificationTitleLiveModeExpired =
 String notificationSubTitleLiveModeExpired =
     'การเชื่อมต่อ 5G ของคุณจะกลับเข้าสู่  Max Mode โดย\nอัตโนมัติ';
 
+String textSubmitBtnC = 'Confirm';
+String textSubmitBtnE = 'Exit';
+String textCancelBtn = 'Close';
+String textSubmitEco = 'Switch to Eco mode';
+
+//switch mode
+String titleEco = 'Switch to Eco mode?';
+String descEco = 'Detail: save battery';
+String btmSheetTitleEco = 'Exit From Eco mode?';
+String btmSheetDescEco = 'Detail: exit from eco mode';
+
+String ecoSuccess = 'Switched to Eco mode!';
+String boostSuccess = 'Switched to Power / Boost mode!';
+String gameSuccess = 'Switched to Game mode!';
+
 //switch mode payment
+String btmSheetTitlePower = 'Exit From Power/Boost mode?';
+String btmSheetDescPower = 'Detail: exit from power/boost mode';
 String titlePaymentL = 'สลับเป็น Power mode!';
 String descPaymentL =
     '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';
@@ -117,6 +143,8 @@ String termsConditionsTitleL = 'Terms & Conditions';
 String termsConditionsDescL =
     '1.The exceas unago ratea are 1.50 Baht minute for voice and video calis to anry retwork (Secande are rounded up to the next minutel, 2.50 Baht/Sh/S and 4 Baht/MMS. AISsupor WIFi: The Wifi sorvice systom will gend a Wifi userrame and password autoraticaly via SMS. For more information, please go to www aie.co.towiti Exiating custorers can aubacribe to this package with an initial subscription fee of 30 Baht per subscription. limited to 3 subecriotion per month. The allowance and servico ratea aro for domestic use anly. Commercial utization and other appications tnat may affect the service of other clentr are prohibited.The ucage allowance ia valid for each biling cycle. The remaining alowance carinot be accurulated for use in the next biling cycles. The unage allawance wil be torminated immediately whan the pack is changed or tranaferred.Al senvice rotes sre 79 VAT exclucive.This package is valid for 12 bill cyctes cansacutivalyFree unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial 889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.';
 
+String btmSheetTitleGame = 'Exit From Game mode?';
+String btmSheetDescGame = 'Detail: exit from game mode';
 String titlePaymentG = 'สลับเป็นเกมโหมด!';
 String descPaymentG =
     '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';

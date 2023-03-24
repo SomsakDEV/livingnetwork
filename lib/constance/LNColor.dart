@@ -26,6 +26,7 @@ class LNColor {
   static const darkestGrey = Color(0xFF262626); // change to neutralsDarkestGrey
 
   static const transparent = Color.fromARGB(0, 255, 255, 255);
+  static const translucent = Color.fromARGB(0, 0, 0, 0);
   static const greenColor700 = Color(0xFF64CA00);
   static const greenColor100 = Color(0xFFF1FFF1);
   static const mintColor = Color(0xFF169770);
@@ -39,6 +40,7 @@ class LNColor {
   static const greenColor20 = Color(0xFF64CA00);
   static const greenColorClose = Color(0xFF5FBB1C);
   static const whiteSpeedCompare = Color(0xFFF2F4F6);
+  static const blackGrey80percent = Color(0xCC262626);
 
   // below code is new base colors
 

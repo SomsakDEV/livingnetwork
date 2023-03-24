@@ -19,7 +19,8 @@ class Mode5GInternal extends StatefulWidget {
 class _Mode5GInternalState extends State<Mode5GInternal> {
   @override
   void initState() {
-    print('Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
+    print(
+        'Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
     super.initState();
   }
 
@@ -153,7 +154,8 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
       ),
       body: RefreshIndicator(
         color: LNColor.primaryColor,
-        onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(),
+        onRefresh: () => Provider.of<InternalProvider>(context, listen: false)
+            .internalPrepare(),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -165,7 +167,14 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                   Container(
                     alignment: Alignment.topCenter,
-                    decoration: BoxDecoration(color: Color(0xFFFFFFFF), borderRadius: BorderRadius.circular(8), border: Border.all(width: 3, color: Color(0xFFF0F0F0))),
+                    decoration: BoxDecoration(
+                      color: Color(0xFFFFFFFF),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        width: 3,
+                        color: Color(0xFFF0F0F0),
+                      ),
+                    ),
                     width: w * 0.93,
                     child: ModeWidget(),
                   ),
