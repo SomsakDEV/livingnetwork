@@ -137,7 +137,7 @@ class _ModeWidgetState extends State<ModeWidget> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Padding(
-                padding: const EdgeInsets.only(left: 10),
+                padding: const EdgeInsets.only(left: 5),
                 child: Row(
                   children: [
                     Image.asset(
@@ -215,7 +215,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                               return BottomSheetDecisionPaymentCardDialogMode(
                                 title: titlePaymentL,
                                 desc: descPaymentL,
-                                priceTime: priceTimeL,
+                                price: priceL,
+                                seperate: seperateL,
+                                time: timeL,
                                 vat: vatL,
                                 termsConditionsTitle: termsConditionsTitleL,
                                 termsConditionsDesc: termsConditionsDescL,
@@ -317,10 +319,12 @@ class _ModeWidgetState extends State<ModeWidget> {
                               return BottomSheetDecisionPaymentCardDialogMode(
                                 title: titlePaymentG,
                                 desc: descPaymentG,
-                                priceTime: priceTimeG,
+                                price: priceG,
+                                seperate: seperateG,
+                                time: timeG,
                                 vat: vatG,
                                 termsConditionsTitle: termsConditionsTitleG,
-                                termsConditionsDesc: termsConditionsDescG,
+                                termsConditionsDesc: "termsConditionsDescG",
                                 textSubmitBtn: textSubmitBtnC,
                                 textCancelBtn: textCancelBtn,
                                 onPressedSubmit: (isClicked) {
@@ -334,7 +338,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   data.mode?.modeUpdate?.mode5G.currentMode
                                           .expireDate =
                                       DateTime.now()
-                                          .add(const Duration(hours: 10))
+                                          .add(const Duration(hours: 1))
                                           .toString();
                                   data.mode?.modeUpdate?.mode5G.changeModePerDay
                                       .count++;
@@ -355,7 +359,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               return BottomSheetDecisionCardDialogMode(
                                 title: btmSheetTitleGame,
                                 desc: btmSheetDescGame,
-                                textSubmitBtn: textSubmitBtnC,
+                                textSubmitBtn: textSubmitBtnE,
                                 textCancelBtn: textCancelBtn,
                                 exitMode: true,
                                 onPressedSubmit: (isClicked) {

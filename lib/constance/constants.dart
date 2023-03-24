@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/utility/image_utils.dart';
 
-List title = ['Power / Boost Mode', 'Game Mode', 'Eco Mode'];
+List title = ['Boost mode', 'Eco mode', 'Game mode'];
 List subTitle = [
-  '5G Power / Boost Mode ให้คุณไลฟ์ไปได้ไม่มีสะดุด ไปกับความเร็ว แรง ของอินเทอร์เน็ต 5G',
-  '5G Game Mode สนุกเต็มแม็กซ์ ไม่มีกระตุกให้อารมณ์เสียไปกับความเร็วแรงของ 5G ที่เหมือนกับอินเทอร์เน็ตบรอดแบนด์',
-  '5G Eco Mode ให้คุณประหยัดแบตเตอรี่ แต่ยังสนุกไปกับความเร็ว แรง ของอินเทอร์เน็ต 5G'
+  '5G Max Mode ให้คุณเพลิดเพลินไปกับความเร็วแรงของ อินเทอร์เน็ตเต็มแม็กซ์',
+  '5G Eco Mode ให้คุณประหยัดแบตเตอรี่ แต่ยังสนุกไปกับความ เร็ว แรง ของอินเทอร์เน็ต 5G',
+  '5G Game Mode สนุกเต็มแม็กซ์ ไม่มีกระตุกให้อารมณ์เสีย ไปกับความเร็วแรงของ 5G ที่เหมือนกับอินเทอร์เน็ตบรอดแบนด์'
 ];
 List<Image> image = [
   Image.asset(
@@ -116,8 +116,8 @@ String notificationTitleLiveModeExpired =
 String notificationSubTitleLiveModeExpired =
     'การเชื่อมต่อ 5G ของคุณจะกลับเข้าสู่  Max Mode โดย\nอัตโนมัติ';
 
-String textSubmitBtnC = 'Confirm';
-String textSubmitBtnE = 'Exit';
+String textSubmitBtnC = 'ยืนยัน';
+String textSubmitBtnE = 'ยืนยัน';
 String textCancelBtn = 'Close';
 String textSubmitEco = 'Switch to Eco mode';
 
@@ -134,10 +134,12 @@ String gameSuccess = 'Switched to Game mode!';
 //switch mode payment
 String btmSheetTitlePower = 'Exit From Power/Boost mode?';
 String btmSheetDescPower = 'Detail: exit from power/boost mode';
-String titlePaymentL = 'สลับเป็น Power mode!';
+String titlePaymentL = 'สลับเป็นบูสโหมด!!';
 String descPaymentL =
     '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';
-String priceTimeL = '10 บาท | 1 ชั่วโมง';
+String priceL = '10 บาท';
+String seperateL = " | ";
+String timeL = "1 ชั่วโมง";
 String vatL = 'VAT Included';
 String termsConditionsTitleL = 'Terms & Conditions';
 String termsConditionsDescL =
@@ -148,11 +150,25 @@ String btmSheetDescGame = 'Detail: exit from game mode';
 String titlePaymentG = 'สลับเป็นเกมโหมด!';
 String descPaymentG =
     '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';
-String priceTimeG = '10 บาท | 1 ชั่วโมง';
+String priceG = '10 บาท';
+String seperateG = " | ";
+String timeG = "1 ชั่วโมง";
 String vatG = 'VAT Included';
 String termsConditionsTitleG = 'Terms & Conditions';
-String termsConditionsDescG =
-    '1.The exceas unago ratea are 1.50 Baht minute for voice and video calis to anry retwork (Secande are rounded up to the next minutel, 2.50 Baht/Sh/S and 4 Baht/MMS. AISsupor WIFi: The Wifi sorvice systom will gend a Wifi userrame and password autoraticaly via SMS. For more information, please go to www aie.co.towiti Exiating custorers can aubacribe to this package with an initial subscription fee of 30 Baht per subscription. limited to 3 subecriotion per month. The allowance and servico ratea aro for domestic use anly. Commercial utization and other appications tnat may affect the service of other clentr are prohibited.The ucage allowance ia valid for each biling cycle. The remaining alowance carinot be accurulated for use in the next biling cycles. The unage allawance wil be torminated immediately whan the pack is changed or tranaferred.Al senvice rotes sre 79 VAT exclucive.This package is valid for 12 bill cyctes cansacutivalyFree unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial 889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.';
+var termsConditionsDescG = {
+  "1":
+      "The exceas unago ratea are 1.50 Baht minute for voice and video calis to anry retwork (Secande are rounded up to the next minutel, 2.50 Baht/Sh/S and 4 Baht/MMS. AISsupor WIFi: The Wifi sorvice systom will gend a Wifi userrame and password autoraticaly via SMS. For more information, please go to www aie.co.towiti Exiating custorers can aubacribe to this package with an initial subscription fee of 30 Baht per subscription. limited to 3 subecriotion per month.",
+  "2":
+      "The allowance and servico ratea aro for domestic use anly. Commercial utization and other appications tnat may affect the service of other clentr are prohibited. The ucage allowance ia valid for each biling cycle. The remaining alowance carinot be accurulated for use in the next biling cycles. The unage allawance wil be torminated immediately whan the pack is changed or tranaferred. Al senvice rotes sre 79 VAT exclucive.",
+  "3":
+      "This package is valid for 12 bill cyctes cansacutivaly Free unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial \"889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
+  "4": "AIS Play: ready to enioy Immociatoly",
+  "5":
+      "Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation.",
+  "6":
+      "Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
+};
+
 //Performance
 // List<PerformanceModel> contentList = [
 //   PerformanceModel(

@@ -15,17 +15,18 @@ class BottomSheetDecisionCardDialogMode extends StatefulWidget {
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetDecisionCardDialogMode({Key? key,
-    required this.title,
-    required this.desc,
-    required this.textSubmitBtn,
-    required this.textCancelBtn,
-    required this.onPressedSubmit,
-    required this.onPressedCancel,
-    this.imagePath,
-    this.isDisable,
-    this.exitMode,
-    this.hasBorderCancelBtn})
+  const BottomSheetDecisionCardDialogMode(
+      {Key? key,
+      required this.title,
+      required this.desc,
+      required this.textSubmitBtn,
+      required this.textCancelBtn,
+      required this.onPressedSubmit,
+      required this.onPressedCancel,
+      this.imagePath,
+      this.isDisable,
+      this.exitMode,
+      this.hasBorderCancelBtn})
       : super(key: key);
 
   @override
@@ -52,13 +53,8 @@ class _BottomSheetDecisionCardDialogModeState
             ),
             child: Padding(
               padding: EdgeInsets.only(
-                  top: 16.0,
-                  bottom: MediaQuery
-                      .of(context)
-                      .size
-                      .height * 0.053,
-                  left: 16.0,
-                  right: 16.0),
+                bottom: MediaQuery.of(context).size.height * 0.053,
+              ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.min,
@@ -76,24 +72,24 @@ class _BottomSheetDecisionCardDialogModeState
                             padding: const EdgeInsets.all(16),
                             child: Text(
                               widget.textCancelBtn,
-                              style: widget.exitMode ?? false ? LNStyle.buttonSheetTextButtonCloseExit : LNStyle.buttonSheetTextButtonCloseAdd,
+                              style: widget.exitMode ?? false
+                                  ? LNStyle.buttonSheetTextButtonCloseExit
+                                  : LNStyle.buttonSheetTextButtonCloseAdd,
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16),
-                    child: Text(
-                      widget.title,
-                      style: widget.exitMode ?? false ? LNStyle.buttonSheetTitleExit : LNStyle.buttonSheetTitleAdd,
-                    ),
+                  Text(
+                    widget.title,
+                    style: widget.exitMode ?? false
+                        ? LNStyle.buttonSheetTitleExit
+                        : LNStyle.buttonSheetTitleAdd,
                   ),
                   Padding(
-                    padding:
-                    const EdgeInsets.only(
-                        left: 16.0, top: 8, right: 16.0, bottom: 40),
+                    padding: const EdgeInsets.only(
+                        top: 8, bottom: 40, left: 10, right: 10),
                     child: Text(
                       textAlign: TextAlign.center,
                       widget.desc,
@@ -102,27 +98,16 @@ class _BottomSheetDecisionCardDialogModeState
                       style: LNStyle.buttonSheetDesc,
                     ),
                   ),
-                  // Container(
-                  //   child: widget.imagePath == null
-                  //       ? const SizedBox(height: 45)
-                  //       : Padding(
-                  //           padding:
-                  //               const EdgeInsets.only(top: 24.0, bottom: 33),
-                  //           child: Image.asset(
-                  //             widget.imagePath!,
-                  //             fit: BoxFit.fill,
-                  //             height: 72,
-                  //             width: 72,
-                  //           ),
-                  //         ),
-                  // ),
                   Button(
                     title: widget.textSubmitBtn,
-                    backgroundColor: widget.exitMode ?? false ? LNColor.speedCompare1 : LNColor.kellyGreen500,
+                    backgroundColor: widget.exitMode ?? false
+                        ? LNColor.speedCompare1
+                        : LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
                     isDisable: widget.isDisable ?? false,
                     height: 54,
+                    width: MediaQuery.of(context).size.width * 0.9,
                     borderRadius: 8,
                     fontSize: 28,
                     fontWeight: FontWeight.w500,

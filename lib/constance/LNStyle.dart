@@ -380,7 +380,7 @@ class LNStyle {
 
   static const uiBottomSheetTextDesc = TextStyle(
     fontFamily: 'DB Heavent',
-    color: LNColor.header6_1,
+    color: LNColor.textColorTabBar,
     fontSize: 16,
     fontWeight: FontWeight.w400,
     fontStyle: FontStyle.normal,
@@ -447,6 +447,17 @@ class LNStyle {
     color: LNColor.greenColorClose,
     fontSize: 32,
     fontWeight: FontWeight.w700,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    height: 1,
+    // letterSpacing: -0.4,
+  );
+
+  static const buttonSheetSeperate = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.greenColorClose,
+    fontSize: 32,
+    fontWeight: FontWeight.w100,
     fontStyle: FontStyle.normal,
     leadingDistribution: TextLeadingDistribution.even,
     height: 1,

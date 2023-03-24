@@ -13,8 +13,7 @@ dependencies:
     sdk: flutter
     
   living_network_repository:
-    path: ../living_network_repository
-    # path: /Users/pipap/Desktop/mfaf/living_network_repository
+#    path: ../living_network_repository
     git:    
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git    
       ref: develop
