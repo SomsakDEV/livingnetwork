@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
@@ -13,14 +15,28 @@ class InternalProvider with ChangeNotifier {
 
   String? get status => _status;
 
+  Future<bool> initialCore(String token) async {
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      var coreConfig = CoreConfig(mode: Mode.debug);
+      await coreConfig.checkOrGetConfig().whenComplete(() =>
+          IntiAppCionfig().setInitAppConfig().whenComplete(() =>
+              coreConfig.checkCacheConfig()));
+      return await internalPrepare(token);
+    } catch (e, st) {
+      print('[LIVING_NETWORK] $e, $st');
+      return false;
+    }
+  }
+
   Future<bool> internalPrepare(String token) async {
     List<String?> listCase = [null, 'mobile4G', 'mobile5G'];
-    String? caseTest= listCase[2];
+    String? caseTest = listCase[2];
     repo = repo ?? InitialInternal();
     _mode = await repo?.getModeSocket(token, caseTest: caseTest);
     // _mode = await repo?.getMode(token, caseTest: caseTest);
     _status = caseTest ?? await repo?.getCurrentNetworkStatus();
-    print('Mode : ${_mode?.toJson()}');
+    print('[LIVING_NETWORK] Mode : ${_mode?.toJson()}');
     _verify = (_mode != null);
     notifyListeners();
     return _verify;
@@ -29,19 +45,19 @@ class InternalProvider with ChangeNotifier {
   Future<String> updateMode5G(MsisdnDB? msisdnDB, CheckModeProfile? checkModeProfile) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
-    print('Mode reload  : ${_mode?.toJson()}');
+    print('[LIVING_NETWORK] Mode reload  : ${_mode?.toJson()}');
     notifyListeners();
     return "Success";
   }
 
-  Future<String> getAddMode(Msisdn? msisdn,String mode) async {
+  Future<String> getAddMode(Msisdn? msisdn, String mode) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.getAddPackageSocket(msisdn, mode);
     notifyListeners();
     return "Success";
   }
 
-  Future<String> getDeleteMode(Msisdn? msisdn,String mode) async {
+  Future<String> getDeleteMode(Msisdn? msisdn, String mode) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.getDeletePackageSocket(msisdn, mode);
     notifyListeners();
