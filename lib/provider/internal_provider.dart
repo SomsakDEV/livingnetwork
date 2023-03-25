@@ -24,7 +24,7 @@ class InternalProvider with ChangeNotifier {
               coreConfig.checkCacheConfig()));
       return await internalPrepare(token);
     } catch (e, st) {
-      print('[LN_ERROR] $e, $st');
+      print('[LIVING_NETWORK] $e, $st');
       return false;
     }
   }
@@ -36,7 +36,7 @@ class InternalProvider with ChangeNotifier {
     _mode = await repo?.getModeSocket(token, caseTest: caseTest);
     // _mode = await repo?.getMode(token, caseTest: caseTest);
     _status = caseTest ?? await repo?.getCurrentNetworkStatus();
-    print('Mode : ${_mode?.toJson()}');
+    print('[LIVING_NETWORK] Mode : ${_mode?.toJson()}');
     _verify = (_mode != null);
     notifyListeners();
     return _verify;
@@ -45,7 +45,7 @@ class InternalProvider with ChangeNotifier {
   Future<String> updateMode5G(MsisdnDB? msisdnDB, CheckModeProfile? checkModeProfile) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
-    print('Mode reload  : ${_mode?.toJson()}');
+    print('[LIVING_NETWORK] Mode reload  : ${_mode?.toJson()}');
     notifyListeners();
     return "Success";
   }
