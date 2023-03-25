@@ -25,19 +25,19 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   late Duration duration;
   late Timer timer;
 
-  timeState() {
+  _counting() {
     final seconds = duration.inSeconds - 1;
     print(seconds);
     // seconds < 0 ? waitUpdate() & timer.cancel() : duration = Duration(seconds: seconds);
     if (seconds < 0) {
-      waitUpdate();
+      _sessionExpire();
       timer.cancel();
     } else {
       duration = Duration(seconds: seconds);
     }
   }
 
-  waitUpdate() {
+  _sessionExpire() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
         context: context,
@@ -106,7 +106,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 timer = Timer.periodic(
                     const Duration(seconds: 1),
                     (_) => setState(() {
-                          timeState();
+                          _counting();
                         }));
                 return Dialog(
                   backgroundColor: LNColor.transparent,
