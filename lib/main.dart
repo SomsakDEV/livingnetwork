@@ -17,7 +17,7 @@ class LivingNetwork extends StatefulWidget {
 }
 
 class _LivingNetworkState extends State<LivingNetwork> {
-  String? token;
+  String token = "eyJhbGciOiJIUzI1NiJ9.eyJtb2JpbGVObyI6IjA2NTkzMzIwNjEiLCJuZXR3b3JrVHlwZSI6Ik1BU1MiLCJ0aW1lc3RhbXAiOiIyMDIzLTAzLTIzVDE0OjU0OjMyKzA3OjAwIn0.R4eHmEG4oP4pZnKl5bCZPdjDBkhkUzrCBdh1rVZKlJE";
 
   @override
   Widget build(BuildContext context) {
@@ -37,7 +37,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
           // '/': (context) => HomePage(),
           // '/map': (context) => MapScreen(),
           // '/map/direction': (context) => MapDirection(),
-          '/internal_test': (context) => Mode5GInternal(),
+          '/internal_test': (context) => Mode5GInternal(token: token),
         },
       ),
     );

@@ -1,62 +1,145 @@
-// ignore_for_file: prefer_const_constructors , prefer_const_literals_to_create_immutables
+// ignore_for_file: prefer_const_constructors
+
+import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/provider/internal_provider.dart';
+import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 
 class Mode5GInternal extends StatefulWidget {
-  Mode5GInternal({
-    Key? key,
-  }) : super(key: key);
+  String token;
+
+  Mode5GInternal({Key? key, required this.token}) : super(key: key);
 
   @override
   State<Mode5GInternal> createState() => _Mode5GInternalState();
 }
 
 class _Mode5GInternalState extends State<Mode5GInternal> {
-  @override
-  void initState() {
-    print(
-        'Verify : ${Provider.of<InternalProvider>(context, listen: false).internalPrepare()}');
-    super.initState();
+  late Duration duration;
+  late Timer timer;
+
+  _counting() {
+    final seconds = duration.inSeconds - 1;
+    print(seconds);
+    // seconds < 0 ? waitUpdate() & timer.cancel() : duration = Duration(seconds: seconds);
+    if (seconds < 0) {
+      _sessionExpire();
+      timer.cancel();
+    } else {
+      duration = Duration(seconds: seconds);
+    }
   }
 
-  /*@override
+  _sessionExpire() {
+    WidgetsBinding.instance.addPostFrameCallback(
+          (_) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return Dialog(
+            backgroundColor: LNColor.transparent,
+            child: Wrap(
+              children: [
+                Container(
+                  decoration: const BoxDecoration(
+                    color: LNColor.neutralsWhite,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                        child: Image.asset(ImageUtils.getImagePath('assets/piggy.gif')),
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text('Please Login again!!!!!', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Button(
+                        textStyle: LNStyle.dialogButtonText,
+                        title: "OK",
+                        buttonType: ButtonType.primaryBtn,
+                        onPress: () {
+                          SystemNavigator.pop();
+                        },
+                        borderRadius: 6,
+                        width: 236,
+                        height: 36,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
+  @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
+          (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
           return FutureBuilder(
-            future: Provider.of<InternalProvider>(context, listen: false).internalPrepare(),
+            future: Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
+                int sec = DateTime.now().add(Duration(hours: 1)).difference(DateTime.now()).inSeconds;
+                duration = Duration(seconds: sec <= 0 ? 0 : sec);
+                timer = Timer.periodic(
+                    const Duration(seconds: 1),
+                        (_) => setState(() {
+                      _counting();
+                    }));
                 return Dialog(
                   backgroundColor: LNColor.transparent,
                   child: Wrap(
                     children: [
                       Container(
-                        padding: EdgeInsets.all(10),
                         decoration: const BoxDecoration(
                           color: LNColor.neutralsWhite,
                           borderRadius: BorderRadius.all(Radius.circular(10)),
                         ),
                         child: Column(
                           children: [
+                            ClipRRect(
+                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                              child: Image.asset(
+                                ImageUtils.getImagePath('assets/images/image.png'),
+                                width: 260,
+                              ),
+                            ),
                             SizedBox(
                               height: 16,
                             ),
-                            Text('Initial Success', style: LNStyle.dialogHeader),
+                            Text('5G Modes!', style: LNStyle.dialogHeader),
                             SizedBox(
                               height: 8,
                             ),
+                            Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                            SizedBox(
+                              height: 16,
+                            ),
                             Button(
                               textStyle: LNStyle.dialogButtonText,
-                              title: "OK",
+                              title: "Got it",
                               buttonType: ButtonType.primaryBtn,
                               onPress: () {
                                 Navigator.pop(context);
@@ -122,17 +205,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
               } else {
                 return Dialog(
                   backgroundColor: LNColor.transparent,
-                  child: Container(
-                    width: 30,
-                    height: 30,
-                    decoration: BoxDecoration(
-                      color: LNColor.transparent,
-                      image: DecorationImage(
-                        image: AssetImage('assets/test.gif'),
-                        fit: BoxFit.fill,
-                      ),
-                    ),
-                  ),
+                  child: SizedBox(),
                 );
               }
             },
@@ -141,7 +214,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
       ),
     );
     super.initState();
-  }*/
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -151,11 +224,15 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
       appBar: AppBar(
         title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
         backgroundColor: Colors.white,
+        centerTitle: true,
+        leading: BackButton(
+          color: LNColor.blackColor,
+          onPressed: () => SystemNavigator.pop(),
+        ),
       ),
       body: RefreshIndicator(
         color: LNColor.primaryColor,
-        onRefresh: () => Provider.of<InternalProvider>(context, listen: false)
-            .internalPrepare(),
+        onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
         child: SafeArea(
           child: Center(
             child: SingleChildScrollView(
@@ -177,6 +254,17 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                     ),
                     width: w * 0.93,
                     child: ModeWidget(),
+                  ),
+                  Text(
+                    'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).status}',
+                    style: TextStyle(color: LNColor.failColor, fontSize: 20),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.all(15.0),
+                    child: Text(
+                      'Data : ${Provider.of<InternalProvider>(context, listen: true).mode == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode!.toJson()}',
+                      style: TextStyle(color: LNColor.failColor, fontSize: 17),
+                    ),
                   ),
                   SizedBox(
                     height: h * 0.4,
