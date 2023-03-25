@@ -27,8 +27,6 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
 
   _counting() {
     final seconds = duration.inSeconds - 1;
-    print(seconds);
-    // seconds < 0 ? waitUpdate() & timer.cancel() : duration = Duration(seconds: seconds);
     if (seconds < 0) {
       _sessionExpire();
       timer.cancel();
