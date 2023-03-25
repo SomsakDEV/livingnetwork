@@ -13,6 +13,13 @@ class InternalProvider with ChangeNotifier {
 
   String? get status => _status;
 
+  Future<bool> initialCore(String token) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    var coreConfig = CoreConfig(mode: Mode.release);
+    coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
+    return internalPrepare(token);
+  }
+
   Future<bool> internalPrepare(String token) async {
     List<String?> listCase = [null, 'mobile4G', 'mobile5G'];
     String? caseTest= listCase[2];

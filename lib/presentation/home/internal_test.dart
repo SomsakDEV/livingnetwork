@@ -98,7 +98,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         barrierDismissible: false,
         builder: (context) {
           return FutureBuilder(
-            future: Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
+            future: Provider.of<InternalProvider>(context, listen: false).initialCore(widget.token),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
                 int sec = DateTime.now().add(Duration(hours: 1)).difference(DateTime.now()).inSeconds;

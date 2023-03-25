@@ -3,13 +3,9 @@ import 'package:flutter/services.dart';
 import 'package:living_network/presentation/home/internal_test.dart';
 import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network_repository/living_network_repository.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  var coreConfig = CoreConfig(mode: Mode.debug);
-  await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
   runApp(LivingNetwork());
 }
 
@@ -26,7 +22,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
 
   @override
   void initState() {
-    // _wRequest();
+    _wRequest();
     super.initState();
   }
 
