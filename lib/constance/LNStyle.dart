@@ -453,7 +453,7 @@ class LNStyle {
     // letterSpacing: -0.4,
   );
 
-  static const buttonSheetSeperate = TextStyle(
+  static const buttonSheetSeparate = TextStyle(
     fontFamily: 'DB Heavent',
     color: LNColor.greenColorClose,
     fontSize: 32,

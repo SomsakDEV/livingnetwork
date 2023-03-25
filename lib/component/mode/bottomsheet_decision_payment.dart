@@ -46,7 +46,7 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 class _BottomSheetDecisionPaymentCardDialogModeState
     extends State<BottomSheetDecisionPaymentCardDialogMode> {
   Widget? termConditionDesc() {
-    Map<String, dynamic> koko = termsConditionsDescG;
+    Map<String, dynamic> koko = termsConditionsDesc;
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
@@ -154,7 +154,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                           widget.price,
                           style: LNStyle.buttonSheetPriceTime,
                         ),
-                        Text(widget.seperate, style: LNStyle.buttonSheetSeperate,),
+                        Text(widget.seperate, style: LNStyle.buttonSheetSeparate,),
                         Text(
                           widget.time,
                           style: LNStyle.buttonSheetPriceTime,
@@ -197,8 +197,8 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                         height: 140,
                         child: Scrollbar(
                           thickness: 5,
-                          isAlwaysShown: true,
-                          showTrackOnHover: true,
+                          thumbVisibility: true,
+                          trackVisibility: true,
                           scrollbarOrientation: ScrollbarOrientation.right,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
