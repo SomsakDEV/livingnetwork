@@ -17,7 +17,8 @@ class InternalProvider with ChangeNotifier {
     List<String?> listCase = [null, 'mobile4G', 'mobile5G'];
     String? caseTest= listCase[2];
     repo = repo ?? InitialInternal();
-    _mode = await repo?.getMode(token, caseTest: caseTest);
+    _mode = await repo?.getModeSocket(token, caseTest: caseTest);
+    // _mode = await repo?.getMode(token, caseTest: caseTest);
     _status = caseTest ?? await repo?.getCurrentNetworkStatus();
     print('Mode : ${_mode?.toJson()}');
     _verify = (_mode != null);
@@ -29,6 +30,20 @@ class InternalProvider with ChangeNotifier {
     repo = repo ?? InitialInternal();
     _mode = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
     print('Mode reload  : ${_mode?.toJson()}');
+    notifyListeners();
+    return "Success";
+  }
+
+  Future<String> getAddMode(Msisdn? msisdn,String mode) async {
+    repo = repo ?? InitialInternal();
+    _mode = await repo?.getAddPackageSocket(msisdn, mode);
+    notifyListeners();
+    return "Success";
+  }
+
+  Future<String> getDeleteMode(Msisdn? msisdn,String mode) async {
+    repo = repo ?? InitialInternal();
+    _mode = await repo?.getDeletePackageSocket(msisdn, mode);
     notifyListeners();
     return "Success";
   }
