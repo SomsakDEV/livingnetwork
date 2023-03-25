@@ -237,7 +237,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   data.mode?.modeUpdate?.mode5G.currentMode
                                           .expireDate =
                                       DateTime.now()
-                                          .add(const Duration(hours: 1))
+                                          .add(const Duration(minutes: 5))
                                           .toString();
                                   data.mode?.modeUpdate?.mode5G.changeModePerDay
                                       .count++;
@@ -343,7 +343,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   data.mode?.modeUpdate?.mode5G.currentMode
                                           .expireDate =
                                       DateTime.now()
-                                          .add(const Duration(hours: 1))
+                                          .add(const Duration(minutes: 5))
                                           .toString();
                                   data.mode?.modeUpdate?.mode5G.changeModePerDay
                                       .count++;
