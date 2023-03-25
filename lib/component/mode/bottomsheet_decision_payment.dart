@@ -154,7 +154,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                           widget.price,
                           style: LNStyle.buttonSheetPriceTime,
                         ),
-                        Text(widget.seperate, style: LNStyle.buttonSheetSeperate,),
+                        Text(widget.seperate, style: LNStyle.buttonSheetSeparate,),
                         Text(
                           widget.time,
                           style: LNStyle.buttonSheetPriceTime,
