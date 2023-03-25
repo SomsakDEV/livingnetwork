@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'package:flutter/material.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
@@ -14,15 +16,22 @@ class InternalProvider with ChangeNotifier {
   String? get status => _status;
 
   Future<bool> initialCore(String token) async {
-    WidgetsFlutterBinding.ensureInitialized();
-    var coreConfig = CoreConfig(mode: Mode.release);
-    coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
-    return internalPrepare(token);
+    try {
+      WidgetsFlutterBinding.ensureInitialized();
+      var coreConfig = CoreConfig(mode: Mode.debug);
+      await coreConfig.checkOrGetConfig().whenComplete(() =>
+          IntiAppCionfig().setInitAppConfig().whenComplete(() =>
+              coreConfig.checkCacheConfig()));
+      return await internalPrepare(token);
+    } catch (e, st) {
+      print('[LN_ERROR] $e, $st');
+      return false;
+    }
   }
 
   Future<bool> internalPrepare(String token) async {
     List<String?> listCase = [null, 'mobile4G', 'mobile5G'];
-    String? caseTest= listCase[2];
+    String? caseTest = listCase[2];
     repo = repo ?? InitialInternal();
     _mode = await repo?.getModeSocket(token, caseTest: caseTest);
     // _mode = await repo?.getMode(token, caseTest: caseTest);
@@ -41,14 +50,14 @@ class InternalProvider with ChangeNotifier {
     return "Success";
   }
 
-  Future<String> getAddMode(Msisdn? msisdn,String mode) async {
+  Future<String> getAddMode(Msisdn? msisdn, String mode) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.getAddPackageSocket(msisdn, mode);
     notifyListeners();
     return "Success";
   }
 
-  Future<String> getDeleteMode(Msisdn? msisdn,String mode) async {
+  Future<String> getDeleteMode(Msisdn? msisdn, String mode) async {
     repo = repo ?? InitialInternal();
     _mode = await repo?.getDeletePackageSocket(msisdn, mode);
     notifyListeners();
