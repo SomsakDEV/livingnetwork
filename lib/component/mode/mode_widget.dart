@@ -89,7 +89,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     ss.setIsDisable(value);
   }
 
-  Future<bool?> wUpdate(InternalProvider data,bool addSocket, String mode,
+  Future<void> wUpdate(InternalProvider data,bool addSocket, String mode,
       {String loadingGif = 'default', String add = 'default'}) async {
     String img = loadingGif == 'game'
         ? 'assets/loading_game_mode.gif'
