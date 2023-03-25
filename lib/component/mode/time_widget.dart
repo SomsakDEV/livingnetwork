@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/provider/internal_provider.dart';
-import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -71,9 +70,9 @@ class _TimeWidgetState extends State<TimeWidget> {
       if(seconds < 0) {
         String lastMode =
             data.mode?.modeUpdate?.mode5G.lastDefaultMode ?? 'max_mode';
-        bool fk = (lastMode == 'boost_mode' || lastMode == 'game_mode');
+        bool last = (lastMode == 'boost_mode' || lastMode == 'game_mode');
         data.mode?.modeUpdate?.mode5G.currentMode.modeName =
-        fk ? 'max_mode' : lastMode;
+        last ? 'max_mode' : lastMode;
         data.mode?.modeUpdate?.mode5G.lastDefaultMode =
             data.mode?.mode ?? 'max_mode';
         data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';

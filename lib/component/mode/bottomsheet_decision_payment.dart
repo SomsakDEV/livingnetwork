@@ -46,11 +46,11 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 class _BottomSheetDecisionPaymentCardDialogModeState
     extends State<BottomSheetDecisionPaymentCardDialogMode> {
   Widget? termConditionDesc() {
-    Map<String, dynamic> koko = termsConditionsDescG;
+    Map<String, dynamic> desc = termsConditionsDesc;
     return ListView.builder(
       scrollDirection: Axis.vertical,
       shrinkWrap: true,
-      itemCount: koko.length,
+      itemCount: desc.length,
       itemBuilder: (context, index) {
         int s = index + 1;
         return Row(
@@ -68,7 +68,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                 child: Padding(
                   padding: const EdgeInsets.only(right: 5),
                   child: Text(
-                    koko["$s"].toString(),
+                    desc["$s"].toString(),
                     style: LNStyle.buttonSheetTermDesc,
                   ),
                 ))
@@ -197,8 +197,8 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                         height: 140,
                         child: Scrollbar(
                           thickness: 5,
-                          isAlwaysShown: true,
-                          showTrackOnHover: true,
+                          thumbVisibility: true,
+                          trackVisibility: true,
                           scrollbarOrientation: ScrollbarOrientation.right,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
@@ -206,7 +206,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
-                                  widget.termsConditionsTitle,
+                                  termsConditionsTitle,
                                   style: LNStyle.buttonSheetTermTitle,
                                 ),
                                 Container(child: termConditionDesc()),
@@ -243,9 +243,6 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                     borderRadius: 8,
                     fontSize: 28,
                     fontWeight: FontWeight.w500,
-                  ),
-                  const SizedBox(
-                    height: 34,
                   ),
                 ],
               ),

@@ -222,9 +222,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 seperate: seperateL,
                                 time: timeL,
                                 vat: vatL,
-                                termsConditionsTitle: termsConditionsTitleL,
-                                termsConditionsDesc: termsConditionsDescL,
-                                textSubmitBtn: textSubmitBtnC,
+                                termsConditionsTitle: termsConditionsTitle,
+                                termsConditionsDesc: '',
+                                textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
@@ -258,7 +258,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               return BottomSheetDecisionCardDialogMode(
                                 title: btmSheetTitlePower,
                                 desc: btmSheetDescPower,
-                                textSubmitBtn: textSubmitBtnE,
+                                textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 exitMode: true,
                                 onPressedSubmit: (isClicked) {
@@ -328,9 +328,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                 seperate: seperateG,
                                 time: timeG,
                                 vat: vatG,
-                                termsConditionsTitle: termsConditionsTitleG,
+                                termsConditionsTitle: termsConditionsTitle,
                                 termsConditionsDesc: "termsConditionsDescG",
-                                textSubmitBtn: textSubmitBtnC,
+                                textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 onPressedSubmit: (isClicked) {
                                   Navigator.pop(context);
@@ -364,7 +364,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               return BottomSheetDecisionCardDialogMode(
                                 title: btmSheetTitleGame,
                                 desc: btmSheetDescGame,
-                                textSubmitBtn: textSubmitBtnE,
+                                textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 exitMode: true,
                                 onPressedSubmit: (isClicked) {
@@ -457,7 +457,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               return BottomSheetDecisionCardDialogMode(
                                 title: btmSheetTitleEco,
                                 desc: btmSheetDescEco,
-                                textSubmitBtn: textSubmitBtnE,
+                                textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 exitMode: true,
                                 onPressedSubmit: (isClicked) async {
