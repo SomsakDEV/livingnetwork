@@ -54,7 +54,7 @@ class LnProvider with ChangeNotifier {
   }
 
   Future<String> updateMode5G(
-      MsisdnDB? msisdnDB, CheckModeProfile? checkModeProfile) async {
+      MsisdnMode? msisdnDB, CheckModeProfile? checkModeProfile) async {
       repo1 = repo1 ?? InitialInternal();
       _mode = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
       print('Mode reload  : ${_mode?.toJson()}');
