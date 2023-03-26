@@ -6,14 +6,15 @@ import 'package:living_network_repository/living_network_repository.dart';
 
 class InternalProvider with ChangeNotifier {
   InitialInternal? repo;
-  late bool _verify = false;
-
   Mode5G? _mode5G;
+  String? _status;
+  DateTime? _sExpire;
 
   Mode5G? get mode5G => _mode5G;
-  String? _status;
 
   String? get status => _status;
+
+  DateTime? get sExpire => _sExpire;
 
   List<String?> listCase = [null, 'mobile4G', 'mobile5G'];
   String? caseTest;
@@ -31,15 +32,19 @@ class InternalProvider with ChangeNotifier {
   }
 
   Future<bool> internalPrepare(String token) async {
-    repo = repo ?? InitialInternal();
-    _mode5G = await repo?.getModeSocket(token, caseTest: caseTest);
-    // _mode = await repo?.getMode(token, caseTest: caseTest);
-    caseTest = listCase[2];
-    _status = caseTest ?? await repo?.getCurrentNetworkStatus();
-    print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-    _verify = (_mode5G != null);
-    notifyListeners();
-    return _verify;
+    try {
+      caseTest = listCase[2];
+      repo = repo ?? InitialInternal();
+      _mode5G = await repo?.getModeSocket(token, caseTest: caseTest);
+      _status = caseTest ?? await repo?.getCurrentNetworkStatus();
+      _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
+      print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
+      notifyListeners();
+      return (_mode5G != null);
+    } catch (e, st) {
+      print('[LIVING_NETWORK] $e, $st');
+      return false;
+    }
   }
 
   Future<String> updateMode5G(MsisdnMode? msisdnDB, CheckModeProfile? checkModeProfile) async {
@@ -53,6 +58,7 @@ class InternalProvider with ChangeNotifier {
   Future<String> getAddMode(String mode) async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getAddPackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: caseTest);
+    print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
     return "Success";
   }
@@ -60,6 +66,7 @@ class InternalProvider with ChangeNotifier {
   Future<String> getDeleteMode(String mode) async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getDeletePackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: caseTest);
+    print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
     return "Success";
   }

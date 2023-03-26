@@ -89,7 +89,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     ss.setIsDisable(value);
   }
 
-  Future<void> wUpdate(InternalProvider data,bool addSocket, String mode,
+  Future<void> wUpdate(InternalProvider data, bool addSocket, String mode,
       {String loadingGif = 'default', String add = 'default'}) async {
     String img = loadingGif == 'game'
         ? 'assets/loading_game_mode.gif'
@@ -185,7 +185,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false)
+                        ((data.mode5G?.isDisableModeLive ?? false) ||
+                                (data.mode5G?.isDisableMode ?? false))
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_power_bw.png')
                             : ImageUtils.getImagePath(
@@ -200,7 +201,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'boost_mode',
-                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableModeLive ?? false) ||
+                          (data.mode5G?.isDisableMode ?? false),
                       expireDate: data.mode5G?.mode == 'boost_mode'
                           ? data.mode5G?.expireMode
                           : null,
@@ -239,8 +241,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       DateTime.now()
                                           .add(const Duration(minutes: 5))
                                           .toString();
-                                  data.mode5G?.modeUpdate?.mode5G.changeModePerDay
-                                      .count++;
+                                  data.mode5G?.modeUpdate?.mode5G
+                                      .changeModePerDay.count++;
                                   wUpdate(data, true, 'boost_mode',
                                       add: 'boost');
                                 },
@@ -271,8 +273,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .modeName = 'max_mode';
                                   data.mode5G?.modeUpdate?.mode5G.currentMode
                                       .expireDate = '';
-                                  data.mode5G?.modeUpdate?.mode5G.changeModePerDay
-                                      .count++;
+                                  data.mode5G?.modeUpdate?.mode5G
+                                      .changeModePerDay.count++;
                                   wUpdate(data, false, 'boost_mode',
                                       add: 'delete');
                                 },
@@ -288,7 +290,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false)
+                        ((data.mode5G?.isDisableModeGame ?? false) ||
+                                (data.mode5G?.isDisableMode ?? false))
                             // ||
                             //     (data.displayScreen?.mode?.isDisableModeGame ??
                             //         false)
@@ -306,7 +309,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'game_mode',
-                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableModeGame ?? false) ||
+                          (data.mode5G?.isDisableMode ?? false),
                       expireDate: data.mode5G?.mode == 'game_mode'
                           ? data.mode5G?.expireMode
                           : null,
@@ -345,8 +349,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       DateTime.now()
                                           .add(const Duration(minutes: 5))
                                           .toString();
-                                  data.mode5G?.modeUpdate?.mode5G.changeModePerDay
-                                      .count++;
+                                  data.mode5G?.modeUpdate?.mode5G
+                                      .changeModePerDay.count++;
                                   wUpdate(data, true, 'game_mode',
                                       loadingGif: 'game', add: 'game');
                                 },
@@ -377,8 +381,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .modeName = 'max_mode';
                                   data.mode5G?.modeUpdate?.mode5G.currentMode
                                       .expireDate = '';
-                                  data.mode5G?.modeUpdate?.mode5G.changeModePerDay
-                                      .count++;
+                                  data.mode5G?.modeUpdate?.mode5G
+                                      .changeModePerDay.count++;
                                   wUpdate(data, false, 'game_mode',
                                       loadingGif: 'game', add: 'delete');
                                 },
@@ -400,7 +404,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false)
+                        ((data.mode5G?.isDisableModeEco ?? false) ||
+                                (data.mode5G?.isDisableMode ?? false))
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -415,7 +420,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'eco_mode',
-                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableModeEco ?? false) ||
+                          (data.mode5G?.isDisableMode ?? false),
                       onPress: () {
                         if (!(data.mode5G?.mode == 'eco_mode')) {
                           showModalBottomSheet(
@@ -438,10 +444,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .modeName = 'eco_mode';
                                   data.mode5G?.modeUpdate?.mode5G.currentMode
                                       .expireDate = '';
-                                  data.mode5G?.modeUpdate?.mode5G.changeModePerDay
-                                      .count++;
-                                  wUpdate(data, true, 'eco_mode',
-                                      add: 'eco');
+                                  data.mode5G?.modeUpdate?.mode5G
+                                      .changeModePerDay.count++;
+                                  wUpdate(data, true, 'eco_mode', add: 'eco');
                                 },
                                 onPressedCancel: (isClicked) =>
                                     Navigator.pop(context),
