@@ -68,4 +68,11 @@ class InternalProvider with ChangeNotifier {
     notifyListeners();
     return "Success";
   }
+
+  Future<String> getExpireMode() async {
+    repo = repo ?? InitialInternal();
+    _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: caseTest);
+    notifyListeners();
+    return "Success";
+  }
 }
