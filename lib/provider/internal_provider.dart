@@ -33,9 +33,9 @@ class InternalProvider with ChangeNotifier {
 
   Future<bool> internalPrepare(String token) async {
     try {
+      caseTest = listCase[2];
       repo = repo ?? InitialInternal();
       _mode5G = await repo?.getModeSocket(token, caseTest: caseTest);
-      caseTest = listCase[2];
       _status = caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');

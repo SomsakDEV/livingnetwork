@@ -37,7 +37,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
 
   _sessionExpire() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
+          (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -91,7 +91,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
+          (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -100,13 +100,14 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
                 DateTime sExpire = Provider.of<InternalProvider>(context).sExpire ?? DateTime.now().add(Duration(hours: 1));
+                print('[LIVING_NETWORK] Session expire : $sExpire');
                 int sec = sExpire.difference(DateTime.now()).inSeconds;
                 duration = Duration(seconds: sec <= 0 ? 0 : sec);
                 timer = Timer.periodic(
                     const Duration(seconds: 1),
-                    (_) => setState(() {
-                          _counting();
-                        }));
+                        (_) => setState(() {
+                      _counting();
+                    }));
                 return Dialog(
                   backgroundColor: LNColor.transparent,
                   child: Wrap(
