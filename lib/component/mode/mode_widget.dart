@@ -245,7 +245,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeLiveTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: data.mode5G?.mode == 'boost_mode',
                       onPress: () {
                         if (!(data.mode5G?.mode == 'boost_mode')) {
@@ -353,7 +353,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeGameTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: data.mode5G?.mode == 'game_mode',
                       onPress: () {
                         if (!(data.mode5G?.mode == 'game_mode')) {
