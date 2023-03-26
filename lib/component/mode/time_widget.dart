@@ -69,14 +69,14 @@ class _TimeWidgetState extends State<TimeWidget> {
       timer?.cancel();
       if(seconds < 0) {
         String lastMode =
-            data.mode?.modeUpdate?.mode5G.lastDefaultMode ?? 'max_mode';
+            data.mode5G?.modeUpdate?.mode5G.lastDefaultMode ?? 'max_mode';
         bool last = (lastMode == 'boost_mode' || lastMode == 'game_mode');
-        data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+        data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
         last ? 'max_mode' : lastMode;
-        data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-            data.mode?.mode ?? 'max_mode';
-        data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-        data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+        data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+            data.mode5G?.mode ?? 'max_mode';
+        data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+        data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
         widget.setMode!(data);
       }
       checkTimerStart = true;

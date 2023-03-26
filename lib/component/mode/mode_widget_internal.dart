@@ -95,7 +95,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           builder: (context) {
             return FutureBuilder(
                 future: data.updateMode5G(
-                    data.mode?.modeUpdate, data.mode?.checkModeProfile),
+                    data.mode5G?.modeUpdate, data.mode5G?.checkModeProfile),
                 builder: (context, snap) {
                   if (snap.hasData) {
                     Navigator.pop(context);
@@ -136,7 +136,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           exitMode: true,
           onPressedSubmit: (isClicked) {
             Navigator.pop(context);
-            if (!(data.mode?.mode == 'boost_mode')) {
+            if (!(data.mode5G?.mode == 'boost_mode')) {
               showModalBottomSheet(
                 isDismissible: false,
                 backgroundColor: Colors.transparent,
@@ -156,16 +156,16 @@ class _ModeWidgetState extends State<ModeWidget> {
                     textCancelBtn: textCancelBtn,
                     onPressedSubmit: (isClicked) {
                       Navigator.pop(context);
-                      data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                          data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                          data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                               'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
                       'boost_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.expireDate =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
                           DateTime.now()
                               .add(const Duration(seconds: 15))
                               .toString();
-                      data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+                      data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
                       waitUpdate(data, add: 'boost');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -186,13 +186,13 @@ class _ModeWidgetState extends State<ModeWidget> {
                     exitMode: true,
                     onPressedSubmit: (isClicked) {
                       Navigator.pop(context);
-                      data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                          data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                          data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                               'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
                       'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-                      data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+                      data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
                       waitUpdate(data, loadingGif: 'game', add: 'delete');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -209,7 +209,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseBoostMode(
       InternalProvider data, BuildContext context) async {
-    if (!(data.mode?.mode == 'boost_mode')) {
+    if (!(data.mode5G?.mode == 'boost_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -229,13 +229,13 @@ class _ModeWidgetState extends State<ModeWidget> {
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'boost_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate =
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'boost_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
                   DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, add: 'boost');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -256,12 +256,12 @@ class _ModeWidgetState extends State<ModeWidget> {
             exitMode: true,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, loadingGif: 'game', add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -286,7 +286,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           exitMode: true,
           onPressedSubmit: (isClicked) {
             Navigator.pop(context);
-            if (!(data.mode?.mode == 'game_mode')) {
+            if (!(data.mode5G?.mode == 'game_mode')) {
               showModalBottomSheet(
                 isDismissible: false,
                 backgroundColor: Colors.transparent,
@@ -306,16 +306,16 @@ class _ModeWidgetState extends State<ModeWidget> {
                     textCancelBtn: textCancelBtn,
                     onPressedSubmit: (isClicked) {
                       Navigator.pop(context);
-                      data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                          data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                          data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                               'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
                       'game_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.expireDate =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
                           DateTime.now()
                               .add(const Duration(seconds: 15))
                               .toString();
-                      data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+                      data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
                       waitUpdate(data, loadingGif: 'game', add: 'game');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -336,13 +336,13 @@ class _ModeWidgetState extends State<ModeWidget> {
                     exitMode: true,
                     onPressedSubmit: (isClicked) {
                       Navigator.pop(context);
-                      data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                          data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                          data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                               'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
                       'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-                      data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+                      data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
                       waitUpdate(data, loadingGif: 'game', add: 'delete');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -359,7 +359,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseGameMode(
       InternalProvider data, BuildContext context) async {
-    if (!(data.mode?.mode == 'game_mode')) {
+    if (!(data.mode5G?.mode == 'game_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -379,13 +379,13 @@ class _ModeWidgetState extends State<ModeWidget> {
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'game_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate =
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'game_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
                   DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, add: 'game');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -406,12 +406,12 @@ class _ModeWidgetState extends State<ModeWidget> {
             exitMode: true,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, loadingGif: 'game', add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -423,7 +423,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseEcoMode(
       InternalProvider data, BuildContext context) async {
-    if (!(data.mode?.mode == 'eco_mode')) {
+    if (!(data.mode5G?.mode == 'eco_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -436,12 +436,12 @@ class _ModeWidgetState extends State<ModeWidget> {
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) async {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'eco_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'eco_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, add: 'eco');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -462,11 +462,11 @@ class _ModeWidgetState extends State<ModeWidget> {
             exitMode: true,
             onPressedSubmit: (isClicked) async {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
               waitUpdate(data, add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -481,7 +481,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
   Future<void> chooseBoostMode5G(
       InternalProvider data, BuildContext context) async {
-    if (!(data.mode?.mode == 'boost_mode')) {
+    if (!(data.mode5G?.mode == 'boost_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -501,13 +501,13 @@ class _ModeWidgetState extends State<ModeWidget> {
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'boost_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate =
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'boost_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
                   DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, add: 'boost');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -528,12 +528,12 @@ class _ModeWidgetState extends State<ModeWidget> {
             exitMode: true,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, loadingGif: 'game', add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -545,7 +545,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseGameMode5G(
       InternalProvider data, BuildContext context) async {
-    if (!(data.mode?.mode == 'game_mode')) {
+    if (!(data.mode5G?.mode == 'game_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -565,13 +565,13 @@ class _ModeWidgetState extends State<ModeWidget> {
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'game_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate =
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'game_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
                   DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, add: 'game');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -592,12 +592,12 @@ class _ModeWidgetState extends State<ModeWidget> {
             exitMode: true,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                       'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
+              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               waitUpdate(data, loadingGif: 'game', add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -622,7 +622,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           exitMode: true,
           onPressedSubmit: (isClicked) {
             Navigator.pop(context);
-            if (!(data.mode?.mode == 'eco_mode')) {
+            if (!(data.mode5G?.mode == 'eco_mode')) {
               showModalBottomSheet(
                 isDismissible: false,
                 backgroundColor: Colors.transparent,
@@ -635,13 +635,13 @@ class _ModeWidgetState extends State<ModeWidget> {
                     textCancelBtn: textCancelBtn,
                     onPressedSubmit: (isClicked) async {
                       Navigator.pop(context);
-                      data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                          data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                          data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                               'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
                       'eco_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
-                      data.mode?.modeUpdate?.mode5G.changeModePerDay.count++;
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
+                      data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
                       waitUpdate(data, add: 'eco');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -662,12 +662,12 @@ class _ModeWidgetState extends State<ModeWidget> {
                     exitMode: true,
                     onPressedSubmit: (isClicked) async {
                       Navigator.pop(context);
-                      data.mode?.modeUpdate?.mode5G.lastDefaultMode =
-                          data.mode?.modeUpdate?.mode5G.currentMode.modeName ??
+                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
+                          data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
                               'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.modeName =
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
                       'max_mode';
-                      data.mode?.modeUpdate?.mode5G.currentMode.expireDate = '';
+                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
                       waitUpdate(data, add: 'delete');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
@@ -740,7 +740,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode?.isDisableMode ?? false)
+                        (data.mode5G?.isDisableMode ?? false)
                             ? ImageUtils.getImagePath(
                             'assets/images/mode_power_bw.png')
                             : ImageUtils.getImagePath(
@@ -754,21 +754,21 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      isMode: data.mode?.mode == 'boost_mode',
-                      isDisable: (data.mode?.isDisableMode ?? false),
-                      expireDate: data.mode?.mode == 'boost_mode'
-                          ? data.mode?.expireMode
+                      isMode: data.mode5G?.mode == 'boost_mode',
+                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      expireDate: data.mode5G?.mode == 'boost_mode'
+                          ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeLiveTime',
                       setMode: waitUpdate,
-                      check: data.mode?.mode == 'boost_mode',
+                      check: data.mode5G?.mode == 'boost_mode',
                       onPress: () {
                         if (package5G == 'low') {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          DateTime? expiredTime = data.mode?.expireMode;
+                          DateTime? expiredTime = data.mode5G?.expireMode;
                           int? seconds =
                               expiredTime?.difference(DateTime.now()).inSeconds;
-                          if (data.mode?.mode == 'game_mode' && seconds! > 0) {
+                          if (data.mode5G?.mode == 'game_mode' && seconds! > 0) {
                             switchBoostModeNotExpire(data, context, seconds);
                           } else {
                             chooseBoostMode(data, context);
@@ -786,7 +786,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode?.isDisableMode ?? false)
+                        (data.mode5G?.isDisableMode ?? false)
                         // ||
                         //     (data.displayScreen?.mode?.isDisableModeGame ??
                         //         false)
@@ -803,21 +803,21 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      isMode: data.mode?.mode == 'game_mode',
-                      isDisable: (data.mode?.isDisableMode ?? false),
-                      expireDate: data.mode?.mode == 'game_mode'
-                          ? data.mode?.expireMode
+                      isMode: data.mode5G?.mode == 'game_mode',
+                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      expireDate: data.mode5G?.mode == 'game_mode'
+                          ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeGameTime',
                       setMode: waitUpdate,
-                      check: data.mode?.mode == 'game_mode',
+                      check: data.mode5G?.mode == 'game_mode',
                       onPress: () {
                         if (package5G == 'low') {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          DateTime? expiredTime = data.mode?.expireMode;
+                          DateTime? expiredTime = data.mode5G?.expireMode;
                           int? seconds =
                               expiredTime?.difference(DateTime.now()).inSeconds;
-                          if (data.mode?.mode == 'boost_mode' && seconds! > 0) {
+                          if (data.mode5G?.mode == 'boost_mode' && seconds! > 0) {
                             switchGameModeNotExpire(data, context, seconds);
                           } else {
                             chooseGameMode(data, context);
@@ -843,7 +843,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode?.isDisableMode ?? false)
+                        (data.mode5G?.isDisableMode ?? false)
                             ? ImageUtils.getImagePath(
                             'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -857,8 +857,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       height: 70,
                       width: 143,
                       borderRadius: 10,
-                      isMode: data.mode?.mode == 'eco_mode',
-                      isDisable: (data.mode?.isDisableMode ?? false),
+                      isMode: data.mode5G?.mode == 'eco_mode',
+                      isDisable: (data.mode5G?.isDisableMode ?? false),
                       onPress: () {
                         if (package5G == 'low') {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)

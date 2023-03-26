@@ -260,7 +260,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   Padding(
                     padding: EdgeInsets.all(15.0),
                     child: Text(
-                      'Data : ${Provider.of<InternalProvider>(context, listen: true).mode == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode!.toJson()}',
+                      'Data : ${Provider.of<InternalProvider>(context, listen: true).mode5G == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode5G!.toJson()}',
                       style: TextStyle(color: LNColor.failColor, fontSize: 17),
                     ),
                   ),
