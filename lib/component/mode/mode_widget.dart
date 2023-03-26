@@ -185,9 +185,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.mode == 'boost_mode'
-                                ? false
-                                : (data.mode5G?.isDisableMode ?? false))
+                        ((data.mode5G?.isDisableModeLive ?? false) ||
+                                (data.mode5G?.isDisableMode ?? false))
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_power_bw.png')
                             : ImageUtils.getImagePath(
@@ -202,9 +201,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'boost_mode',
-                      isDisable: data.mode5G?.mode == 'boost_mode'
-                          ? false
-                          : (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableModeLive ?? false) ||
+                          (data.mode5G?.isDisableMode ?? false),
                       expireDate: data.mode5G?.mode == 'boost_mode'
                           ? data.mode5G?.expireMode
                           : null,
@@ -292,9 +290,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.mode == 'game_mode'
-                                ? false
-                                : (data.mode5G?.isDisableMode ?? false))
+                        ((data.mode5G?.isDisableModeGame ?? false) ||
+                                (data.mode5G?.isDisableMode ?? false))
                             // ||
                             //     (data.displayScreen?.mode?.isDisableModeGame ??
                             //         false)
@@ -312,9 +309,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'game_mode',
-                      isDisable: data.mode5G?.mode == 'game_mode'
-                          ? false
-                          : (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableModeGame ?? false) ||
+                          (data.mode5G?.isDisableMode ?? false),
                       expireDate: data.mode5G?.mode == 'game_mode'
                           ? data.mode5G?.expireMode
                           : null,
@@ -408,9 +404,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.mode == 'eco_mode'
-                                ? false
-                                : (data.mode5G?.isDisableMode ?? false))
+                        ((data.mode5G?.isDisableModeEco ?? false) ||
+                                (data.mode5G?.isDisableMode ?? false))
                             ? ImageUtils.getImagePath(
                                 'assets/images/mode_eco_bw.png')
                             : ImageUtils.getImagePath(
@@ -425,9 +420,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'eco_mode',
-                      isDisable: data.mode5G?.mode == 'eco_mode'
-                          ? false
-                          : (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableModeEco ?? false) ||
+                          (data.mode5G?.isDisableMode ?? false),
                       onPress: () {
                         if (!(data.mode5G?.mode == 'eco_mode')) {
                           showModalBottomSheet(
