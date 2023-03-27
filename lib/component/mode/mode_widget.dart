@@ -129,6 +129,44 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
+  Future<void> expireMode(InternalProvider data,
+      {String loadingGif = 'default', String add = 'default'}) async {
+    String img = loadingGif == 'game'
+        ? 'assets/loading_game_mode.gif'
+        : 'assets/piggy.gif';
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showDialog(
+          context: context,
+          barrierDismissible: false,
+          builder: (context) {
+            return FutureBuilder(
+                future: data.getExpireMode(),
+                // data.updateMode5G(
+                //     data.mode?.modeUpdate, data.mode?.checkModeProfile),
+                builder: (context, snap) {
+                  if (snap.hasData) {
+                    Navigator.pop(context);
+                    if (add == 'delete') {
+                      return Container();
+                    } else {
+                      Timer(
+                        const Duration(milliseconds: 100),
+                        () => ScaffoldMessenger.of(context).showSnackBar(
+                            snackBarSuccess(context, message: add)),
+                      );
+                      return Container();
+                    }
+                  } else {
+                    return Container(
+                      color: Colors.transparent,
+                      child: Image.asset(img),
+                    );
+                  }
+                });
+          }),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Consumer<InternalProvider>(
@@ -207,7 +245,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeLiveTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: data.mode5G?.mode == 'boost_mode',
                       onPress: () {
                         if (!(data.mode5G?.mode == 'boost_mode')) {
@@ -315,7 +353,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeGameTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: data.mode5G?.mode == 'game_mode',
                       onPress: () {
                         if (!(data.mode5G?.mode == 'game_mode')) {
