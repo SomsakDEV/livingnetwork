@@ -45,6 +45,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   late bool isDisableButtonSheet = false;
   late bool exitMode = false;
+  late bool checkTimeMode = true;
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -246,7 +247,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           : null,
                       mode: 'modeLiveTime',
                       setMode: expireMode,
-                      check: data.mode5G?.mode == 'boost_mode',
+                      check: (data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false) ,
                       onPress: () {
                         if (!(data.mode5G?.mode == 'boost_mode')) {
                           showModalBottomSheet(
@@ -354,7 +355,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           : null,
                       mode: 'modeGameTime',
                       setMode: expireMode,
-                      check: data.mode5G?.mode == 'game_mode',
+                      check: data.mode5G?.mode == 'game_mode' ? checkTimeMode : false,
                       onPress: () {
                         if (!(data.mode5G?.mode == 'game_mode')) {
                           showModalBottomSheet(
@@ -421,6 +422,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .expireDate = '';
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
+                                  checkTimeMode = false;
                                   wUpdate(data, false, 'game_mode',
                                       loadingGif: 'game', add: 'delete');
                                 },
@@ -484,6 +486,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .expireDate = '';
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
+                                  checkTimeMode = false;
                                   wUpdate(data, true, 'eco_mode', add: 'eco');
                                 },
                                 onPressedCancel: (isClicked) =>
