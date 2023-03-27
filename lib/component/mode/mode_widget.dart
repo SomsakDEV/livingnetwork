@@ -247,7 +247,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                           : null,
                       mode: 'modeLiveTime',
                       setMode: expireMode,
-                      check: (data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false) ,
+                      check: (data.mode5G?.mode == 'boost_mode'
+                          ? checkTimeMode
+                          : false),
                       onPress: () {
                         if (!(data.mode5G?.mode == 'boost_mode')) {
                           showModalBottomSheet(
@@ -282,6 +284,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                           .toString();
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
+                                  setState(() {
+                                    checkTimeMode = false;
+                                  });
                                   wUpdate(data, true, 'boost_mode',
                                       add: 'boost');
                                 },
@@ -314,6 +319,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .expireDate = '';
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
+                                  setState(() {
+                                    checkTimeMode = false;
+                                  });
                                   wUpdate(data, false, 'boost_mode',
                                       add: 'delete');
                                 },
@@ -355,7 +363,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                           : null,
                       mode: 'modeGameTime',
                       setMode: expireMode,
-                      check: data.mode5G?.mode == 'game_mode' ? checkTimeMode : false,
+                      check: data.mode5G?.mode == 'game_mode'
+                          ? checkTimeMode
+                          : false,
                       onPress: () {
                         if (!(data.mode5G?.mode == 'game_mode')) {
                           showModalBottomSheet(
@@ -390,6 +400,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                           .toString();
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
+                                  setState(() {
+                                    checkTimeMode = false;
+                                  });
                                   wUpdate(data, true, 'game_mode',
                                       loadingGif: 'game', add: 'game');
                                 },
@@ -422,7 +435,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .expireDate = '';
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
-                                  checkTimeMode = false;
+                                  setState(() {
+                                    checkTimeMode = false;
+                                  });
                                   wUpdate(data, false, 'game_mode',
                                       loadingGif: 'game', add: 'delete');
                                 },
@@ -486,7 +501,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .expireDate = '';
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
-                                  checkTimeMode = false;
+                                  setState(() {
+                                    checkTimeMode = false;
+                                  });
                                   wUpdate(data, true, 'eco_mode', add: 'eco');
                                 },
                                 onPressedCancel: (isClicked) =>
@@ -516,6 +533,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                                       .modeName = 'max_mode';
                                   data.mode5G?.modeUpdate?.mode5G.currentMode
                                       .expireDate = '';
+                                  setState(() {
+                                    checkTimeMode = false;
+                                  });
                                   wUpdate(data, false, 'eco_mode',
                                       add: 'delete');
                                 },
