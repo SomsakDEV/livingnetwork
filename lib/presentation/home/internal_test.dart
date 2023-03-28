@@ -35,6 +35,11 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     }
   }
 
+  _onExit() {
+    Provider.of<InternalProvider>(context).dispose();
+    SystemNavigator.pop();
+  }
+
   _sessionExpire() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
@@ -67,9 +72,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         textStyle: LNStyle.dialogButtonText,
                         title: "OK",
                         buttonType: ButtonType.primaryBtn,
-                        onPress: () {
-                          SystemNavigator.pop();
-                        },
+                        onPress: () => _onExit,
                         borderRadius: 6,
                         width: 236,
                         height: 36,
@@ -185,9 +188,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                               textStyle: LNStyle.dialogButtonText,
                               title: "Exit",
                               buttonType: ButtonType.primaryBtn,
-                              onPress: () {
-                                SystemNavigator.pop();
-                              },
+                              onPress: () => _onExit,
                               borderRadius: 6,
                               width: 236,
                               height: 36,
@@ -226,7 +227,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         centerTitle: true,
         leading: BackButton(
           color: LNColor.blackColor,
-          onPressed: () => SystemNavigator.pop(),
+          onPressed: () => _onExit,
         ),
       ),
       body: RefreshIndicator(
@@ -275,5 +276,11 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Provider.of<InternalProvider>(context).dispose();
+    super.dispose();
   }
 }
