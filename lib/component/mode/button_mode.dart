@@ -93,9 +93,9 @@ class _ButtonModeState extends State<ButtonMode> {
               width: widget.isSmall != null && widget.isSmall == true
                   ? null
                   : widget.width ?? MediaQuery.of(context).size.width / 1.1,
-              height: widget.isSmall != null && widget.isSmall == true
-                  ? null
-                  : widget.height ?? MediaQuery.of(context).size.height / 17.5,
+              // height: widget.isSmall != null && widget.isSmall == true
+              //     ? null
+              //     : widget.height ?? MediaQuery.of(context).size.height / 17.5,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Column(
@@ -118,6 +118,7 @@ class _ButtonModeState extends State<ButtonMode> {
                     ),
                     Text(
                       widget.title,
+                      overflow: TextOverflow.ellipsis,
                       textAlign: TextAlign.left,
                       style: widget.textStyle ??
                           TextStyle(
@@ -137,6 +138,7 @@ class _ButtonModeState extends State<ButtonMode> {
                     ),
                     Text(
                       widget.detail,
+                      overflow: TextOverflow.ellipsis,
                       style: widget.textStyle ??
                           TextStyle(
                             fontFamily: 'DB Heavent',

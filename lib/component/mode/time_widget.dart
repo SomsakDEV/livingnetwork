@@ -67,7 +67,7 @@ class _TimeWidgetState extends State<TimeWidget> {
     final seconds = duration.inSeconds - 1;
     if (seconds < 0 || !(widget.check ?? true)) {
       timer?.cancel();
-      if(seconds < 0) {
+      if (seconds < 0) {
         widget.setMode!(data);
       }
       checkTimerStart = true;
@@ -95,7 +95,6 @@ class _TimeWidgetState extends State<TimeWidget> {
                     begin: FractionalOffset.centerLeft,
                     end: FractionalOffset.centerRight,
                     colors: [LNColor.greenColor10, LNColor.greenColor20])),
-            width: 68,
             height: 24,
             child: Row(
               children: [
@@ -113,6 +112,10 @@ class _TimeWidgetState extends State<TimeWidget> {
                 Text(
                   '$hours : $minutes : $seconds',
                   style: widget.textStyle ?? LNStyle.timeWidgetNumber,
+                  overflow: TextOverflow.ellipsis,
+                ),
+                const SizedBox(
+                  width: 4,
                 ),
               ],
             ),
@@ -123,7 +126,7 @@ class _TimeWidgetState extends State<TimeWidget> {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(4)),
                 color: LNColor.neutralsLightGrey),
-            width: MediaQuery.of(context).size.width * 0.95,
+            // width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
             child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
