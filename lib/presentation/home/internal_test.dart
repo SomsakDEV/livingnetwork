@@ -35,9 +35,14 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     }
   }
 
+  _onExit() {
+    Provider.of<InternalProvider>(context).dispose();
+    SystemNavigator.pop();
+  }
+
   _sessionExpire() {
     WidgetsBinding.instance.addPostFrameCallback(
-          (_) => showDialog(
+      (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -67,9 +72,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         textStyle: LNStyle.dialogButtonText,
                         title: "OK",
                         buttonType: ButtonType.primaryBtn,
-                        onPress: () {
-                          SystemNavigator.pop();
-                        },
+                        onPress: () => _onExit,
                         borderRadius: 6,
                         width: 236,
                         height: 36,
@@ -91,7 +94,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   @override
   void initState() {
     WidgetsBinding.instance.addPostFrameCallback(
-          (_) => showDialog(
+      (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -105,9 +108,9 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 duration = Duration(seconds: sec <= 0 ? 0 : sec);
                 timer = Timer.periodic(
                     const Duration(seconds: 1),
-                        (_) => setState(() {
-                      _counting();
-                    }));
+                    (_) => setState(() {
+                          _counting();
+                        }));
                 return Dialog(
                   backgroundColor: LNColor.transparent,
                   child: Wrap(
@@ -185,9 +188,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                               textStyle: LNStyle.dialogButtonText,
                               title: "Exit",
                               buttonType: ButtonType.primaryBtn,
-                              onPress: () {
-                                SystemNavigator.pop();
-                              },
+                              onPress: () => _onExit,
                               borderRadius: 6,
                               width: 236,
                               height: 36,
@@ -226,7 +227,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         centerTitle: true,
         leading: BackButton(
           color: LNColor.blackColor,
-          onPressed: () => SystemNavigator.pop(),
+          onPressed: () => _onExit,
         ),
       ),
       body: RefreshIndicator(
@@ -275,5 +276,11 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         ),
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    Provider.of<InternalProvider>(context).dispose();
+    super.dispose();
   }
 }
