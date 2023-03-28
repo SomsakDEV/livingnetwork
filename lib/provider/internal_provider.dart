@@ -19,10 +19,10 @@ class InternalProvider with ChangeNotifier {
 
   caseTest(String value) {
     if (value.startsWith('5G')) {
-      _caseTest = 'mobile4G';
+      _caseTest = 'mobile5G';
       notifyListeners();
     } else if (value.startsWith('4G')) {
-      _caseTest = 'mobile5G';
+      _caseTest = 'mobile4G';
       notifyListeners();
     }
   }
