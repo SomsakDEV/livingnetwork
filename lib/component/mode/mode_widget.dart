@@ -284,7 +284,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
                                   setState(() {
-                                    checkTimeMode = false;
+                                    checkTimeMode = true;
                                   });
                                   wUpdate(data, true, 'boost_mode',
                                       add: 'boost');
@@ -319,7 +319,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                                   data.mode5G?.modeUpdate?.mode5G
                                       .changeModePerDay.count++;
                                   setState(() {
-                                    checkTimeMode = true;
+                                    checkTimeMode = false;
                                   });
                                   wUpdate(data, false, 'boost_mode',
                                       add: 'delete');
