@@ -36,6 +36,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   }
 
   _onExit() {
+    print('[LIVING_NETWORK] : Clear on exit');
     Provider.of<InternalProvider>(context).dispose();
     SystemNavigator.pop();
   }
@@ -72,7 +73,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         textStyle: LNStyle.dialogButtonText,
                         title: "OK",
                         buttonType: ButtonType.primaryBtn,
-                        onPress: () => _onExit,
+                        onPress: _onExit,
                         borderRadius: 6,
                         width: 236,
                         height: 36,
@@ -188,7 +189,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                               textStyle: LNStyle.dialogButtonText,
                               title: "Exit",
                               buttonType: ButtonType.primaryBtn,
-                              onPress: () => _onExit,
+                              onPress: _onExit,
                               borderRadius: 6,
                               width: 236,
                               height: 36,
@@ -227,7 +228,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         centerTitle: true,
         leading: BackButton(
           color: LNColor.blackColor,
-          onPressed: () => _onExit,
+          onPressed: _onExit,
         ),
       ),
       body: RefreshIndicator(
