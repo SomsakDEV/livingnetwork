@@ -65,13 +65,13 @@ class _TimeWidgetState extends State<TimeWidget> {
 
   timeState(InternalProvider data) {
     final seconds = duration.inSeconds - 1;
-    if (seconds < 0 || !(widget.check ?? true)) {
-      timer?.cancel();
-      if (seconds < 0) {
+    if (seconds <= 0 || !(widget.check ?? true)) {
+      if (widget.check ?? true) {
         widget.setMode!(data);
       }
       checkTimerStart = true;
       duration = const Duration(seconds: 0, hours: 0, minutes: 0);
+      timer?.cancel();
     } else {
       duration = Duration(seconds: seconds);
     }
