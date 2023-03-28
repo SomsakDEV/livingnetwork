@@ -14,7 +14,7 @@ class LivingNetwork extends StatefulWidget {
 }
 
 class _LivingNetworkState extends State<LivingNetwork> {
-  String token = "eyJhbGciOiJIUzI1NiJ9.eyJtb2JpbGVObyI6IjA2NTkzMzIwNjEiLCJuZXR3b3JrVHlwZSI6Ik1BU1MiLCJ0aW1lc3RhbXAiOiIyMDIzLTAzLTIzVDE0OjU0OjMyKzA3OjAwIn0.R4eHmEG4oP4pZnKl5bCZPdjDBkhkUzrCBdh1rVZKlJE";
+  String token = "testtoken";
 
   @override
   Widget build(BuildContext context) {

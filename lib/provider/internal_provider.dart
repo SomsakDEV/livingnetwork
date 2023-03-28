@@ -9,6 +9,7 @@ class InternalProvider with ChangeNotifier {
   Mode5G? _mode5G;
   String? _status;
   DateTime? _sExpire;
+  String? _caseTest;
 
   Mode5G? get mode5G => _mode5G;
 
@@ -16,11 +17,19 @@ class InternalProvider with ChangeNotifier {
 
   DateTime? get sExpire => _sExpire;
 
-  List<String?> listCase = [null, 'mobile4G', 'mobile5G'];
-  String? caseTest;
+  caseTest(String value) {
+    if (value.startsWith('5G')) {
+      _caseTest = 'mobile4G';
+      notifyListeners();
+    } else if (value.startsWith('4G')) {
+      _caseTest = 'mobile5G';
+      notifyListeners();
+    }
+  }
 
   Future<bool> initialCore(String token) async {
     try {
+      caseTest(token);
       WidgetsFlutterBinding.ensureInitialized();
       var coreConfig = CoreConfig(mode: Mode.debug);
       await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
@@ -33,10 +42,9 @@ class InternalProvider with ChangeNotifier {
 
   Future<bool> internalPrepare(String token) async {
     try {
-      caseTest = listCase[2];
       repo = repo ?? InitialInternal();
-      _mode5G = await repo?.getModeSocket(token, caseTest: caseTest);
-      _status = caseTest ?? await repo?.getCurrentNetworkStatus();
+      _mode5G = await repo?.getModeSocket(token, caseTest: _caseTest);
+      _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       notifyListeners();
@@ -57,7 +65,7 @@ class InternalProvider with ChangeNotifier {
 
   Future<String> getAddMode(String mode) async {
     repo = repo ?? InitialInternal();
-    _mode5G = await repo?.getAddPackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: caseTest);
+    _mode5G = await repo?.getAddPackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
     return "Success";
@@ -65,7 +73,7 @@ class InternalProvider with ChangeNotifier {
 
   Future<String> getDeleteMode(String mode) async {
     repo = repo ?? InitialInternal();
-    _mode5G = await repo?.getDeletePackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: caseTest);
+    _mode5G = await repo?.getDeletePackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
     return "Success";
@@ -73,7 +81,7 @@ class InternalProvider with ChangeNotifier {
 
   Future<String> getExpireMode() async {
     repo = repo ?? InitialInternal();
-    _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: caseTest);
+    _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     notifyListeners();
     return "Success";
   }
