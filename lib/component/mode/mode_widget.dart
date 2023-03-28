@@ -259,13 +259,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                             builder: (BuildContext context) {
                               return BottomSheetDecisionPaymentCardDialogMode(
                                 title: titlePaymentL,
-                                desc: descPaymentL,
-                                price: priceL,
-                                seperate: seperateL,
-                                time: timeL,
-                                vat: vatL,
-                                termsConditionsTitle: termsConditionsTitle,
-                                termsConditionsDesc: '',
                                 textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 onPressedSubmit: (isClicked) {
@@ -374,13 +367,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                             builder: (BuildContext context) {
                               return BottomSheetDecisionPaymentCardDialogMode(
                                 title: titlePaymentG,
-                                desc: descPaymentG,
-                                price: priceG,
-                                seperate: seperateG,
-                                time: timeG,
-                                vat: vatG,
-                                termsConditionsTitle: termsConditionsTitle,
-                                termsConditionsDesc: "termsConditionsDescG",
                                 textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 onPressedSubmit: (isClicked) {
@@ -482,9 +468,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                             context: context,
                             builder: (BuildContext context) {
                               return BottomSheetDecisionCardDialogMode(
-                                title: titleEco,
-                                desc: descEco,
-                                textSubmitBtn: textSubmitEco,
+                                title: switchEcoTitle,
+                                desc: switchDesc,
+                                textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 onPressedSubmit: (isClicked) async {
                                   Navigator.pop(context);
@@ -515,8 +501,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                             context: context,
                             builder: (BuildContext context) {
                               return BottomSheetDecisionCardDialogMode(
-                                title: btmSheetTitleEco,
-                                desc: btmSheetDescEco,
+                                title: switchEcoTitle,
+                                desc: switchDesc,
                                 textSubmitBtn: textSubmitBtn,
                                 textCancelBtn: textCancelBtn,
                                 exitMode: true,

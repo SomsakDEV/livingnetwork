@@ -6,13 +6,6 @@ import 'package:living_network/constance/constants.dart';
 
 class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
   final String title;
-  final String desc;
-  final String price;
-  final String seperate;
-  final String time;
-  final String vat;
-  final String termsConditionsTitle;
-  final String termsConditionsDesc;
   final String? imagePath;
   final String textSubmitBtn;
   final String textCancelBtn;
@@ -23,13 +16,6 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
   const BottomSheetDecisionPaymentCardDialogMode(
       {Key? key,
       required this.title,
-      required this.desc,
-      required this.price,
-      required this.seperate,
-      required this.time,
-      required this.vat,
-      required this.termsConditionsTitle,
-      required this.termsConditionsDesc,
       required this.textSubmitBtn,
       required this.textCancelBtn,
       required this.onPressedSubmit,
@@ -138,7 +124,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                       padding: const EdgeInsets.only(top: 8, bottom: 8),
                       child: Text(
                         textAlign: TextAlign.center,
-                        widget.desc,
+                        descPayment,
                         maxLines: 2,
                         overflow: TextOverflow.ellipsis,
                         style: LNStyle.buttonSheetDescPayment,
@@ -151,12 +137,12 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          widget.price,
+                          price,
                           style: LNStyle.buttonSheetPriceTime,
                         ),
-                        Text(widget.seperate, style: LNStyle.buttonSheetSeparate,),
+                        Text(separate, style: LNStyle.buttonSheetSeparate,),
                         Text(
-                          widget.time,
+                          time,
                           style: LNStyle.buttonSheetPriceTime,
                         )
                       ],
@@ -171,7 +157,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                         child: Padding(
                           padding: const EdgeInsets.only(left: 4, right: 4),
                           child: Text(
-                            widget.vat,
+                            vat,
                             style: LNStyle.buttonSheetVat,
                           ),
                         ),

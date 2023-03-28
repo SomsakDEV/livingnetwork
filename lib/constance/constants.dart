@@ -109,7 +109,6 @@ String notificationSubTitleLiveModeExpired =
 
 String textSubmitBtn = 'ยืนยัน';
 String textCancelBtn = 'Close';
-String textSubmitEco = 'Switch to Eco mode';
 
 //Mode Widget
 String modeWidgetTitle = 'Mode';
@@ -120,12 +119,6 @@ String gameDesc = 'Latency Stability';
 String ecoTitle = 'Eco Mode';
 String ecoDesc = 'Save Battery';
 
-//switch mode
-String titleEco = 'Switch to Eco mode?';
-String descEco = 'Detail: save battery';
-String btmSheetTitleEco = 'Exit From Eco mode?';
-String btmSheetDescEco = 'Detail: exit from eco mode';
-
 String ecoSuccess = 'Switched to Eco mode!';
 String boostSuccess = 'Switched to Power / Boost mode!';
 String gameSuccess = 'Switched to Game mode!';
@@ -133,31 +126,23 @@ String gameSuccess = 'Switched to Game mode!';
 //switch mode payment
 String btmSheetTitlePower = 'Exit From Power/Boost mode?';
 String btmSheetDescPower = 'Detail: exit from power/boost mode';
-String exitModeTitle = 'ต้องการออกจากโหมดนี้ใช่ไหม?';
-String exitModeDesc = 'โหมดที่คุณใช้งานอยู่ยังไม่หมดเวลา ระบบจะทำการตัดรอบโหมดนี้ทิ้ง โดยที่ไม่สามารถเก็บเวลาที่เหลือไว้ใช้้ต่อภายหลังได้';
-String switchBoostTitle = 'ต้องการสลับไปโหมด Boost?';
-String switchGameTitle = 'ต้องการสลับไปโหมด Game?';
-String switchEcoTitle = 'ต้องการสลับไปโหมด Eco?';
-String switchDesc = 'โหมดที่คุณใช้งานอยู่ยังไม่หมดเวลา ระบบจะทำการตัดรอบโหมดนี้ทิ้ง โดยที่ไม่สามารถเก็บเวลาที่เหลือไว้ใช้้ต่อภายหลังได้';
-
-String titlePaymentL = 'สลับเป็นบูสโหมด!!';
-String descPaymentL =
-    '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';
-String priceL = '10 บาท';
-String seperateL = " | ";
-String timeL = "1 ชั่วโมง";
-String vatL = 'VAT Included';
-
 String btmSheetTitleGame = 'Exit From Game mode?';
 String btmSheetDescGame = 'Detail: exit from game mode';
-String titlePaymentG = 'สลับเป็นเกมโหมด!';
-String descPaymentG =
-    '*หากคุณสลับโหมดเป็นโหมดอื่นๆ ก่อนหมดเวลาระบบจะ\nทำการตัดรอบโหมดนี้ทิ้ง';
-String priceG = '10 บาท';
-String seperateG = " | ";
-String timeG = "1 ชั่วโมง";
-String vatG = 'VAT Included';
+String exitModeTitle = 'ต้องการออกจากโหมดนี้ใช่ไหม?';
+String exitModeDesc = 'โหมดที่คุณใช้งานอยู่ยังไม่หมดเวลา ระบบจะทำการตัดรอบโหมดนี้ทิ้ง โดยที่ไม่สามารถเก็บเวลาที่เหลือไว้ใช้้ต่อภายหลังได้';
+String switchBoostTitle = 'ต้องการสลับไปโหมด Boost Mode?';
+String switchGameTitle = 'ต้องการสลับไปโหมด Game Mode?';
+String switchEcoTitle = 'ต้องการสลับไปโหมด Eco Mode?';
+String switchDesc = 'โหมดที่คุณใช้งานอยู่ยังไม่หมดเวลา ระบบจะทำการตัดรอบโหมดนี้ทิ้ง โดยที่ไม่สามารถเก็บเวลาที่เหลือไว้ใช้้ต่อภายหลังได้';
 
+String titlePaymentL = 'สลับเป็น Boost Mode!';
+String titlePaymentG = 'สลับเป็น Game Mode!';
+String descPayment =
+    '*เรียกเก็บค่าบริการพร้อมกับแพ็กเกจรายเดือนลงบิล';
+String price = '10 บาท';
+String separate = " | ";
+String time = "1 ชั่วโมง";
+String vat = 'VAT Included';
 String termsConditionsTitle = 'Terms & Conditions';
 var termsConditionsDesc = {
   "1":
