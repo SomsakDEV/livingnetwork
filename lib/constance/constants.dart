@@ -115,11 +115,11 @@ String textCancelBtn = 'Close';
 //Mode Widget
 String modeWidgetTitle = 'Mode';
 String powerTitle = 'Power / Boost Mode';
-String powerDesc = 'Stream Smoothly';
+String powerDesc = 'Fast Downloading';
 String gameTitle = 'Game Mode';
 String gameDesc = 'Latency Stability';
 String ecoTitle = 'Eco Mode';
-String ecoDesc = 'Save Battery';
+String ecoDesc = 'Data Battery';
 
 String ecoSuccess = 'Switched to Eco mode!';
 String boostSuccess = 'Switched to Power / Boost mode!';

@@ -26,13 +26,11 @@ class ModeWidgetInternal extends StatefulWidget {
 class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   final SizedBox _sizedBox = const SizedBox(height: 8);
 
-  late bool errorMessage = false;
-  late bool defaultMessage = false;
-
+  late bool defaultMessage = true;
   late bool isDisableButtonSheet = false;
   late bool exitMode = false;
   late bool checkTimeMode = true;
-  late int num;
+  late int num = 1;
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -49,7 +47,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
           children: [
             Padding(
                 padding: const EdgeInsets.only(right: 11.96),
-                child: Image.asset('assets/images/checkmark.png')),
+                child: message == 'fail' ? Image.asset('assets/images/checkmark_no.png') : Image.asset('assets/images/checkmark.png')),
             message == 'boost'
                 ? Text(boostSuccess)
                 : message == 'game'
@@ -114,7 +112,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           snackBarSuccess(context, message: 'fail')),
                     );
                     defaultMessage = false;
-                    errorMessage = true;
                     num = 12;
                     return Container();
                   } else {
@@ -624,7 +621,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeLiveTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: (data.mode5G?.mode == 'boost_mode'
                           ? checkTimeMode
                           : false),
@@ -677,7 +674,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeGameTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: data.mode5G?.mode == 'game_mode'
                           ? checkTimeMode
                           : false,
@@ -754,9 +751,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
               _sizedBox,
               defaultMessage
                   ? const Mode5GDefault()
-                  : errorMessage
-                      ? ModeWarning(warningNumber: num)
-                      : const Mode5GDefault(),
+                  : ModeWarning(warningNumber: num),
               // Container(
               //   width: MediaQuery.of(context).size.width * 0.85,
               //   height: 52,
