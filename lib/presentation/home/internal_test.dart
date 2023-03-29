@@ -5,7 +5,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/component/mode/button.dart';
-import 'package:living_network/component/mode/mode_widget.dart';
+import 'package:living_network/component/mode/mode_widget_internal.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/provider/internal_provider.dart';
@@ -254,7 +254,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                       ),
                     ),
                     width: w * 0.93,
-                    child: ModeWidget(),
+                    child: ModeWidgetInternal(),
                   ),
                   Text(
                     'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).status}',
