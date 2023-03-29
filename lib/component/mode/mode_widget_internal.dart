@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
@@ -13,10 +12,7 @@ import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
-
 import 'bottomsheet_decision_payment.dart';
-
-bool timeout = false;
 
 class ModeWidgetInternal extends StatefulWidget {
   ModeWidgetInternal({
@@ -28,16 +24,14 @@ class ModeWidgetInternal extends StatefulWidget {
 }
 
 class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
-  final SizedBox _sizedBox = const SizedBox(
-    height: 8,
-  );
+  final SizedBox _sizedBox = const SizedBox(height: 8);
 
-  late bool errorMessage = true;
   late bool defaultMessage = true;
-
   late bool isDisableButtonSheet = false;
   late bool exitMode = false;
   late bool checkTimeMode = true;
+  late int num = 1;
+  late int seconds;
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -53,16 +47,17 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
         child: Row(
           children: [
             Padding(
-              padding: const EdgeInsets.only(right: 11.96),
-              child: Image.asset('assets/images/checkmark.png'),
-            ),
+                padding: const EdgeInsets.only(right: 11.96),
+                child: message == 'fail' ? Image.asset('assets/images/checkmark_no.png') : Image.asset('assets/images/checkmark.png')),
             message == 'boost'
                 ? Text(boostSuccess)
                 : message == 'game'
                     ? Text(gameSuccess)
                     : message == 'eco'
                         ? Text(ecoSuccess)
-                        : const Text('Switched success!'),
+                        : message == 'fail'
+                            ? Text(unsuccessful)
+                            : const Text('Switching Mode!'),
           ],
         ),
       ),
@@ -109,8 +104,18 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         () => ScaffoldMessenger.of(context).showSnackBar(
                             snackBarSuccess(context, message: add)),
                       );
+                      defaultMessage = true;
                       return Container();
                     }
+                  } else if (snap.hasError) {
+                    Timer(
+                      const Duration(milliseconds: 100),
+                      () => ScaffoldMessenger.of(context).showSnackBar(
+                          snackBarSuccess(context, message: 'fail')),
+                    );
+                    defaultMessage = false;
+                    num = 12;
+                    return Container();
                   } else {
                     return Container(
                       color: Colors.transparent,
@@ -160,7 +165,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
     );
   }
 
-  //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
   Future<void> switchBoostModeNotExpire(
       InternalProvider data, BuildContext context, int seconds) async {
     showModalBottomSheet(
@@ -482,7 +486,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   }
 
   Future<void> chooseEcoMode(
-      InternalProvider data, BuildContext context) async {
+      InternalProvider data, BuildContext context, bool isHighValue) async {
     if (!(data.mode5G?.mode == 'eco_mode')) {
       showModalBottomSheet(
         isDismissible: false,
@@ -494,6 +498,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
             desc: switchDesc,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
+            exitMode: isHighValue,
             onPressedSubmit: (isClicked) async {
               Navigator.pop(context);
               data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
@@ -541,232 +546,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
       );
     }
   }
-
-  //-----------------------------------------------------------------
-
-  //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-  Future<void> chooseBoostMode5G(
-      InternalProvider data, BuildContext context) async {
-    if (!(data.mode5G?.mode == 'boost_mode')) {
-      showModalBottomSheet(
-        isDismissible: false,
-        backgroundColor: Colors.transparent,
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext context) {
-          return BottomSheetDecisionPaymentCardDialogMode(
-            title: titlePaymentL,
-            textSubmitBtn: textSubmitBtn,
-            textCancelBtn: textCancelBtn,
-            onPressedSubmit: (isClicked) {
-              Navigator.pop(context);
-              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
-                      'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
-                  'boost_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
-                  DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
-              setState(() {
-                checkTimeMode = false;
-              });
-              wUpdate(data, true, 'boost_mode', add: 'boost');
-            },
-            onPressedCancel: (isClicked) => Navigator.pop(context),
-          );
-        },
-      );
-    } else {
-      showModalBottomSheet(
-        isDismissible: false,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (BuildContext context) {
-          return BottomSheetDecisionCardDialogMode(
-            title: exitModeTitle,
-            desc: exitModeDesc,
-            textSubmitBtn: textSubmitBtn,
-            textCancelBtn: textCancelBtn,
-            exitMode: true,
-            onPressedSubmit: (isClicked) {
-              Navigator.pop(context);
-              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
-                      'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
-              setState(() {
-                checkTimeMode = false;
-              });
-              wUpdate(data, false, 'boost_mode', add: 'delete');
-            },
-            onPressedCancel: (isClicked) => Navigator.pop(context),
-          );
-        },
-      );
-    }
-  }
-
-  Future<void> chooseGameMode5G(
-      InternalProvider data, BuildContext context) async {
-    if (!(data.mode5G?.mode == 'game_mode')) {
-      showModalBottomSheet(
-        isDismissible: false,
-        backgroundColor: Colors.transparent,
-        isScrollControlled: true,
-        context: context,
-        builder: (BuildContext context) {
-          return BottomSheetDecisionPaymentCardDialogMode(
-            title: titlePaymentL,
-            textSubmitBtn: textSubmitBtn,
-            textCancelBtn: textCancelBtn,
-            onPressedSubmit: (isClicked) {
-              Navigator.pop(context);
-              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
-                      'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
-                  'game_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
-                  DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
-              setState(() {
-                checkTimeMode = false;
-              });
-              wUpdate(data, true, 'game_mode', loadingGif: 'game', add: 'game');
-            },
-            onPressedCancel: (isClicked) => Navigator.pop(context),
-          );
-        },
-      );
-    } else {
-      showModalBottomSheet(
-        isDismissible: false,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (BuildContext context) {
-          return BottomSheetDecisionCardDialogMode(
-            title: exitModeTitle,
-            desc: exitModeDesc,
-            textSubmitBtn: textSubmitBtn,
-            textCancelBtn: textCancelBtn,
-            exitMode: true,
-            onPressedSubmit: (isClicked) {
-              Navigator.pop(context);
-              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode =
-                  data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ??
-                      'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
-              setState(() {
-                checkTimeMode = false;
-              });
-              wUpdate(data, false, 'game_mode',
-                  loadingGif: 'game', add: 'game');
-            },
-            onPressedCancel: (isClicked) => Navigator.pop(context),
-          );
-        },
-      );
-    }
-  }
-
-  Future<void> chooseEcoMode5G(
-      InternalProvider data, BuildContext context) async {
-    showModalBottomSheet(
-      isDismissible: false,
-      backgroundColor: Colors.transparent,
-      context: context,
-      builder: (BuildContext context) {
-        return BottomSheetDecisionCardDialogMode(
-          title: switchEcoTitle,
-          desc: switchDesc,
-          textSubmitBtn: textSubmitBtn,
-          textCancelBtn: textCancelBtn,
-          exitMode: true,
-          onPressedSubmit: (isClicked) {
-            Navigator.pop(context);
-            if (!(data.mode5G?.mode == 'eco_mode')) {
-              showModalBottomSheet(
-                isDismissible: false,
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (BuildContext context) {
-                  return BottomSheetDecisionCardDialogMode(
-                    title: switchEcoTitle,
-                    desc: switchDesc,
-                    textSubmitBtn: textSubmitBtn,
-                    textCancelBtn: textCancelBtn,
-                    exitMode: true,
-                    onPressedSubmit: (isClicked) async {
-                      Navigator.pop(context);
-                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode = data
-                              .mode5G
-                              ?.modeUpdate
-                              ?.mode5G
-                              .currentMode
-                              .modeName ??
-                          'max_mode';
-                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
-                          'eco_mode';
-                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
-                          '';
-                      data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
-                      setState(() {
-                        checkTimeMode = false;
-                      });
-                      wUpdate(data, true, 'eco_mode', add: 'eco');
-                    },
-                    onPressedCancel: (isClicked) => Navigator.pop(context),
-                  );
-                },
-              );
-            } else {
-              showModalBottomSheet(
-                isDismissible: false,
-                backgroundColor: Colors.transparent,
-                context: context,
-                builder: (BuildContext context) {
-                  return BottomSheetDecisionCardDialogMode(
-                    title: switchEcoTitle,
-                    desc: switchDesc,
-                    textSubmitBtn: textSubmitBtn,
-                    textCancelBtn: textCancelBtn,
-                    exitMode: true,
-                    onPressedSubmit: (isClicked) async {
-                      Navigator.pop(context);
-                      data.mode5G?.modeUpdate?.mode5G.lastDefaultMode = data
-                              .mode5G
-                              ?.modeUpdate
-                              ?.mode5G
-                              .currentMode
-                              .modeName ??
-                          'max_mode';
-                      data.mode5G?.modeUpdate?.mode5G.currentMode.modeName =
-                          'max_mode';
-                      data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate =
-                          '';
-                      setState(() {
-                        checkTimeMode = false;
-                      });
-                      wUpdate(data, false, 'eco_mode', add: 'delete');
-                    },
-                    onPressedCancel: (isClicked) => Navigator.pop(context),
-                  );
-                },
-              );
-            }
-          },
-          onPressedCancel: (isClicked) => Navigator.pop(context),
-        );
-      },
-    );
-  }
-
-  //-----------------------------------------------------------------
 
   @override
   Widget build(BuildContext context) {
@@ -844,7 +623,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeLiveTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: (data.mode5G?.mode == 'boost_mode'
                           ? checkTimeMode
                           : false),
@@ -852,20 +631,20 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         bool? highValue = data.mode5G?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          DateTime? expiredTime = data.mode5G?.expireMode;
+                          DateTime? expiredTime = data.mode5G!.expireMode;
                           int? seconds =
-                              expiredTime?.difference(DateTime.now()).inSeconds;
+                              expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
                           if (data.mode5G?.mode == 'game_mode' &&
-                                  seconds! > 0 ||
+                                  seconds > 0 ||
                               data.mode5G?.mode == 'eco_mode') {
-                            switchBoostModeNotExpire(data, context, seconds!);
+                            switchBoostModeNotExpire(data, context, seconds);
                           } else {
                             chooseBoostMode(data, context);
                           }
                           //-----------------------------------------------------------------
                         } else {
                           //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseBoostMode5G(data, context);
+                          chooseBoostMode(data, context);
                           //-----------------------------------------------------------------
                         }
                       },
@@ -897,7 +676,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           ? data.mode5G?.expireMode
                           : null,
                       mode: 'modeGameTime',
-                      setMode: wUpdate,
+                      setMode: expireMode,
                       check: data.mode5G?.mode == 'game_mode'
                           ? checkTimeMode
                           : false,
@@ -905,20 +684,20 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         bool? highValue = data.mode5G?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          DateTime? expiredTime = data.mode5G?.expireMode;
+                          DateTime? expiredTime = data.mode5G!.expireMode;
                           int? seconds =
-                              expiredTime?.difference(DateTime.now()).inSeconds;
+                              expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
                           if (data.mode5G?.mode == 'boost_mode' &&
-                                  seconds! > 0 ||
+                                  seconds > 0 ||
                               data.mode5G?.mode == 'eco_mode') {
-                            switchGameModeNotExpire(data, context, seconds!);
+                            switchGameModeNotExpire(data, context, seconds);
                           } else {
                             chooseGameMode(data, context);
                           }
                           //-----------------------------------------------------------------
                         } else {
                           //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseGameMode5G(data, context);
+                          chooseGameMode(data, context);
                           //-----------------------------------------------------------------
                         }
                       },
@@ -926,9 +705,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                   ),
                 ],
               ),
-
               _sizedBox,
-
               Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
@@ -955,11 +732,11 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         bool? highValue = data.mode5G?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseEcoMode(data, context);
+                          chooseEcoMode(data, context, false);
                           //-----------------------------------------------------------------
                         } else {
                           //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseEcoMode5G(data, context);
+                          chooseEcoMode(data, context, true);
                           //-----------------------------------------------------------------
                         }
                       },
@@ -976,9 +753,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
               _sizedBox,
               defaultMessage
                   ? const Mode5GDefault()
-                  : errorMessage
-                      ? const ModeWarning(warningNumber: 2)
-                      : const Mode5GDefault(),
+                  : ModeWarning(warningNumber: num),
               // Container(
               //   width: MediaQuery.of(context).size.width * 0.85,
               //   height: 52,
