@@ -14,7 +14,7 @@ class LivingNetwork extends StatefulWidget {
 }
 
 class _LivingNetworkState extends State<LivingNetwork> {
-  String token = "testtoken";
+  String token = "5Gtesttoken";
 
   @override
   Widget build(BuildContext context) {

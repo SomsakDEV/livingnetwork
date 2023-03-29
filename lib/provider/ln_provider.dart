@@ -38,7 +38,10 @@ class LnProvider with ChangeNotifier {
     repo = repo ?? InitialData();
     try {
       repo?.getCleanCache();
-      _displayScreen = await repo?.getMockupData('08123456789');
+      WidgetsFlutterBinding.ensureInitialized();
+      var coreConfig = CoreConfig(mode: Mode.debug);
+      await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
+      _displayScreen = await repo?.getMockupData('0889081797');
       if (_verify = (_displayScreen != null)) {
         _perform = _displayScreen?.perform;
         _mode = _displayScreen?.mode;
