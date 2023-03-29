@@ -549,6 +549,10 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                       onPress: () {
                         bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
                         if (highValue) {
+                          //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
+                          chooseBoostMode(data, context);
+                          //-----------------------------------------------------------------
+                        } else {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           DateTime? expiredTime = data.mode5G!.expireMode;
                           int? seconds = expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
@@ -557,10 +561,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           } else {
                             chooseBoostMode(data, context);
                           }
-                          //-----------------------------------------------------------------
-                        } else {
-                          //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseBoostMode(data, context);
+
                           //-----------------------------------------------------------------
                         }
                       },
@@ -593,6 +594,10 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                       onPress: () {
                         bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
                         if (highValue) {
+                          //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
+                          chooseGameMode(data, context);
+                          //-----------------------------------------------------------------
+                        } else {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           DateTime? expiredTime = data.mode5G!.expireMode;
                           int? seconds = expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
@@ -601,10 +606,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           } else {
                             chooseGameMode(data, context);
                           }
-                          //-----------------------------------------------------------------
-                        } else {
-                          //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseGameMode(data, context);
                           //-----------------------------------------------------------------
                         }
                       },
@@ -632,16 +633,16 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                       isMode: data.mode5G?.mode == 'eco_mode',
                       isDisable: (data.mode5G?.isDisableMode ?? false),
                       onPress: () {
-                        bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
-                        if (highValue) {
-                          //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseEcoMode(data, context, false);
-                          //-----------------------------------------------------------------
-                        } else {
-                          //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                          chooseEcoMode(data, context, true);
-                          //-----------------------------------------------------------------
-                        }
+                        chooseEcoMode(data, context, (data.mode5G?.checkModeProfile?.is5GHighValue ?? false));
+                        // if (highValue) {
+                        //   //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
+                        //   chooseEcoMode(data, context, highValue);
+                        //   //-----------------------------------------------------------------
+                        // } else {
+                        //   //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
+                        //   chooseEcoMode(data, context, highValue);
+                        //   //-----------------------------------------------------------------
+                        // }
                       },
                     ),
                   ),
