@@ -41,6 +41,8 @@ String conditionShowMessage(int num) {
       return warning10;
     case 11:
       return warning10;
+    case 12:
+      return warningTimeout;
   }
   return "no message";
 }

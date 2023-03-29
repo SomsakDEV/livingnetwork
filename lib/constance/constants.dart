@@ -94,6 +94,8 @@ String warning9 =
 String warning10 =
     'เราไม่สามารถตรวจสอบได้ว่าคุณใช้โทรศัพท์รุ่นที่รองรับ 5G หรือไม่';
 
+String warningTimeout = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง';
+
 //5G Mode (default)
 String messageDefault =
     'Game Mode และ Boost Mode จะใช้งานได้ ประสิทธิภาพสูงสุดขึ้นอยู่ กับเสาสัญญาณที่ท่านอยู่ ณ บริเวณนั้นๆ';
@@ -122,6 +124,7 @@ String ecoDesc = 'Save Battery';
 String ecoSuccess = 'Switched to Eco mode!';
 String boostSuccess = 'Switched to Power / Boost mode!';
 String gameSuccess = 'Switched to Game mode!';
+String unsuccessful = 'Unsuccessful Switching !';
 
 //switch mode payment
 String btmSheetTitlePower = 'Exit From Power/Boost mode?';

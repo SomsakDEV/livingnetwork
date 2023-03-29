@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
@@ -13,10 +12,7 @@ import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
-
 import 'bottomsheet_decision_payment.dart';
-
-bool timeout = false;
 
 class ModeWidgetInternal extends StatefulWidget {
   ModeWidgetInternal({
