@@ -68,6 +68,8 @@ class _ModeWarningState extends State<ModeWarning> {
               title: Text(
                 conditionShowMessage(widget.warningNumber),
                 style: LNStyle.warningMessage,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
               ),
             ),
           ),

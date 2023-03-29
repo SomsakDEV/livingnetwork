@@ -22,7 +22,8 @@ class _Mode5GDefaultState extends State<Mode5GDefault> {
       child: Row(
         children: [
           Padding(
-            padding: const EdgeInsets.only(left: 16, top: 25.17, bottom: 22.83, right: 16),
+            padding: const EdgeInsets.only(
+                left: 16, top: 25.17, bottom: 22.83, right: 16),
             child: Image.asset(
               ImageUtils.getImagePath(
                 'assets/images/information.png',
@@ -30,14 +31,15 @@ class _Mode5GDefaultState extends State<Mode5GDefault> {
               height: 20,
               width: 20,
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(top: 8, bottom: 5.66, right: 15),
-            child: Text(
-              messageDefault,
-              style: LNStyle.messageDefault,
+          ),Expanded(
+              child: Text(
+                messageDefault,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
+                style: LNStyle.messageDefault,
+              ),
             ),
-          ),
+
         ],
       ),
     );
