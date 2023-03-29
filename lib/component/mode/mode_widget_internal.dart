@@ -628,7 +628,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           ? checkTimeMode
                           : false),
                       onPress: () {
-                        bool? highValue = data.mode5G?.is5GHighValue;
+                        bool? highValue = data.mode5G?.checkModeProfile?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           DateTime? expiredTime = data.mode5G!.expireMode;
@@ -681,7 +681,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           ? checkTimeMode
                           : false,
                       onPress: () {
-                        bool? highValue = data.mode5G?.is5GHighValue;
+                        bool? highValue = data.mode5G?.checkModeProfile?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           DateTime? expiredTime = data.mode5G!.expireMode;
@@ -729,7 +729,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                       isMode: data.mode5G?.mode == 'eco_mode',
                       isDisable: (data.mode5G?.isDisableMode ?? false),
                       onPress: () {
-                        bool? highValue = data.mode5G?.is5GHighValue;
+                        bool? highValue = data.mode5G?.checkModeProfile?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           chooseEcoMode(data, context, false);
