@@ -41,6 +41,8 @@ String conditionShowMessage(int num) {
       return warning10;
     case 11:
       return warning10;
+    case 12:
+      return warningTimeout;
   }
   return "no message";
 }
@@ -68,6 +70,8 @@ class _ModeWarningState extends State<ModeWarning> {
               title: Text(
                 conditionShowMessage(widget.warningNumber),
                 style: LNStyle.warningMessage,
+                overflow: TextOverflow.ellipsis,
+                maxLines: 3,
               ),
             ),
           ),
