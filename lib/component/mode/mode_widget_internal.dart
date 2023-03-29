@@ -31,6 +31,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   late bool exitMode = false;
   late bool checkTimeMode = true;
   late int num = 1;
+  late int seconds;
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -632,11 +633,11 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           DateTime? expiredTime = data.mode5G?.expireMode;
                           int? seconds =
-                              expiredTime?.difference(DateTime.now()).inSeconds;
+                              expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
                           if (data.mode5G?.mode == 'game_mode' &&
-                                  seconds! > 0 ||
+                                  seconds > 0 ||
                               data.mode5G?.mode == 'eco_mode') {
-                            switchBoostModeNotExpire(data, context, seconds!);
+                            switchBoostModeNotExpire(data, context, seconds);
                           } else {
                             chooseBoostMode(data, context);
                           }
@@ -685,11 +686,11 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           DateTime? expiredTime = data.mode5G?.expireMode;
                           int? seconds =
-                              expiredTime?.difference(DateTime.now()).inSeconds;
+                              expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
                           if (data.mode5G?.mode == 'boost_mode' &&
-                                  seconds! > 0 ||
+                                  seconds > 0 ||
                               data.mode5G?.mode == 'eco_mode') {
-                            switchGameModeNotExpire(data, context, seconds!);
+                            switchGameModeNotExpire(data, context, seconds);
                           } else {
                             chooseGameMode(data, context);
                           }
