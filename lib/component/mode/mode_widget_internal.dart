@@ -631,7 +631,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         bool? highValue = data.mode5G?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          DateTime? expiredTime = data.mode5G?.expireMode;
+                          DateTime? expiredTime = data.mode5G!.expireMode;
                           int? seconds =
                               expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
                           if (data.mode5G?.mode == 'game_mode' &&
@@ -684,7 +684,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         bool? highValue = data.mode5G?.is5GHighValue;
                         if (highValue!) {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
-                          DateTime? expiredTime = data.mode5G?.expireMode;
+                          DateTime? expiredTime = data.mode5G!.expireMode;
                           int? seconds =
                               expiredTime?.difference(DateTime.now()).inSeconds ?? 0;
                           if (data.mode5G?.mode == 'boost_mode' &&
