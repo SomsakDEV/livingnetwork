@@ -103,6 +103,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                         () => ScaffoldMessenger.of(context).showSnackBar(
                             snackBarSuccess(context, message: add)),
                       );
+                      defaultMessage = true;
                       return Container();
                     }
                   } else if (snap.hasError) {
