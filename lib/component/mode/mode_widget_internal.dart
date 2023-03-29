@@ -28,7 +28,7 @@ class ModeWidgetInternal extends StatefulWidget {
 class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   final SizedBox _sizedBox = const SizedBox(height: 8);
 
-  late bool hasErrorMessage = true;
+  late bool hasErrorMessage = false;
   late bool isDisableButtonSheet = false;
   late bool exitMode = false;
   late bool checkTimeMode = true;
