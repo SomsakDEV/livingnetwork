@@ -55,34 +55,26 @@ class InternalProvider with ChangeNotifier {
     }
   }
 
-  Future<String> updateMode5G(MsisdnMode? msisdnDB, CheckModeProfile? checkModeProfile) async {
-    repo = repo ?? InitialInternal();
-    _mode5G = await repo?.updateMsisdn(msisdnDB, checkModeProfile);
-    print('[LIVING_NETWORK] Mode reload  : ${_mode5G?.toJson()}');
-    notifyListeners();
-    return "Success";
-  }
-
-  Future<String> getAddMode(String mode) async {
+  Future<bool> getAddMode(String mode) async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getAddPackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
-    return "Success";
+    return _mode5G?.error ?? true;
   }
 
-  Future<String> getDeleteMode(String mode) async {
+  Future<bool> getDeleteMode(String mode) async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getDeletePackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
-    return "Success";
+    return _mode5G?.error ?? true;
   }
 
-  Future<String> getExpireMode() async {
+  Future<bool> getExpireMode() async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     notifyListeners();
-    return "Success";
+    return _mode5G?.error ?? true;
   }
 }
