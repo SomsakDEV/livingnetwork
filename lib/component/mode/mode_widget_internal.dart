@@ -94,11 +94,11 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                     if (add == 'delete') {
                       return Container();
                     } else {
+                      hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: add)),
+                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : add)),
                       );
-                      hasErrorMessage = snap.data as bool;
                       return Container();
                     }
                   } else if (snap.hasError) {
