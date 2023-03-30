@@ -245,14 +245,14 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                     alignment: Alignment.bottomCenter,
                     children: <Widget>[
                       SizedBox(
-                        height: h * 0.2,
+                        height: h * 0.35,
                         width: w,
                         child: MapNearByWidget(select1: true, select2: true),
                       ),
                       InkWell(
                         onTap: () {},
                         child: SizedBox(
-                          height: h * 0.2,
+                          height: h * 0.35,
                           width: w,
                         ),
                       ),

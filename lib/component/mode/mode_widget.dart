@@ -302,7 +302,7 @@ class _ModeWidgetState extends State<ModeWidget> {
         context: context,
         builder: (BuildContext context) {
           return BottomSheetDecisionPaymentCardDialogMode(
-            title: titlePaymentL,
+            title: titlePaymentG,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
