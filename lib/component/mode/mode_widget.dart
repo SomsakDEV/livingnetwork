@@ -208,8 +208,9 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionPaymentCardDialogMode(
+          return BottomSheetDecisionCardDialogMode(
             title: titlePaymentL,
+            desc: descBoost,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
@@ -301,8 +302,9 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionPaymentCardDialogMode(
+          return BottomSheetDecisionCardDialogMode(
             title: titlePaymentG,
+            desc: descGame,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
@@ -342,7 +344,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     }
   }
 
-  Future<void> chooseEcoMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> chooseEcoMode(InternalProvider data, BuildContext context, bool isPolicy) async {
     if (!(data.mode5G?.mode == 'eco_mode')) {
       showModalBottomSheet(
         isDismissible: false,
@@ -354,7 +356,7 @@ class _ModeWidgetState extends State<ModeWidget> {
             desc: switchDesc,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
-            exitMode: isHighValue,
+            exitMode: isPolicy,
             onPressedSubmit: (isClicked) async {
               Navigator.pop(context);
               setState(() {
@@ -373,9 +375,9 @@ class _ModeWidgetState extends State<ModeWidget> {
         context: context,
         builder: (BuildContext context) {
           return BottomSheetDecisionCardDialogMode(
-            title: switchEcoTitle,
-            desc: switchDesc,
-            textSubmitBtn: textSubmitBtn,
+            title: titleEco,
+            desc: descEco,
+            textSubmitBtn: textSubmitEco,
             textCancelBtn: textCancelBtn,
             exitMode: true,
             onPressedSubmit: (isClicked) async {
@@ -547,7 +549,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                       isMode: data.mode5G?.mode == 'eco_mode',
                       isDisable: (data.mode5G?.isDisableMode ?? false),
                       onPress: () {
-                        chooseEcoMode(data, context, (data.mode5G?.checkModeProfile?.is5GHighValue ?? false));
+                        String mode = data.mode5G?.mode ?? 'max_mode';
+                        chooseEcoMode(data, context, (mode == 'boost_mode' || mode == 'game_mode'));
                         // if (highValue) {
                         //   //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                         //   chooseEcoMode(data, context, highValue);

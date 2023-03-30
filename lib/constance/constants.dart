@@ -111,6 +111,7 @@ String notificationSubTitleLiveModeExpired =
 
 String textSubmitBtn = 'ยืนยัน';
 String textCancelBtn = 'Close';
+String textSubmitEco = 'Switch to Eco Mode';
 
 //Mode Widget
 String modeWidgetTitle = 'Mode';
@@ -138,6 +139,10 @@ String switchGameTitle = 'ต้องการสลับไปโหมด Ga
 String switchEcoTitle = 'ต้องการสลับไปโหมด Eco Mode?';
 String switchDesc = 'โหมดที่คุณใช้งานอยู่ยังไม่หมดเวลา ระบบจะทำการตัดรอบโหมดนี้ทิ้ง โดยที่ไม่สามารถเก็บเวลาที่เหลือไว้ใช้้ต่อภายหลังได้';
 
+String descEco = 'Detail : Eco Mode (Waiting detail from marketing)';
+String descBoost = 'Deatil : Boost Mode (Waiting detail from marketing)';
+String descGame = 'Deatil : Game Mode (Waiting detail from marketing)';
+String titleEco = 'สลับเป็น Eco Mode!';
 String titlePaymentL = 'สลับเป็น Boost Mode!';
 String titlePaymentG = 'สลับเป็น Game Mode!';
 String descPayment =
