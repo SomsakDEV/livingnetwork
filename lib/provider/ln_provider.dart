@@ -53,7 +53,7 @@ class LnProvider with ChangeNotifier {
     }
     print('_verify Data : $_verify');
     notifyListeners();
-    return _verify;
+    return true;
   }
 
   Future<String> updateMode5G(

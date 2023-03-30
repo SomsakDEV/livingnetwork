@@ -1,10 +1,15 @@
 import 'dart:async';
+import 'dart:collection';
+import 'dart:convert';
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:living_network/constance/LNColor.dart';
+import 'package:living_network/model/map/grid_location.dart';
 import 'package:living_network/provider/ln_provider.dart';
+import 'package:living_network/provider/map_location_provider.dart';
 import 'dart:ui' as ui;
 
 import 'package:living_network/utility/image_utils.dart';
@@ -12,6 +17,8 @@ import 'package:living_network_repository/living_network_repository.dart';
 import 'package:provider/provider.dart';
 
 const LatLng current = LatLng(13.731946300000061, 100.56913540000005);
+// const LatLng current = LatLng(13.717417000000069, 100.41941700000007);
+
 
 class MapNearByWidget extends StatefulWidget {
   final bool select1, select2;
@@ -24,9 +31,11 @@ class MapNearByWidget extends StatefulWidget {
 
 class _MapNearByWidgetState extends State<MapNearByWidget> {
   late GoogleMapController mapController;
-  final Completer<GoogleMapController> _controller =
-      Completer<GoogleMapController>();
   final Map<MarkerId, Marker> _markers = {};
+
+  final Set<Polygon> _polygon = HashSet<Polygon>();
+
+  // late MapLocationProvider mapLocationState;
   // LatLng? _markerPosition;
   MarkerId? selectedMarker;
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
@@ -39,73 +48,54 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         .asUint8List();
   }
 
-  @override
-  Widget build(BuildContext context) {
-    return FutureBuilder<bool>(
-        future: _getLocations(widget.select1, widget.select2),
-        builder: (context, snapshot) {
-          print(snapshot.connectionState);
-          print(snapshot.hasData);
+  BitmapDescriptor iconShop = BitmapDescriptor.defaultMarker;
+  BitmapDescriptor iconWifi = BitmapDescriptor.defaultMarker;
 
-          if (snapshot.connectionState == ConnectionState.done) {
-            return GoogleMap(
-              initialCameraPosition: const CameraPosition(
-                target: current,
-                zoom: 17,
-                //limit zoom in zoom out
-              ),
-              onMapCreated: (GoogleMapController controller) async {
-                _markers.clear();
-                print(
-                    "################################################################");
-              },
-              mapType: MapType.terrain,
-              markers: Set<Marker>.of(_markers.values),
-              zoomControlsEnabled: true,
-              myLocationEnabled: true,
-              myLocationButtonEnabled: true,
-              minMaxZoomPreference: const MinMaxZoomPreference(13, 20),
-            );
-          } else {
-            return const Center(
-              child: CircularProgressIndicator(
-                color: LNColor.kellyGreen500,
-              ),
-            );
-          }
-        });
+  @override
+  void initState() {
+    super.initState();
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(48, 48)),
+            'assets/images/ais_shop.png')
+        .then((onValue) {
+      iconShop = onValue;
+    });
+
+    BitmapDescriptor.fromAssetImage(
+            const ImageConfiguration(size: Size(48, 48)),
+            'assets/images/bit_wifi.png')
+        .then((onValue) {
+      iconWifi = onValue;
+    });
   }
 
-  Future<void> prepareMarkerShop(
-      LocationShop appstate, Uint8List markerIcon) async {
-    for (final office in appstate.features) {
-      int size = 200;
-      final MarkerId markerId =
-          MarkerId('${office.properties.ccsmLocationCode}');
-      final marker = Marker(
-        markerId: markerId,
-        position: LatLng(office.properties.lmLat!.toDouble(),
-            office.properties.lmLong!.toDouble()),
-        infoWindow: InfoWindow(
-          title: '${office.properties.ccsmLocationCode}',
-          snippet: 'add this $size',
-        ),
-        icon: BitmapDescriptor.fromBytes(markerIcon),
-        // icon: BitmapDescriptor.defaultMarker,
-        //// onTap: () => _onMarkerTapped(markerId),
-      );
-      // setState(() {
-      _markers[markerId] = marker;
-      // });
+  @override
+  void didUpdateWidget(MapNearByWidget oldWidget) {
+    super.didUpdateWidget(oldWidget);
+
+    _markers.clear();
+
+    if (widget.select1) {
+      prepareDataShop();
+    }
+
+    if (widget.select2) {
+      prepareDataWifi();
     }
   }
 
-  Future<void> prepareMarkerWifi(
-      LocationWifi appstate, Uint8List markerIcon) async {
-    for (final office in appstate.features) {
+  void prepareDataShop() {
+    for (final office in getlocationShop()!.features) {
+      String img = 'assets/images/ais_shop.png';
       int size = 200;
+      if ('assets/images/cellular_other.png' == img) {
+        size = 100;
+      } else if ('assets/images/cellular_bad.png' == img) {
+        size = 100;
+      }
+      // final Uint8List markerIcon = await getBytesFromAsset(img, size);
       final MarkerId markerId =
-          MarkerId('${office.properties.slmServiceAreaCode}');
+          MarkerId('${office.properties.ccsmLocationCode}');
       final marker = Marker(
         markerId: markerId,
         position: LatLng(office.properties.lmLat!.toDouble(),
@@ -114,34 +104,95 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
           title: '${office.properties.lmAmpName}',
           snippet: 'add this $size',
         ),
-        icon: BitmapDescriptor.fromBytes(markerIcon),
+        // icon: BitmapDescriptor.fromBytes(markerIcon),
+        // icon: BitmapDescriptor.fromAssetImage(ImageConfiguration.empty, Image.asset('assets/images/ais_shop.png')).then((value) => value)
         // icon: BitmapDescriptor.defaultMarker,
-        //// onTap: () => _onMarkerTapped(markerId),
+        icon: iconShop,
+        onTap: () => _onMarkerTapped(markerId),
       );
-      // setState(() {
-      _markers[markerId] = marker;
-      // });
+      setState(() {
+        _markers[markerId] = marker;
+      });
     }
   }
 
-  Future<bool> _getLocations(bool select1, bool select2) async {
+  void prepareDataWifi() {
+    for (final office in getlocationWifi()!.features) {
+      String img = 'assets/images/bit_wifi.png';
+      int size = 200;
+      if ('assets/images/cellular_other.png' == img) {
+        size = 100;
+      } else if ('assets/images/cellular_bad.png' == img) {
+        size = 100;
+      }
+      // final Uint8List markerIcon = await getBytesFromAsset(img, size);
+      final MarkerId markerId =
+          MarkerId('${office.properties.slmSiteApSsidId}');
+      final marker = Marker(
+        markerId: markerId,
+        position: LatLng(office.properties.lmLat!.toDouble(),
+            office.properties.lmLong!.toDouble()),
+        infoWindow: InfoWindow(
+          title: '${office.properties.lmAmpName}',
+          snippet: 'add this $size',
+        ),
+        // icon: BitmapDescriptor.fromBytes(markerIcon),
+        // icon: BitmapDescriptor.defaultMarker,
+        icon: iconWifi,
+        onTap: () => _onMarkerTapped(markerId),
+      );
+      setState(() {
+        _markers[markerId] = marker;
+      });
+    }
+  }
+
+  LocationShop? getlocationShop() {
     LocationShop? shop =
         Provider.of<LnProvider>(context, listen: false).locationShop;
+    return shop;
+  }
+
+  LocationWifi? getlocationWifi() {
     LocationWifi? wifi =
         Provider.of<LnProvider>(context, listen: false).locationWifi;
+    return wifi;
+  }
 
-    String img_shop = 'assets/images/ais_shop.png';
-    String img_wifi = 'assets/images/bit_wifi.png';
+  void _onMarkerTapped(MarkerId markerId) {
+    Provider.of<MapLocationProvider>(context, listen: false)
+        .updateMarkerTab(markerId.value);
+  }
 
-    final Uint8List markerIconShop = await getBytesFromAsset(img_shop, 100);
-    final Uint8List markerIconWifi = await getBytesFromAsset(img_wifi, 100);
+  Future<void> _onMapCreated(GoogleMapController controller) async {
+    print("################################################################");
+    _markers.clear();
 
     if (widget.select1) {
-      await prepareMarkerShop(shop!, markerIconShop);
+      prepareDataShop();
     }
+
     if (widget.select2) {
-      await prepareMarkerWifi(wifi!, markerIconWifi);
+      prepareDataWifi();
     }
-    return true;
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return GoogleMap(
+      initialCameraPosition: const CameraPosition(
+        target: current,
+        zoom: 17,
+        //limit zoom in zoom out
+      ),
+      onMapCreated: _onMapCreated,
+      mapType: MapType.terrain,
+      markers: Set<Marker>.of(_markers.values),
+      polygons: _polygon,
+      zoomControlsEnabled: true,
+      myLocationEnabled: true,
+      myLocationButtonEnabled: true,
+      minMaxZoomPreference: const MinMaxZoomPreference(13, 20),
+    );
   }
 }
