@@ -39,7 +39,7 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   BitmapDescriptor iconWifi = BitmapDescriptor.defaultMarker;
 
   Future<void> _loadMarker() async {
-    final Uint8List shop = await getBytesFromAsset('assets/images/bit_shop.png', 100);
+    final Uint8List shop = await getBytesFromAsset('assets/images/bit_shop.png', 50);
     final Uint8List wifi = await getBytesFromAsset('assets/images/bit_wifi.png', 100);
     iconShop = BitmapDescriptor.fromBytes(shop);
     iconWifi = BitmapDescriptor.fromBytes(wifi);
