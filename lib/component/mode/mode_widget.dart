@@ -485,9 +485,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                             } else {
                               //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                               String mode = data.mode5G?.mode ?? 'max_mode';
-                              if (mode == 'game_mode' || mode == 'eco_mode' || mode == 'max_mode') {
+                              if (mode == 'game_mode') {
                                 switchBoostMode(data, context, highValue);
-                              } else {
+                              } if ( mode == 'eco_mode' || mode == 'max_mode') {
                                 chooseBoostMode(data, context, highValue);
                               }
                               //-----------------------------------------------------------------
@@ -528,9 +528,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                             } else {
                               //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                               String mode = data.mode5G?.mode ?? 'max_mode';
-                              if (mode == 'boost_mode' || mode == 'eco_mode' || mode == 'max_mode') {
+                              if (mode == 'boost_mode') {
                                 switchGameMode(data, context, highValue);
-                              } else {
+                              } if (mode == 'eco_mode' || mode == 'max_mode') {
                                 chooseGameMode(data, context, highValue);
                               }
                               //-----------------------------------------------------------------
