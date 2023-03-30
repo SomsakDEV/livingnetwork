@@ -249,13 +249,13 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         width: w,
                         child: MapNearByWidget(select1: true, select2: true),
                       ),
-                      InkWell(
-                        onTap: () {},
-                        child: SizedBox(
-                          height: h * 0.35,
-                          width: w,
-                        ),
-                      ),
+                      // InkWell(
+                      //   onTap: () {},
+                      //   child: SizedBox(
+                      //     height: h * 0.35,
+                      //     width: w,
+                      //   ),
+                      // ),
                     ],
                   ),
                   Container(

@@ -2,13 +2,11 @@
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/presentation/home/tab_home.dart';
 import 'package:living_network/presentation/home/tab_mobile.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 
 class HomePage extends StatefulWidget {
@@ -21,124 +19,124 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return FutureBuilder(
-            future: Provider.of<LnProvider>(context, listen: false).prepareData(),
-            builder: (context, snap) {
-              if (snap.hasData && 'true' == snap.data.toString()) {
-                return Dialog(
-                  backgroundColor: LNColor.transparent,
-                  child: Wrap(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: LNColor.neutralsWhite,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                              child: Image.asset(
-                                ImageUtils.getImagePath('assets/images/image.png'),
-                                width: 260,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text('5G Modes!', style: LNStyle.dialogHeader),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Button(
-                              textStyle: LNStyle.dialogButtonText,
-                              title: "Got it",
-                              buttonType: ButtonType.primaryBtn,
-                              onPress: () {
-                                Navigator.pop(context);
-                              },
-                              borderRadius: 6,
-                              width: 236,
-                              height: 36,
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              } else if (snap.hasError || 'false' == snap.data.toString()) {
-                return Dialog(
-                  backgroundColor: LNColor.transparent,
-                  child: Wrap(
-                    children: [
-                      Container(
-                        padding: EdgeInsets.all(10),
-                        decoration: const BoxDecoration(
-                          color: LNColor.neutralsWhite,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Column(
-                          children: [
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text('Something wrong !!!', style: LNStyle.dialogHeader),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Button(
-                              textStyle: LNStyle.dialogButtonText,
-                              title: "Exit",
-                              buttonType: ButtonType.primaryBtn,
-                              onPress: () {
-                                // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
-                                SystemNavigator.pop();
-                              },
-                              borderRadius: 6,
-                              width: 236,
-                              height: 36,
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              } else {
-                return Dialog(
-                  backgroundColor: LNColor.transparent,
-                  child: SizedBox(),
-                );
-              }
-            },
-          );
-        },
-      ),
-    );
-    super.initState();
-  }
+  // @override
+  // void initState() {
+  //   WidgetsBinding.instance.addPostFrameCallback(
+  //     (_) => showDialog(
+  //       context: context,
+  //       barrierDismissible: false,
+  //       builder: (context) {
+  //         return FutureBuilder(
+  //           future: Provider.of<LnProvider>(context, listen: false).prepareData(),
+  //           builder: (context, snap) {
+  //             if (snap.hasData && 'true' == snap.data.toString()) {
+  //               return Dialog(
+  //                 backgroundColor: LNColor.transparent,
+  //                 child: Wrap(
+  //                   children: [
+  //                     Container(
+  //                       decoration: const BoxDecoration(
+  //                         color: LNColor.neutralsWhite,
+  //                         borderRadius: BorderRadius.all(Radius.circular(10)),
+  //                       ),
+  //                       child: Column(
+  //                         children: [
+  //                           ClipRRect(
+  //                             borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+  //                             child: Image.asset(
+  //                               ImageUtils.getImagePath('assets/images/image.png'),
+  //                               width: 260,
+  //                             ),
+  //                           ),
+  //                           SizedBox(
+  //                             height: 16,
+  //                           ),
+  //                           Text('5G Modes!', style: LNStyle.dialogHeader),
+  //                           SizedBox(
+  //                             height: 8,
+  //                           ),
+  //                           Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+  //                           SizedBox(
+  //                             height: 16,
+  //                           ),
+  //                           Button(
+  //                             textStyle: LNStyle.dialogButtonText,
+  //                             title: "Got it",
+  //                             buttonType: ButtonType.primaryBtn,
+  //                             onPress: () {
+  //                               Navigator.pop(context);
+  //                             },
+  //                             borderRadius: 6,
+  //                             width: 236,
+  //                             height: 36,
+  //                           ),
+  //                           SizedBox(
+  //                             height: 16,
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     )
+  //                   ],
+  //                 ),
+  //               );
+  //             } else if (snap.hasError || 'false' == snap.data.toString()) {
+  //               return Dialog(
+  //                 backgroundColor: LNColor.transparent,
+  //                 child: Wrap(
+  //                   children: [
+  //                     Container(
+  //                       padding: EdgeInsets.all(10),
+  //                       decoration: const BoxDecoration(
+  //                         color: LNColor.neutralsWhite,
+  //                         borderRadius: BorderRadius.all(Radius.circular(10)),
+  //                       ),
+  //                       child: Column(
+  //                         children: [
+  //                           SizedBox(
+  //                             height: 16,
+  //                           ),
+  //                           Text('Something wrong !!!', style: LNStyle.dialogHeader),
+  //                           SizedBox(
+  //                             height: 8,
+  //                           ),
+  //                           Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+  //                           SizedBox(
+  //                             height: 16,
+  //                           ),
+  //                           Button(
+  //                             textStyle: LNStyle.dialogButtonText,
+  //                             title: "Exit",
+  //                             buttonType: ButtonType.primaryBtn,
+  //                             onPress: () {
+  //                               // SystemChannels.platform.invokeMethod<void>('SystemNavigator.pop');
+  //                               SystemNavigator.pop();
+  //                             },
+  //                             borderRadius: 6,
+  //                             width: 236,
+  //                             height: 36,
+  //                           ),
+  //                           SizedBox(
+  //                             height: 16,
+  //                           ),
+  //                         ],
+  //                       ),
+  //                     )
+  //                   ],
+  //                 ),
+  //               );
+  //             } else {
+  //               return Dialog(
+  //                 backgroundColor: LNColor.transparent,
+  //                 child: SizedBox(),
+  //               );
+  //             }
+  //           },
+  //         );
+  //       },
+  //     ),
+  //   );
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
