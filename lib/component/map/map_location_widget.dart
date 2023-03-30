@@ -19,7 +19,6 @@ import 'package:provider/provider.dart';
 const LatLng current = LatLng(13.783681327551925, 100.54645268209386);
 // const LatLng current = LatLng(13.717417000000069, 100.41941700000007);
 
-
 class MapNearByWidget extends StatefulWidget {
   final bool select1, select2;
   const MapNearByWidget(
@@ -165,13 +164,12 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    print("################################################################");
     _markers.clear();
     _polygon.clear();
 
     // GridLocation gridLocation = await getGridLocation();
     String data_json =
-    await rootBundle.loadString('assets/data/mockdata_pt_ssn.json');
+        await rootBundle.loadString('assets/data/800m_aisbuild1.json');
     GridLocation gridLocation = GridLocation.fromJson(json.decode(data_json));
     double diff = 0.0004999999999881766;
     double benchmark_max = 0;
@@ -242,7 +240,6 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
       ));
     }
 
-
     if (widget.select1) {
       prepareDataShop();
     }
@@ -250,9 +247,6 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
     if (widget.select2) {
       prepareDataWifi();
     }
-
-
-
   }
 
   @override

@@ -12,8 +12,8 @@
     "geometry" : {
       "type" : "Point",
       "coordinates" : [
-        100.55535000000003,
-        13.77947000000006
+        100.5448081117171,
+        13.783412156653108
       ]
     },
     "properties" : {
@@ -40,8 +40,8 @@
       "SLM_AP_SSID_STATUS" : "Active",
       "SLM_LATITUDE" : 13.77947,
       "SLM_LONGITUDE" : 100.55535,
-      "LM_LAT" : 13.782918365146639,
-      "LM_LONG" : 100.54406384302393,
+      "LM_LAT" : 13.783412156653108,
+      "LM_LONG" : 100.5448081117171,
       "SLM_SERVICE_AREA_CODE" : "UHCMW_BLDB3",
       "SLM_SERVICE_AREA_ID" : "2726",
       "SLM_SITE_AP_ID" : "55647",
@@ -54,8 +54,8 @@
       "geometry" : {
         "type" : "Point",
         "coordinates" : [
-          100.55535000000003,
-          13.77947000000006
+          100.54507096817922,
+          13.784308264679202
         ]
       },
       "properties" : {
@@ -82,8 +82,8 @@
         "SLM_AP_SSID_STATUS" : "Active",
         "SLM_LATITUDE" : 13.77947,
         "SLM_LONGITUDE" : 100.55535,
-        "LM_LAT" : 13.784977334761415,
-        "LM_LONG" : 100.54450117581517,
+        "LM_LAT" : 13.784308264679202,
+        "LM_LONG" : 100.54507096817922,
         "SLM_SERVICE_AREA_CODE" : "UHCMW_BLDB3",
         "SLM_SERVICE_AREA_ID" : "2726",
         "SLM_SITE_AP_ID" : "55648",
