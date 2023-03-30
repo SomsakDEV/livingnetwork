@@ -5,20 +5,17 @@ import 'dart:ui' as ui;
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
-import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network/provider/map_location_provider.dart';
+import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
-import 'package:living_network_repository/living_network_repository.dart';
 import 'package:provider/provider.dart';
 
 const LatLng current = LatLng(13.731946300000061, 100.56913540000005);
 // const LatLng current = LatLng(13.717417000000069, 100.41941700000007);
 
-
 class MapNearByWidget extends StatefulWidget {
   final bool select1, select2;
-  const MapNearByWidget(
-      {super.key, required this.select1, required this.select2});
+
+  const MapNearByWidget({super.key, required this.select1, required this.select2});
 
   @override
   State<MapNearByWidget> createState() => _MapNearByWidgetState();
@@ -33,14 +30,12 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   // late MapLocationProvider mapLocationState;
   // LatLng? _markerPosition;
   MarkerId? selectedMarker;
+
   Future<Uint8List> getBytesFromAsset(String path, int width) async {
     ByteData data = await rootBundle.load(ImageUtils.getImagePath(path));
-    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(),
-        targetWidth: width, allowUpscaling: true, targetHeight: width);
+    ui.Codec codec = await ui.instantiateImageCodec(data.buffer.asUint8List(), targetWidth: width, allowUpscaling: true, targetHeight: width);
     ui.FrameInfo fi = await codec.getNextFrame();
-    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!
-        .buffer
-        .asUint8List();
+    return (await fi.image.toByteData(format: ui.ImageByteFormat.png))!.buffer.asUint8List();
   }
 
   BitmapDescriptor iconShop = BitmapDescriptor.defaultMarker;
@@ -49,17 +44,11 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   @override
   void initState() {
     super.initState();
-    BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(48, 48)),
-            'assets/images/ais_shop.png')
-        .then((onValue) {
+    BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(48, 48)), 'assets/images/ais_shop.png').then((onValue) {
       iconShop = onValue;
     });
 
-    BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(48, 48)),
-            'assets/images/bit_wifi.png')
-        .then((onValue) {
+    BitmapDescriptor.fromAssetImage(const ImageConfiguration(size: Size(48, 48)), 'assets/images/bit_wifi.png').then((onValue) {
       iconWifi = onValue;
     });
   }
@@ -89,12 +78,10 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         size = 100;
       }
       // final Uint8List markerIcon = await getBytesFromAsset(img, size);
-      final MarkerId markerId =
-          MarkerId('${office.properties.ccsmLocationCode}');
+      final MarkerId markerId = MarkerId('${office.properties.ccsmLocationCode}');
       final marker = Marker(
         markerId: markerId,
-        position: LatLng(office.properties.lmLat!.toDouble(),
-            office.properties.lmLong!.toDouble()),
+        position: LatLng(office.properties.lmLat!.toDouble(), office.properties.lmLong!.toDouble()),
         infoWindow: InfoWindow(
           title: '${office.properties.lmAmpName}',
           snippet: 'add this $size',
@@ -121,12 +108,10 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         size = 100;
       }
       // final Uint8List markerIcon = await getBytesFromAsset(img, size);
-      final MarkerId markerId =
-          MarkerId('${office.properties.slmSiteApSsidId}');
+      final MarkerId markerId = MarkerId('${office.properties.slmSiteApSsidId}');
       final marker = Marker(
         markerId: markerId,
-        position: LatLng(office.properties.lmLat!.toDouble(),
-            office.properties.lmLong!.toDouble()),
+        position: LatLng(office.properties.lmLat!.toDouble(), office.properties.lmLong!.toDouble()),
         infoWindow: InfoWindow(
           title: '${office.properties.lmAmpName}',
           snippet: 'add this $size',
@@ -142,21 +127,16 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
     }
   }
 
-  LocationShop? getlocationShop() {
-    LocationShop? shop =
-        Provider.of<LnProvider>(context, listen: false).locationShop;
-    return shop;
+  getlocationShop() {
+    return Provider.of<InternalProvider>(context).locationShop;
   }
 
-  LocationWifi? getlocationWifi() {
-    LocationWifi? wifi =
-        Provider.of<LnProvider>(context, listen: false).locationWifi;
-    return wifi;
+  getlocationWifi() {
+    return Provider.of<InternalProvider>(context).locationWifi;
   }
 
   void _onMarkerTapped(MarkerId markerId) {
-    Provider.of<MapLocationProvider>(context, listen: false)
-        .updateMarkerTab(markerId.value);
+    Provider.of<InternalProvider>(context).updateMarkerTab(markerId.value);
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {

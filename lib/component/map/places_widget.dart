@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/model/map/location_nearby.dart';
-import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network/provider/map_location_provider.dart';
+import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:living_network_repository/domain/entities/location_shop.dart';
 import 'package:living_network_repository/domain/entities/location_wifi.dart';
@@ -29,13 +28,13 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
   Future<List<LocationNearBy>> _getItems(bool selectShop, bool selectWifi) async {
     List<LocationNearBy> signal_list = [];
     LocationShop? locationShop =
-        Provider.of<LnProvider>(context, listen: false).locationShop;
+        Provider.of<InternalProvider>(context, listen: false).locationShop;
 
     LocationWifi? locationWifi =
-        Provider.of<LnProvider>(context, listen: false).locationWifi;
+        Provider.of<InternalProvider>(context, listen: false).locationWifi;
 
     String? markerTab =
-        Provider.of<MapLocationProvider>(context, listen: true).markerTab;
+        Provider.of<InternalProvider>(context, listen: true).markerTab;
 
     if (selectShop && selectWifi) {
       for (Feature data in locationShop!.features) {

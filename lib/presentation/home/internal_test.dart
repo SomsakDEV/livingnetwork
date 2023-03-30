@@ -245,7 +245,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                     alignment: Alignment.bottomCenter,
                     children: <Widget>[
                       SizedBox(
-                        height: h * 0.35,
+                        height: h * 0.2,
                         width: w,
                         child: MapNearByWidget(select1: true, select2: true),
                       ),

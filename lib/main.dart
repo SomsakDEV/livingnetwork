@@ -3,8 +3,6 @@ import 'package:flutter/services.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/presentation/home/internal_test.dart';
 import 'package:living_network/provider/internal_provider.dart';
-import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network/provider/map_location_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -67,8 +65,8 @@ class _LivingNetworkState extends State<LivingNetwork> {
             providers: [
               // ChangeNotifierProvider(create: (context) => MainProvider(repo: repo, tmp: repo?.getMockupData())),
               ChangeNotifierProvider(create: (context) => InternalProvider()),
-              ChangeNotifierProvider(create: (context) => LnProvider()),
-              ChangeNotifierProvider(create: (context) => MapLocationProvider()),
+              // ChangeNotifierProvider(create: (context) => LnProvider()),
+              // ChangeNotifierProvider(create: (context) => MapLocationProvider()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
