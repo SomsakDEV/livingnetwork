@@ -133,12 +133,11 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   }
 
   Future<void> _onMapCreated(GoogleMapController controller) async {
-    print("################################################################");
     _markers.clear();
     _polygon.clear();
 
     // GridLocation gridLocation = await getGridLocation();
-    String data_json = await rootBundle.loadString('assets/data/mockdata_pt_ssn.json');
+    String data_json = await rootBundle.loadString('assets/data/800m_aisbuild1.json');
     GridLocation gridLocation = GridLocation.fromJson(json.decode(data_json));
     double diff = 0.0004999999999881766;
     double benchmark_max = 0;
