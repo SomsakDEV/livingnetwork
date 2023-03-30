@@ -1,18 +1,19 @@
 // ignore_for_file: avoid_print
 
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
 
 class InternalProvider with ChangeNotifier {
-  InitialData? repoln;
   InitialInternal? repo;
   Mode5G? _mode5G;
   String? _status;
   DateTime? _sExpire;
   String? _caseTest;
   LocationWifi? _locationWifi;
-
   LocationShop? _locationShop;
 
   Mode5G? get mode5G => _mode5G;
@@ -55,8 +56,10 @@ class InternalProvider with ChangeNotifier {
       _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      getLocationShop();
-      getLocationWifi();
+      String shop = await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+      String wifi = await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+      _locationShop = LocationShop.fromJson(json.decode(shop));
+      _locationWifi = LocationWifi.fromJson(json.decode(wifi));
       notifyListeners();
       return (_mode5G != null);
     } catch (e, st) {
@@ -86,22 +89,6 @@ class InternalProvider with ChangeNotifier {
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     notifyListeners();
     return _mode5G?.error ?? true;
-  }
-
-  Future<LocationWifi?> getLocationWifi() async {
-    repoln = repoln ?? InitialData();
-    _locationWifi = await repoln?.getLocationWifi();
-    print('[LIVING_NETWORK] Wifi : ${_locationWifi?.toJson()}');
-    notifyListeners();
-    return _locationWifi;
-  }
-
-  Future<LocationShop?> getLocationShop() async {
-    repoln = repoln ?? InitialData();
-    _locationShop = await repoln?.getLocationShop();
-    print('[LIVING_NETWORK] Shop : ${_locationShop?.toJson()}');
-    notifyListeners();
-    return _locationShop;
   }
 
   String? _markerTab;
