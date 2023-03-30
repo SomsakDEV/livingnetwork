@@ -8,9 +8,7 @@ import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:living_network/model/map/grid_location.dart';
 import 'package:living_network/provider/internal_provider.dart';
-import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
-import 'package:living_network_repository/living_network_repository.dart';
 import 'package:provider/provider.dart';
 
 const LatLng current = LatLng(13.783681327551925, 100.54645268209386);
@@ -60,22 +58,20 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   @override
   void didUpdateWidget(MapNearByWidget oldWidget) {
     super.didUpdateWidget(oldWidget);
-
     _markers.clear();
-
     if (widget.select1) {
       prepareDataShop();
     }
-
     if (widget.select2) {
       prepareDataWifi();
     }
   }
 
   void prepareDataShop() {
-    for (final office in getlocationShop()!.features) {
+    var list = Provider.of<InternalProvider>(context).locationShop?.features ?? [];
+    for (final office in list) {
       String img = 'assets/images/ais_shop.png';
-      int size = 200;
+      int size = 100;
       if ('assets/images/cellular_other.png' == img) {
         size = 100;
       } else if ('assets/images/cellular_bad.png' == img) {
@@ -103,7 +99,8 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   }
 
   void prepareDataWifi() {
-    for (final office in getlocationWifi()!.features) {
+    var list = Provider.of<InternalProvider>(context).locationWifi?.features ?? [];
+    for (final office in list) {
       String img = 'assets/images/bit_wifi.png';
       int size = 200;
       if ('assets/images/cellular_other.png' == img) {
@@ -129,16 +126,6 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         _markers[markerId] = marker;
       });
     }
-  }
-
-  LocationShop? getlocationShop() {
-    LocationShop? shop = Provider.of<LnProvider>(context, listen: false).locationShop;
-    return shop;
-  }
-
-  LocationWifi? getlocationWifi() {
-    LocationWifi? wifi = Provider.of<LnProvider>(context, listen: false).locationWifi;
-    return wifi;
   }
 
   void _onMarkerTapped(MarkerId markerId) {
