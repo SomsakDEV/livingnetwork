@@ -4,6 +4,8 @@
 
 import 'dart:convert';
 
+import 'package:flutter/services.dart';
+
 GridLocation gridLocationFromJson(String str) => GridLocation.fromJson(json.decode(str));
 
 String gridLocationToJson(GridLocation data) => json.encode(data.toJson());
@@ -258,4 +260,12 @@ class FeatureProperties {
     "SE_LAT": seLat,
     "SE_LONG": seLong,
   };
+}
+
+Future<GridLocation> getGridLocation()  async {
+String data_json =
+    await rootBundle.loadString('assets/data/mockdata_pt_ssn.json');
+GridLocation dd = GridLocation.fromJson(json.decode(data_json));
+
+return dd;
 }

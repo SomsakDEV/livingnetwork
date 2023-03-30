@@ -51,7 +51,7 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
       for (FeatureShop data in locationWifi!.features) {
         signal_list.add(LocationNearBy(
             id: "${data.properties.slmSiteApSsidId}",
-            name: "${data.properties.lmAmpNamt}",
+            name: "${data.properties.slmApLocation}",
             imagetype: "wifi",
             lat: data.properties.lmLat ?? 0.0,
             lng: data.properties.lmLong ?? 0.0,
@@ -72,7 +72,7 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
         for (FeatureShop data in locationWifi!.features) {
           signal_list.add(LocationNearBy(
               id: "${data.properties.slmSiteApSsidId}",
-              name: "${data.properties.lmAmpNamt}",
+              name: "${data.properties.slmApLocation}",
               imagetype: "wifi",
               lat: data.properties.lmLat ?? 0.0,
               lng: data.properties.lmLong ?? 0.0,
