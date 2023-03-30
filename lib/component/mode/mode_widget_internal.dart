@@ -1,5 +1,4 @@
 import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
@@ -10,7 +9,6 @@ import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/constance/constants.dart';
 import 'package:living_network/provider/internal_provider.dart';
-import 'package:living_network/provider/ln_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
 
@@ -67,14 +65,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   @override
   void initState() {
     super.initState();
-  }
-
-  Future<bool> isDisable(bool value) async {
-    return value;
-  }
-
-  Future<void> setIsDisable(LnProvider provider, bool value) async {
-    provider.setIsDisable(value);
   }
 
   Future<void> wUpdate(InternalProvider data, bool addSocket, String mode, {String loadingGif = 'default', String add = 'default'}) async {
@@ -317,10 +307,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode = data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ?? 'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'game_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = DateTime.now().add(const Duration(seconds: 15)).toString();
-              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               setState(() {
                 checkTimeMode = true;
               });
@@ -344,10 +330,6 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
             exitMode: true,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
-              data.mode5G?.modeUpdate?.mode5G.lastDefaultMode = data.mode5G?.modeUpdate?.mode5G.currentMode.modeName ?? 'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.modeName = 'max_mode';
-              data.mode5G?.modeUpdate?.mode5G.currentMode.expireDate = '';
-              data.mode5G?.modeUpdate?.mode5G.changeModePerDay.count++;
               setState(() {
                 checkTimeMode = false;
               });
