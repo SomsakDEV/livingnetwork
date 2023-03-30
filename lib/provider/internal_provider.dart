@@ -1,5 +1,3 @@
-// ignore_for_file: avoid_print
-
 import 'package:flutter/material.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
@@ -57,7 +55,7 @@ class InternalProvider with ChangeNotifier {
 
   Future<bool> getAddMode(String mode) async {
     repo = repo ?? InitialInternal();
-    _mode5G = await repo?.getAddPackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
+    _mode5G = await repo?.addPackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
     return _mode5G?.error ?? true;
@@ -65,7 +63,7 @@ class InternalProvider with ChangeNotifier {
 
   Future<bool> getDeleteMode(String mode) async {
     repo = repo ?? InitialInternal();
-    _mode5G = await repo?.getDeletePackageSocket(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
+    _mode5G = await repo?.deletePackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
     return _mode5G?.error ?? true;
