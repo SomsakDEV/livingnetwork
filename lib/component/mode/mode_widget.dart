@@ -472,7 +472,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         } else {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           String mode = data.mode5G?.mode ?? 'max_mode';
-                          if (mode == 'game_mode' || mode == 'eco_mode' || mode == 'eco_mode') {
+                          if (mode == 'game_mode' || mode == 'eco_mode' || mode == 'max_mode') {
                             switchBoostMode(data, context);
                           } else {
                             chooseBoostMode(data, context);
