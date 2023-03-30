@@ -13,7 +13,6 @@ dependencies:
     sdk: flutter
     
   living_network_repository:
-#    path: ../living_network_repository
     git:    
       url: https://git.matador.ais.co.th/mfaf/mobileapp/mfaf_flutter/data/living_network_repository.git    
       ref: develop
@@ -38,13 +37,13 @@ flutter:
 
   assets:
     - assets/images/
-    - assets/loading.gif
+    - assets/data/
     - assets/piggy.gif
-    - assets/pig.gif
     - assets/loading_boost_mode.gif
     - assets/loading_game_mode.gif
     - assets/loading_eco_mode.gif
-    - assets/data/
+    - assets/pig.gif
+
   fonts:
     - family: DB Heavent
       fonts:

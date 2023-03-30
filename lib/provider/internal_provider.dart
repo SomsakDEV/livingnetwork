@@ -1,4 +1,9 @@
+// ignore_for_file: avoid_print
+
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
 
@@ -8,12 +13,18 @@ class InternalProvider with ChangeNotifier {
   String? _status;
   DateTime? _sExpire;
   String? _caseTest;
+  LocationWifi? _locationWifi;
+  LocationShop? _locationShop;
 
   Mode5G? get mode5G => _mode5G;
 
   String? get status => _status;
 
   DateTime? get sExpire => _sExpire;
+
+  LocationShop? get locationShop => _locationShop;
+
+  LocationWifi? get locationWifi => _locationWifi;
 
   caseTest(String value) {
     if (value.startsWith('5G')) {
@@ -45,6 +56,10 @@ class InternalProvider with ChangeNotifier {
       _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
+      String shop = await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+      String wifi = await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+      _locationShop = LocationShop.fromJson(json.decode(shop));
+      _locationWifi = LocationWifi.fromJson(json.decode(wifi));
       notifyListeners();
       return (_mode5G != null);
     } catch (e, st) {
@@ -74,5 +89,14 @@ class InternalProvider with ChangeNotifier {
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     notifyListeners();
     return _mode5G?.error ?? true;
+  }
+
+  String? _markerTab;
+
+  String? get markerTab => _markerTab;
+
+  void updateMarkerTab(String id) {
+    _markerTab = id;
+    notifyListeners();
   }
 }
