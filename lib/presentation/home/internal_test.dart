@@ -4,6 +4,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:living_network/component/map/map_location_widget.dart';
 import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
@@ -60,7 +61,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                     children: [
                       ClipRRect(
                         borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                        child: Image.asset(ImageUtils.getImagePath('assets/piggy.gif')),
+                        child: Image.asset(ImageUtils.getImagePath('assets/image1.gif')),
                       ),
                       SizedBox(
                         height: 16,
@@ -240,9 +241,24 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  SizedBox(
-                    height: h * 0.13,
+                  Stack(
+                    alignment: Alignment.bottomCenter,
+                    children: <Widget>[
+                      SizedBox(
+                        height: h * 0.35,
+                        width: w,
+                        child: MapNearByWidget(select1: true, select2: true),
+                      ),
+                      InkWell(
+                        onTap: () {},
+                        child: SizedBox(
+                          height: h * 0.35,
+                          width: w,
+                        ),
+                      ),
+                    ],
                   ),
+                  SizedBox(height: 8),
                   Container(
                     alignment: Alignment.topCenter,
                     decoration: BoxDecoration(

@@ -1,10 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/presentation/home/homepage.dart';
 import 'package:living_network/presentation/home/internal_test.dart';
-import 'package:living_network/presentation/map/map_direction.dart';
-import 'package:living_network/presentation/map/map_screen.dart';
 import 'package:living_network/provider/internal_provider.dart';
-import 'package:living_network/provider/ln_provider.dart';
 import 'package:provider/provider.dart';
 
 void main() async {
@@ -26,7 +22,7 @@ class _LivingNetworkState extends State<LivingNetwork> {
       providers: [
         // ChangeNotifierProvider(create: (context) => MainProvider(repo: repo, tmp: repo?.getMockupData())),
         ChangeNotifierProvider(create: (context) => InternalProvider()),
-        ChangeNotifierProvider(create: (context) => LnProvider()),
+        // ChangeNotifierProvider(create: (context) => LnProvider()),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -34,9 +30,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
         // initialRoute: '/internal_test',
         initialRoute: '/internal_test',
         routes: {
-          '/': (context) => HomePage(),
-          '/map': (context) => MapScreen(),
-          '/map/direction': (context) => MapDirection(),
+          // '/': (context) => HomePage(),
+          // '/map': (context) => MapScreen(),
+          // '/map/direction': (context) => MapDirection(),
           '/internal_test': (context) => Mode5GInternal(token: token),
         },
       ),
