@@ -10,27 +10,17 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
   final String textSubmitBtn;
   final String textCancelBtn;
   final bool? hasBorderCancelBtn;
+  final bool? isHighValue;
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetDecisionPaymentCardDialogMode(
-      {Key? key,
-      required this.title,
-      required this.textSubmitBtn,
-      required this.textCancelBtn,
-      required this.onPressedSubmit,
-      required this.onPressedCancel,
-      this.imagePath,
-      this.hasBorderCancelBtn})
-      : super(key: key);
+  const BottomSheetDecisionPaymentCardDialogMode({Key? key, required this.title, required this.textSubmitBtn, required this.textCancelBtn, required this.onPressedSubmit, required this.onPressedCancel, this.isHighValue, this.imagePath, this.hasBorderCancelBtn}) : super(key: key);
 
   @override
-  State<BottomSheetDecisionPaymentCardDialogMode> createState() =>
-      _BottomSheetDecisionPaymentCardDialogModeState();
+  State<BottomSheetDecisionPaymentCardDialogMode> createState() => _BottomSheetDecisionPaymentCardDialogModeState();
 }
 
-class _BottomSheetDecisionPaymentCardDialogModeState
-    extends State<BottomSheetDecisionPaymentCardDialogMode> {
+class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDecisionPaymentCardDialogMode> {
   Widget? termConditionDesc() {
     Map<String, dynamic> desc = termsConditionsDesc;
     return ListView.builder(
@@ -80,10 +70,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
               ),
             ),
             child: Padding(
-              padding: EdgeInsets.only(
-                  bottom: MediaQuery.of(context).size.height * 0.053,
-                  left: 16.0,
-                  right: 16.0),
+              padding: EdgeInsets.only(bottom: MediaQuery.of(context).size.height * 0.053, left: 16.0, right: 16.0),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
                 mainAxisSize: MainAxisSize.min,
@@ -137,10 +124,13 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          price,
+                          (widget.isHighValue?? false ? priceHigh : priceNotHigh),
                           style: LNStyle.buttonSheetPriceTime,
                         ),
-                        Text(separate, style: LNStyle.buttonSheetSeparate,),
+                        Text(
+                          separate,
+                          style: LNStyle.buttonSheetSeparate,
+                        ),
                         Text(
                           time,
                           style: LNStyle.buttonSheetPriceTime,
@@ -178,8 +168,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState
                     alignment: Alignment.center,
                     child: Center(
                       child: Container(
-                        padding: const EdgeInsets.only(
-                            top: 16, bottom: 16, left: 15, right: 5),
+                        padding: const EdgeInsets.only(top: 16, bottom: 16, left: 15, right: 5),
                         height: 140,
                         child: Scrollbar(
                           thickness: 5,

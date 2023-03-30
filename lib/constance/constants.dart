@@ -147,7 +147,8 @@ String titlePaymentL = 'สลับเป็น Boost Mode!';
 String titlePaymentG = 'สลับเป็น Game Mode!';
 String descPayment =
     '*เรียกเก็บค่าบริการพร้อมกับแพ็กเกจรายเดือนลงบิล';
-String price = '10 บาท';
+String priceNotHigh = '10 บาท';
+String priceHigh = '0 บาท';
 String separate = " | ";
 String time = "1 ชั่วโมง";
 String vat = 'VAT Included';
