@@ -29,10 +29,8 @@ class InternalProvider with ChangeNotifier {
   caseTest(String value) {
     if (value.startsWith('5G')) {
       _caseTest = 'mobile5G';
-      notifyListeners();
     } else if (value.startsWith('4G')) {
       _caseTest = 'mobile4G';
-      notifyListeners();
     }
   }
 
@@ -51,15 +49,16 @@ class InternalProvider with ChangeNotifier {
 
   Future<bool> internalPrepare(String token) async {
     try {
+      String shop = await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+      String wifi = await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+      _locationShop = LocationShop.fromJson(json.decode(shop));
+      _locationWifi = LocationWifi.fromJson(json.decode(wifi));
       repo = repo ?? InitialInternal();
       _mode5G = await repo?.getModeSocket(token, caseTest: _caseTest);
       _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      String shop = await rootBundle.loadString('assets/data/mock_ais1_shop.json');
-      String wifi = await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
-      _locationShop = LocationShop.fromJson(json.decode(shop));
-      _locationWifi = LocationWifi.fromJson(json.decode(wifi));
+
       notifyListeners();
       return (_mode5G != null);
     } catch (e, st) {

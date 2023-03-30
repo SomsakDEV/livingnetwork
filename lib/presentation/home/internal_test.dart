@@ -252,14 +252,11 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                       InkWell(
                         onTap: () {},
                         child: SizedBox(
-                          height: h * 0.35,
+                          height: h * 0.2,
                           width: w,
                         ),
                       ),
                     ],
-                  ),
-                  SizedBox(
-                    height: h * 0.13,
                   ),
                   Container(
                     alignment: Alignment.topCenter,
