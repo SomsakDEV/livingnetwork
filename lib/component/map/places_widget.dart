@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
-import 'package:living_network/utility/image_utils.dart';
 import 'package:living_network/model/map/location_nearby.dart';
 import 'package:living_network/provider/ln_provider.dart';
-import 'package:living_network_repository/domain/entities/display_screen.dart';
+import 'package:living_network/provider/map_location_provider.dart';
+import 'package:living_network/utility/image_utils.dart';
 import 'package:living_network_repository/domain/entities/location_shop.dart';
 import 'package:living_network_repository/domain/entities/location_wifi.dart';
 import 'package:provider/provider.dart';
-
-
 
 class ListPlaceDetail extends StatefulWidget {
   final bool select1, select2;
@@ -28,12 +26,19 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
   late AssetImage wifi_img =
       AssetImage(ImageUtils.getImagePath('assets/images/ais_wifi.png'));
 
-  Future<List<LocationNearBy>> _getItems(bool a, bool b) async {
+  Future<List<LocationNearBy>> _getItems(bool selectShop, bool selectWifi) async {
     List<LocationNearBy> signal_list = [];
-    DisplayScreen? appstate = Provider.of<LnProvider>(context, listen: false).displayScreen;
+    LocationShop? locationShop =
+        Provider.of<LnProvider>(context, listen: false).locationShop;
 
-    if (a && b) {
-      for (Feature data in appstate!.locationShop!.features) {
+    LocationWifi? locationWifi =
+        Provider.of<LnProvider>(context, listen: false).locationWifi;
+
+    String? markerTab =
+        Provider.of<MapLocationProvider>(context, listen: true).markerTab;
+
+    if (selectShop && selectWifi) {
+      for (Feature data in locationShop!.features) {
         signal_list.add(LocationNearBy(
             id: "${data.properties.ccsmLocationCode}",
             name: "${data.properties.ccsmPartnername}",
@@ -42,9 +47,9 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
             lng: data.properties.lmLong ?? 0.0,
             dist: 100));
       }
-      for (FeatureShop data in appstate.locationWifi!.features) {
+      for (FeatureShop data in locationWifi!.features) {
         signal_list.add(LocationNearBy(
-            id: "${data.properties.slmServiceAreaCode}",
+            id: "${data.properties.slmSiteApSsidId}",
             name: "${data.properties.lmAmpNamt}",
             imagetype: "wifi",
             lat: data.properties.lmLat ?? 0.0,
@@ -52,8 +57,8 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
             dist: 100));
       }
     } else {
-      if (a) {
-        for (Feature data in appstate!.locationShop!.features) {
+      if (selectShop) {
+        for (Feature data in locationShop!.features) {
           signal_list.add(LocationNearBy(
               id: "${data.properties.ccsmLocationCode}",
               name: "${data.properties.ccsmPartnername}",
@@ -62,10 +67,10 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
               lng: data.properties.lmLong ?? 0.0,
               dist: 100));
         }
-      } else if (b) {
-        for (FeatureShop data in appstate!.locationWifi!.features) {
+      } else if (selectWifi) {
+        for (FeatureShop data in locationWifi!.features) {
           signal_list.add(LocationNearBy(
-              id: "${data.properties.slmServiceAreaCode}",
+              id: "${data.properties.slmSiteApSsidId}",
               name: "${data.properties.lmAmpNamt}",
               imagetype: "wifi",
               lat: data.properties.lmLat ?? 0.0,
@@ -76,7 +81,29 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
         signal_list.clear();
       }
     }
-    return signal_list;
+
+    if (markerTab != null) {
+      return modifyList(markerTab, signal_list);
+    } else {
+      return signal_list;
+    }
+  }
+
+  List<LocationNearBy> modifyList(String input, List<LocationNearBy> list) {
+    List<LocationNearBy> list_copy = List.from(list);
+
+    LocationNearBy item = list.singleWhere((it) => it.id == input , orElse: () => LocationNearBy(id: 'null', name: 'null', imagetype: 'null', lat: 0.0, lng: 0.0, dist: 0));
+
+    if (item.id == 'null') {
+      return list;
+    }
+    print(item);
+    print(item.id);
+    print(item.name);
+    list_copy.remove(item);
+    list_copy.insert(0, item);
+    print(list_copy[0].id);
+    return list_copy;
   }
 
   @override

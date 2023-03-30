@@ -78,7 +78,13 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   }
 
   Future<void> wUpdate(InternalProvider data, bool addSocket, String mode, {String loadingGif = 'default', String add = 'default'}) async {
-    String img = loadingGif == 'game' ? 'assets/loading_game_mode.gif' : 'assets/piggy.gif';
+    String img = loadingGif == 'boost'
+        ? 'assets/loading_boost_mode.gif'
+        : loadingGif == 'game'
+            ? 'assets/loading_game_mode.gif'
+            : loadingGif == 'eco'
+                ? 'assets/loading_eco_mode.gif'
+                : '';
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
           context: context,
@@ -121,7 +127,13 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
   }
 
   Future<void> expireMode(InternalProvider data, {String loadingGif = 'default', String add = 'default'}) async {
-    String img = loadingGif == 'game' ? 'assets/loading_game_mode.gif' : 'assets/piggy.gif';
+    String img = loadingGif == 'boost'
+        ? 'assets/loading_boost_mode.gif'
+        : loadingGif == 'game'
+        ? 'assets/loading_game_mode.gif'
+        : loadingGif == 'eco'
+        ? 'assets/loading_eco_mode.gif'
+        : '';
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
           context: context,
@@ -188,7 +200,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                       setState(() {
                         checkTimeMode = false;
                       });
-                      wUpdate(data, true, 'boost_mode', add: 'boost');
+                      wUpdate(data, true, 'boost_mode', loadingGif: 'boost', add: 'boost');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
                   );
@@ -215,7 +227,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
                       setState(() {
                         checkTimeMode = false;
                       });
-                      wUpdate(data, false, 'boost_mode', add: 'boost');
+                      wUpdate(data, false, 'boost_mode', loadingGif: 'boost', add: 'boost');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
                   );
@@ -250,7 +262,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, true, 'boost_mode', add: 'boost');
+              wUpdate(data, true, 'boost_mode', loadingGif: 'boost', add: 'boost');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -277,7 +289,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, false, 'boost_mode', add: 'delete');
+              wUpdate(data, false, 'boost_mode', loadingGif: 'boost', add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -440,7 +452,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, true, 'eco_mode', add: 'eco');
+              wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -466,7 +478,7 @@ class _ModeWidgetInternalState extends State<ModeWidgetInternal> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, false, 'eco_mode', add: 'delete');
+              wUpdate(data, false, 'eco_mode', loadingGif: 'eco', add: 'delete');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );

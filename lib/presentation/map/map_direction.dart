@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:living_network/component/map/map_widget.dart';
 import 'package:living_network/component/map_direction/m_bottom_sheet.dart';
 import 'package:living_network/constance/LNStyle.dart';
 
@@ -17,14 +16,14 @@ class _MapDirectionState extends State<MapDirection> {
       appBar: AppBar(
         title: const Text('Signal map', style: LNStyle.head4Text),
         backgroundColor: Colors.white,
-        leading: BackButton(color: Colors.black),
+        leading: const BackButton(color: Colors.black),
       ),
       body: Column(
         mainAxisSize: MainAxisSize.max,
         children: const [
           Expanded(
             child: SizedBox(
-              child: MapWidget(),
+              // child: MapWidget(),
             ),
           ),
         ],

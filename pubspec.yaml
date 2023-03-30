@@ -37,8 +37,9 @@ flutter:
   assets:
     - assets/images/
     - assets/piggy.gif
-    - assets/loading.gif
+    - assets/loading_boost_mode.gif
     - assets/loading_game_mode.gif
+    - assets/loading_eco_mode.gif
     - assets/pig.gif
 
   fonts:

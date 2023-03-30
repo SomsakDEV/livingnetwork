@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/component/map/button_selection.dart';
 import 'package:living_network/component/map/map_location_widget.dart';
-import 'package:living_network/component/map/map_widget.dart';
 import 'package:living_network/component/map/places_widget.dart';
 import 'package:living_network/component/map/toggle_signal_widget.dart';
 import 'package:living_network/constance/LNStyle.dart';
