@@ -44,18 +44,18 @@ class LnProvider with ChangeNotifier {
       WidgetsFlutterBinding.ensureInitialized();
       var coreConfig = CoreConfig(mode: Mode.debug);
       await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
+      String data_json =
+      await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+      String data_json_wifi =
+      await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
       _displayScreen = await repo?.getMockupData('0889081797');
       if (_verify = (_displayScreen != null)) {
         _perform = _displayScreen?.perform;
         _mode = _displayScreen?.mode;
         // _locationWifi = _displayScreen?.locationWifi;
         // _locationShop = _displayScreen?.locationShop;
-        String data_json =
-        await rootBundle.loadString('assets/data/mock_ais1_shop.json');
-        _locationShop = LocationShop.fromJson(json.decode(data_json));
 
-        String data_json_wifi =
-        await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+        _locationShop = LocationShop.fromJson(json.decode(data_json));
         _locationWifi = LocationWifi.fromJson(json.decode(data_json_wifi));
       }
     } catch (e, st) {
@@ -104,17 +104,17 @@ class LnProvider with ChangeNotifier {
     try {
       repo?.getCleanCache();
       _displayScreen = await repo?.getMockupData('08123456789');
+      String data_json =
+      await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+      String data_json_wifi =
+      await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
       if (_verify = (_displayScreen != null)) {
         _perform = _displayScreen?.perform;
         _mode = _displayScreen?.mode;
         // _locationWifi = _displayScreen?.locationWifi;
         // _locationShop = _displayScreen?.locationShop;
-        String data_json =
-        await rootBundle.loadString('assets/data/mock_ais1_shop.json');
-        _locationShop = LocationShop.fromJson(json.decode(data_json));
 
-        String data_json_wifi =
-        await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+        _locationShop = LocationShop.fromJson(json.decode(data_json));
         _locationWifi = LocationWifi.fromJson(json.decode(data_json_wifi));
       }
     } catch (e, st) {
