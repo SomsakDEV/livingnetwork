@@ -7,6 +7,8 @@ import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/provider/ln_provider.dart';
 import 'package:provider/provider.dart';
 
+import '../../component/map/map_location_widget.dart';
+
 class TabMobile extends StatefulWidget {
   TabMobile({
     super.key,
@@ -38,7 +40,7 @@ class _TabMobileState extends State<TabMobile> {
                   Container(
                     height: h * 0.35,
                     width: w,
-                    child: MapWidget(),
+                    child: MapNearByWidget(select1: true, select2: true),
                   ),
                   InkWell(
                     onTap: () {

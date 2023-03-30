@@ -1,0 +1,179 @@
+{
+  "type": "FeatureCollection",
+  "_id": "fffffff",
+  "crs": {
+    "type": "name",
+    "properties": {
+      "name": "EPSG:4326"
+    }
+  },
+  "features":[{
+    "type" : "Feature",
+    "geometry" : {
+      "type" : "Point",
+      "coordinates" : [
+        100.55535000000003,
+        13.77947000000006
+      ]
+    },
+    "properties" : {
+      "OBJECTID" : 140372,
+      "LM_PROV_CODE" : "10",
+      "LM_AMP_CODE" : "14",
+      "LM_TAM_CODE" : "01",
+      "LM_PROV_NAMT" : "กรุงเทพมหานคร",
+      "LM_AMP_NAMT" : "พญาไท",
+      "LM_TAM_NAMT" : "สามเสนใน",
+      "LM_PROV_NAME" : "BANGKOK",
+      "LM_AMP_NAME" : "PHAYA THAI",
+      "LM_TAM_NAME" : "SAM SEN NAI",
+      "LM_UPD_DATE" : 1569125920000,
+      "SLM_AP_NAME" : "UHCMW_BLDB3_FA01D",
+      "SLM_AP_LOCATION" : "1st floor",
+      "SLM_AP_MAC_ADDRESS" : null,
+      "SLM_ZONE" : null,
+      "SLM_FLOOR" : "1",
+      "SLM_BRAND" : "RUCKUS",
+      "SLM_MODEL" : "N/A",
+      "SLM_AP_SSID" : "AIS SMART Login",
+      "SLM_PARTNER" : null,
+      "SLM_AP_SSID_STATUS" : "Active",
+      "SLM_LATITUDE" : 13.77947,
+      "SLM_LONGITUDE" : 100.55535,
+      "LM_LAT" : 13.782918365146639,
+      "LM_LONG" : 100.54406384302393,
+      "SLM_SERVICE_AREA_CODE" : "UHCMW_BLDB3",
+      "SLM_SERVICE_AREA_ID" : "2726",
+      "SLM_SITE_AP_ID" : "55647",
+      "SLM_SITE_AP_SSID_ID" : "136558",
+      "GDB_GEOMATTR_DATA" : null
+    }
+  },
+    {
+      "type" : "Feature",
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          100.55535000000003,
+          13.77947000000006
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 140373,
+        "LM_PROV_CODE" : "10",
+        "LM_AMP_CODE" : "14",
+        "LM_TAM_CODE" : "01",
+        "LM_PROV_NAMT" : "กรุงเทพมหานคร",
+        "LM_AMP_NAMT" : "พญาไท",
+        "LM_TAM_NAMT" : "สามเสนใน",
+        "LM_PROV_NAME" : "BANGKOK",
+        "LM_AMP_NAME" : "PHAYA THAI",
+        "LM_TAM_NAME" : "SAM SEN NAI",
+        "LM_UPD_DATE" : 1569125920000,
+        "SLM_AP_NAME" : "UHCMW_BLDB3_FA02H",
+        "SLM_AP_LOCATION" : "2nd floor",
+        "SLM_AP_MAC_ADDRESS" : null,
+        "SLM_ZONE" : null,
+        "SLM_FLOOR" : "2",
+        "SLM_BRAND" : "RUCKUS",
+        "SLM_MODEL" : "N/A",
+        "SLM_AP_SSID" : ".@ AIS SUPER WiFi",
+        "SLM_PARTNER" : null,
+        "SLM_AP_SSID_STATUS" : "Active",
+        "SLM_LATITUDE" : 13.77947,
+        "SLM_LONGITUDE" : 100.55535,
+        "LM_LAT" : 13.784977334761415,
+        "LM_LONG" : 100.54450117581517,
+        "SLM_SERVICE_AREA_CODE" : "UHCMW_BLDB3",
+        "SLM_SERVICE_AREA_ID" : "2726",
+        "SLM_SITE_AP_ID" : "55648",
+        "SLM_SITE_AP_SSID_ID" : "136559",
+        "GDB_GEOMATTR_DATA" : null
+      }
+    },
+    {
+      "type" : "Feature",
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          100.55535000000003,
+          13.77947000000006
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 140374,
+        "LM_PROV_CODE" : "10",
+        "LM_AMP_CODE" : "14",
+        "LM_TAM_CODE" : "01",
+        "LM_PROV_NAMT" : "กรุงเทพมหานคร",
+        "LM_AMP_NAMT" : "พญาไท",
+        "LM_TAM_NAMT" : "สามเสนใน",
+        "LM_PROV_NAME" : "BANGKOK",
+        "LM_AMP_NAME" : "PHAYA THAI",
+        "LM_TAM_NAME" : "SAM SEN NAI",
+        "LM_UPD_DATE" : 1569125920000,
+        "SLM_AP_NAME" : "UHCMW_BLDB3_FA02H",
+        "SLM_AP_LOCATION" : "3nd floor",
+        "SLM_AP_MAC_ADDRESS" : null,
+        "SLM_ZONE" : null,
+        "SLM_FLOOR" : "2",
+        "SLM_BRAND" : "RUCKUS",
+        "SLM_MODEL" : "N/A",
+        "SLM_AP_SSID" : "AIS SMART Login",
+        "SLM_PARTNER" : null,
+        "SLM_AP_SSID_STATUS" : "Active",
+        "SLM_LATITUDE" : 13.77947,
+        "SLM_LONGITUDE" : 100.55535,
+        "LM_LAT" : 13.77947,
+        "LM_LONG" : 100.55535,
+        "SLM_SERVICE_AREA_CODE" : "UHCMW_BLDB3",
+        "SLM_SERVICE_AREA_ID" : "2726",
+        "SLM_SITE_AP_ID" : "55648",
+        "SLM_SITE_AP_SSID_ID" : "136560",
+        "GDB_GEOMATTR_DATA" : null
+      }
+    },
+    {
+      "type" : "Feature",
+      "geometry" : {
+        "type" : "Point",
+        "coordinates" : [
+          100.55535000000003,
+          13.77947000000006
+        ]
+      },
+      "properties" : {
+        "OBJECTID" : 140375,
+        "LM_PROV_CODE" : "10",
+        "LM_AMP_CODE" : "14",
+        "LM_TAM_CODE" : "01",
+        "LM_PROV_NAMT" : "กรุงเทพมหานคร",
+        "LM_AMP_NAMT" : "พญาไท",
+        "LM_TAM_NAMT" : "สามเสนใน",
+        "LM_PROV_NAME" : "BANGKOK",
+        "LM_AMP_NAME" : "PHAYA THAI",
+        "LM_TAM_NAME" : "SAM SEN NAI",
+        "LM_UPD_DATE" : 1569125920000,
+        "SLM_AP_NAME" : "UHCMW_BLDB3_FA02I",
+        "SLM_AP_LOCATION" : "4nd floor",
+        "SLM_AP_MAC_ADDRESS" : null,
+        "SLM_ZONE" : null,
+        "SLM_FLOOR" : "2",
+        "SLM_BRAND" : "RUCKUS",
+        "SLM_MODEL" : "N/A",
+        "SLM_AP_SSID" : ".@ AIS SUPER WiFi",
+        "SLM_PARTNER" : null,
+        "SLM_AP_SSID_STATUS" : "Active",
+        "SLM_LATITUDE" : 13.77947,
+        "SLM_LONGITUDE" : 100.55535,
+        "LM_LAT" : 13.77947,
+        "LM_LONG" : 100.55535,
+        "SLM_SERVICE_AREA_CODE" : "UHCMW_BLDB3",
+        "SLM_SERVICE_AREA_ID" : "2726",
+        "SLM_SITE_AP_ID" : "55649",
+        "SLM_SITE_AP_SSID_ID" : "136561",
+        "GDB_GEOMATTR_DATA" : null
+      }
+    }
+  ]
+}
