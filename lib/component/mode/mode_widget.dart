@@ -208,9 +208,8 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionCardDialogMode(
+          return BottomSheetDecisionPaymentCardDialogMode(
             title: titlePaymentL,
-            desc: descBoost,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
@@ -302,9 +301,8 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionCardDialogMode(
+          return BottomSheetDecisionPaymentCardDialogMode(
             title: titlePaymentG,
-            desc: descGame,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             onPressedSubmit: (isClicked) {
@@ -474,7 +472,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         } else {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           String mode = data.mode5G?.mode ?? 'max_mode';
-                          if (mode == 'game_mode' || mode == 'eco_mode') {
+                          if (mode == 'game_mode' || mode == 'eco_mode' || mode == 'eco_mode') {
                             switchBoostMode(data, context);
                           } else {
                             chooseBoostMode(data, context);
@@ -517,7 +515,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         } else {
                           //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                           String mode = data.mode5G?.mode ?? 'max_mode';
-                          if (mode == 'boost_mode' || mode == 'eco_mode') {
+                          if (mode == 'boost_mode' || mode == 'eco_mode' || mode == 'max_mode') {
                             switchGameMode(data, context);
                           } else {
                             chooseGameMode(data, context);
