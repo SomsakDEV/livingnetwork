@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
 
@@ -45,8 +48,15 @@ class LnProvider with ChangeNotifier {
       if (_verify = (_displayScreen != null)) {
         _perform = _displayScreen?.perform;
         _mode = _displayScreen?.mode;
-        _locationWifi = _displayScreen?.locationWifi;
-        _locationShop = _displayScreen?.locationShop;
+        // _locationWifi = _displayScreen?.locationWifi;
+        // _locationShop = _displayScreen?.locationShop;
+        String data_json =
+        await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+        _locationShop = LocationShop.fromJson(json.decode(data_json));
+
+        String data_json_wifi =
+        await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+        _locationWifi = LocationWifi.fromJson(json.decode(data_json_wifi));
       }
     } catch (e, st) {
       print('ERROR : $e  : $st');
@@ -97,8 +107,15 @@ class LnProvider with ChangeNotifier {
       if (_verify = (_displayScreen != null)) {
         _perform = _displayScreen?.perform;
         _mode = _displayScreen?.mode;
-        _locationWifi = _displayScreen?.locationWifi;
-        _locationShop = _displayScreen?.locationShop;
+        // _locationWifi = _displayScreen?.locationWifi;
+        // _locationShop = _displayScreen?.locationShop;
+        String data_json =
+        await rootBundle.loadString('assets/data/mock_ais1_shop.json');
+        _locationShop = LocationShop.fromJson(json.decode(data_json));
+
+        String data_json_wifi =
+        await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
+        _locationWifi = LocationWifi.fromJson(json.decode(data_json_wifi));
       }
     } catch (e, st) {
       print('ERROR : $e  : $st');

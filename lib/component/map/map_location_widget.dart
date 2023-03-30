@@ -16,7 +16,7 @@ import 'package:living_network/utility/image_utils.dart';
 import 'package:living_network_repository/living_network_repository.dart';
 import 'package:provider/provider.dart';
 
-const LatLng current = LatLng(13.731946300000061, 100.56913540000005);
+const LatLng current = LatLng(13.783681327551925, 100.54645268209386);
 // const LatLng current = LatLng(13.717417000000069, 100.41941700000007);
 
 
@@ -55,14 +55,14 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   void initState() {
     super.initState();
     BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(48, 48)),
-            'assets/images/ais_shop.png')
+            const ImageConfiguration(size: Size(36, 36)),
+            'assets/images/bit_shop.png')
         .then((onValue) {
       iconShop = onValue;
     });
 
     BitmapDescriptor.fromAssetImage(
-            const ImageConfiguration(size: Size(48, 48)),
+            const ImageConfiguration(size: Size(36, 36)),
             'assets/images/bit_wifi.png')
         .then((onValue) {
       iconWifi = onValue;
@@ -133,7 +133,7 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         position: LatLng(office.properties.lmLat!.toDouble(),
             office.properties.lmLong!.toDouble()),
         infoWindow: InfoWindow(
-          title: '${office.properties.lmAmpName}',
+          title: '${office.properties.slmApLocation}',
           snippet: 'add this $size',
         ),
         // icon: BitmapDescriptor.fromBytes(markerIcon),
@@ -167,6 +167,79 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
   Future<void> _onMapCreated(GoogleMapController controller) async {
     print("################################################################");
     _markers.clear();
+    _polygon.clear();
+
+    GridLocation gridLocation = await getGridLocation();
+
+    double diff = 0.0004999999999881766;
+    double benchmark_max = 0;
+
+    for (final features_data in gridLocation.features) {
+      List<List<List<double>>> coordinates = features_data.geometry.coordinates;
+      if (coordinates[0][4][1] > benchmark_max) {
+        benchmark_max = coordinates[0][4][1];
+      }
+    }
+
+    for (final features_data in gridLocation.features) {
+      List<List<List<double>>> coordinates = features_data.geometry.coordinates;
+      double diff_layer = benchmark_max - coordinates[0][1][1];
+      int layer_num = (diff_layer / diff).toInt();
+      final width_cal_slide =
+          (coordinates[0][0][1] - coordinates[0][2][1]).abs() / 2;
+      double slide_up = width_cal_slide - (width_cal_slide / 2);
+
+      if (layer_num % 2 == 0 && layer_num != 0) {
+        coordinates[0][0][0] = coordinates[0][0][0] - (diff / 2);
+        coordinates[0][1][0] = coordinates[0][1][0] - (diff / 2);
+        coordinates[0][2][0] = coordinates[0][2][0] - (diff / 2);
+        coordinates[0][3][0] = coordinates[0][3][0] - (diff / 2);
+        coordinates[0][4][0] = coordinates[0][4][0] - (diff / 2);
+      }
+
+      coordinates[0][0][1] =
+          coordinates[0][0][1] + ((layer_num - 1) * slide_up);
+      coordinates[0][1][1] =
+          coordinates[0][1][1] + ((layer_num - 1) * slide_up);
+      coordinates[0][2][1] =
+          coordinates[0][2][1] + ((layer_num - 1) * slide_up);
+      coordinates[0][3][1] =
+          coordinates[0][3][1] + ((layer_num - 1) * slide_up);
+      coordinates[0][4][1] =
+          coordinates[0][4][1] + ((layer_num - 1) * slide_up);
+
+      // Calculate the center point of the rectangle
+      // if (coordinates[0][4][1] == benchmark_max) {}
+
+      final centerLat = (coordinates[0][1][1] + coordinates[0][3][1]) / 2; //x
+      final centerLng = (coordinates[0][1][0] + coordinates[0][2][0]) / 2; //y
+      final center = LatLng(centerLat, centerLng);
+
+      final width = (coordinates[0][0][1] - coordinates[0][2][1]).abs() / 2;
+      // final height2 = math.sqrt(3) * width;
+
+      final hexagonPoints = [
+        LatLng(centerLat - (width), centerLng),
+        LatLng(centerLat - (width / 2), centerLng + width),
+        LatLng(centerLat + (width / 2), centerLng + width),
+        LatLng(centerLat + (width), centerLng),
+        LatLng(centerLat + (width / 2), centerLng - width),
+        LatLng(centerLat - (width / 2), centerLng - width),
+      ];
+
+      _polygon.add(Polygon(
+        polygonId: PolygonId('${features_data.id}'),
+        points: hexagonPoints,
+        // given color to polygon
+        fillColor: Color.fromARGB(255, 175, 231, 104).withOpacity(0.4),
+        // given border color to polygon
+        strokeColor: Color.fromARGB(255, 253, 253, 253).withOpacity(0.4),
+        geodesic: true,
+        // given width of border
+        strokeWidth: 2,
+      ));
+    }
+
 
     if (widget.select1) {
       prepareDataShop();
@@ -175,6 +248,9 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
     if (widget.select2) {
       prepareDataWifi();
     }
+
+
+
   }
 
   @override
@@ -190,9 +266,10 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
       markers: Set<Marker>.of(_markers.values),
       polygons: _polygon,
       zoomControlsEnabled: true,
+      scrollGesturesEnabled: false,
       myLocationEnabled: true,
       myLocationButtonEnabled: true,
-      minMaxZoomPreference: const MinMaxZoomPreference(13, 20),
+      minMaxZoomPreference: const MinMaxZoomPreference(17, 20),
     );
   }
 }
