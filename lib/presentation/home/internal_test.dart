@@ -59,10 +59,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                   child: Column(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                        child: Image.asset(ImageUtils.getImagePath('assets/image1.gif')),
-                      ),
+                      ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), child: SizedBox(width: 260)),
                       SizedBox(
                         height: 16,
                       ),
@@ -250,7 +247,9 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         child: MapNearByWidget(select1: true, select2: true),
                       ),
                       InkWell(
-                        onTap: () {},
+                        onTap: () {
+                          Navigator.pushNamed(context, 'map');
+                        },
                         child: SizedBox(
                           height: h * 0.35,
                           width: w,
