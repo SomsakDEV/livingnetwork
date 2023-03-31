@@ -8,7 +8,8 @@ import 'package:living_network_repository/domain/entities/display_screen.dart';
 import 'package:living_network_repository/living_network_repository.dart';
 
 class InternalProvider with ChangeNotifier {
-  InitialInternal? repo;
+  // InitialInternal? repo;
+  InitialInternalMock? repo;
   Mode5G? _mode5G;
   String? _status;
   DateTime? _sExpire;
@@ -53,7 +54,8 @@ class InternalProvider with ChangeNotifier {
       String wifi = await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
       _locationShop = LocationShop.fromJson(json.decode(shop));
       _locationWifi = LocationWifi.fromJson(json.decode(wifi));
-      repo = repo ?? InitialInternal();
+      // repo = repo ?? InitialInternal();
+      repo = repo ?? InitialInternalMock();
       _mode5G = await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
@@ -69,7 +71,8 @@ class InternalProvider with ChangeNotifier {
   }
 
   Future<bool> getAddMode(String mode) async {
-    repo = repo ?? InitialInternal();
+    // repo = repo ?? InitialInternal();
+    repo = repo ?? InitialInternalMock();
     _mode5G = await repo?.addPackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
@@ -77,7 +80,8 @@ class InternalProvider with ChangeNotifier {
   }
 
   Future<bool> getDeleteMode(String mode) async {
-    repo = repo ?? InitialInternal();
+    // repo = repo ?? InitialInternal();
+    repo = repo ?? InitialInternalMock();
     _mode5G = await repo?.deletePackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     notifyListeners();
@@ -85,7 +89,8 @@ class InternalProvider with ChangeNotifier {
   }
 
   Future<bool> getExpireMode() async {
-    repo = repo ?? InitialInternal();
+    // repo = repo ?? InitialInternal();
+    repo = repo ?? InitialInternalMock();
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     notifyListeners();
     return _mode5G?.error ?? true;
