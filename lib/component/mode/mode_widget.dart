@@ -354,8 +354,9 @@ class _ModeWidgetState extends State<ModeWidget> {
     }
   }
 
-  Future<void> chooseEcoMode(InternalProvider data, BuildContext context, bool isPolicy) async {
-    if (!(data.mode5G?.mode == 'eco_mode')) {
+  Future<void> chooseEcoMode(InternalProvider data, BuildContext context) async {
+    String? mode = data.mode5G?.mode;
+    if (!(mode == 'eco_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -366,16 +367,28 @@ class _ModeWidgetState extends State<ModeWidget> {
             desc: switchDesc,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
-            exitMode: isPolicy,
+            exitMode: mode == 'boost_mode' || mode == 'game_mode',
             onPressedSubmit: (isClicked) async {
               Navigator.pop(context);
-              setState(() {
-                checkTimeMode = false;
-              });
-              wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
+              return BottomSheetDecisionCardDialogMode(
+                title: titleEco,
+                desc: descEco,
+                textSubmitBtn: textSubmitBtn,
+                textCancelBtn: textCancelBtn,
+                exitMode: false,
+                onPressedSubmit: (isClicked) async {
+                  Navigator.pop(context);
+                  setState(() {
+                    checkTimeMode = false;
+                  });
+                  wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
+                },
+                onPressedCancel: (isClicked) => Navigator.pop(context),
+              );
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
+
         },
       );
     } else {
@@ -478,20 +491,20 @@ class _ModeWidgetState extends State<ModeWidget> {
                           check: (data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false),
                           onPress: () {
                             bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
-                            if (highValue) {
+                            // if (highValue) {
                               //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                              chooseBoostMode(data, context, highValue);
+                              // chooseBoostMode(data, context, highValue);
                               //-----------------------------------------------------------------
-                            } else {
+                            // } else {
                               //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                               String mode = data.mode5G?.mode ?? 'max_mode';
                               if (mode == 'game_mode') {
                                 switchBoostMode(data, context, highValue);
-                              } else if ( mode == 'eco_mode' || mode == 'max_mode') {
+                              } else if ( mode == 'eco_mode' || mode == 'max_mode' || mode == 'boost_mode') {
                                 chooseBoostMode(data, context, highValue);
                               }
                               //-----------------------------------------------------------------
-                            }
+                            // }
                           },
                         ),
                       ),
@@ -521,20 +534,20 @@ class _ModeWidgetState extends State<ModeWidget> {
                           check: data.mode5G?.mode == 'game_mode' ? checkTimeMode : false,
                           onPress: () {
                             bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
-                            if (highValue) {
+                            // if (highValue) {
                               //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
-                              chooseGameMode(data, context, highValue);
+                              // chooseGameMode(data, context, highValue);
                               //-----------------------------------------------------------------
-                            } else {
+                            // } else {
                               //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                               String mode = data.mode5G?.mode ?? 'max_mode';
                               if (mode == 'boost_mode') {
                                 switchGameMode(data, context, highValue);
-                              } else if (mode == 'eco_mode' || mode == 'max_mode') {
+                              } else if (mode == 'eco_mode' || mode == 'max_mode' || mode == 'game_mode') {
                                 chooseGameMode(data, context, highValue);
                               }
                               //-----------------------------------------------------------------
-                            }
+                            // }
                           },
                         ),
                       ),
@@ -560,8 +573,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           isMode: data.mode5G?.mode == 'eco_mode',
                           isDisable: (data.mode5G?.isDisableMode ?? false),
                           onPress: () {
-                            String mode = data.mode5G?.mode ?? 'max_mode';
-                            chooseEcoMode(data, context, (mode == 'boost_mode' || mode == 'game_mode'));
+                            chooseEcoMode(data, context);
                             // if (highValue) {
                             //   //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                             //   chooseEcoMode(data, context, highValue);

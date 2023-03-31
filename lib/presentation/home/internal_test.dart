@@ -59,10 +59,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                   child: Column(
                     children: [
-                      ClipRRect(
-                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                        child: Image.asset(ImageUtils.getImagePath('assets/image1.gif')),
-                      ),
+                      ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), child: SizedBox(width: 260)),
                       SizedBox(
                         height: 16,
                       ),
