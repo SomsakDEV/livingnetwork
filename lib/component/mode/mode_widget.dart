@@ -92,7 +92,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         if (add == 'delete') {
                           return Container();
                         } else {
-                          String errorCode = Provider.of<InternalProvider>(context, listen: true).mode5G?.errorCode ?? '0';
+                          String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
                           if (errorCode != '0') {
                             num = int.parse(errorCode);
                           }
@@ -104,7 +104,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                           return Container();
                         }
                       } else if (snap.hasError) {
-                        String errorCode = Provider.of<InternalProvider>(context, listen: true).mode5G?.errorCode ?? '0';
+                        String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
                         if (errorCode != '0') {
                           num = int.parse(errorCode);
                         }
