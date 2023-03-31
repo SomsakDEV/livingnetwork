@@ -224,9 +224,9 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     double w = MediaQuery.of(context).size.width;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('5G Mode', style: LNStyle.modeWidgetTitle),
+        title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
         backgroundColor: Colors.white,
-        centerTitle: true,
+        centerTitle: false,
         leading: BackButton(
           color: LNColor.blackColor,
           onPressed: _onExit,
