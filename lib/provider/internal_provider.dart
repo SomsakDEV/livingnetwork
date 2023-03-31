@@ -54,7 +54,7 @@ class InternalProvider with ChangeNotifier {
       _locationShop = LocationShop.fromJson(json.decode(shop));
       _locationWifi = LocationWifi.fromJson(json.decode(wifi));
       repo = repo ?? InitialInternal();
-      _mode5G = await repo?.getModeSocket(token, caseTest: _caseTest);
+      _mode5G = await repo?.initiateProcess(token, caseTest: _caseTest);
       _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');

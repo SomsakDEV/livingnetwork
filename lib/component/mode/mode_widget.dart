@@ -487,7 +487,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               String mode = data.mode5G?.mode ?? 'max_mode';
                               if (mode == 'game_mode') {
                                 switchBoostMode(data, context, highValue);
-                              } else if ( mode == 'eco_mode' || mode == 'max_mode') {
+                              } else if ( mode == 'eco_mode' || mode == 'max_mode' || mode == 'boost_mode') {
                                 chooseBoostMode(data, context, highValue);
                               }
                               //-----------------------------------------------------------------
@@ -530,7 +530,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                               String mode = data.mode5G?.mode ?? 'max_mode';
                               if (mode == 'boost_mode') {
                                 switchGameMode(data, context, highValue);
-                              } else if (mode == 'eco_mode' || mode == 'max_mode') {
+                              } else if (mode == 'eco_mode' || mode == 'max_mode' || mode == 'game_mode') {
                                 chooseGameMode(data, context, highValue);
                               }
                               //-----------------------------------------------------------------
