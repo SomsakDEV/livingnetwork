@@ -43,6 +43,10 @@ String conditionShowMessage(int num) {
       return warning10;
     case 12:
       return warningTimeout;
+    case 13:
+      return not5GMode;
+    case 14:
+      return warningCheck5GError;
   }
   return "no message";
 }

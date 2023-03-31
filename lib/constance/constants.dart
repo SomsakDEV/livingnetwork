@@ -83,7 +83,7 @@ String warning2 =
 String warning3 = 'XXX แพ็กเกจหลักของคุณไม่สามารถใช้ LiveMode ได้';
 String warning3_1 = 'แพ็กเกจของท่านไม่เข้าเงื่อนไข';
 String warning4 =
-    'You are currently using 4G. Because it isoutside the 5G service area.';
+    'You are currently using 4G. Because it is outside the 5G service area.';
 String warning4_1 = 'แพ็กเกจหลักของคุณไม่สามารถใช้ 5G Mode ได้';
 String warning6 =
     'Unable to use 5G mode as your max speedinternet has limited.';
@@ -94,7 +94,9 @@ String warning9 =
 String warning10 =
     'เราไม่สามารถตรวจสอบได้ว่าคุณใช้โทรศัพท์รุ่นที่รองรับ 5G หรือไม่';
 
-String warningTimeout = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง';
+String warningTimeout = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง'; //16
+String not5GMode = 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง'; //13
+String warningCheck5GError = 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี้';  //14
 
 //5G Mode (default)
 String messageDefault =

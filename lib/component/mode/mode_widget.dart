@@ -86,14 +86,16 @@ class _ModeWidgetState extends State<ModeWidget> {
               builder: (context) {
                 return FutureBuilder(
                     future: addSocket ? data.getAddMode(mode) : data.getDeleteMode(mode),
-                    // future: data.updateMode5G(
-                    //     data.mode5G?.modeUpdate, data.mode5G?.checkModeProfile),
                     builder: (context, snap) {
                       if (snap.hasData) {
                         Navigator.pop(context);
                         if (add == 'delete') {
                           return Container();
                         } else {
+                          String errorCode = Provider.of<InternalProvider>(context, listen: true).mode5G?.errorCode ?? '0';
+                          if (errorCode != '0') {
+                            num = int.parse(errorCode);
+                          }
                           hasErrorMessage = snap.data as bool;
                           Timer(
                             const Duration(milliseconds: 100),
@@ -102,12 +104,15 @@ class _ModeWidgetState extends State<ModeWidget> {
                           return Container();
                         }
                       } else if (snap.hasError) {
+                        String errorCode = Provider.of<InternalProvider>(context, listen: true).mode5G?.errorCode ?? '0';
+                        if (errorCode != '0') {
+                          num = int.parse(errorCode);
+                        }
                         Timer(
                           const Duration(milliseconds: 100),
                               () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
                         );
                         hasErrorMessage = snap.data as bool;
-                        num = 12;
                         return Container();
                       } else {
                         return Container(
