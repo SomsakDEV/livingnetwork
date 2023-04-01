@@ -200,7 +200,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   }
 
   Future<void> chooseBoostMode(InternalProvider data, BuildContext context, bool isHighValue) async {
-    if (!(data.mode5G?.mode == 'boost_mode')) {
+    if (data.mode5G?.mode != 'boost_mode') {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -295,7 +295,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   }
 
   Future<void> chooseGameMode(InternalProvider data, BuildContext context, bool isHighValue) async {
-    if (!(data.mode5G?.mode == 'game_mode')) {
+    if (data.mode5G?.mode != 'game_mode') {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -369,7 +369,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               onPressedCancel: (isClicked) => Navigator.pop(context),
             );
           });
-    } else if ((mode != 'eco_mode')) {
+    } else if (mode != 'eco_mode') {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
