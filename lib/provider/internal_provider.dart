@@ -57,11 +57,13 @@ class InternalProvider with ChangeNotifier {
       repo = repo ?? InitialInternal();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
-      _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
-      if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
-        notifyListeners();
-        return true;
+      if (_mode5G?.error ?? true) {
+        _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
+        _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
+        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
+          notifyListeners();
+          return true;
+        }
       }
     } catch (e, st) {
       print('[LIVING_NETWORK]$e, $st');
