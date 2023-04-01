@@ -36,11 +36,9 @@ flutter:
   assets:
     - assets/images/
     - assets/data/
-    - assets/piggy.gif
     - assets/loading_boost_mode.gif
     - assets/loading_game_mode.gif
     - assets/loading_eco_mode.gif
-    - assets/pig.gif
 
   fonts:
   - family: DB Heavent
