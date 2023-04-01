@@ -94,7 +94,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                     } else {
                       String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
                       if (errorCode != '0') {
-                        errorText = warningMessage(errorCode);
+                        setState(() {
+                          errorText = warningMessage(errorCode);
+                        });
                       }
                       hasErrorMessage = snap.data as bool;
                       Timer(
@@ -106,7 +108,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   } else if (snap.hasError) {
                     String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
                     if (errorCode != '0') {
-                      errorText = warningMessage(errorCode);
+                      setState(() {
+                        errorText = warningMessage(errorCode);
+                      });
                     }
                     Timer(
                       const Duration(milliseconds: 100),
@@ -148,7 +152,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                     } else {
                       String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
                       if (errorCode != '0') {
-                        errorText = warningMessage(errorCode);
+                        setState(() {
+                          errorText = warningMessage(errorCode);
+                        });
                       }
                       hasErrorMessage = snap.data as bool;
                       Timer(
@@ -160,7 +166,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   } else if (snap.hasError) {
                     String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
                     if (errorCode != '0') {
-                      errorText = warningMessage(errorCode);
+                      setState(() {
+                        errorText = warningMessage(errorCode);
+                      });
                     }
                     Timer(
                       const Duration(milliseconds: 100),
