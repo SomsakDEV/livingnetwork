@@ -92,10 +92,8 @@ class _ModeWidgetState extends State<ModeWidget> {
                         const Duration(milliseconds: 100),
                         () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : mode)),
                       );
-                      return const SizedBox();
-                    } else {
-                      return const SizedBox();
                     }
+                    return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
                       const Duration(milliseconds: 100),
@@ -114,7 +112,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> expireMode(InternalProvider data, {String add = 'default'}) async {
+  Future<void> expireMode(InternalProvider data) async {
     String mode = data.mode5G?.mode ?? 'max_mode';
     String img = mode == 'boost_mode'
         ? 'assets/loading_boost_mode.gif'
