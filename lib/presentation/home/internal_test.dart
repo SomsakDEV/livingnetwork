@@ -101,15 +101,18 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
             future: Provider.of<InternalProvider>(context, listen: false).initialCore(widget.token),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
-                DateTime sExpire = Provider.of<InternalProvider>(context).sExpire ?? DateTime.now().add(Duration(hours: 1));
+                DateTime sExpire = Provider.of<InternalProvider>(context, listen: false).sExpire ?? DateTime.now().add(Duration(hours: 1));
                 print('[LIVING_NETWORK] Session expire : $sExpire');
                 int sec = sExpire.difference(DateTime.now()).inSeconds;
-                duration = Duration(seconds: sec <= 0 ? 0 : sec);
-                timer = Timer.periodic(
-                    const Duration(seconds: 1),
-                    (_) => setState(() {
-                          _counting();
-                        }));
+                if(sec > 0) {
+                  duration = Duration(seconds: sec);
+                  timer = Timer.periodic(
+                      const Duration(seconds: 1),
+                          (_) =>
+                          setState(() {
+                            _counting();
+                          }));
+                }
                 return Dialog(
                   backgroundColor: LNColor.transparent,
                   child: Wrap(
@@ -246,15 +249,18 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         width: w,
                         child: MapNearByWidget(select1: true, select2: true),
                       ),
-                      // InkWell(
-                      //   onTap: () {},
-                      //   child: SizedBox(
-                      //     height: h * 0.35,
-                      //     width: w,
-                      //   ),
-                      // ),
+                      InkWell(
+                        onTap: () {
+                          Navigator.pushNamed(context, 'map');
+                        },
+                        child: SizedBox(
+                          height: h * 0.35,
+                          width: w,
+                        ),
+                      ),
                     ],
                   ),
+                  SizedBox(height: 8),
                   Container(
                     alignment: Alignment.topCenter,
                     decoration: BoxDecoration(
