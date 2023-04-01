@@ -1,54 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNStyle.dart';
-import 'package:living_network/constance/constants.dart';
 import 'package:living_network/utility/image_utils.dart';
 
 class ModeWarning extends StatefulWidget {
-  final int warningNumber;
+  final String warningText;
 
   const ModeWarning({
     Key? key,
-    required this.warningNumber,
+    required this.warningText,
   }) : super(key: key);
 
   @override
   State<ModeWarning> createState() => _ModeWarningState();
-}
-
-int num = 1;
-
-String conditionShowMessage(int num) {
-  switch (num) {
-    case 1:
-      return warning1;
-    case 2:
-      return warning2;
-    case 3:
-      return warning3;
-    case 31:
-      return warning3_1;
-    case 4:
-      return warning4;
-    case 41:
-      return warning4_1;
-    case 6:
-      return warning6;
-    case 8:
-      return warning8;
-    case 8:
-      return warning9;
-    case 10:
-      return warning10;
-    case 11:
-      return warning10;
-    case 12:
-      return warningTimeout;
-    case 13:
-      return not5GMode;
-    case 14:
-      return warningCheck5GError;
-  }
-  return "no message";
 }
 
 class _ModeWarningState extends State<ModeWarning> {
@@ -72,7 +35,7 @@ class _ModeWarningState extends State<ModeWarning> {
                 height: 20,
               ),
               title: Text(
-                conditionShowMessage(widget.warningNumber),
+                widget.warningText,
                 style: LNStyle.warningMessage,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,
