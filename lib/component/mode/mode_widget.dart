@@ -133,7 +133,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     hasErrorMessage = snap.data as bool;
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : mode)),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : data.mode5G?.lastMode ?? 'fail')),
                     );
                     return const SizedBox();
                   } else if (snap.hasError) {
