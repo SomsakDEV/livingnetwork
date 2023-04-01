@@ -79,7 +79,7 @@ warningMessage (String errorCode) {
   Map warning = <String, dynamic>{};
   warning['12'] = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง';
   warning['13'] = 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง';
-  warning['9999'] = 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี'; //refresh screen again
+  warning['99999'] = 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี'; //refresh screen again
   warning['500'] = 'System Error';
   return warning[errorCode] ?? warning['500'];
 }
