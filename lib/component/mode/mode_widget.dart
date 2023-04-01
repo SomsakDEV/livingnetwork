@@ -32,7 +32,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool checkTimeMode = true;
   late int num = 1;
   late int seconds;
-  late String errorText;
+  late String errorText = 'default';
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
