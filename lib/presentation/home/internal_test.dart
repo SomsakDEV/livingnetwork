@@ -101,7 +101,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
             future: Provider.of<InternalProvider>(context, listen: false).initialCore(widget.token),
             builder: (context, snap) {
               if (snap.hasData && 'true' == snap.data.toString()) {
-                DateTime sExpire = Provider.of<InternalProvider>(context).sExpire ?? DateTime.now().add(Duration(hours: 1));
+                DateTime sExpire = Provider.of<InternalProvider>(context, listen: false).sExpire ?? DateTime.now().add(Duration(hours: 1));
                 print('[LIVING_NETWORK] Session expire : $sExpire');
                 int sec = sExpire.difference(DateTime.now()).inSeconds;
                 duration = Duration(seconds: sec <= 0 ? 0 : sec);

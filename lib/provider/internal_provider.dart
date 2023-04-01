@@ -9,6 +9,7 @@ import 'package:living_network_repository/living_network_repository.dart';
 
 class InternalProvider with ChangeNotifier {
   InitialInternal? repo;
+  String? _token;
   Mode5G? _mode5G;
   String? _status;
   DateTime? _sExpire;
@@ -36,7 +37,7 @@ class InternalProvider with ChangeNotifier {
 
   Future<bool> initialCore(String token) async {
     try {
-      caseTest(token);
+      caseTest(_token = token);
       WidgetsFlutterBinding.ensureInitialized();
       var coreConfig = CoreConfig(mode: Mode.debug);
       await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig().whenComplete(() => coreConfig.checkCacheConfig()));
@@ -54,29 +55,40 @@ class InternalProvider with ChangeNotifier {
       _locationShop = LocationShop.fromJson(json.decode(shop));
       _locationWifi = LocationWifi.fromJson(json.decode(wifi));
       repo = repo ?? InitialInternal();
-      if (token.startsWith('5Gtest')) {
-        _mode5G = await repo?.initiateProcessMock(token, caseTest: _caseTest);
-      } else {
-        _mode5G = await repo?.initiateProcess(token, caseTest: _caseTest);
-      }
+      _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
         notifyListeners();
-        return (_mode5G != null);
+        return true;
+      }
+    } catch (e, st) {
+      print('[LIVING_NETWORK]$e, $st');
+    }
+    return false;
+  }
+
+  Future<void> _reInitial(String token) async {
+    try {
+      repo = repo ?? InitialInternal();
+      _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
+      print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
+      _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
+      _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
+      if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
+        notifyListeners();
       }
     } catch (e, st) {
       print('[LIVING_NETWORK] $e, $st');
     }
-    return false;
   }
 
   Future<bool> getAddMode(String mode) async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.addPackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-    notifyListeners();
+    (_mode5G?.errorCode == '99999') ? await _reInitial(_token!) : notifyListeners();
     return _mode5G?.error ?? true;
   }
 
@@ -84,14 +96,15 @@ class InternalProvider with ChangeNotifier {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.deletePackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-    notifyListeners();
+    (_mode5G?.errorCode == '99999') ? await _reInitial(_token!) : notifyListeners();
     return _mode5G?.error ?? true;
   }
 
   Future<bool> getExpireMode() async {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
-    notifyListeners();
+    print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
+    (_mode5G?.errorCode == '99999') ? await _reInitial(_token!) : notifyListeners();
     return _mode5G?.error ?? true;
   }
 
