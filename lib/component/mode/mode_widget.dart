@@ -168,7 +168,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           exitMode: true,
           onPressedSubmit: (isClicked) {
             Navigator.pop(context);
-            if (!(data.mode5G?.mode == 'boost_mode')) {
+            if (data.mode5G?.mode != 'boost_mode') {
               showModalBottomSheet(
                 isDismissible: false,
                 backgroundColor: Colors.transparent,
@@ -263,7 +263,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           exitMode: true,
           onPressedSubmit: (isClicked) {
             Navigator.pop(context);
-            if (!(data.mode5G?.mode == 'game_mode')) {
+            if (data.mode5G?.mode != 'game_mode') {
               showModalBottomSheet(
                 isDismissible: false,
                 backgroundColor: Colors.transparent,
