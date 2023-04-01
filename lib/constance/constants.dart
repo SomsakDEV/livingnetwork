@@ -75,11 +75,20 @@ List<Image> image_preformance = [
   )
 ];
 
+warningMessage (String errorCode) {
+  Map warning = <String, dynamic>{};
+  warning['12'] = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง';
+  warning['13'] = 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง';
+  warning['9999'] = 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี'; //refresh screen again
+  warning['500'] = 'System Error';
+  return warning[errorCode] ?? warning['500'];
+}
+
 //5G Mode (warning)
 String warning1 =
-    'Unable to use 5G mode because you haveturned off cellular 5G. Please check yoursetting menu on your phone';
+    'Unable to use 5G mode because you have turned off cellular 5G. Please check your setting menu on your phone';
 String warning2 =
-    'Unable to use 5G mode as your max speedinternet has run out.';
+    'Unable to use 5G mode as your max speed internet has run out.';
 String warning3 = 'XXX แพ็กเกจหลักของคุณไม่สามารถใช้ LiveMode ได้';
 String warning3_1 = 'แพ็กเกจของท่านไม่เข้าเงื่อนไข';
 String warning4 =
@@ -127,6 +136,7 @@ String ecoDesc = 'Data Battery';
 String ecoSuccess = 'Switched to Eco mode!';
 String boostSuccess = 'Switched to Power / Boost mode!';
 String gameSuccess = 'Switched to Game mode!';
+String maxSuccess = 'Switched to Max mode!';
 String unsuccessful = 'Unsuccessful Switching !';
 
 //switch mode payment
@@ -136,6 +146,7 @@ String btmSheetTitleGame = 'Exit From Game mode?';
 String btmSheetDescGame = 'Detail: exit from game mode';
 String exitModeTitle = 'ต้องการออกจากโหมดนี้ใช่ไหม?';
 String exitModeDesc = 'โหมดที่คุณใช้งานอยู่ยังไม่หมดเวลา ระบบจะทำการตัดรอบโหมดนี้ทิ้ง โดยที่ไม่สามารถเก็บเวลาที่เหลือไว้ใช้้ต่อภายหลังได้';
+String exitEcoMode = 'คุณต้องการออกจาก Eco Mode ใช่หรือไม่ ?';
 String switchBoostTitle = 'ต้องการสลับไปโหมด Boost Mode?';
 String switchGameTitle = 'ต้องการสลับไปโหมด Game Mode?';
 String switchEcoTitle = 'ต้องการสลับไปโหมด Eco Mode?';
