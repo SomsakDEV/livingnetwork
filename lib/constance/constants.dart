@@ -76,7 +76,7 @@ List<Image> image_preformance = [
 ];
 
 warningMessage (String errorCode) {
-  Map warning = <String, dynamic>{};
+  Map warning = <String, String>{};
   warning['12'] = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง';
   warning['13'] = 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง';
   warning['99999'] = 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี'; //refresh screen again
