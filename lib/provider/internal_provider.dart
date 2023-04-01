@@ -57,7 +57,10 @@ class InternalProvider with ChangeNotifier {
       repo = repo ?? InitialInternal();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      if (_mode5G?.error ?? true) {
+      if ((_mode5G?.error ?? true)) {
+        return false;
+      } else {
+        if (status == 'mobile4G') return true;
         _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
         _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
         if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
@@ -76,11 +79,10 @@ class InternalProvider with ChangeNotifier {
       repo = repo ?? InitialInternal();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
-      _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
-      if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
-        notifyListeners();
+      if (!(_mode5G?.error ?? true)) {
+        _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
       }
+      notifyListeners();
     } catch (e, st) {
       print('[LIVING_NETWORK] $e, $st');
     }
