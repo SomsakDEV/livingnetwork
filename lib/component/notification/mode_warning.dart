@@ -5,7 +5,7 @@ import 'package:living_network/utility/image_utils.dart';
 class ModeWarning extends StatefulWidget {
   final String warningText;
 
-  const ModeWarning({
+  ModeWarning({
     Key? key,
     required this.warningText,
   }) : super(key: key);

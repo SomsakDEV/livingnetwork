@@ -33,6 +33,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   late int num = 1;
   late int seconds;
   late String errorText = '500';
+  late String snackBarText = 'default';
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -48,17 +49,15 @@ class _ModeWidgetState extends State<ModeWidget> {
         child: Row(
           children: [
             Padding(padding: const EdgeInsets.only(right: 11.96), child: message == 'fail' ? Image.asset('assets/images/checkmark_no.png') : Image.asset('assets/images/checkmark.png')),
-            message == 'boost'
+            message == 'boost_mode'
                 ? Text(boostSuccess)
-                : message == 'game'
+                : message == 'game_mode'
                     ? Text(gameSuccess)
-                    : message == 'eco'
+                    : message == 'eco_mode'
                         ? Text(ecoSuccess)
-                        : message == 'max'
+                        : message == 'max_mode'
                             ? Text(maxSuccess)
-                            : message == 'fail'
-                                ? Text(unsuccessful)
-                                : const Text('Switching Mode!'),
+                            : Text(unsuccessful),
           ],
         ),
       ),
@@ -70,14 +69,13 @@ class _ModeWidgetState extends State<ModeWidget> {
     super.initState();
   }
 
-  Future<void> wUpdate(InternalProvider data, bool addSocket, String mode, {String loadingGif = 'default', String add = 'default'}) async {
-    String img = loadingGif == 'boost'
+  Future<void> wUpdate(InternalProvider data, bool addSocket, String mode) async {
+    String img = mode == 'boost_mode'
         ? 'assets/loading_boost_mode.gif'
-        : loadingGif == 'game'
+        : mode == 'game_mode'
             ? 'assets/loading_game_mode.gif'
-            : loadingGif == 'eco'
-                ? 'assets/loading_eco_mode.gif'
-                : '';
+            : 'assets/loading_eco_mode.gif';
+
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
           context: context,
@@ -86,18 +84,17 @@ class _ModeWidgetState extends State<ModeWidget> {
             return FutureBuilder(
                 future: addSocket ? data.getAddMode(mode) : data.getDeleteMode(mode),
                 builder: (context, snap) {
-                  add = data.mode5G?.mode == 'max_mode' ? 'max' : 'default';
                   if (snap.hasData) {
                     Navigator.pop(context);
-                    if (add == 'delete') {
-                      return Container();
-                    } else {
+                    if (addSocket) {
                       hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : add)),
+                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : mode)),
                       );
-                      return Container();
+                      return const SizedBox();
+                    } else {
+                      return const SizedBox();
                     }
                   } else if (snap.hasError) {
                     Timer(
@@ -105,7 +102,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
                     );
                     hasErrorMessage = snap.data as bool;
-                    return Container();
+                    return const SizedBox();
                   } else {
                     return Container(
                       color: Colors.transparent,
@@ -123,9 +120,7 @@ class _ModeWidgetState extends State<ModeWidget> {
         ? 'assets/loading_boost_mode.gif'
         : mode == 'game_mode'
             ? 'assets/loading_game_mode.gif'
-            : mode == 'eco'
-                ? 'assets/loading_eco_mode.gif'
-                : '';
+            : 'assets/loading_eco_mode.gif';
 
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
@@ -137,23 +132,19 @@ class _ModeWidgetState extends State<ModeWidget> {
                 builder: (context, snap) {
                   if (snap.hasData) {
                     Navigator.pop(context);
-                    if (add == 'delete') {
-                      return Container();
-                    } else {
-                      hasErrorMessage = snap.data as bool;
-                      Timer(
-                        const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : add)),
-                      );
-                      return Container();
-                    }
+                    hasErrorMessage = snap.data as bool;
+                    Timer(
+                      const Duration(milliseconds: 100),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : mode)),
+                    );
+                    return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
                     );
                     hasErrorMessage = snap.data as bool;
-                    return Container();
+                    return const SizedBox();
                   } else {
                     return Container(
                       color: Colors.transparent,
@@ -196,7 +187,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       setState(() {
                         checkTimeMode = true;
                       });
-                      wUpdate(data, true, 'boost_mode', loadingGif: 'boost', add: 'boost');
+                      wUpdate(data, true, 'boost_mode');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
                   );
@@ -228,7 +219,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               setState(() {
                 checkTimeMode = true;
               });
-              wUpdate(data, true, 'boost_mode', loadingGif: 'boost', add: 'boost');
+              wUpdate(data, true, 'boost_mode');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -251,7 +242,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, false, 'boost_mode', loadingGif: 'boost', add: 'delete');
+              wUpdate(data, false, 'boost_mode');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -291,7 +282,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       setState(() {
                         checkTimeMode = true;
                       });
-                      wUpdate(data, true, 'game_mode', loadingGif: 'game', add: 'game');
+                      wUpdate(data, true, 'game_mode');
                     },
                     onPressedCancel: (isClicked) => Navigator.pop(context),
                   );
@@ -323,7 +314,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               setState(() {
                 checkTimeMode = true;
               });
-              wUpdate(data, true, 'game_mode', loadingGif: 'game', add: 'delete');
+              wUpdate(data, true, 'game_mode');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -346,7 +337,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, false, 'game_mode', loadingGif: 'game', add: 'delete');
+              wUpdate(data, false, 'game_mode');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
@@ -357,7 +348,30 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseEcoMode(InternalProvider data, BuildContext context) async {
     String? mode = data.mode5G?.mode;
-    if (!(mode == 'eco_mode')) {
+    if (mode == 'max_mode') {
+      showModalBottomSheet(
+          isDismissible: false,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext context) {
+            return BottomSheetDecisionCardDialogMode(
+              title: titleEco,
+              desc: descEco,
+              textSubmitBtn: textSubmitBtn,
+              textCancelBtn: textCancelBtn,
+              exitMode: false,
+              onPressedSubmit: (isClicked) async {
+                Navigator.pop(context);
+                setState(() {
+                  checkTimeMode = false;
+                });
+                wUpdate(data, true, 'eco_mode');
+              },
+              onPressedCancel: (isClicked) => Navigator.pop(context),
+            );
+          });
+    } else if ((mode != 'eco_mode')) {
       showModalBottomSheet(
         isDismissible: false,
         backgroundColor: Colors.transparent,
@@ -388,7 +402,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         setState(() {
                           checkTimeMode = false;
                         });
-                        wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
+                        wUpdate(data, true, 'eco_mode');
                       },
                       onPressedCancel: (isClicked) => Navigator.pop(context),
                     );
@@ -398,29 +412,6 @@ class _ModeWidgetState extends State<ModeWidget> {
           );
         },
       );
-    } else if (mode == 'max_mode') {
-      showModalBottomSheet(
-          isDismissible: false,
-          backgroundColor: Colors.transparent,
-          isScrollControlled: true,
-          context: context,
-          builder: (BuildContext context) {
-            return BottomSheetDecisionCardDialogMode(
-              title: titleEco,
-              desc: descEco,
-              textSubmitBtn: textSubmitBtn,
-              textCancelBtn: textCancelBtn,
-              exitMode: false,
-              onPressedSubmit: (isClicked) async {
-                Navigator.pop(context);
-                setState(() {
-                  checkTimeMode = false;
-                });
-                wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
-              },
-              onPressedCancel: (isClicked) => Navigator.pop(context),
-            );
-          });
     } else {
       showModalBottomSheet(
         isDismissible: false,
@@ -438,7 +429,7 @@ class _ModeWidgetState extends State<ModeWidget> {
               setState(() {
                 checkTimeMode = false;
               });
-              wUpdate(data, false, 'eco_mode', loadingGif: 'eco', add: 'delete');
+              wUpdate(data, false, 'eco_mode');
             },
             onPressedCancel: (isClicked) => Navigator.pop(context),
           );
