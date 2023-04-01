@@ -420,6 +420,29 @@ class _ModeWidgetState extends State<ModeWidget> {
           );
         },
       );
+    } else if (mode == 'max_mode'){
+      showModalBottomSheet(
+          isDismissible: false,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext context) {
+            return BottomSheetDecisionCardDialogMode(
+              title: titleEco,
+              desc: descEco,
+              textSubmitBtn: textSubmitBtn,
+              textCancelBtn: textCancelBtn,
+              exitMode: false,
+              onPressedSubmit: (isClicked) async {
+                Navigator.pop(context);
+                setState(() {
+                  checkTimeMode = false;
+                });
+                wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
+              },
+              onPressedCancel: (isClicked) => Navigator.pop(context),
+            );
+          });
     } else {
       showModalBottomSheet(
         isDismissible: false,
