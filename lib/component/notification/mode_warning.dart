@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNStyle.dart';
+import 'package:living_network/constance/constants.dart';
 import 'package:living_network/utility/image_utils.dart';
 
 class ModeWarning extends StatefulWidget {
@@ -35,7 +36,7 @@ class _ModeWarningState extends State<ModeWarning> {
                 height: 20,
               ),
               title: Text(
-                widget.warningText,
+                warningMessage(widget.warningText),
                 style: LNStyle.warningMessage,
                 overflow: TextOverflow.ellipsis,
                 maxLines: 3,

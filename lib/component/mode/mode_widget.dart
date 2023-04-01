@@ -32,7 +32,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool checkTimeMode = true;
   late int num = 1;
   late int seconds;
-  late String errorText = '99999';
+  late String errorText = '500';
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -93,11 +93,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                       return Container();
                     } else {
                       String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                      if (errorCode != '0') {
-                        setState(() {
-                          errorText = warningMessage(errorCode);
-                        });
-                      }
+                      // if (errorCode != '0') {
+                      //   setState(() {
+                      //     errorText = warningMessage(errorCode);
+                      //   });
+                      // }
                       hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
@@ -107,11 +107,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                     }
                   } else if (snap.hasError) {
                     String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                    if (errorCode != '0') {
-                      setState(() {
-                        errorText = warningMessage(errorCode);
-                      });
-                    }
+                    // if (errorCode != '0') {
+                    //   setState(() {
+                    //     errorText = warningMessage(errorCode);
+                    //   });
+                    // }
                     Timer(
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
@@ -151,11 +151,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                       return Container();
                     } else {
                       String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                      if (errorCode != '0') {
-                        setState(() {
-                          errorText = warningMessage(errorCode);
-                        });
-                      }
+                      // if (errorCode != '0') {
+                      //   setState(() {
+                      //     errorText = warningMessage(errorCode);
+                      //   });
+                      // }
                       hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
@@ -165,11 +165,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                     }
                   } else if (snap.hasError) {
                     String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                    if (errorCode != '0') {
-                      setState(() {
-                        errorText = warningMessage(errorCode);
-                      });
-                    }
+                    // if (errorCode != '0') {
+                    //   setState(() {
+                    //     errorText = warningMessage(errorCode);
+                    //   });
+                    // }
                     Timer(
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
@@ -623,7 +623,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 ],
               ),
               _sizedBox,
-              hasErrorMessage ? ModeWarning(warningText: errorText) : const Mode5GDefault(),
+              hasErrorMessage ? ModeWarning(warningText:data.mode5G?.errorCode ?? errorText) : const Mode5GDefault(),
               // Container(
               //   width: MediaQuery.of(context).size.width * 0.85,
               //   height: 52,
