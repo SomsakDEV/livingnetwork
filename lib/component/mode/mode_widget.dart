@@ -32,7 +32,7 @@ class _ModeWidgetState extends State<ModeWidget> {
   late bool checkTimeMode = true;
   late int num = 1;
   late int seconds;
-  late String errorText = '99999';
+  late String errorText = '500';
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -92,12 +92,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                     if (add == 'delete') {
                       return Container();
                     } else {
-                      String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                      if (errorCode != '0') {
-                        setState(() {
-                          errorText = warningMessage(errorCode);
-                        });
-                      }
                       hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
@@ -106,12 +100,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                       return Container();
                     }
                   } else if (snap.hasError) {
-                    String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                    if (errorCode != '0') {
-                      setState(() {
-                        errorText = warningMessage(errorCode);
-                      });
-                    }
                     Timer(
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
@@ -129,14 +117,16 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> expireMode(InternalProvider data, {String loadingGif = 'default', String add = 'default'}) async {
-    String img = loadingGif == 'boost'
+  Future<void> expireMode(InternalProvider data, {String add = 'default'}) async {
+    String mode = data.mode5G?.mode ?? 'max_mode';
+    String img = mode == 'boost_mode'
         ? 'assets/loading_boost_mode.gif'
-        : loadingGif == 'game'
+        : mode == 'game_mode'
             ? 'assets/loading_game_mode.gif'
-            : loadingGif == 'eco'
+            : mode == 'eco'
                 ? 'assets/loading_eco_mode.gif'
                 : '';
+
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
           context: context,
@@ -150,12 +140,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                     if (add == 'delete') {
                       return Container();
                     } else {
-                      String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                      if (errorCode != '0') {
-                        setState(() {
-                          errorText = warningMessage(errorCode);
-                        });
-                      }
                       hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
@@ -164,12 +148,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                       return Container();
                     }
                   } else if (snap.hasError) {
-                    String errorCode = Provider.of<InternalProvider>(context, listen: false).mode5G?.errorCode ?? '0';
-                    if (errorCode != '0') {
-                      setState(() {
-                        errorText = warningMessage(errorCode);
-                      });
-                    }
                     Timer(
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
@@ -420,6 +398,29 @@ class _ModeWidgetState extends State<ModeWidget> {
           );
         },
       );
+    } else if (mode == 'max_mode') {
+      showModalBottomSheet(
+          isDismissible: false,
+          backgroundColor: Colors.transparent,
+          isScrollControlled: true,
+          context: context,
+          builder: (BuildContext context) {
+            return BottomSheetDecisionCardDialogMode(
+              title: titleEco,
+              desc: descEco,
+              textSubmitBtn: textSubmitBtn,
+              textCancelBtn: textCancelBtn,
+              exitMode: false,
+              onPressedSubmit: (isClicked) async {
+                Navigator.pop(context);
+                setState(() {
+                  checkTimeMode = false;
+                });
+                wUpdate(data, true, 'eco_mode', loadingGif: 'eco', add: 'eco');
+              },
+              onPressedCancel: (isClicked) => Navigator.pop(context),
+            );
+          });
     } else {
       showModalBottomSheet(
         isDismissible: false,
@@ -623,7 +624,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 ],
               ),
               _sizedBox,
-              hasErrorMessage ? ModeWarning(warningText: errorText) : const Mode5GDefault(),
+              hasErrorMessage ? ModeWarning(warningText: warningMessage(data.mode5G?.errorCode ?? errorText)) : const Mode5GDefault(),
               // Container(
               //   width: MediaQuery.of(context).size.width * 0.85,
               //   height: 52,
