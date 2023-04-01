@@ -117,14 +117,16 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> expireMode(InternalProvider data, {String loadingGif = 'default', String add = 'default'}) async {
-    String img = loadingGif == 'boost'
+  Future<void> expireMode(InternalProvider data, {String add = 'default'}) async {
+    String mode = data.mode5G?.mode ?? 'max_mode';
+    String img = mode == 'boost_mode'
         ? 'assets/loading_boost_mode.gif'
-        : loadingGif == 'game'
+        : mode == 'game_mode'
             ? 'assets/loading_game_mode.gif'
-            : loadingGif == 'eco'
+            : mode == 'eco'
                 ? 'assets/loading_eco_mode.gif'
                 : '';
+
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
           context: context,
@@ -396,7 +398,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           );
         },
       );
-    } else if (mode == 'max_mode'){
+    } else if (mode == 'max_mode') {
       showModalBottomSheet(
           isDismissible: false,
           backgroundColor: Colors.transparent,
@@ -622,7 +624,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 ],
               ),
               _sizedBox,
-              hasErrorMessage ? ModeWarning(warningText:warningMessage(data.mode5G?.errorCode ?? errorText)) : const Mode5GDefault(),
+              hasErrorMessage ? ModeWarning(warningText: warningMessage(data.mode5G?.errorCode ?? errorText)) : const Mode5GDefault(),
               // Container(
               //   width: MediaQuery.of(context).size.width * 0.85,
               //   height: 52,
