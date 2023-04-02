@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
+import 'package:living_network/component/mode/bottomsheet_decision_payment.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
 import 'package:living_network/component/notification/mode_warning.dart';
@@ -11,8 +12,6 @@ import 'package:living_network/constance/constants.dart';
 import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
-
-import 'bottomsheet_decision_payment.dart';
 
 class ModeWidget extends StatefulWidget {
   ModeWidget({
@@ -26,12 +25,7 @@ class ModeWidget extends StatefulWidget {
 class _ModeWidgetState extends State<ModeWidget> {
   final SizedBox _sizedBox = const SizedBox(height: 8);
 
-  bool isDisableButtonSheet = false;
-  bool exitMode = false;
   bool checkTimeMode = true;
-  int num = 1;
-  int? seconds;
-  String snackBarText = 'default';
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(

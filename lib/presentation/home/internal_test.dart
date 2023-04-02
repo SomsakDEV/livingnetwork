@@ -299,7 +299,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
 
   @override
   void dispose() {
-    Provider.of<InternalProvider>(context).dispose();
+    _onExit();
     super.dispose();
   }
 }
