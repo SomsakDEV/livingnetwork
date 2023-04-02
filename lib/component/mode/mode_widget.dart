@@ -490,7 +490,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'boost_mode',
-                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableMode ?? false) || (data.mode5G?.isDisableModeLive ?? false),
                       expireDate: data.mode5G?.mode == 'boost_mode' ? data.mode5G?.expireMode : null,
                       mode: 'modeLiveTime',
                       setMode: expireMode,
@@ -533,7 +533,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'game_mode',
-                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableMode ?? false) || (data.mode5G?.isDisableModeGame ?? false),
                       expireDate: data.mode5G?.mode == 'game_mode' ? data.mode5G?.expireMode : null,
                       mode: 'modeGameTime',
                       setMode: expireMode,
@@ -577,7 +577,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       width: 143,
                       borderRadius: 10,
                       isMode: data.mode5G?.mode == 'eco_mode',
-                      isDisable: (data.mode5G?.isDisableMode ?? false),
+                      isDisable: (data.mode5G?.isDisableMode ?? false) || (data.mode5G?.isDisableModeEco ?? false),
                       onPress: () {
                         chooseEcoMode(data, context);
                         // if (highValue) {

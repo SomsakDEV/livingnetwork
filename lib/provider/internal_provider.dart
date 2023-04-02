@@ -60,7 +60,7 @@ class InternalProvider with ChangeNotifier {
       if ((_mode5G?.error ?? true)) {
         return false;
       } else {
-        if (_mode5G?.devMessage == 'Not Mobile5G') {
+        if (_mode5G?.devMessage == 'Check5G is incomplete') {
           notifyListeners();
           return true;
         }

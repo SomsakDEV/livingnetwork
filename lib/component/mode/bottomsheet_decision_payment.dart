@@ -23,7 +23,7 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDecisionPaymentCardDialogMode> {
   Widget? termConditionDesc() {
     Map<String, dynamic> desc = termsConditionsDesc;
-    final scrollController = ScrollController(initialScrollOffset: 0);
+    ScrollController scrollController = ScrollController();
     return ListView.builder(
       controller: scrollController,
       scrollDirection: Axis.vertical,
@@ -171,11 +171,13 @@ class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDe
                     child: Center(
                       child: Container(
                         padding: const EdgeInsets.only(top: 16, bottom: 16, left: 15, right: 5),
+                        width: MediaQuery.of(context).size.width * 0.90,
                         height: 140,
                         child: Scrollbar(
                           thickness: 5,
                           thumbVisibility: true,
                           trackVisibility: true,
+                          interactive: true,
                           scrollbarOrientation: ScrollbarOrientation.right,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
