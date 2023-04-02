@@ -496,7 +496,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       expireDate: data.mode5G?.mode == 'boost_mode' ? data.mode5G?.expireMode : null,
                       mode: 'modeLiveTime',
                       setMode: expireMode,
-                      check: (data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false),
+                      check: data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false,
                       onPress: () {
                         bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
                         // if (highValue) {
@@ -519,12 +519,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false)
-                            // ||
-                            //     (data.displayScreen?.mode?.isDisableModeGame ??
-                            //         false)
-                            ? ImageUtils.getImagePath('assets/images/mode_game_bw.png')
-                            : ImageUtils.getImagePath('assets/images/mode_game.png'),
+                        (data.mode5G?.isDisableMode ?? false) ? ImageUtils.getImagePath('assets/images/mode_game_bw.png') : ImageUtils.getImagePath('assets/images/mode_game.png'),
                         height: 24,
                         width: 24,
                       ),

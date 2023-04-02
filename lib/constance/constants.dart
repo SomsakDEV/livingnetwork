@@ -59,6 +59,7 @@ List<Image> image_preformance = [
   )
 ];
 
+//5G Mode warning
 Map warningRepo = <String, String>{
   '12': 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout กรุณาลองใหม่อีกครั้ง',
   '13': 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง',
@@ -66,22 +67,6 @@ Map warningRepo = <String, String>{
   '99999': 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี',
   '500': 'System Error',
 };
-
-//5G Mode (warning)
-String warning1 = 'Unable to use 5G mode because you have turned off cellular 5G. Please check your setting menu on your phone';
-String warning2 = 'Unable to use 5G mode as your max speed internet has run out.';
-String warning3 = 'XXX แพ็กเกจหลักของคุณไม่สามารถใช้ LiveMode ได้';
-String warning3_1 = 'แพ็กเกจของท่านไม่เข้าเงื่อนไข';
-String warning4 = 'You are currently using 4G. Because it is outside the 5G service area.';
-String warning4_1 = 'แพ็กเกจหลักของคุณไม่สามารถใช้ 5G Mode ได้';
-String warning6 = 'Unable to use 5G mode as your max speedinternet has limited.';
-String warning8 = 'ขณะนี้มีผู้ใช้งานเต็มในโหมดนี้แล้ว ขออภัยในความไม่ สะดวก(ท่านจะกลับมาใช้งานโหมดนี้ได้ในอีกxxxนาที)';
-String warning9 = 'ขณะนี้คุณได้ทำการปรับโหมดเกิน 10 ครั้ง ซึ่งเกินลิมิตของวันนี้ คุณจะกลับมาปรับโหมดได้อีกครั้งหลังเที่ยงคืน';
-String warning10 = 'เราไม่สามารถตรวจสอบได้ว่าคุณใช้โทรศัพท์รุ่นที่รองรับ 5G หรือไม่';
-
-String warningTimeout = 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout\nกรุณาลองใหม่อีกครั้ง'; //16
-String not5GMode = 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง'; //13
-String warningCheck5GError = 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี้'; //14
 
 //5G Mode (default)
 String messageDefault = 'Game Mode และ Boost Mode จะใช้งานได้ ประสิทธิภาพสูงสุดขึ้นอยู่ กับเสาสัญญาณที่ท่านอยู่ ณ บริเวณนั้นๆ';

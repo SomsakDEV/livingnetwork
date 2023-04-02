@@ -59,9 +59,7 @@ class _ModeWarningState extends State<ModeWarning> {
                     Padding(
                       padding: const EdgeInsets.only(left: 16, top: 25.17, bottom: 22.83, right: 16),
                       child: Image.asset(
-                        ImageUtils.getImagePath(
-                          'assets/images/information.png',
-                        ),
+                        ImageUtils.getImagePath('assets/images/information.png'),
                         height: 20,
                         width: 20,
                       ),
