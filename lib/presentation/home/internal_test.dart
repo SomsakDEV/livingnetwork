@@ -39,6 +39,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   _onExit() {
     print('[LIVING_NETWORK] : Clear on exit');
     Provider.of<InternalProvider>(context).dispose();
+    Navigator.pop(context);
     SystemNavigator.pop();
   }
 
@@ -104,12 +105,11 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 DateTime sExpire = Provider.of<InternalProvider>(context, listen: false).sExpire ?? DateTime.now().add(Duration(hours: 1));
                 print('[LIVING_NETWORK] Session expire : $sExpire');
                 int sec = sExpire.difference(DateTime.now()).inSeconds;
-                if(sec > 0) {
+                if (sec > 0) {
                   duration = Duration(seconds: sec);
                   timer = Timer.periodic(
                       const Duration(seconds: 1),
-                          (_) =>
-                          setState(() {
+                      (_) => setState(() {
                             _counting();
                           }));
                 }

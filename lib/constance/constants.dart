@@ -25,13 +25,7 @@ List<Image> image = [
 ];
 
 List title_preformance = ['Browsing / Social', 'Live', 'Video streaming', 'Music streaming', 'Game'];
-List subTitle_preformance = [
-  'Detail : At vero eos et accusamus et iusto odio\ne.g. LINE, Facebook, Twitter, Google',
-  'Detail : At vero eos et accusamus et iusto odio\ne.g. Tiktok, Facebook Live, Youtube Live',
-  'Detail : At vero eos et accusamus et iusto odio\ne.g. Youtube, Netflix, Disney Hostar, HBO Go',
-  'Detail : At vero eos et accusamus et iusto odio\ne.g. Joox, Spotify, Youtube Music, Apple Music, Plern',
-  'Detail : At vero eos et accusamus et iusto odio\ne.g. ROV, Pub G, Among Us, Candy Crush'
-];
+List subTitle_preformance = ['Detail : At vero eos et accusamus et iusto odio\ne.g. LINE, Facebook, Twitter, Google', 'Detail : At vero eos et accusamus et iusto odio\ne.g. Tiktok, Facebook Live, Youtube Live', 'Detail : At vero eos et accusamus et iusto odio\ne.g. Youtube, Netflix, Disney Hostar, HBO Go', 'Detail : At vero eos et accusamus et iusto odio\ne.g. Joox, Spotify, Youtube Music, Apple Music, Plern', 'Detail : At vero eos et accusamus et iusto odio\ne.g. ROV, Pub G, Among Us, Candy Crush'];
 List<Image> image_preformance = [
   Image.asset(
     ImageUtils.getImagePath('assets/images/performance_icon_1.png'),
@@ -65,16 +59,12 @@ List<Image> image_preformance = [
   )
 ];
 
-warningMessage(String errorCode) {
-  Map warning = <String, String>{
-    '12': 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout กรุณาลองใหม่อีกครั้ง',
-    '13': 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง',
-    '99999': 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี',
-    '500': 'System Error',
-  };
-
-  return warning[errorCode] ?? warning['500'];
-}
+Map warningRepo = <String, String>{
+  '12': 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout กรุณาลองใหม่อีกครั้ง',
+  '13': 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง',
+  '99999': 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี',
+  '500': 'System Error',
+};
 
 //5G Mode (warning)
 String warning1 = 'Unable to use 5G mode because you have turned off cellular 5G. Please check your setting menu on your phone';
@@ -149,8 +139,7 @@ String termsConditionsTitle = 'Terms & Conditions';
 var termsConditionsDesc = {
   "1": "The exceas unago ratea are 1.50 Baht minute for voice and video calis to anry retwork (Secande are rounded up to the next minutel, 2.50 Baht/Sh/S and 4 Baht/MMS. AISsupor WIFi: The Wifi sorvice systom will gend a Wifi userrame and password autoraticaly via SMS. For more information, please go to www aie.co.towiti Exiating custorers can aubacribe to this package with an initial subscription fee of 30 Baht per subscription. limited to 3 subecriotion per month.",
   "2": "The allowance and servico ratea aro for domestic use anly. Commercial utization and other appications tnat may affect the service of other clentr are prohibited. The ucage allowance ia valid for each biling cycle. The remaining alowance carinot be accurulated for use in the next biling cycles. The unage allawance wil be torminated immediately whan the pack is changed or tranaferred. Al senvice rotes sre 79 VAT exclucive.",
-  "3":
-      "This package is valid for 12 bill cyctes cansacutivaly Free unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial \"889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
+  "3": "This package is valid for 12 bill cyctes cansacutivaly Free unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial \"889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
   "4": "AIS Play: ready to enioy Immociatoly",
   "5": "Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation.",
   "6": "Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
