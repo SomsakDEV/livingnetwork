@@ -78,12 +78,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                 builder: (context, snap) {
                   if (snap.hasData) {
                     Navigator.pop(context);
-                    if (addSocket) {
-                      Timer(
+                    Timer(
                         const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: snap.data as bool ? 'fail' : mode)),
-                      );
-                    }
+                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context,
+                            message: snap.data as bool
+                                ? 'fail'
+                                : addSocket
+                                    ? mode
+                                    : 'max_mode')));
                     return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
@@ -494,7 +496,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       expireDate: data.mode5G?.mode == 'boost_mode' ? data.mode5G?.expireMode : null,
                       mode: 'modeLiveTime',
                       setMode: expireMode,
-                      check: (data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false),
+                      check: data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false,
                       onPress: () {
                         bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
                         // if (highValue) {
@@ -517,12 +519,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false)
-                            // ||
-                            //     (data.displayScreen?.mode?.isDisableModeGame ??
-                            //         false)
-                            ? ImageUtils.getImagePath('assets/images/mode_game_bw.png')
-                            : ImageUtils.getImagePath('assets/images/mode_game.png'),
+                        (data.mode5G?.isDisableMode ?? false) ? ImageUtils.getImagePath('assets/images/mode_game_bw.png') : ImageUtils.getImagePath('assets/images/mode_game.png'),
                         height: 24,
                         width: 24,
                       ),
