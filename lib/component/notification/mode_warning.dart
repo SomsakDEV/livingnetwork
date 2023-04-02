@@ -20,7 +20,7 @@ class _ModeWarningState extends State<ModeWarning> {
   Widget build(BuildContext context) {
     return Consumer<InternalProvider>(
       builder: (context, data, _) {
-        return (data.mode5G?.error ?? false)
+        return ((data.mode5G?.error ?? false) || data.mode5G?.errorCode != null)
             ? Container(
                 width: MediaQuery.of(context).size.width * 0.85,
                 height: 52,
