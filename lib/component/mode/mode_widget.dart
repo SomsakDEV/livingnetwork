@@ -78,12 +78,14 @@ class _ModeWidgetState extends State<ModeWidget> {
                 builder: (context, snap) {
                   if (snap.hasData) {
                     Navigator.pop(context);
-                    if (addSocket) {
-                      Timer(
+                    Timer(
                         const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: snap.data as bool ? 'fail' : mode)),
-                      );
-                    }
+                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context,
+                            message: snap.data as bool
+                                ? 'fail'
+                                : addSocket
+                                    ? mode
+                                    : 'max_mode')));
                     return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
