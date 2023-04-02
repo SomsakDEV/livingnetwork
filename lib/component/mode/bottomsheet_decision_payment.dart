@@ -23,7 +23,7 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
 class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDecisionPaymentCardDialogMode> {
   Widget? termConditionDesc() {
     Map<String, dynamic> desc = termsConditionsDesc;
-    final scrollController = ScrollController();
+    ScrollController scrollController = ScrollController();
     return ListView.builder(
       controller: scrollController,
       scrollDirection: Axis.vertical,
@@ -177,6 +177,7 @@ class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDe
                           thickness: 5,
                           thumbVisibility: true,
                           trackVisibility: true,
+                          interactive: true,
                           scrollbarOrientation: ScrollbarOrientation.right,
                           child: SingleChildScrollView(
                             scrollDirection: Axis.vertical,
