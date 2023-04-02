@@ -1,9 +1,9 @@
 import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
-import 'package:living_network/component/notification/mode_5G_default.dart';
 import 'package:living_network/component/notification/mode_warning.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/constance/LNStyle.dart';
@@ -26,14 +26,12 @@ class ModeWidget extends StatefulWidget {
 class _ModeWidgetState extends State<ModeWidget> {
   final SizedBox _sizedBox = const SizedBox(height: 8);
 
-  late bool hasErrorMessage = false;
-  late bool isDisableButtonSheet = false;
-  late bool exitMode = false;
-  late bool checkTimeMode = true;
-  late int num = 1;
-  late int seconds;
-  late String errorText = '500';
-  late String snackBarText = 'default';
+  bool isDisableButtonSheet = false;
+  bool exitMode = false;
+  bool checkTimeMode = true;
+  int num = 1;
+  int? seconds;
+  String snackBarText = 'default';
 
   SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
     return SnackBar(
@@ -87,10 +85,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                   if (snap.hasData) {
                     Navigator.pop(context);
                     if (addSocket) {
-                      hasErrorMessage = snap.data as bool;
                       Timer(
                         const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : mode)),
+                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: snap.data as bool ? 'fail' : mode)),
                       );
                     }
                     return const SizedBox();
@@ -99,7 +96,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
                     );
-                    hasErrorMessage = snap.data as bool;
                     return const SizedBox();
                   } else {
                     return Container(
@@ -130,10 +126,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                 builder: (context, snap) {
                   if (snap.hasData) {
                     Navigator.pop(context);
-                    hasErrorMessage = snap.data as bool;
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: hasErrorMessage ? 'fail' : data.mode5G?.lastMode ?? 'fail')),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: snap.data as bool ? 'fail' : data.mode5G?.lastMode ?? 'fail')),
                     );
                     return const SizedBox();
                   } else if (snap.hasError) {
@@ -141,7 +136,6 @@ class _ModeWidgetState extends State<ModeWidget> {
                       const Duration(milliseconds: 100),
                       () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
                     );
-                    hasErrorMessage = snap.data as bool;
                     return const SizedBox();
                   } else {
                     return Container(
@@ -613,7 +607,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                 ],
               ),
               _sizedBox,
-              hasErrorMessage ? ModeWarning(warningText: warningMessage(data.mode5G?.errorCode ?? errorText)) : const Mode5GDefault(),
+              ModeWarning(),
               // Container(
               //   width: MediaQuery.of(context).size.width * 0.85,
               //   height: 52,
