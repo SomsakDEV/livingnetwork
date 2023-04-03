@@ -1,11 +1,9 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
-import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_exit_app/flutter_exit_app.dart';
 import 'package:living_network/component/map/map_location_widget.dart';
 import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
@@ -37,7 +35,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   void _initialState([bool inits = true]) {
     bool status = false;
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
+          (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -75,7 +73,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
 
   void _popup5G() {
     WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
+          (_) => showDialog(
         context: context,
         barrierDismissible: false,
         builder: (context) {
@@ -303,12 +301,12 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 ],
               ),
             );
-          case 'CallBack':
-            _initialState(false);
-            return Dialog(
-              backgroundColor: LNColor.transparent,
-              child: SizedBox(),
-            );
+        // case 'CallBack':
+        //   _initialState(false);
+        //   return Dialog(
+        //     backgroundColor: LNColor.transparent,
+        //     child: SizedBox(),
+        //   );
           default:
             return Dialog(
               backgroundColor: LNColor.transparent,
@@ -320,22 +318,15 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   }
 
   _onExit() {
-    if(Platform.isAndroid){
-      FlutterExitApp.exitApp();
-    }else if (Platform.isIOS){
-      FlutterExitApp.exitApp(iosForceExit: true);
-    }
-    // SystemNavigator.pop();
-    print('[LIVING_NETWORK] : Clear on exit , Platform -> ${Platform.operatingSystem}');
-    disposeProvider();
+    SystemNavigator.pop();
+    print('[LIVING_NETWORK] : Clear on exit');
+    dispose();
   }
 
-  disposeProvider() {
+  @override
+  void dispose() {
     print('[LIVING_NETWORK] : dispose');
-    if(Platform.isAndroid) {
-      Provider.of<InternalProvider>(context).dispose();
-    }else if (Platform.isIOS){
-      Provider.of<InternalProvider>(context).setStatus('CallBack');
-    }
+    Provider.of<InternalProvider>(context).dispose();
+    super.dispose();
   }
 }
