@@ -10,12 +10,15 @@ import 'package:living_network_repository/living_network_repository.dart';
 class InternalProvider with ChangeNotifier {
   InitialInternal? repo;
   String? _token;
+  bool _verify = true;
   Mode5G? _mode5G;
   String? _status;
   DateTime? _sExpire;
   String? _caseTest;
   LocationWifi? _locationWifi;
   LocationShop? _locationShop;
+
+  bool get verify => _verify;
 
   Mode5G? get mode5G => _mode5G;
 
@@ -59,15 +62,17 @@ class InternalProvider with ChangeNotifier {
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       if (_mode5G?.devMessage == 'Check5G is incomplete') {
         notifyListeners();
-        return true;
+        return _verify;
       } else if ((_mode5G?.error ?? true)) {
-        return false;
+        _verify = false;
+        notifyListeners();
+        return _verify;
       } else {
         _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
         _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
         if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
           notifyListeners();
-          return true;
+          return _verify;
         }
       }
     } catch (e, st) {
