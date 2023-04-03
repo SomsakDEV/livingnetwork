@@ -32,7 +32,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     super.initState();
   }
 
-  void _initialState() {
+  void _initialState([bool inits = true]) {
     bool status = false;
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
@@ -66,7 +66,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         },
       ),
     );
-    if (status) {
+    if (status && inits) {
       _popup5G;
     }
   }
@@ -201,13 +201,13 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                             child: ModeWidget(),
                           ),
                           Text(
-                            'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).detect}',
+                            'Detected Network Type : ${data.detect}',
                             style: TextStyle(color: LNColor.failColor, fontSize: 20),
                           ),
                           Padding(
                             padding: EdgeInsets.all(15.0),
                             child: Text(
-                              'Data : ${Provider.of<InternalProvider>(context, listen: true).mode5G == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode5G!.toJson()}',
+                              'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
                               style: TextStyle(color: LNColor.failColor, fontSize: 17),
                             ),
                           ),
@@ -301,6 +301,12 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 ],
               ),
             );
+          // case 'CallBack':
+          //   _initialState(false);
+          //   return Dialog(
+          //     backgroundColor: LNColor.transparent,
+          //     child: SizedBox(),
+          //   );
           default:
             return Dialog(
               backgroundColor: LNColor.transparent,
