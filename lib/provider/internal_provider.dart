@@ -10,19 +10,24 @@ import 'package:living_network_repository/living_network_repository.dart';
 class InternalProvider with ChangeNotifier {
   InitialInternal? repo;
   String? _token;
-  bool _verify = true;
   Mode5G? _mode5G;
-  String? _status;
+  String _status = 'Loading';
+  String? _detect;
   DateTime? _sExpire;
   String? _caseTest;
   LocationWifi? _locationWifi;
   LocationShop? _locationShop;
 
-  bool get verify => _verify;
+  setStatus(String value) {
+    _status = value;
+    notifyListeners();
+  }
+
+  String get status => _status;
 
   Mode5G? get mode5G => _mode5G;
 
-  String? get status => _status;
+  String? get detect => _detect;
 
   DateTime? get sExpire => _sExpire;
 
@@ -38,7 +43,7 @@ class InternalProvider with ChangeNotifier {
     }
   }
 
-  Future<bool> initialCore(String token) async {
+  Future<String> initialCore(String token) async {
     try {
       caseTest(_token = token);
       WidgetsFlutterBinding.ensureInitialized();
@@ -47,11 +52,11 @@ class InternalProvider with ChangeNotifier {
       return await internalPrepare(token);
     } catch (e, st) {
       print('[LIVING_NETWORK] $e, $st');
-      return false;
+      return 'Fail';
     }
   }
 
-  Future<bool> internalPrepare(String token) async {
+  Future<String> internalPrepare(String token) async {
     try {
       String shop = await rootBundle.loadString('assets/data/mock_ais1_shop.json');
       String wifi = await rootBundle.loadString('assets/data/mock_ais1_wifi.json');
@@ -61,24 +66,26 @@ class InternalProvider with ChangeNotifier {
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       if (_mode5G?.devMessage == 'Check5G is incomplete') {
-        notifyListeners();
-        return _verify;
+        _status = 'Passed';
       } else if ((_mode5G?.error ?? true)) {
-        _verify = false;
-        notifyListeners();
-        return _verify;
+        _status = 'Failed';
       } else {
-        _status = _caseTest ?? await repo?.getCurrentNetworkStatus();
+        _detect = _caseTest ?? await repo?.getCurrentNetworkStatus();
         _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
         if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
-          notifyListeners();
-          return _verify;
+          _status = 'Passed';
+        } else {
+          _status = 'Expire';
         }
       }
+      notifyListeners();
+      return status;
     } catch (e, st) {
       print('[LIVING_NETWORK]$e, $st');
     }
-    return false;
+    _status = 'Failed';
+    notifyListeners();
+    return _status;
   }
 
   Future<void> _reInitial(String token) async {
@@ -88,6 +95,11 @@ class InternalProvider with ChangeNotifier {
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       if (!(_mode5G?.error ?? true) && _mode5G?.devMessage != 'Check5G is incomplete') {
         _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
+        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
+          _status = 'Passed';
+        } else {
+          _status = 'Expire';
+        }
       }
       notifyListeners();
     } catch (e, st) {
