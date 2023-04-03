@@ -26,23 +26,52 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   late Duration duration;
   late Timer timer;
 
-  _counting() {
-    final seconds = duration.inSeconds - 1;
-    if (seconds < 0) {
-      _sessionExpire();
-      timer.cancel();
-    } else {
-      duration = Duration(seconds: seconds);
+  @override
+  void initState() {
+    _initialState();
+    super.initState();
+  }
+
+  void _initialState() {
+    bool status = false;
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return FutureBuilder(
+            future: Provider.of<InternalProvider>(context, listen: false).initialCore(widget.token),
+            builder: (context, snap) {
+              if (snap.hasData) {
+                if (status = (snap.data == 'Passed')) {
+                  DateTime? sExpire = Provider.of<InternalProvider>(context, listen: false).sExpire;
+                  if (sExpire != null) {
+                    print('[LIVING_NETWORK] Session expire : $sExpire');
+                    int sec = sExpire.difference(DateTime.now()).inSeconds;
+                    if (sec > 0) {
+                      status = true;
+                      duration = Duration(seconds: sec);
+                      timer = Timer.periodic(const Duration(seconds: 1), (_) => _counting());
+                    }
+                  }
+                }
+                Navigator.pop(context);
+                Provider.of<InternalProvider>(context).setStatus(snap.data as String);
+                return SizedBox();
+              } else {
+                return SizedBox();
+              }
+            },
+          );
+        },
+      ),
+    );
+    if (status) {
+      _popup5G;
     }
   }
 
-  _onExit() {
-    print('[LIVING_NETWORK] : Clear on exit');
-    Navigator.of(context, rootNavigator: true).pop(context);
-    SystemNavigator.pop();
-  }
-
-  _sessionExpire() {
+  void _popup5G() {
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
         context: context,
@@ -59,19 +88,29 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                   child: Column(
                     children: [
-                      ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), child: SizedBox(width: 260)),
+                      ClipRRect(
+                        borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
+                        child: Image.asset(
+                          ImageUtils.getImagePath('assets/images/image.png'),
+                          width: 260,
+                        ),
+                      ),
                       SizedBox(
                         height: 16,
                       ),
-                      Text('Please Login again!!!!!', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                      Text('5G Modes!', style: LNStyle.dialogHeader),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
                       SizedBox(
                         height: 16,
                       ),
                       Button(
                         textStyle: LNStyle.dialogButtonText,
-                        title: "OK",
+                        title: "Got it",
                         buttonType: ButtonType.primaryBtn,
-                        onPress: _onExit,
+                        onPress: () => Navigator.pop(context),
                         borderRadius: 6,
                         width: 236,
                         height: 36,
@@ -90,87 +129,14 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     );
   }
 
-  @override
-  void initState() {
-    WidgetsBinding.instance.addPostFrameCallback(
-      (_) => showDialog(
-        context: context,
-        barrierDismissible: false,
-        builder: (context) {
-          return FutureBuilder(
-            future: Provider.of<InternalProvider>(context, listen: false).initialCore(widget.token),
-            builder: (context, snap) {
-              if (snap.hasData && 'true' == snap.data.toString()) {
-                DateTime sExpire = Provider.of<InternalProvider>(context, listen: false).sExpire ?? DateTime.now().add(Duration(hours: 1));
-                print('[LIVING_NETWORK] Session expire : $sExpire');
-                int sec = sExpire.difference(DateTime.now()).inSeconds;
-                if (sec > 0) {
-                  duration = Duration(seconds: sec);
-                  timer = Timer.periodic(
-                      const Duration(seconds: 1),
-                      (_) => setState(() {
-                            _counting();
-                          }));
-                }
-                return Dialog(
-                  backgroundColor: LNColor.transparent,
-                  child: Wrap(
-                    children: [
-                      Container(
-                        decoration: const BoxDecoration(
-                          color: LNColor.neutralsWhite,
-                          borderRadius: BorderRadius.all(Radius.circular(10)),
-                        ),
-                        child: Column(
-                          children: [
-                            ClipRRect(
-                              borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)),
-                              child: Image.asset(
-                                ImageUtils.getImagePath('assets/images/image.png'),
-                                width: 260,
-                              ),
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Text('5G Modes!', style: LNStyle.dialogHeader),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Text('Switch your connection mode to suite\nyour demand the most.', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Button(
-                              textStyle: LNStyle.dialogButtonText,
-                              title: "Got it",
-                              buttonType: ButtonType.primaryBtn,
-                              onPress: () {
-                                Navigator.pop(context);
-                              },
-                              borderRadius: 6,
-                              width: 236,
-                              height: 36,
-                            ),
-                            SizedBox(
-                              height: 16,
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                );
-              } else {
-                Navigator.pop(context);
-                return SizedBox();
-              }
-            },
-          );
-        },
-      ),
-    );
-    super.initState();
+  void _counting() {
+    final seconds = duration.inSeconds - 1;
+    if (seconds <= 0) {
+      timer.cancel();
+      Provider.of<InternalProvider>(context).setStatus('Expire');
+    } else {
+      duration = Duration(seconds: seconds);
+    }
   }
 
   @override
@@ -179,131 +145,181 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     double w = MediaQuery.of(context).size.width;
     return Consumer<InternalProvider>(
       builder: (context, data, _) {
-        return data.verify
-            ? Scaffold(
-                appBar: AppBar(
-                  title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
-                  backgroundColor: Colors.white,
-                  centerTitle: false,
-                  leading: BackButton(
-                    color: LNColor.blackColor,
-                    onPressed: _onExit,
-                  ),
+        switch (data.status) {
+          case 'Passed':
+            return Scaffold(
+              appBar: AppBar(
+                title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
+                backgroundColor: Colors.white,
+                centerTitle: false,
+                leading: BackButton(
+                  color: LNColor.blackColor,
+                  onPressed: _onExit,
                 ),
-                body: RefreshIndicator(
-                  color: LNColor.primaryColor,
-                  onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
-                  child: SafeArea(
-                    child: Center(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                          children: [
-                            Stack(
-                              alignment: Alignment.bottomCenter,
-                              children: <Widget>[
-                                SizedBox(
-                                  height: h * 0.35,
-                                  width: w,
-                                  child: MapNearByWidget(select1: true, select2: true),
-                                ),
-                                // InkWell(
-                                //   onTap: () {
-                                //     Navigator.pushNamed(context, 'map');
-                                //   },
-                                //   child: SizedBox(
-                                //     height: h * 0.35,
-                                //     width: w,
-                                //   ),
-                                // ),
-                              ],
-                            ),
-                            SizedBox(height: 8),
-                            Container(
-                              alignment: Alignment.topCenter,
-                              decoration: BoxDecoration(
-                                color: Color(0xFFFFFFFF),
-                                borderRadius: BorderRadius.circular(8),
-                                border: Border.all(
-                                  width: 3,
-                                  color: Color(0xFFF0F0F0),
-                                ),
+              ),
+              body: RefreshIndicator(
+                color: LNColor.primaryColor,
+                onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
+                child: SafeArea(
+                  child: Center(
+                    child: SingleChildScrollView(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                        children: [
+                          Stack(
+                            alignment: Alignment.bottomCenter,
+                            children: <Widget>[
+                              SizedBox(
+                                height: h * 0.35,
+                                width: w,
+                                child: MapNearByWidget(select1: true, select2: true),
                               ),
-                              width: w * 0.93,
-                              child: ModeWidget(),
-                            ),
-                            Text(
-                              'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).status}',
-                              style: TextStyle(color: LNColor.failColor, fontSize: 20),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.all(15.0),
-                              child: Text(
-                                'Data : ${Provider.of<InternalProvider>(context, listen: true).mode5G == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode5G!.toJson()}',
-                                style: TextStyle(color: LNColor.failColor, fontSize: 17),
+                              // InkWell(
+                              //   onTap: () {
+                              //     Navigator.pushNamed(context, 'map');
+                              //   },
+                              //   child: SizedBox(
+                              //     height: h * 0.35,
+                              //     width: w,
+                              //   ),
+                              // ),
+                            ],
+                          ),
+                          SizedBox(height: 8),
+                          Container(
+                            alignment: Alignment.topCenter,
+                            decoration: BoxDecoration(
+                              color: Color(0xFFFFFFFF),
+                              borderRadius: BorderRadius.circular(8),
+                              border: Border.all(
+                                width: 3,
+                                color: Color(0xFFF0F0F0),
                               ),
                             ),
-                            SizedBox(
-                              height: h * 0.4,
+                            width: w * 0.93,
+                            child: ModeWidget(),
+                          ),
+                          Text(
+                            'Detected Network Type : ${Provider.of<InternalProvider>(context, listen: true).detect}',
+                            style: TextStyle(color: LNColor.failColor, fontSize: 20),
+                          ),
+                          Padding(
+                            padding: EdgeInsets.all(15.0),
+                            child: Text(
+                              'Data : ${Provider.of<InternalProvider>(context, listen: true).mode5G == null ? "Loading . . ." : Provider.of<InternalProvider>(context, listen: true).mode5G!.toJson()}',
+                              style: TextStyle(color: LNColor.failColor, fontSize: 17),
                             ),
-                          ],
-                        ),
+                          ),
+                          SizedBox(
+                            height: h * 0.4,
+                          ),
+                        ],
                       ),
                     ),
                   ),
                 ),
-              )
-            : Dialog(
-                backgroundColor: LNColor.transparent,
-                child: Wrap(
-                  children: [
-                    Container(
-                      padding: EdgeInsets.all(10),
-                      decoration: const BoxDecoration(
-                        color: LNColor.neutralsWhite,
-                        borderRadius: BorderRadius.all(Radius.circular(10)),
-                      ),
-                      child: Column(
-                        children: [
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Text('Something wrong !!!', style: LNStyle.dialogHeader),
-                          SizedBox(
-                            height: 8,
-                          ),
-                          Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                          SizedBox(
-                            height: 16,
-                          ),
-                          Button(
-                            textStyle: LNStyle.dialogButtonText,
-                            title: "Exit",
-                            buttonType: ButtonType.primaryBtn,
-                            onPress: () {
-                              SystemNavigator.pop();
-                            },
-                            borderRadius: 6,
-                            width: 236,
-                            height: 36,
-                          ),
-                          SizedBox(
-                            height: 16,
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              );
+              ),
+            );
+          case 'Failed':
+            return Dialog(
+              backgroundColor: LNColor.transparent,
+              child: Wrap(
+                children: [
+                  Container(
+                    padding: EdgeInsets.all(10),
+                    decoration: const BoxDecoration(
+                      color: LNColor.neutralsWhite,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Column(
+                      children: [
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text('Something wrong !!!', style: LNStyle.dialogHeader),
+                        SizedBox(
+                          height: 8,
+                        ),
+                        Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Button(
+                          textStyle: LNStyle.dialogButtonText,
+                          title: "Exit",
+                          buttonType: ButtonType.primaryBtn,
+                          onPress: _onExit,
+                          borderRadius: 6,
+                          width: 236,
+                          height: 36,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          case 'Expire':
+            return Dialog(
+              backgroundColor: LNColor.transparent,
+              child: Wrap(
+                children: [
+                  Container(
+                    decoration: const BoxDecoration(
+                      color: LNColor.neutralsWhite,
+                      borderRadius: BorderRadius.all(Radius.circular(10)),
+                    ),
+                    child: Column(
+                      children: [
+                        ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), child: SizedBox(width: 260)),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Text('Please Login again!!!!!', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                        SizedBox(
+                          height: 16,
+                        ),
+                        Button(
+                          textStyle: LNStyle.dialogButtonText,
+                          title: "OK",
+                          buttonType: ButtonType.primaryBtn,
+                          onPress: _onExit,
+                          borderRadius: 6,
+                          width: 236,
+                          height: 36,
+                        ),
+                        SizedBox(
+                          height: 16,
+                        ),
+                      ],
+                    ),
+                  )
+                ],
+              ),
+            );
+          default:
+            return Dialog(
+              backgroundColor: LNColor.transparent,
+              child: SizedBox(),
+            );
+        }
       },
     );
   }
 
+  _onExit() {
+    SystemNavigator.pop();
+    print('[LIVING_NETWORK] : Clear on exit');
+    dispose();
+  }
+
   @override
   void dispose() {
-    super.dispose();
     print('[LIVING_NETWORK] : dispose');
     Provider.of<InternalProvider>(context).dispose();
+    super.dispose();
   }
 }
