@@ -154,7 +154,8 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                 centerTitle: false,
                 leading: BackButton(
                   color: LNColor.blackColor,
-                  onPressed: _onExit,
+                  // onPressed: _onExit,
+                  onPressed: () => SystemNavigator.pop(),
                 ),
               ),
               body: RefreshIndicator(
