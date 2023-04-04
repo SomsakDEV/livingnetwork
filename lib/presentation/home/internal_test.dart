@@ -55,7 +55,12 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                     }
                   }
                 }
-                return status ? _popup5G() : SizedBox();
+                if (status) {
+                  return _popup5G();
+                } else {
+                  Navigator.pop(context);
+                  return SizedBox();
+                }
               } else {
                 return SizedBox();
               }

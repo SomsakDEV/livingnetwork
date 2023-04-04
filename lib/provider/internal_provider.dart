@@ -40,6 +40,8 @@ class InternalProvider with ChangeNotifier {
       _caseTest = 'mobile5G';
     } else if (value.startsWith('4G')) {
       _caseTest = 'mobile4G';
+    } else if (value.startsWith('eyJhbGciOiJIUzI1NiJ9.eyJtb2JpbGVObyI6IjA5MzcwNjAwND')){
+      _caseTest = 'mobile5G';
     }
   }
 
@@ -52,7 +54,7 @@ class InternalProvider with ChangeNotifier {
       return await internalPrepare(token);
     } catch (e, st) {
       print('[LIVING_NETWORK] $e, $st');
-      return 'Fail';
+      return 'Failed';
     }
   }
 
