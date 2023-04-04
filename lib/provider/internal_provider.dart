@@ -11,7 +11,7 @@ class InternalProvider with ChangeNotifier {
   InitialInternal? repo;
   String? _token;
   Mode5G? _mode5G;
-  String _status = 'Loading';
+  String _status = 'Passed';
   String? _detect;
   DateTime? _sExpire;
   String? _caseTest;
@@ -63,18 +63,14 @@ class InternalProvider with ChangeNotifier {
       _locationShop = LocationShop.fromJson(json.decode(shop));
       _locationWifi = LocationWifi.fromJson(json.decode(wifi));
       repo = repo ?? InitialInternal();
+      _detect = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      if (_mode5G?.devMessage == 'Check5G is incomplete') {
-        _status = 'Passed';
-      } else if ((_mode5G?.error ?? true)) {
+      if ((_mode5G?.error ?? true)) {
         _status = 'Failed';
       } else {
-        _detect = _caseTest ?? await repo?.getCurrentNetworkStatus();
         _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
-        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
-          _status = 'Passed';
-        } else {
+        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) < 1) {
           _status = 'Expire';
         }
       }
@@ -82,10 +78,10 @@ class InternalProvider with ChangeNotifier {
       return status;
     } catch (e, st) {
       print('[LIVING_NETWORK]$e, $st');
+      _status = 'Failed';
+      notifyListeners();
+      return _status;
     }
-    _status = 'Failed';
-    notifyListeners();
-    return _status;
   }
 
   Future<void> _reInitial(String token) async {
@@ -95,9 +91,7 @@ class InternalProvider with ChangeNotifier {
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       if (!(_mode5G?.error ?? true) && _mode5G?.devMessage != 'Check5G is incomplete') {
         _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
-        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) > 1) {
-          _status = 'Passed';
-        } else {
+        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) < 1) {
           _status = 'Expire';
         }
       }

@@ -32,7 +32,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     super.initState();
   }
 
-  void _initialState([bool inits = true]) {
+  void _initialState() {
     bool status = false;
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
@@ -66,7 +66,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         },
       ),
     );
-    if (status && inits) {
+    if (status) {
       _popup5G;
     }
   }
@@ -139,6 +139,50 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     }
   }
 
+  Widget errorDialog(String content, String subContent, String onSubmit) {
+    return Dialog(
+      backgroundColor: LNColor.transparent,
+      child: Wrap(
+        children: [
+          Container(
+            padding: EdgeInsets.all(10),
+            decoration: const BoxDecoration(
+              color: LNColor.neutralsWhite,
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+            ),
+            child: Column(
+              children: [
+                SizedBox(
+                  height: 16,
+                ),
+                Text(content, style: LNStyle.dialogHeader),
+                SizedBox(
+                  height: 8,
+                ),
+                Text(subContent, textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                SizedBox(
+                  height: 16,
+                ),
+                Button(
+                  textStyle: LNStyle.dialogButtonText,
+                  title: onSubmit,
+                  buttonType: ButtonType.primaryBtn,
+                  onPress: _onExit,
+                  borderRadius: 6,
+                  width: 236,
+                  height: 36,
+                ),
+                SizedBox(
+                  height: 16,
+                ),
+              ],
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
@@ -146,7 +190,17 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     return Consumer<InternalProvider>(
       builder: (context, data, _) {
         switch (data.status) {
-          case 'Passed':
+          case 'Failed':
+            return errorDialog("Something wrong !!!", "Service is not ready. Please try again later", "Exit");
+          case 'Expire':
+            return errorDialog('Session timeout', 'Please Login again!!!!!', 'OK');
+          // case 'CallBack':
+          //   _initialState(false);
+          //   return Dialog(
+          //     backgroundColor: LNColor.transparent,
+          //     child: SizedBox(),
+          //   );
+          default:
             return Scaffold(
               appBar: AppBar(
                 title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
@@ -220,97 +274,6 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                   ),
                 ),
               ),
-            );
-          case 'Failed':
-            return Dialog(
-              backgroundColor: LNColor.transparent,
-              child: Wrap(
-                children: [
-                  Container(
-                    padding: EdgeInsets.all(10),
-                    decoration: const BoxDecoration(
-                      color: LNColor.neutralsWhite,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Column(
-                      children: [
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text('Something wrong !!!', style: LNStyle.dialogHeader),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Text('Service is not ready. Please try again later', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Button(
-                          textStyle: LNStyle.dialogButtonText,
-                          title: "Exit",
-                          buttonType: ButtonType.primaryBtn,
-                          onPress: _onExit,
-                          borderRadius: 6,
-                          width: 236,
-                          height: 36,
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
-          case 'Expire':
-            return Dialog(
-              backgroundColor: LNColor.transparent,
-              child: Wrap(
-                children: [
-                  Container(
-                    decoration: const BoxDecoration(
-                      color: LNColor.neutralsWhite,
-                      borderRadius: BorderRadius.all(Radius.circular(10)),
-                    ),
-                    child: Column(
-                      children: [
-                        ClipRRect(borderRadius: BorderRadius.only(topLeft: Radius.circular(10), topRight: Radius.circular(10)), child: SizedBox(width: 260)),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Text('Please Login again!!!!!', textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                        SizedBox(
-                          height: 16,
-                        ),
-                        Button(
-                          textStyle: LNStyle.dialogButtonText,
-                          title: "OK",
-                          buttonType: ButtonType.primaryBtn,
-                          onPress: _onExit,
-                          borderRadius: 6,
-                          width: 236,
-                          height: 36,
-                        ),
-                        SizedBox(
-                          height: 16,
-                        ),
-                      ],
-                    ),
-                  )
-                ],
-              ),
-            );
-          // case 'CallBack':
-          //   _initialState(false);
-          //   return Dialog(
-          //     backgroundColor: LNColor.transparent,
-          //     child: SizedBox(),
-          //   );
-          default:
-            return Dialog(
-              backgroundColor: LNColor.transparent,
-              child: SizedBox(),
             );
         }
       },
