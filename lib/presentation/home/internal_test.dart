@@ -55,6 +55,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                     }
                   }
                 }
+                if (status) _popup5G;
                 Navigator.pop(context);
                 Provider.of<InternalProvider>(context).setStatus(snap.data as String);
                 return SizedBox();
@@ -66,9 +67,6 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         },
       ),
     );
-    if (status) {
-      _popup5G;
-    }
   }
 
   void _popup5G() {
@@ -131,7 +129,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
 
   void _counting() {
     final seconds = duration.inSeconds - 1;
-    if (seconds <= 0) {
+    if (seconds < 1) {
       timer.cancel();
       Provider.of<InternalProvider>(context).setStatus('Expire');
     } else {
