@@ -40,7 +40,7 @@ class InternalProvider with ChangeNotifier {
       _caseTest = 'mobile5G';
     } else if (value.startsWith('4G')) {
       _caseTest = 'mobile4G';
-    } else if (value.startsWith('eyJhbGciOiJIUzI1NiJ9.eyJtb2JpbGVObyI6IjA5MzcwNjAwND')){
+    } else if (value.startsWith('eyJhbGciOiJIUzI1NiJ9.eyJtb2JpbGVObyI6IjA5MzcwNjAwND')) {
       _caseTest = 'mobile5G';
     }
   }
@@ -68,12 +68,14 @@ class InternalProvider with ChangeNotifier {
       _detect = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      if ((_mode5G?.error ?? true)) {
-        _status = 'Failed';
-      } else {
-        _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
-        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) < 1) {
-          _status = 'Expire';
+      if (mode5G?.devMessage != 'Check5G is incomplete') {
+        if ((_mode5G?.error ?? true)) {
+          _status = 'Failed';
+        } else {
+          _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
+          if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) < 1) {
+            _status = 'Expire';
+          }
         }
       }
       notifyListeners();
