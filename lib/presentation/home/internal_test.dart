@@ -132,56 +132,13 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     }
   }
 
-  Widget errorDialog(String content, String subContent, String onSubmit) {
-    return Dialog(
-      backgroundColor: LNColor.transparent,
-      child: Wrap(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: LNColor.neutralsWhite,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 16,
-                ),
-                Text(content, style: LNStyle.dialogHeader),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(subContent, textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                SizedBox(
-                  height: 16,
-                ),
-                Button(
-                  textStyle: LNStyle.dialogButtonText,
-                  title: onSubmit,
-                  buttonType: ButtonType.primaryBtn,
-                  onPress: _onExit,
-                  borderRadius: 6,
-                  width: 236,
-                  height: 36,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Consumer<InternalProvider>(
       builder: (context, data, _) {
+        _alertDialog(data.status);
         return Scaffold(
           appBar: AppBar(
             title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
@@ -189,7 +146,6 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
             centerTitle: false,
             leading: BackButton(
               color: LNColor.blackColor,
-              // onPressed: _onExit,
               onPressed: _onExit,
             ),
           ),
@@ -249,7 +205,6 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                       SizedBox(
                         height: h * 0.4,
                       ),
-                      _alertDialog(data.status),
                     ],
                   ),
                 ),
@@ -266,6 +221,8 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     String subContent = "Service is not ready. Please try again later";
     String onSubmit = "Exit";
     switch (value) {
+      case 'Failed':
+        break;
       case 'Expire':
         {
           content = "Session timeout";
@@ -274,41 +231,75 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
           break;
         }
       default:
-        return;
+        return SizedBox();
     }
-    return showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(content),
-          content: Text(subContent),
-          actions: [
-            TextButton(
-              onPressed: _onExit(true),
-              child: Text(onSubmit),
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: LNColor.transparent,
+            child: Wrap(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    color: LNColor.neutralsWhite,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(content, style: LNStyle.dialogHeader),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(subContent, textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Button(
+                        textStyle: LNStyle.dialogButtonText,
+                        title: onSubmit,
+                        buttonType: ButtonType.primaryBtn,
+                        onPress: _onExit,
+                        borderRadius: 6,
+                        width: 236,
+                        height: 36,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
+                )
+              ],
             ),
-          ],
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
-  _onExit([bool boo = false]) {
+  _onExit() {
     print('[LIVING_NETWORK] : Clear on exit');
     if (Platform.isIOS) {
       Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).pop();
     } else {
       SystemNavigator.pop();
-      if (boo) {
-        dispose();
-      }
+      dispose();
     }
   }
 
   @override
   void dispose() {
     print('[LIVING_NETWORK] : dispose');
-    Provider.of<InternalProvider>(context).dispose();
+    if (Platform.isAndroid) {
+      Provider.of<InternalProvider>(context).dispose();
+    }
     super.dispose();
   }
 }
