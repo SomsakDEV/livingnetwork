@@ -286,8 +286,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
   _onExit() {
     print('[LIVING_NETWORK] : Clear on exit');
     if (Platform.isIOS) {
-      Navigator.of(context).popUntil((route) => route.isFirst);
-      Navigator.of(context).pop();
+      exit(0);
     } else {
       SystemNavigator.pop();
       dispose();
