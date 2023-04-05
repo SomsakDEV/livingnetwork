@@ -1,6 +1,7 @@
 // ignore_for_file: prefer_const_constructors
 
 import 'dart:async';
+import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -131,157 +132,174 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     }
   }
 
-  Widget errorDialog(String content, String subContent, String onSubmit) {
-    return Dialog(
-      backgroundColor: LNColor.transparent,
-      child: Wrap(
-        children: [
-          Container(
-            padding: EdgeInsets.all(10),
-            decoration: const BoxDecoration(
-              color: LNColor.neutralsWhite,
-              borderRadius: BorderRadius.all(Radius.circular(10)),
-            ),
-            child: Column(
-              children: [
-                SizedBox(
-                  height: 16,
-                ),
-                Text(content, style: LNStyle.dialogHeader),
-                SizedBox(
-                  height: 8,
-                ),
-                Text(subContent, textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
-                SizedBox(
-                  height: 16,
-                ),
-                Button(
-                  textStyle: LNStyle.dialogButtonText,
-                  title: onSubmit,
-                  buttonType: ButtonType.primaryBtn,
-                  onPress: _onExit,
-                  borderRadius: 6,
-                  width: 236,
-                  height: 36,
-                ),
-                SizedBox(
-                  height: 16,
-                ),
-              ],
-            ),
-          )
-        ],
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
     double h = MediaQuery.of(context).size.height;
     double w = MediaQuery.of(context).size.width;
     return Consumer<InternalProvider>(
       builder: (context, data, _) {
-        switch (data.status) {
-          case 'Failed':
-            return errorDialog("Something wrong !!!", "Service is not ready. Please try again later", "Exit");
-          case 'Expire':
-            return errorDialog('Session timeout', 'Please Login again!!!!!', 'OK');
-          // case 'CallBack':
-          //   _initialState(false);
-          //   return Dialog(
-          //     backgroundColor: LNColor.transparent,
-          //     child: SizedBox(),
-          //   );
-          default:
-            return Scaffold(
-              appBar: AppBar(
-                title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
-                backgroundColor: Colors.white,
-                centerTitle: false,
-                leading: BackButton(
-                  color: LNColor.blackColor,
-                  // onPressed: _onExit,
-                  onPressed: () => SystemNavigator.pop(),
-                ),
-              ),
-              body: RefreshIndicator(
-                color: LNColor.primaryColor,
-                onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
-                child: SafeArea(
-                  child: Center(
-                    child: SingleChildScrollView(
-                      child: Column(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          Stack(
-                            alignment: Alignment.bottomCenter,
-                            children: <Widget>[
-                              SizedBox(
-                                height: h * 0.35,
-                                width: w,
-                                child: MapNearByWidget(select1: true, select2: true),
-                              ),
-                              // InkWell(
-                              //   onTap: () {
-                              //     Navigator.pushNamed(context, 'map');
-                              //   },
-                              //   child: SizedBox(
-                              //     height: h * 0.35,
-                              //     width: w,
-                              //   ),
-                              // ),
-                            ],
-                          ),
-                          SizedBox(height: 8),
-                          Container(
-                            alignment: Alignment.topCenter,
-                            decoration: BoxDecoration(
-                              color: Color(0xFFFFFFFF),
-                              borderRadius: BorderRadius.circular(8),
-                              border: Border.all(
-                                width: 3,
-                                color: Color(0xFFF0F0F0),
-                              ),
-                            ),
-                            width: w * 0.93,
-                            child: ModeWidget(),
-                          ),
-                          Text(
-                            'Detected Network Type : ${data.detect}',
-                            style: TextStyle(color: LNColor.failColor, fontSize: 20),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(15.0),
-                            child: Text(
-                              'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
-                              style: TextStyle(color: LNColor.failColor, fontSize: 17),
-                            ),
-                          ),
+        _alertDialog(data.status);
+        return Scaffold(
+          appBar: AppBar(
+            title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
+            backgroundColor: Colors.white,
+            centerTitle: false,
+            leading: BackButton(
+              color: LNColor.blackColor,
+              onPressed: _onExit,
+            ),
+          ),
+          body: RefreshIndicator(
+            color: LNColor.primaryColor,
+            onRefresh: () => Provider.of<InternalProvider>(context, listen: false).internalPrepare(widget.token),
+            child: SafeArea(
+              child: Center(
+                child: SingleChildScrollView(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Stack(
+                        alignment: Alignment.bottomCenter,
+                        children: <Widget>[
                           SizedBox(
-                            height: h * 0.4,
+                            height: h * 0.35,
+                            width: w,
+                            child: MapNearByWidget(select1: true, select2: true),
                           ),
+                          // InkWell(
+                          //   onTap: () {
+                          //     Navigator.pushNamed(context, 'map');
+                          //   },
+                          //   child: SizedBox(
+                          //     height: h * 0.35,
+                          //     width: w,
+                          //   ),
+                          // ),
                         ],
                       ),
-                    ),
+                      SizedBox(height: 8),
+                      Container(
+                        alignment: Alignment.topCenter,
+                        decoration: BoxDecoration(
+                          color: Color(0xFFFFFFFF),
+                          borderRadius: BorderRadius.circular(8),
+                          border: Border.all(
+                            width: 3,
+                            color: Color(0xFFF0F0F0),
+                          ),
+                        ),
+                        width: w * 0.93,
+                        child: ModeWidget(),
+                      ),
+                      Text(
+                        'Detected Network Type : ${data.detect}',
+                        style: TextStyle(color: LNColor.failColor, fontSize: 20),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.all(15.0),
+                        child: Text(
+                          'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
+                          style: TextStyle(color: LNColor.failColor, fontSize: 17),
+                        ),
+                      ),
+                      SizedBox(
+                        height: h * 0.4,
+                      ),
+                    ],
                   ),
                 ),
               ),
-            );
-        }
+            ),
+          ),
+        );
       },
     );
   }
 
+  _alertDialog(String value) {
+    String content = "Something wrong !!!";
+    String subContent = "Service is not ready. Please try again later";
+    String onSubmit = "Exit";
+    switch (value) {
+      case 'Failed':
+        break;
+      case 'Expire':
+        {
+          content = "Session timeout";
+          subContent = "Please Login again!!!!!";
+          onSubmit = "OK";
+          break;
+        }
+      default:
+        return SizedBox();
+    }
+    WidgetsBinding.instance.addPostFrameCallback(
+      (_) => showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+            backgroundColor: LNColor.transparent,
+            child: Wrap(
+              children: [
+                Container(
+                  padding: EdgeInsets.all(10),
+                  decoration: const BoxDecoration(
+                    color: LNColor.neutralsWhite,
+                    borderRadius: BorderRadius.all(Radius.circular(10)),
+                  ),
+                  child: Column(
+                    children: [
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Text(content, style: LNStyle.dialogHeader),
+                      SizedBox(
+                        height: 8,
+                      ),
+                      Text(subContent, textAlign: TextAlign.center, style: LNStyle.dialogTitleText),
+                      SizedBox(
+                        height: 16,
+                      ),
+                      Button(
+                        textStyle: LNStyle.dialogButtonText,
+                        title: onSubmit,
+                        buttonType: ButtonType.primaryBtn,
+                        onPress: _onExit,
+                        borderRadius: 6,
+                        width: 236,
+                        height: 36,
+                      ),
+                      SizedBox(
+                        height: 16,
+                      ),
+                    ],
+                  ),
+                )
+              ],
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   _onExit() {
-    SystemNavigator.pop();
     print('[LIVING_NETWORK] : Clear on exit');
-    dispose();
+    if (Platform.isIOS) {
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      Navigator.of(context).pop();
+    } else {
+      SystemNavigator.pop();
+      dispose();
+    }
   }
 
   @override
   void dispose() {
     print('[LIVING_NETWORK] : dispose');
-    Provider.of<InternalProvider>(context).dispose();
+    if (Platform.isAndroid) {
+      Provider.of<InternalProvider>(context).dispose();
+    }
     super.dispose();
   }
 }
