@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/constance/LNColor.dart';
@@ -63,22 +65,28 @@ class _LivingNetworkState extends State<LivingNetwork> {
           )
         : MultiProvider(
             providers: [
-              // ChangeNotifierProvider(create: (context) => MainProvider(repo: repo, tmp: repo?.getMockupData())),
               ChangeNotifierProvider(create: (context) => InternalProvider()),
-              // ChangeNotifierProvider(create: (context) => LnProvider()),
-              // ChangeNotifierProvider(create: (context) => MapLocationProvider()),
             ],
             child: MaterialApp(
               debugShowCheckedModeBanner: false,
               theme: ThemeData(fontFamily: 'DB Heavent'),
               initialRoute: '/internal_test',
               routes: {
-                // '/': (context) => HomePage(),
-                // '/map': (context) => MapScreen(),
-                // '/map/direction': (context) => MapDirection(),
-                '/internal_test': (context) => Mode5GInternal(token: token),
+                '/': (context) => LivingNetwork(),
+                '/internal_test': (context) => Mode5GInternal(token: token = '5Gtest'),
               },
             ),
           );
+  }
+
+  @override
+  void dispose() {
+    print('[LIVING_NETWORK] : dispose main');
+    if (Platform.isAndroid) {
+      Provider.of<InternalProvider>(context).dispose();
+    } else if (Platform.isIOS) {
+      platform.invokeMethod('close', ['error initial']);
+    }
+    super.dispose();
   }
 }
