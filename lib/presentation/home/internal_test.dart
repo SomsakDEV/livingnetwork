@@ -283,14 +283,18 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     );
   }
 
-  _onExit() {
-    print('[LIVING_NETWORK] : Clear on exit');
+  static const platform = MethodChannel('LIVING_NETWORK');
+
+  _onExit() async {
+    print('[LIVING_NETWORK] : Clear on exit $Platform.isIOS');
     if (Platform.isIOS) {
-      exit(0);
+      Navigator.pop(context);
+      Navigator.of(context).popUntil((route) => route.isFirst);
+      await platform.invokeMethod('close', ['error initial']);
     } else {
       SystemNavigator.pop();
-      dispose();
     }
+    dispose();
   }
 
   @override

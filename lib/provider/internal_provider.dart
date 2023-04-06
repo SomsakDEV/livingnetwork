@@ -68,8 +68,9 @@ class InternalProvider with ChangeNotifier {
       _detect = _caseTest ?? await repo?.getCurrentNetworkStatus();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      if (mode5G?.devMessage != 'Check5G is incomplete') {
-        if ((_mode5G?.error ?? true)) {
+      String code = mode5G?.errorCode ?? '';
+      if (!(code == '1' || code == '2' || code == '3')) {
+        if ((_mode5G?.error ?? true) || (_mode5G?.errorCode == '50000')) {
           _status = 'Failed';
         } else {
           _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
@@ -93,13 +94,17 @@ class InternalProvider with ChangeNotifier {
       repo = repo ?? InitialInternal();
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-      if (!(_mode5G?.error ?? true) && _mode5G?.devMessage != 'Check5G is incomplete') {
-        _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
-        if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) < 1) {
-          _status = 'Expire';
+      String code = mode5G?.errorCode ?? '';
+      if (!(code == '1' || code == '2' || code == '3')) {
+        if ((_mode5G?.error ?? true) || (_mode5G?.errorCode == '50000')) {
+          _status = 'Failed';
+        } else {
+          _sExpire = DateTime.parse(_mode5G?.msisdn?.expireDate as String);
+          if ((_sExpire?.difference(DateTime.now()).inSeconds ?? 0) < 1) {
+            _status = 'Expire';
+          }
         }
       }
-      notifyListeners();
     } catch (e, st) {
       print('[LIVING_NETWORK] $e, $st');
     }
@@ -109,7 +114,13 @@ class InternalProvider with ChangeNotifier {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.addPackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-    (_mode5G?.errorCode == '99999') ? await _reInitial(_token!) : notifyListeners();
+    String code = mode5G?.errorCode ?? '';
+    if (code == '99999') {
+      await _reInitial(_token!);
+    } else if (code == '50000') {
+      _status = 'Failed';
+    }
+    notifyListeners();
     return _mode5G?.error ?? true;
   }
 
@@ -117,7 +128,13 @@ class InternalProvider with ChangeNotifier {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.deletePackage(mode5G, mode, (mode5G?.mode as String), caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-    (_mode5G?.errorCode == '99999') ? await _reInitial(_token!) : notifyListeners();
+    String code = mode5G?.errorCode ?? '';
+    if (code == '99999') {
+      await _reInitial(_token!);
+    } else if (code == '50000') {
+      _status = 'Failed';
+    }
+    notifyListeners();
     return _mode5G?.error ?? true;
   }
 
@@ -125,7 +142,13 @@ class InternalProvider with ChangeNotifier {
     repo = repo ?? InitialInternal();
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
-    (_mode5G?.errorCode == '99999') ? await _reInitial(_token!) : notifyListeners();
+    String code = mode5G?.errorCode ?? '';
+    if (code == '99999') {
+      await _reInitial(_token!);
+    } else if (code == '50000') {
+      _status = 'Failed';
+    }
+    notifyListeners();
     return _mode5G?.error ?? true;
   }
 
