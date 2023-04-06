@@ -58,26 +58,26 @@ class _ModeWarningState extends State<ModeWarning> {
                 ),
                 child: Row(
                   children: [
-                    Padding(
-                      padding: const EdgeInsets.only(left: 16, top: 25.17, bottom: 22.83, right: 16),
-                      child: Image.asset(
-                        ImageUtils.getImagePath('assets/images/information.png'),
-                        height: 20,
-                        width: 20,
-                      ),
-                    ),
                     Expanded(
-                      child: Text(
-                        data.mode5G?.mode == 'max_mode'
-                            ? msgDefault
-                            : data.mode5G?.mode == 'eco_mode'
-                                ? msgNoTimeout
-                                : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
-                                    ? msgAvailableUse
-                                    : msgDefault,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 3,
-                        style: LNStyle.messageDefault,
+                      child: ListTile(
+                        minLeadingWidth: 12,
+                        leading: Image.asset(
+                          ImageUtils.getImagePath('assets/images/information.png'),
+                          width: 20,
+                          height: 20,
+                        ),
+                        title: Text(
+                          data.mode5G?.mode == 'max_mode'
+                              ? msgDefault
+                              : data.mode5G?.mode == 'eco_mode'
+                              ? msgNoTimeout
+                              : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
+                              ? msgAvailableUse
+                              : msgDefault,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          style: LNStyle.messageDefault,
+                        ),
                       ),
                     ),
                   ],
