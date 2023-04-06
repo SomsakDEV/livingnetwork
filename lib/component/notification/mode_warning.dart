@@ -66,7 +66,13 @@ class _ModeWarningState extends State<ModeWarning> {
                     ),
                     Expanded(
                       child: Text(
-                        messageDefault,
+                        data.mode5G?.mode == 'max_mode'
+                            ? msgDefault
+                            : data.mode5G?.mode == 'eco_mode'
+                                ? msgNoTimeout
+                                : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
+                                    ? msgAvailableUse
+                                    : msgDefault,
                         overflow: TextOverflow.ellipsis,
                         maxLines: 3,
                         style: LNStyle.messageDefault,

@@ -2,7 +2,7 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:living_network/component/mode/bottomsheet_decision.dart';
-import 'package:living_network/component/mode/bottomsheet_decision_payment.dart';
+import 'package:living_network/component/mode/bottomsheet_decision_switching.dart';
 import 'package:living_network/component/mode/bottomsheet_text.dart';
 import 'package:living_network/component/mode/button_mode.dart' as button;
 import 'package:living_network/component/notification/mode_warning.dart';
@@ -27,7 +27,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   bool checkTimeMode = true;
 
-  SnackBar snackBarSuccess(BuildContext context, {String message = 'default'}) {
+  SnackBar snackBarMessage(BuildContext context, {String message = 'fail'}) {
     return SnackBar(
       elevation: 6.0,
       backgroundColor: LNColor.blackGrey80percent,
@@ -41,15 +41,9 @@ class _ModeWidgetState extends State<ModeWidget> {
         child: Row(
           children: [
             Padding(padding: const EdgeInsets.only(right: 11.96), child: message == 'fail' ? Image.asset('assets/images/checkmark_no.png') : Image.asset('assets/images/checkmark.png')),
-            message == 'boost_mode'
-                ? Text(boostSuccess)
-                : message == 'game_mode'
-                    ? Text(gameSuccess)
-                    : message == 'eco_mode'
-                        ? Text(ecoSuccess)
-                        : message == 'max_mode'
-                            ? Text(maxSuccess)
-                            : Text(unsuccessful),
+            message == 'success'
+                ? Text(snackBarSuccess)
+                :  Text(snackBarUnsuccessful),
           ],
         ),
       ),
@@ -80,17 +74,15 @@ class _ModeWidgetState extends State<ModeWidget> {
                     Navigator.pop(context);
                     Timer(
                         const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context,
+                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context,
                             message: snap.data as bool
                                 ? 'fail'
-                                : addSocket
-                                    ? mode
-                                    : 'max_mode')));
+                                : 'success')));
                     return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context, message: 'fail')),
                     );
                     return const SizedBox();
                   } else {
@@ -124,13 +116,13 @@ class _ModeWidgetState extends State<ModeWidget> {
                     Navigator.pop(context);
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: snap.data as bool ? 'fail' : data.mode5G?.lastMode ?? 'fail')),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context, message: snap.data as bool ? 'fail' : data.mode5G?.lastMode ?? 'fail')),
                     );
                     return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarSuccess(context, message: 'fail')),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context, message: 'fail')),
                     );
                     return const SizedBox();
                   } else {
@@ -144,15 +136,15 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> switchBoostMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> switchGameToBoostMode(InternalProvider data, BuildContext context, bool isHighValue) async {
     showModalBottomSheet(
       isDismissible: false,
       backgroundColor: Colors.transparent,
       context: context,
       builder: (BuildContext context) {
         return BottomSheetDecisionCardDialogMode(
-          title: switchBoostTitle,
-          desc: switchDesc,
+          title: switchGameExitTitle,
+          desc: switchGameExitDesc,
           textSubmitBtn: textSubmitBtn,
           textCancelBtn: textCancelBtn,
           exitMode: true,
@@ -165,9 +157,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                 isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
-                  return BottomSheetDecisionPaymentCardDialogMode(
-                    title: titlePaymentL,
-                    textSubmitBtn: textSubmitBtn,
+                  return BottomSheetDecisionSwitchingMode(
+                    title: switchBoost,
+                    textSubmitBtn: textSubmitBoost,
                     textCancelBtn: textCancelBtn,
                     isHighValue: isHighValue,
                     onPressedSubmit: (isClicked) {
@@ -197,9 +189,9 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionPaymentCardDialogMode(
-            title: titlePaymentL,
-            textSubmitBtn: textSubmitBtn,
+          return BottomSheetDecisionSwitchingMode(
+            title: switchBoost,
+            textSubmitBtn: textSubmitBoost,
             textCancelBtn: textCancelBtn,
             isHighValue: isHighValue,
             onPressedSubmit: (isClicked) {
@@ -220,8 +212,8 @@ class _ModeWidgetState extends State<ModeWidget> {
         context: context,
         builder: (BuildContext context) {
           return BottomSheetDecisionCardDialogMode(
-            title: exitModeTitle,
-            desc: exitModeDesc,
+            title: switchBoostExitTitle,
+            desc: switchBoostExitDesc,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             exitMode: true,
@@ -239,15 +231,15 @@ class _ModeWidgetState extends State<ModeWidget> {
     }
   }
 
-  Future<void> switchGameMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> switchBoostToGameMode(InternalProvider data, BuildContext context, bool isHighValue) async {
     showModalBottomSheet(
       isDismissible: false,
       backgroundColor: Colors.transparent,
       context: context,
       builder: (BuildContext context) {
         return BottomSheetDecisionCardDialogMode(
-          title: switchGameTitle,
-          desc: switchDesc,
+          title: switchBoostExitTitle,
+          desc: switchBoostExitDesc,
           textSubmitBtn: textSubmitBtn,
           textCancelBtn: textCancelBtn,
           exitMode: true,
@@ -260,9 +252,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                 isScrollControlled: true,
                 context: context,
                 builder: (BuildContext context) {
-                  return BottomSheetDecisionPaymentCardDialogMode(
-                    title: titlePaymentG,
-                    textSubmitBtn: textSubmitBtn,
+                  return BottomSheetDecisionSwitchingMode(
+                    title: switchGame,
+                    textSubmitBtn: textSubmitGame,
                     textCancelBtn: textCancelBtn,
                     isHighValue: isHighValue,
                     onPressedSubmit: (isClicked) {
@@ -292,9 +284,9 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionPaymentCardDialogMode(
-            title: titlePaymentG,
-            textSubmitBtn: textSubmitBtn,
+          return BottomSheetDecisionSwitchingMode(
+            title: switchGame,
+            textSubmitBtn: textSubmitGame,
             textCancelBtn: textCancelBtn,
             isHighValue: isHighValue,
             onPressedSubmit: (isClicked) {
@@ -315,8 +307,8 @@ class _ModeWidgetState extends State<ModeWidget> {
         context: context,
         builder: (BuildContext context) {
           return BottomSheetDecisionCardDialogMode(
-            title: exitModeTitle,
-            desc: exitModeDesc,
+            title: switchGameExitTitle,
+            desc: switchGameExitDesc,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             exitMode: true,
@@ -336,7 +328,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseEcoMode(InternalProvider data, BuildContext context) async {
     String? mode = data.mode5G?.mode;
-    if (mode == 'max_mode') {
+    if (mode != 'eco_mode') {
       showModalBottomSheet(
           isDismissible: false,
           backgroundColor: Colors.transparent,
@@ -344,9 +336,8 @@ class _ModeWidgetState extends State<ModeWidget> {
           context: context,
           builder: (BuildContext context) {
             return BottomSheetDecisionCardDialogMode(
-              title: titleEco,
-              desc: descEco,
-              textSubmitBtn: textSubmitBtn,
+              title: switchEco,
+              textSubmitBtn: textSubmitEco,
               textCancelBtn: textCancelBtn,
               exitMode: false,
               onPressedSubmit: (isClicked) async {
@@ -359,47 +350,6 @@ class _ModeWidgetState extends State<ModeWidget> {
               onPressedCancel: (isClicked) => Navigator.pop(context),
             );
           });
-    } else if (mode != 'eco_mode') {
-      showModalBottomSheet(
-        isDismissible: false,
-        backgroundColor: Colors.transparent,
-        context: context,
-        builder: (BuildContext context) {
-          return BottomSheetDecisionCardDialogMode(
-            title: switchEcoTitle,
-            desc: switchDesc,
-            textSubmitBtn: textSubmitBtn,
-            textCancelBtn: textCancelBtn,
-            exitMode: mode == 'boost_mode' || mode == 'game_mode',
-            onPressedSubmit: (isClicked) async {
-              Navigator.pop(context);
-              showModalBottomSheet(
-                  isDismissible: false,
-                  backgroundColor: Colors.transparent,
-                  isScrollControlled: true,
-                  context: context,
-                  builder: (BuildContext context) {
-                    return BottomSheetDecisionCardDialogMode(
-                      title: titleEco,
-                      desc: descEco,
-                      textSubmitBtn: textSubmitBtn,
-                      textCancelBtn: textCancelBtn,
-                      exitMode: false,
-                      onPressedSubmit: (isClicked) async {
-                        Navigator.pop(context);
-                        setState(() {
-                          checkTimeMode = false;
-                        });
-                        wUpdate(data, true, 'eco_mode');
-                      },
-                      onPressedCancel: (isClicked) => Navigator.pop(context),
-                    );
-                  });
-            },
-            onPressedCancel: (isClicked) => Navigator.pop(context),
-          );
-        },
-      );
     } else {
       showModalBottomSheet(
         isDismissible: false,
@@ -407,8 +357,7 @@ class _ModeWidgetState extends State<ModeWidget> {
         context: context,
         builder: (BuildContext context) {
           return BottomSheetDecisionCardDialogMode(
-            title: exitModeTitle,
-            desc: exitEcoMode,
+            title: switchEcoExit,
             textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
             exitMode: true,
@@ -507,7 +456,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                         String mode = data.mode5G?.mode ?? 'max_mode';
                         if (mode == 'game_mode') {
-                          switchBoostMode(data, context, highValue);
+                          switchGameToBoostMode(data, context, highValue);
                         } else if (mode == 'eco_mode' || mode == 'max_mode' || mode == 'boost_mode') {
                           chooseBoostMode(data, context, highValue);
                         }
@@ -545,7 +494,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                         //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                         String mode = data.mode5G?.mode ?? 'max_mode';
                         if (mode == 'boost_mode') {
-                          switchGameMode(data, context, highValue);
+                          switchBoostToGameMode(data, context, highValue);
                         } else if (mode == 'eco_mode' || mode == 'max_mode' || mode == 'game_mode') {
                           chooseGameMode(data, context, highValue);
                         }
