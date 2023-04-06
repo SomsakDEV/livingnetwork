@@ -49,11 +49,13 @@ class _ModeWarningState extends State<ModeWarning> {
                   ],
                 ),
               )
-            : Card(
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(8.0),
+            : Container(
+                width: MediaQuery.of(context).size.width * 0.85,
+                height: 52,
+                decoration: const BoxDecoration(
+                  color: LNColor.neutralsLightestGrey,
+                  borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
-                color: LNColor.neutralsLightestGrey,
                 child: Row(
                   children: [
                     Padding(
