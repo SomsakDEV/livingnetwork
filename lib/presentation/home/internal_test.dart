@@ -141,7 +141,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         _alertDialog(data.status);
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
+            title: const Text('AIS Living Network', style: LNStyle.modeWidgetTitle),
             backgroundColor: Colors.white,
             centerTitle: false,
             leading: BackButton(
@@ -283,21 +283,26 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     );
   }
 
-  _onExit() {
-    print('[LIVING_NETWORK] : Clear on exit');
+  static const platform = MethodChannel('LIVING_NETWORK');
+
+  _onExit() async {
+    print('[LIVING_NETWORK] : Clear on exit $Platform.isIOS');
     if (Platform.isIOS) {
+      Navigator.pop(context);
       Navigator.of(context).popUntil((route) => route.isFirst);
+      await platform.invokeMethod('close', ['error initial']);
     } else {
       SystemNavigator.pop();
     }
+    dispose();
   }
 
-// @override
-// void dispose() {
-//   print('[LIVING_NETWORK] : dispose');
-//   if (Platform.isAndroid) {
-//     Provider.of<InternalProvider>(context).dispose();
-//   }
-//   super.dispose();
-// }
+  @override
+  void dispose() {
+    print('[LIVING_NETWORK] : dispose');
+    if (Platform.isAndroid) {
+      Provider.of<InternalProvider>(context).dispose();
+    }
+    super.dispose();
+  }
 }

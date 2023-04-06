@@ -5,7 +5,7 @@ import 'package:living_network/component/mode/button.dart';
 
 class BottomSheetDecisionCardDialogMode extends StatefulWidget {
   final String title;
-  final String desc;
+  final String? desc;
   final String? imagePath;
   final bool? isDisable;
   final bool? exitMode;
@@ -18,7 +18,7 @@ class BottomSheetDecisionCardDialogMode extends StatefulWidget {
   const BottomSheetDecisionCardDialogMode(
       {Key? key,
       required this.title,
-      required this.desc,
+      this.desc,
       required this.textSubmitBtn,
       required this.textCancelBtn,
       required this.onPressedSubmit,
@@ -92,7 +92,7 @@ class _BottomSheetDecisionCardDialogModeState
                         top: 8, bottom: 40, left: 10, right: 10),
                     child: Text(
                       textAlign: TextAlign.center,
-                      widget.desc,
+                      widget.desc?? 'description',
                       maxLines: 2,
                       overflow: TextOverflow.ellipsis,
                       style: LNStyle.buttonSheetDesc,

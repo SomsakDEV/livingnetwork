@@ -1,5 +1,3 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:living_network/constance/LNColor.dart';
@@ -72,21 +70,9 @@ class _LivingNetworkState extends State<LivingNetwork> {
               theme: ThemeData(fontFamily: 'DB Heavent'),
               initialRoute: '/internal_test',
               routes: {
-                '/': (context) => LivingNetwork(),
-                '/internal_test': (context) => Mode5GInternal(token: token = '5Gtest'),
+                '/internal_test': (context) => Mode5GInternal(token: token),
               },
             ),
           );
-  }
-
-  @override
-  void dispose() {
-    print('[LIVING_NETWORK] : dispose main');
-    if (Platform.isAndroid) {
-      Provider.of<InternalProvider>(context).dispose();
-    } else if (Platform.isIOS) {
-      platform.invokeMethod('close', ['error initial']);
-    }
-    super.dispose();
   }
 }

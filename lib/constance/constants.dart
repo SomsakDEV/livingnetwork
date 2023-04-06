@@ -1,9 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:living_network/utility/image_utils.dart';
 
-List title = ['Boost mode', 'Eco mode', 'Game mode'];
-List subTitle = ['5G Max Mode ให้คุณเพลิดเพลินไปกับความเร็วแรงของ อินเทอร์เน็ตเต็มแม็กซ์', '5G Eco Mode ให้คุณประหยัดแบตเตอรี่ แต่ยังสนุกไปกับความ เร็ว แรง ของอินเทอร์เน็ต 5G', '5G Game Mode สนุกเต็มแม็กซ์ ไม่มีกระตุกให้อารมณ์เสีย ไปกับความเร็วแรงของ 5G ที่เหมือนกับอินเทอร์เน็ตบรอดแบนด์'];
+List title = ['ECO Mode', 'BOOST Mode', 'GAME Mode'];
+List subTitle = [
+  'Help you to save your internet quota. This Mode is no time out. To use your internet speed package, please turn off ECO Mode.',
+  'Help you to download huge file such as Movie faster. To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.',
+  'Help your internet quality stability for online gaming. To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.',
+];
 List<Image> image = [
+  Image.asset(
+    ImageUtils.getImagePath('assets/images/mode_eco.png'),
+    width: 40,
+    height: 40,
+    alignment: Alignment.topCenter,
+  ),
   Image.asset(
     ImageUtils.getImagePath('assets/images/mode_power.png'),
     width: 40,
@@ -16,16 +26,16 @@ List<Image> image = [
     height: 40,
     alignment: Alignment.topCenter,
   ),
-  Image.asset(
-    ImageUtils.getImagePath('assets/images/mode_eco.png'),
-    width: 40,
-    height: 40,
-    alignment: Alignment.topCenter,
-  ),
 ];
 
 List title_preformance = ['Browsing / Social', 'Live', 'Video streaming', 'Music streaming', 'Game'];
-List subTitle_preformance = ['Detail : At vero eos et accusamus et iusto odio\ne.g. LINE, Facebook, Twitter, Google', 'Detail : At vero eos et accusamus et iusto odio\ne.g. Tiktok, Facebook Live, Youtube Live', 'Detail : At vero eos et accusamus et iusto odio\ne.g. Youtube, Netflix, Disney Hostar, HBO Go', 'Detail : At vero eos et accusamus et iusto odio\ne.g. Joox, Spotify, Youtube Music, Apple Music, Plern', 'Detail : At vero eos et accusamus et iusto odio\ne.g. ROV, Pub G, Among Us, Candy Crush'];
+List subTitle_preformance = [
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. LINE, Facebook, Twitter, Google',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. Tiktok, Facebook Live, Youtube Live',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. Youtube, Netflix, Disney Hostar, HBO Go',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. Joox, Spotify, Youtube Music, Apple Music, Plern',
+  'Detail : At vero eos et accusamus et iusto odio\ne.g. ROV, Pub G, Among Us, Candy Crush'
+];
 List<Image> image_preformance = [
   Image.asset(
     ImageUtils.getImagePath('assets/images/performance_icon_1.png'),
@@ -61,42 +71,67 @@ List<Image> image_preformance = [
 
 //5G Mode warning
 Map warningRepo = <String, String>{
-  '12': 'เปลี่ยนโหมดไม่สำเร็จ เนื่องจาก Session Timeout กรุณาลองใหม่อีกครั้ง',
-  '13': 'ขณะนี้คุณลูกค้าใช้งาน 4G / wifi อยู่ กรุณาลองใหม่อีกครั้ง',
-  '14': 'ขณะนี้แพ็คเกจของลูกค้าไม่สามารถใช้งาน 5G ได้ กรุณาลองใหม่อีกครั้ง',
-  '15': 'ขณะนี้คุณได้ทำการปรับโหมดเกิน 10 ครั้ง ซึ่งเกินลิมิตของวันนี้ คุณจะกลับมาปรับโหมดได้อีกครั้งหลังเที่ยงคืน',
-  '16': 'ขณะนี้มีผู้ใช้งานเต็มในโหมดนี้แล้ว ขออภัยในความไม่ สะดวก (ท่านจะกลับมาใช้งานโหมดนี้ได้ในอีกxxxนาที)',
-  '99999': 'ระบบขัดข้อง จะกลับมาใช้งานได้ใหม่เร็วๆนี',
+  '1': 'Mode will be available when using 5G Device, Package, and Coverage.',
+  '2': 'Your current package is not support Mode.',
+  '3': 'Your package is quota met or under FUP. To use Mode, please purchase your 5G MAX On Top Package.',
+  '4': 'Your switching Mode is quota met. Please try again tomorrow.',
+  '5': 'You cannot switch Mode. The quota for using Mode has been reached. Please try again later.',
+
+  '6': 'You cannot switch Mode. The quota for using Mode has been reached. Please try again later.',
+  '7': 'Your internet package is quota met or in FUP status. Please purchase 5G MAX Speed On Top package.',
+  '8': 'Your request cannot be proceeded. You shall be use internet speed in the current Mode.',
+  '9': 'Your request cannot be proceeded. Your internet speed will turn to your internet speed package.',
+
   '500': 'System Error',
+  '50000': 'Another System Error',
 };
 
 //5G Mode (default)
-String messageDefault = 'Game Mode และ Boost Mode จะใช้งานได้ ประสิทธิภาพสูงสุดขึ้นอยู่ กับเสาสัญญาณที่ท่านอยู่ ณ บริเวณนั้นๆ';
+String msgDefault = 'Your Current Speed depend on your package, package status, and current network status.';
+String msgAvailableUse = 'To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.'; //game or boost mode
+String msgNoTimeout = 'This Mode is no time out. To use your internet speed package, please turn off ECO Mode.'; //eco mode
+String msgInternetPack = 'Your internet speed will turn to your internet speed package.'; //max mode
 
+String textSubmitBtn = 'Confirm';
+String textCancelBtn = 'Close';
+String textSubmitEco = 'Switch to ECO Mode';
+String textSubmitBoost = 'Switch to BOOST Mode';
+String textSubmitGame = 'Switch to GAME Mode';
+
+//Mode Widget
+String modeWidgetTitle = 'Mode';
+String powerTitle = 'BOOST Mode';
+String powerDesc = 'Optimized for Speed';
+String gameTitle = 'GAME Mode';
+String gameDesc = 'Optimized for Stability';
+String ecoTitle = 'ECO Mode';
+String ecoDesc = 'Optimized for Data Saving';
+
+//SnackBar
+String snackBarSuccess = 'Switching Mode Success';
+String snackBarUnsuccessful = 'Switching Mode Unsuccess';
+
+//Switching Mode
+String switchBoost = 'Are you switching to BOOST Mode?';
+String switchGame = 'Are you switching to GAME Mode?';
+String switchEco = 'Are you switching to ECO Mode?';
+
+String switchBoostExitTitle = 'Will you stop using BOOST Mode?';
+String switchBoostExitDesc = 'Your BOOST Mode time quota will be stopped immediately.';
+String switchGameExitTitle = 'Will you stop using GAME Mode?';
+String switchGameExitDesc = 'Your GAME Mode time quota will be stopped immediately.';
+String switchEcoExit = 'Are you turning off ECO Mode?';
+
+
+
+
+//------- don't use
 //Notifications
 String notificationTitleMode5G = 'โหมดทดลองใช้ 5G กำลังจะหมด! 🔥';
 String notificationSubTitleMode5G = 'สนใจเปลี่ยนแพ็กเกจ 5G Max speed หรือดูแพ็กเกจอื่นๆ\nเพิ่มเติมเพื่อความแรงที่มากกว่า คลิก!';
 String notificationTitleLiveModeExpired = 'เวลาในการใช้ Live Mode ของคุณกำลังจะหมด!';
 String notificationSubTitleLiveModeExpired = 'การเชื่อมต่อ 5G ของคุณจะกลับเข้าสู่  Max Mode โดย\nอัตโนมัติ';
-
-String textSubmitBtn = 'ยืนยัน';
-String textCancelBtn = 'Close';
-String textSubmitEco = 'Switch to Eco Mode';
-
-//Mode Widget
-String modeWidgetTitle = 'Mode';
-String powerTitle = 'Power / Boost Mode';
-String powerDesc = 'Fast Downloading';
-String gameTitle = 'Game Mode';
-String gameDesc = 'Latency Stability';
-String ecoTitle = 'Eco Mode';
-String ecoDesc = 'Data Battery';
-
-String ecoSuccess = 'Switched to Eco mode!';
-String boostSuccess = 'Switched to Power / Boost mode!';
-String gameSuccess = 'Switched to Game mode!';
-String maxSuccess = 'Switched to Max mode!';
-String unsuccessful = 'Unsuccessful Switching !';
+//-------
 
 //switch mode payment
 String btmSheetTitlePower = 'Exit From Power/Boost mode?';
@@ -127,7 +162,8 @@ String termsConditionsTitle = 'Terms & Conditions';
 var termsConditionsDesc = {
   "1": "The exceas unago ratea are 1.50 Baht minute for voice and video calis to anry retwork (Secande are rounded up to the next minutel, 2.50 Baht/Sh/S and 4 Baht/MMS. AISsupor WIFi: The Wifi sorvice systom will gend a Wifi userrame and password autoraticaly via SMS. For more information, please go to www aie.co.towiti Exiating custorers can aubacribe to this package with an initial subscription fee of 30 Baht per subscription. limited to 3 subecriotion per month.",
   "2": "The allowance and servico ratea aro for domestic use anly. Commercial utization and other appications tnat may affect the service of other clentr are prohibited. The ucage allowance ia valid for each biling cycle. The remaining alowance carinot be accurulated for use in the next biling cycles. The unage allawance wil be torminated immediately whan the pack is changed or tranaferred. Al senvice rotes sre 79 VAT exclucive.",
-  "3": "This package is valid for 12 bill cyctes cansacutivaly Free unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial \"889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
+  "3":
+      "This package is valid for 12 bill cyctes cansacutivaly Free unlimited Movies and TV for 3 month - The Promotion period is 30 days after activatod package. - Promiar FULL HD : dial \"889*3# to roceive promofion, after that will be charged 290 Bant month on a normal basis. - AIS Play: ready to enioy Immociatoly - Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation. - Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
   "4": "AIS Play: ready to enioy Immociatoly",
   "5": "Froa unlimitod 4G Intomnet for AIS PLAY and Premier FULL HD apolications will be sutomaticaly added after actrated this package witth ShS confirmation.",
   "6": "Thia promotion ie apply to subocribors who receive special offer from each content application for first time onty and cannot be uced in canjunction with othe cromotions. if sulbocribers cancel/change main package, thia promotion will be ciacentinued immediately.Tne Company rezervea the right to change tha torme and canaitiona without prior notice.",
