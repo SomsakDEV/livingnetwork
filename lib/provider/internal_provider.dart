@@ -117,6 +117,12 @@ class InternalProvider with ChangeNotifier {
     String code = mode5G?.errorCode ?? '';
     if (code == '99999') {
       await _reInitial(_token!);
+      if(_status == 'Passed') {
+        _mode5G?.error = mode != _mode5G?.mode;
+        if (_mode5G?.error ?? false) {
+          _mode5G?.errorCode = '9';
+        }
+      }
     } else if (code == '50000') {
       _status = 'Failed';
     }
