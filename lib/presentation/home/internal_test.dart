@@ -141,7 +141,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
         _alertDialog(data.status);
         return Scaffold(
           appBar: AppBar(
-            title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
+            title: const Text('AIS Living Network', style: LNStyle.modeWidgetTitle),
             backgroundColor: Colors.white,
             centerTitle: false,
             leading: BackButton(
