@@ -83,6 +83,7 @@ Map warningRepo = <String, String>{
   '9': 'Your request cannot be proceeded. Your internet speed will turn to your internet speed package.',
 
   '500': 'System Error',
+  '50000': 'Another System Error',
 };
 
 //5G Mode (default)
