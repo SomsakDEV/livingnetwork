@@ -4,7 +4,7 @@ import 'package:living_network/constance/LNStyle.dart';
 import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/constance/constants.dart';
 
-class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
+class BottomSheetDecisionSwitchingMode extends StatefulWidget {
   final String title;
   final String? imagePath;
   final String textSubmitBtn;
@@ -14,13 +14,13 @@ class BottomSheetDecisionPaymentCardDialogMode extends StatefulWidget {
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetDecisionPaymentCardDialogMode({Key? key, required this.title, required this.textSubmitBtn, required this.textCancelBtn, required this.onPressedSubmit, required this.onPressedCancel, this.isHighValue, this.imagePath, this.hasBorderCancelBtn}) : super(key: key);
+  const BottomSheetDecisionSwitchingMode({Key? key, required this.title, required this.textSubmitBtn, required this.textCancelBtn, required this.onPressedSubmit, required this.onPressedCancel, this.isHighValue, this.imagePath, this.hasBorderCancelBtn}) : super(key: key);
 
   @override
-  State<BottomSheetDecisionPaymentCardDialogMode> createState() => _BottomSheetDecisionPaymentCardDialogModeState();
+  State<BottomSheetDecisionSwitchingMode> createState() => _BottomSheetDecisionSwitchingModeState();
 }
 
-class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDecisionPaymentCardDialogMode> {
+class _BottomSheetDecisionSwitchingModeState extends State<BottomSheetDecisionSwitchingMode> {
   Widget? termConditionDesc() {
     Map<String, dynamic> desc = termsConditionsDesc;
     ScrollController scrollController = ScrollController();
@@ -107,90 +107,90 @@ class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDe
                       ),
                     ),
                   ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.only(top: 8, bottom: 8),
-                      child: Text(
-                        textAlign: TextAlign.center,
-                        descPayment,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
-                        style: LNStyle.buttonSheetDescPayment,
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(bottom: 8),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          (widget.isHighValue?? false ? priceHigh : priceNotHigh),
-                          style: LNStyle.buttonSheetPriceTime,
-                        ),
-                        Text(
-                          separate,
-                          style: LNStyle.buttonSheetSeparate,
-                        ),
-                        Text(
-                          time,
-                          style: LNStyle.buttonSheetPriceTime,
-                        )
-                      ],
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Padding(
-                      padding: const EdgeInsets.only(bottom: 16),
-                      child: Container(
-                        color: LNColor.whiteSpeedCompare,
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 4, right: 4),
-                          child: Text(
-                            vat,
-                            style: LNStyle.buttonSheetVat,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(top: 16),
-                    child: Container(
-                      color: LNColor.whiteSpeedCompare,
-                      child: SizedBox(
-                        height: 4,
-                        width: MediaQuery.of(context).size.width * 0.90,
-                      ),
-                    ),
-                  ),
-                  Align(
-                    alignment: Alignment.center,
-                    child: Center(
-                      child: Container(
-                        padding: const EdgeInsets.only(top: 16, bottom: 16, left: 15, right: 5),
-                        width: MediaQuery.of(context).size.width * 0.90,
-                        height: 140,
-                        child: Scrollbar(
-                          thickness: 5,
-                          thumbVisibility: true,
-                          trackVisibility: true,
-                          interactive: true,
-                          scrollbarOrientation: ScrollbarOrientation.right,
-                          child: SingleChildScrollView(
-                            scrollDirection: Axis.vertical,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  termsConditionsTitle,
-                                  style: LNStyle.buttonSheetTermTitle,
-                                ),
-                                Container(child: termConditionDesc()),
-                              ],
-                            ),
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(top: 8, bottom: 8),
+                  //     child: Text(
+                  //       textAlign: TextAlign.center,
+                  //       descPayment,
+                  //       maxLines: 2,
+                  //       overflow: TextOverflow.ellipsis,
+                  //       style: LNStyle.buttonSheetDescPayment,
+                  //     ),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(bottom: 8),
+                  //   child: Row(
+                  //     mainAxisAlignment: MainAxisAlignment.center,
+                  //     children: [
+                  //       Text(
+                  //         (widget.isHighValue?? false ? priceHigh : priceNotHigh),
+                  //         style: LNStyle.buttonSheetPriceTime,
+                  //       ),
+                  //       Text(
+                  //         separate,
+                  //         style: LNStyle.buttonSheetSeparate,
+                  //       ),
+                  //       Text(
+                  //         time,
+                  //         style: LNStyle.buttonSheetPriceTime,
+                  //       )
+                  //     ],
+                  //   ),
+                  // ),
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: Padding(
+                  //     padding: const EdgeInsets.only(bottom: 16),
+                  //     child: Container(
+                  //       color: LNColor.whiteSpeedCompare,
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.only(left: 4, right: 4),
+                  //         child: Text(
+                  //           vat,
+                  //           style: LNStyle.buttonSheetVat,
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(top: 16),
+                  //   child: Container(
+                  //     color: LNColor.whiteSpeedCompare,
+                  //     child: SizedBox(
+                  //       height: 4,
+                  //       width: MediaQuery.of(context).size.width * 0.90,
+                  //     ),
+                  //   ),
+                  // ),
+                  // Align(
+                  //   alignment: Alignment.center,
+                  //   child: Center(
+                  //     child: Container(
+                  //       padding: const EdgeInsets.only(top: 16, bottom: 16, left: 15, right: 5),
+                  //       width: MediaQuery.of(context).size.width * 0.90,
+                  //       height: 140,
+                  //       child: Scrollbar(
+                  //         thickness: 5,
+                  //         thumbVisibility: true,
+                  //         trackVisibility: true,
+                  //         interactive: true,
+                  //         scrollbarOrientation: ScrollbarOrientation.right,
+                  //         child: SingleChildScrollView(
+                  //           scrollDirection: Axis.vertical,
+                  //           child: Column(
+                  //             crossAxisAlignment: CrossAxisAlignment.start,
+                  //             children: [
+                  //               Text(
+                  //                 termsConditionsTitle,
+                  //                 style: LNStyle.buttonSheetTermTitle,
+                  //               ),
+                  //               Container(child: termConditionDesc()),
+                  //             ],
+                  //           ),
 
                             // Column(
                             //   crossAxisAlignment: CrossAxisAlignment.start,
@@ -206,11 +206,11 @@ class _BottomSheetDecisionPaymentCardDialogModeState extends State<BottomSheetDe
                             //   // overflow: TextOverflow.visible,
                             // ),
                             // ],
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ),
+                  // ),
                   // ),
                   Button(
                     title: widget.textSubmitBtn,

@@ -195,7 +195,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
           default:
             return Scaffold(
               appBar: AppBar(
-                title: const Text('Living Network', style: LNStyle.modeWidgetTitle),
+                title: const Text('AIS Living Network', style: LNStyle.modeWidgetTitle),
                 backgroundColor: Colors.white,
                 centerTitle: false,
                 leading: BackButton(
