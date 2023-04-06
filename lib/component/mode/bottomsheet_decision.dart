@@ -15,27 +15,13 @@ class BottomSheetDecisionCardDialogMode extends StatefulWidget {
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetDecisionCardDialogMode(
-      {Key? key,
-      required this.title,
-      this.desc,
-      required this.textSubmitBtn,
-      required this.textCancelBtn,
-      required this.onPressedSubmit,
-      required this.onPressedCancel,
-      this.imagePath,
-      this.isDisable,
-      this.exitMode,
-      this.hasBorderCancelBtn})
-      : super(key: key);
+  const BottomSheetDecisionCardDialogMode({Key? key, required this.title, this.desc, required this.textSubmitBtn, required this.textCancelBtn, required this.onPressedSubmit, required this.onPressedCancel, this.imagePath, this.isDisable, this.exitMode, this.hasBorderCancelBtn}) : super(key: key);
 
   @override
-  State<BottomSheetDecisionCardDialogMode> createState() =>
-      _BottomSheetDecisionCardDialogModeState();
+  State<BottomSheetDecisionCardDialogMode> createState() => _BottomSheetDecisionCardDialogModeState();
 }
 
-class _BottomSheetDecisionCardDialogModeState
-    extends State<BottomSheetDecisionCardDialogMode> {
+class _BottomSheetDecisionCardDialogModeState extends State<BottomSheetDecisionCardDialogMode> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -72,37 +58,34 @@ class _BottomSheetDecisionCardDialogModeState
                             padding: const EdgeInsets.all(16),
                             child: Text(
                               widget.textCancelBtn,
-                              style: widget.exitMode ?? false
-                                  ? LNStyle.buttonSheetTextButtonCloseExit
-                                  : LNStyle.buttonSheetTextButtonCloseAdd,
+                              style: widget.exitMode ?? false ? LNStyle.buttonSheetTextButtonCloseExit : LNStyle.buttonSheetTextButtonCloseAdd,
                             ),
                           ),
                         ),
                       ],
                     ),
                   ),
-                  Text(
-                    widget.title,
-                    style: widget.exitMode ?? false
-                        ? LNStyle.buttonSheetTitleExit
-                        : LNStyle.buttonSheetTitleAdd,
-                  ),
                   Padding(
-                    padding: const EdgeInsets.only(
-                        top: 8, bottom: 40, left: 10, right: 10),
+                    padding: const EdgeInsets.only(top: 10, bottom: 10),
                     child: Text(
-                      textAlign: TextAlign.center,
-                      widget.desc?? 'description',
-                      maxLines: 2,
-                      overflow: TextOverflow.ellipsis,
-                      style: LNStyle.buttonSheetDesc,
+                      widget.title,
+                      style: widget.exitMode ?? false ? LNStyle.buttonSheetTitleExit : LNStyle.buttonSheetTitleAdd,
                     ),
                   ),
+                  // Padding(
+                  //   padding: const EdgeInsets.only(
+                  //       top: 8, bottom: 40, left: 10, right: 10),
+                  //   child: Text(
+                  //     textAlign: TextAlign.center,
+                  //     widget.desc?? '',
+                  //     maxLines: 2,
+                  //     overflow: TextOverflow.ellipsis,
+                  //     style: LNStyle.buttonSheetDesc,
+                  //   ),
+                  // ),
                   Button(
                     title: widget.textSubmitBtn,
-                    backgroundColor: widget.exitMode ?? false
-                        ? LNColor.speedCompare1
-                        : LNColor.kellyGreen500,
+                    backgroundColor: widget.exitMode ?? false ? LNColor.speedCompare1 : LNColor.kellyGreen500,
                     buttonType: ButtonType.primaryBtn,
                     onPress: () => widget.onPressedSubmit(true),
                     isDisable: widget.isDisable ?? false,

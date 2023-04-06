@@ -116,7 +116,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     Navigator.pop(context);
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context, message: snap.data as bool ? 'fail' : data.mode5G?.lastMode ?? 'fail')),
+                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context, message: 'success')),
                     );
                     return const SizedBox();
                   } else if (snap.hasError) {
