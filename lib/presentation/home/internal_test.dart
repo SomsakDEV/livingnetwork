@@ -5,7 +5,6 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:living_network/component/map/map_location_widget.dart';
 import 'package:living_network/component/mode/button.dart';
 import 'package:living_network/component/mode/mode_widget.dart';
 import 'package:living_network/constance/LNColor.dart';
@@ -162,9 +161,9 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         alignment: Alignment.bottomCenter,
                         children: <Widget>[
                           SizedBox(
-                            height: h * 0.35,
+                            height: h * 0.20 /*0.35*/,
                             width: w,
-                            child: MapNearByWidget(select1: true, select2: true),
+                            // child: MapNearByWidget(select1: true, select2: true),
                           ),
                           // InkWell(
                           //   onTap: () {
@@ -203,7 +202,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
                         ),
                       ),
                       SizedBox(
-                        height: h * 0.4,
+                        height: h * 0.55 /* 0.4*/,
                       ),
                     ],
                   ),
@@ -218,7 +217,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
 
   _alertDialog(String value) {
     String content = "Something wrong !!!";
-    String subContent = "Service is not ready. Please try again later";
+    String subContent = "Sorry. Service is not available right now. Please try again.";
     String onSubmit = "Exit";
     switch (value) {
       case 'Failed':
