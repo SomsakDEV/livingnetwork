@@ -14,7 +14,17 @@ class BottomSheetDecisionSwitchingMode extends StatefulWidget {
   final Function(bool) onPressedSubmit;
   final Function(bool) onPressedCancel;
 
-  const BottomSheetDecisionSwitchingMode({Key? key, required this.title, required this.textSubmitBtn, required this.textCancelBtn, required this.onPressedSubmit, required this.onPressedCancel, this.isHighValue, this.imagePath, this.hasBorderCancelBtn}) : super(key: key);
+  const BottomSheetDecisionSwitchingMode({
+    Key? key,
+    required this.title,
+    required this.textSubmitBtn,
+    required this.textCancelBtn,
+    required this.onPressedSubmit,
+    required this.onPressedCancel,
+    this.isHighValue,
+    this.imagePath,
+    this.hasBorderCancelBtn,
+  }) : super(key: key);
 
   @override
   State<BottomSheetDecisionSwitchingMode> createState() => _BottomSheetDecisionSwitchingModeState();
@@ -192,20 +202,20 @@ class _BottomSheetDecisionSwitchingModeState extends State<BottomSheetDecisionSw
                   //             ],
                   //           ),
 
-                            // Column(
-                            //   crossAxisAlignment: CrossAxisAlignment.start,
-                            //   children: [
-                            //     Text(
-                            //       widget.termsConditionsTitle,
-                            //       style: LNStyle.buttonSheetTermTitle,
-                            //     ),
-                            // Text(
-                            //   widget.termsConditionsDesc,
-                            //   style: LNStyle.buttonSheetTermDesc,
-                            //   // maxLines: 3,
-                            //   // overflow: TextOverflow.visible,
-                            // ),
-                            // ],
+                  // Column(
+                  //   crossAxisAlignment: CrossAxisAlignment.start,
+                  //   children: [
+                  //     Text(
+                  //       widget.termsConditionsTitle,
+                  //       style: LNStyle.buttonSheetTermTitle,
+                  //     ),
+                  // Text(
+                  //   widget.termsConditionsDesc,
+                  //   style: LNStyle.buttonSheetTermDesc,
+                  //   // maxLines: 3,
+                  //   // overflow: TextOverflow.visible,
+                  // ),
+                  // ],
                   //         ),
                   //       ),
                   //     ),

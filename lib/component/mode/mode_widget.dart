@@ -40,10 +40,11 @@ class _ModeWidgetState extends State<ModeWidget> {
         width: MediaQuery.of(context).size.width * 0.85,
         child: Row(
           children: [
-            Padding(padding: const EdgeInsets.only(right: 11.96), child: message == 'fail' ? Image.asset('assets/images/checkmark_no.png') : Image.asset('assets/images/checkmark.png')),
-            message == 'success'
-                ? Text(snackBarSuccess)
-                :  Text(snackBarUnsuccessful),
+            Padding(
+              padding: const EdgeInsets.only(right: 11.96),
+              child: message == 'fail' ? Image.asset('assets/images/checkmark_no.png') : Image.asset('assets/images/checkmark.png'),
+            ),
+            message == 'success' ? Text(snackBarSuccess) : Text(snackBarUnsuccessful),
           ],
         ),
       ),
@@ -73,11 +74,11 @@ class _ModeWidgetState extends State<ModeWidget> {
                   if (snap.hasData) {
                     Navigator.pop(context);
                     Timer(
-                        const Duration(milliseconds: 100),
-                        () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context,
-                            message: snap.data as bool
-                                ? 'fail'
-                                : 'success')));
+                      const Duration(milliseconds: 100),
+                      () => ScaffoldMessenger.of(context).showSnackBar(
+                        snackBarMessage(context, message: snap.data as bool ? 'fail' : 'success'),
+                      ),
+                    );
                     return const SizedBox();
                   } else if (snap.hasError) {
                     Timer(
@@ -116,7 +117,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                     Navigator.pop(context);
                     Timer(
                       const Duration(milliseconds: 100),
-                      () => ScaffoldMessenger.of(context).showSnackBar(snackBarMessage(context, message: 'success')),
+                      () => ScaffoldMessenger.of(context).showSnackBar(
+                        snackBarMessage(context, message: snap.data as bool ? 'fail' : 'success'),
+                      ),
                     );
                     return const SizedBox();
                   } else if (snap.hasError) {
@@ -136,7 +139,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> switchGameToBoostMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> switchGameToBoostMode(InternalProvider data, BuildContext context) async {
     showModalBottomSheet(
       isDismissible: false,
       backgroundColor: Colors.transparent,
@@ -161,7 +164,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     title: switchBoost,
                     textSubmitBtn: textSubmitBoost,
                     textCancelBtn: textCancelBtn,
-                    isHighValue: isHighValue,
+                    isHighValue: false,
                     onPressedSubmit: (isClicked) {
                       Navigator.pop(context);
                       setState(() {
@@ -181,7 +184,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> chooseBoostMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> chooseBoostMode(InternalProvider data, BuildContext context) async {
     if (data.mode5G?.mode != 'boost_mode') {
       showModalBottomSheet(
         isDismissible: false,
@@ -189,11 +192,11 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionSwitchingMode(
+          return BottomSheetDecisionCardDialogMode(
             title: switchBoost,
-            textSubmitBtn: textSubmitBoost,
+            textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
-            isHighValue: isHighValue,
+            exitMode: false,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
               setState(() {
@@ -231,7 +234,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     }
   }
 
-  Future<void> switchBoostToGameMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> switchBoostToGameMode(InternalProvider data, BuildContext context) async {
     showModalBottomSheet(
       isDismissible: false,
       backgroundColor: Colors.transparent,
@@ -256,7 +259,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                     title: switchGame,
                     textSubmitBtn: textSubmitGame,
                     textCancelBtn: textCancelBtn,
-                    isHighValue: isHighValue,
+                    isHighValue: false,
                     onPressedSubmit: (isClicked) {
                       Navigator.pop(context);
                       setState(() {
@@ -276,7 +279,7 @@ class _ModeWidgetState extends State<ModeWidget> {
     );
   }
 
-  Future<void> chooseGameMode(InternalProvider data, BuildContext context, bool isHighValue) async {
+  Future<void> chooseGameMode(InternalProvider data, BuildContext context) async {
     if (data.mode5G?.mode != 'game_mode') {
       showModalBottomSheet(
         isDismissible: false,
@@ -284,11 +287,11 @@ class _ModeWidgetState extends State<ModeWidget> {
         isScrollControlled: true,
         context: context,
         builder: (BuildContext context) {
-          return BottomSheetDecisionSwitchingMode(
+          return BottomSheetDecisionCardDialogMode(
             title: switchGame,
-            textSubmitBtn: textSubmitGame,
+            textSubmitBtn: textSubmitBtn,
             textCancelBtn: textCancelBtn,
-            isHighValue: isHighValue,
+            exitMode: false,
             onPressedSubmit: (isClicked) {
               Navigator.pop(context);
               setState(() {
@@ -328,7 +331,7 @@ class _ModeWidgetState extends State<ModeWidget> {
 
   Future<void> chooseEcoMode(InternalProvider data, BuildContext context) async {
     String? mode = data.mode5G?.mode;
-    if (mode != 'eco_mode') {
+    if (mode == 'max_mode') {
       showModalBottomSheet(
           isDismissible: false,
           backgroundColor: Colors.transparent,
@@ -337,7 +340,7 @@ class _ModeWidgetState extends State<ModeWidget> {
           builder: (BuildContext context) {
             return BottomSheetDecisionCardDialogMode(
               title: switchEco,
-              textSubmitBtn: textSubmitEco,
+              textSubmitBtn: textSubmitBtn,
               textCancelBtn: textCancelBtn,
               exitMode: false,
               onPressedSubmit: (isClicked) async {
@@ -350,6 +353,46 @@ class _ModeWidgetState extends State<ModeWidget> {
               onPressedCancel: (isClicked) => Navigator.pop(context),
             );
           });
+    } else if (mode != 'eco_mode') {
+      showModalBottomSheet(
+        isDismissible: false,
+        backgroundColor: Colors.transparent,
+        context: context,
+        builder: (BuildContext context) {
+          return BottomSheetDecisionCardDialogMode(
+            title: mode == 'boost_mode' ? switchBoostExitTitle : switchGameExitTitle,
+            desc: mode == 'boost_mode' ? switchBoostExitDesc : switchGameExitDesc,
+            textSubmitBtn: textSubmitBtn,
+            textCancelBtn: textCancelBtn,
+            exitMode: mode == 'boost_mode' || mode == 'game_mode',
+            onPressedSubmit: (isClicked) async {
+              Navigator.pop(context);
+              showModalBottomSheet(
+                  isDismissible: false,
+                  backgroundColor: Colors.transparent,
+                  isScrollControlled: true,
+                  context: context,
+                  builder: (BuildContext context) {
+                    return BottomSheetDecisionCardDialogMode(
+                      title: switchEco,
+                      textSubmitBtn: textSubmitEco,
+                      textCancelBtn: textCancelBtn,
+                      exitMode: false,
+                      onPressedSubmit: (isClicked) async {
+                        Navigator.pop(context);
+                        setState(() {
+                          checkTimeMode = false;
+                        });
+                        wUpdate(data, true, 'eco_mode');
+                      },
+                      onPressedCancel: (isClicked) => Navigator.pop(context),
+                    );
+                  });
+            },
+            onPressedCancel: (isClicked) => Navigator.pop(context),
+          );
+        },
+      );
     } else {
       showModalBottomSheet(
         isDismissible: false,
@@ -447,7 +490,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       setMode: expireMode,
                       check: data.mode5G?.mode == 'boost_mode' ? checkTimeMode : false,
                       onPress: () {
-                        bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
+                        // bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
                         // if (highValue) {
                         //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
                         // chooseBoostMode(data, context, highValue);
@@ -456,9 +499,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                         //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                         String mode = data.mode5G?.mode ?? 'max_mode';
                         if (mode == 'game_mode') {
-                          switchGameToBoostMode(data, context, highValue);
+                          switchGameToBoostMode(data, context);
                         } else if (mode == 'eco_mode' || mode == 'max_mode' || mode == 'boost_mode') {
-                          chooseBoostMode(data, context, highValue);
+                          chooseBoostMode(data, context);
                         }
                         //-----------------------------------------------------------------
                         // }
@@ -485,7 +528,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                       setMode: expireMode,
                       check: data.mode5G?.mode == 'game_mode' ? checkTimeMode : false,
                       onPress: () {
-                        bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
+                        // bool highValue = data.mode5G?.checkModeProfile?.is5GHighValue ?? false;
                         // if (highValue) {
                         //----------UX Flow สลับโหมดต่อแบบไม่เสียเงิน (ยังไม่หมดเวลาโหมดเก่า)
                         // chooseGameMode(data, context, highValue);
@@ -494,9 +537,9 @@ class _ModeWidgetState extends State<ModeWidget> {
                         //----------UX Flow สลับโหมดแบบเสียเงินต่อเนื่อง 2โหมด (ยังไม่หมดเวลาโหมดเก่า)
                         String mode = data.mode5G?.mode ?? 'max_mode';
                         if (mode == 'boost_mode') {
-                          switchBoostToGameMode(data, context, highValue);
+                          switchBoostToGameMode(data, context);
                         } else if (mode == 'eco_mode' || mode == 'max_mode' || mode == 'game_mode') {
-                          chooseGameMode(data, context, highValue);
+                          chooseGameMode(data, context);
                         }
                         //-----------------------------------------------------------------
                         // }
