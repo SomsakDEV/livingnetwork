@@ -235,6 +235,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     }
     WidgetsBinding.instance.addPostFrameCallback(
       (_) => showDialog(
+        barrierDismissible: false,
         context: context,
         builder: (BuildContext context) {
           return Dialog(
