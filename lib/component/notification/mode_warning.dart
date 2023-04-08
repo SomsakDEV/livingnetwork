@@ -73,7 +73,9 @@ class _ModeWarningState extends State<ModeWarning> {
                                       ? msgBoostTimeout
                                       : (data.mode5G?.mode == 'game_mode' && data.modExp)
                                           ? msgGameTimeout
-                                          : msgAvailableUse,
+                                          : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
+                                              ? msgAvailableUse
+                                              : msgDefault,
                           style: LNStyle.messageDefault,
                         ),
                       ),
