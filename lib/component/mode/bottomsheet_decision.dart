@@ -72,17 +72,17 @@ class _BottomSheetDecisionCardDialogModeState extends State<BottomSheetDecisionC
                       style: widget.exitMode ?? false ? LNStyle.buttonSheetTitleExit : LNStyle.buttonSheetTitleAdd,
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(
-                  //       top: 8, bottom: 40, left: 10, right: 10),
-                  //   child: Text(
-                  //     textAlign: TextAlign.center,
-                  //     widget.desc?? '',
-                  //     maxLines: 2,
-                  //     overflow: TextOverflow.ellipsis,
-                  //     style: LNStyle.buttonSheetDesc,
-                  //   ),
-                  // ),
+                  widget.desc != null ? Padding(
+                    padding: const EdgeInsets.only(
+                        top: 8, bottom: 40, left: 10, right: 10),
+                    child: Text(
+                      textAlign: TextAlign.center,
+                      widget.desc?? '',
+                      maxLines: 2,
+                      overflow: TextOverflow.ellipsis,
+                      style: LNStyle.buttonSheetDesc,
+                    ),
+                  ) : const SizedBox(),
                   Button(
                     title: widget.textSubmitBtn,
                     backgroundColor: widget.exitMode ?? false ? LNColor.speedCompare1 : LNColor.kellyGreen500,

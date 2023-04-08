@@ -23,7 +23,7 @@ class _ModeWarningState extends State<ModeWarning> {
         return ((data.mode5G?.error ?? false) || data.mode5G?.errorCode != null)
             ? Container(
                 width: MediaQuery.of(context).size.width * 0.85,
-                height: 52,
+                constraints: const BoxConstraints(maxHeight: double.infinity),
                 decoration: const BoxDecoration(
                   color: Color(0x66FFE9BD),
                   borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -41,8 +41,6 @@ class _ModeWarningState extends State<ModeWarning> {
                         title: Text(
                           warningRepo[data.mode5G?.errorCode ?? '500'],
                           style: LNStyle.warningMessage,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
                         ),
                       ),
                     ),
@@ -51,7 +49,7 @@ class _ModeWarningState extends State<ModeWarning> {
               )
             : Container(
                 width: MediaQuery.of(context).size.width * 0.85,
-                height: 52,
+                constraints: const BoxConstraints(maxHeight: double.infinity),
                 decoration: const BoxDecoration(
                   color: LNColor.neutralsLightestGrey,
                   borderRadius: BorderRadius.all(Radius.circular(8)),
@@ -70,12 +68,10 @@ class _ModeWarningState extends State<ModeWarning> {
                           data.mode5G?.mode == 'max_mode'
                               ? msgDefault
                               : data.mode5G?.mode == 'eco_mode'
-                              ? msgNoTimeout
-                              : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
-                              ? msgAvailableUse
-                              : msgDefault,
-                          overflow: TextOverflow.ellipsis,
-                          maxLines: 3,
+                                  ? msgNoTimeout
+                                  : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
+                                      ? msgAvailableUse
+                                      : msgDefault,
                           style: LNStyle.messageDefault,
                         ),
                       ),
