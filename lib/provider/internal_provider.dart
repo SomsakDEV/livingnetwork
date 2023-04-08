@@ -17,6 +17,7 @@ class InternalProvider with ChangeNotifier {
   String? _caseTest;
   LocationWifi? _locationWifi;
   LocationShop? _locationShop;
+  bool _modExp = false;
 
   setStatus(String value) {
     _status = value;
@@ -30,6 +31,8 @@ class InternalProvider with ChangeNotifier {
   String? get detect => _detect;
 
   DateTime? get sExpire => _sExpire;
+
+  bool get modExp => _modExp;
 
   LocationShop? get locationShop => _locationShop;
 
@@ -152,6 +155,7 @@ class InternalProvider with ChangeNotifier {
     } else if (code == '50000') {
       _status = 'Failed';
     }
+    _modExp = true;
     notifyListeners();
     return _mode5G?.error ?? true;
   }
