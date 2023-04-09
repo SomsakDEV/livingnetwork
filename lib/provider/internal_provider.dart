@@ -18,6 +18,7 @@ class InternalProvider with ChangeNotifier {
   LocationWifi? _locationWifi;
   LocationShop? _locationShop;
   bool _modExp = false;
+  String? _modeCurrent;
 
   setStatus(String value) {
     _status = value;
@@ -37,6 +38,8 @@ class InternalProvider with ChangeNotifier {
   LocationShop? get locationShop => _locationShop;
 
   LocationWifi? get locationWifi => _locationWifi;
+
+  String? get modeCurrent => _modeCurrent;
 
   caseTest(String value) {
     if (value.startsWith('5G')) {
@@ -118,7 +121,7 @@ class InternalProvider with ChangeNotifier {
     String code = mode5G?.errorCode ?? '';
     if (code == '99999') {
       await _reInitial(_token!);
-      if(_status == 'Passed') {
+      if (_status == 'Passed') {
         _mode5G?.error = mode != _mode5G?.mode;
         if (_mode5G?.error ?? false) {
           _mode5G?.errorCode = '9';
@@ -127,6 +130,7 @@ class InternalProvider with ChangeNotifier {
     } else if (code == '50000') {
       _status = 'Failed';
     }
+    _modExp = false;
     notifyListeners();
     return _mode5G?.error ?? true;
   }
@@ -141,12 +145,14 @@ class InternalProvider with ChangeNotifier {
     } else if (code == '50000') {
       _status = 'Failed';
     }
+    _modExp = false;
     notifyListeners();
     return _mode5G?.error ?? true;
   }
 
   Future<bool> getExpireMode() async {
     repo = repo ?? InitialInternal();
+    _modeCurrent = _mode5G?.mode;
     _mode5G = await repo?.getExpirePackageSocket(mode5G, caseTest: _caseTest);
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     String code = mode5G?.errorCode ?? '';

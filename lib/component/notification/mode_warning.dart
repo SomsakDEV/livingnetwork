@@ -65,14 +65,14 @@ class _ModeWarningState extends State<ModeWarning> {
                           height: 20,
                         ),
                         title: Text(
-                          data.mode5G?.mode == 'max_mode'
-                              ? msgDefault
-                              : data.mode5G?.mode == 'eco_mode'
-                                  ? msgNoTimeout
-                                  : (data.mode5G?.mode == 'boost_mode' && data.modExp)
-                                      ? msgBoostTimeout
-                                      : (data.mode5G?.mode == 'game_mode' && data.modExp)
-                                          ? msgGameTimeout
+                          (data.modeCurrent == 'boost_mode' && data.modExp)
+                              ? msgBoostTimeout
+                              : (data.modeCurrent == 'game_mode' && data.modExp)
+                                  ? msgGameTimeout
+                                  : data.mode5G?.mode == 'max_mode'
+                                      ? msgDefault
+                                      : data.mode5G?.mode == 'eco_mode'
+                                          ? msgNoTimeout
                                           : (data.mode5G?.mode == 'boost_mode') || (data.mode5G?.mode == 'game_mode')
                                               ? msgAvailableUse
                                               : msgDefault,
