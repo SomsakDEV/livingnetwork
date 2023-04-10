@@ -133,18 +133,29 @@ class _ListPlaceDetailState extends State<ListPlaceDetail> {
                           width: 0.5,
                           color: LNColor.greyBtnColor,
                         ),
-                        image: DecorationImage(
-                            image: ((widget.select1 && widget.select2)
-                                ? ((items[index].imagetype == "shop")
+                      ),
+                      child: Padding(
+                        padding: EdgeInsets.all(4.0), // Set the desired padding values
+                        child: SizedBox(
+                          height: double.infinity,
+                          width: double.infinity,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              image: DecorationImage(
+                                image: ((widget.select1 && widget.select2)
+                                    ? ((items[index].imagetype == "shop")
                                     ? shop_img
                                     : wifi_img)
-                                : (widget.select1)
+                                    : (widget.select1)
                                     ? shop_img
                                     : (items[index].imagetype == "wifi")
-                                        ? wifi_img
-                                        : shop_img),
-                            fit: BoxFit.contain,
-                            alignment: Alignment.centerLeft),
+                                    ? wifi_img
+                                    : shop_img),
+                                alignment: Alignment.center,
+                              ),
+                            ),
+                          ),
+                        ),
                       ),
                     ),
                     title: Text(

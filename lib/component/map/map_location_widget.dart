@@ -2,14 +2,17 @@ import 'dart:async';
 import 'dart:collection';
 import 'dart:convert';
 import 'dart:ui' as ui;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:living_network/model/map/grid_location.dart';
+import 'package:living_network/model/map/problem_area.dart';
 import 'package:living_network/provider/internal_provider.dart';
 import 'package:living_network/utility/image_utils.dart';
 import 'package:provider/provider.dart';
+
 
 const LatLng current = LatLng(13.783681327551925, 100.54645268209386);
 
@@ -70,10 +73,10 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
       final marker = Marker(
         markerId: markerId,
         position: LatLng(office.properties.lmLat ?? 0, office.properties.lmLong ?? 0),
-        infoWindow: InfoWindow(
-          title: '${office.properties.lmAmpName}',
-          snippet: 'AISShop',
-        ),
+        // infoWindow: InfoWindow(
+        //   title: '${office.properties.lmAmpName}',
+        //   snippet: 'AISShop',
+        // ),
         icon: iconShop,
         onTap: () => _onMarkerTapped(markerId),
       );
@@ -90,10 +93,10 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
       final marker = Marker(
         markerId: markerId,
         position: LatLng(office.properties.lmLat ?? 0, office.properties.lmLong ?? 0),
-        infoWindow: InfoWindow(
-          title: '${office.properties.slmApLocation}',
-          snippet: 'Super Wifi',
-        ),
+        // infoWindow: InfoWindow(
+        //   title: '${office.properties.slmApLocation}',
+        //   snippet: 'Super Wifi',
+        // ),
         icon: iconWifi,
         onTap: () => _onMarkerTapped(markerId),
       );
@@ -101,6 +104,41 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         _markers[markerId] = marker;
       });
     }
+  }
+
+  bool isPointInsidePolygon(List<List<double>> polygon, List<double> point) {
+    bool inside = false;
+    int n = polygon.length;
+
+    // Check if the point is inside the bounding box of the polygon
+    double minX = polygon[0][0], maxX = polygon[0][0];
+    double minY = polygon[0][1], maxY = polygon[0][1];
+    for (int i = 1; i < n; i++) {
+      List<double> vertex = polygon[i];
+      minX = math.min(minX, vertex[0]);
+      maxX = math.max(maxX, vertex[0]);
+      minY = math.min(minY, vertex[1]);
+      maxY = math.max(maxY, vertex[1]);
+    }
+    if (point[0] < minX ||
+        point[0] > maxX ||
+        point[1] < minY ||
+        point[1] > maxY) {
+      return false;
+    }
+
+    // Check if the point is inside the polygon using the ray casting algorithm
+    for (int i = 0, j = n - 1; i < n; j = i++) {
+      if ((polygon[i][1] > point[1]) != (polygon[j][1] > point[1]) &&
+          point[0] <
+              (polygon[j][0] - polygon[i][0]) *
+                  (point[1] - polygon[i][1]) /
+                  (polygon[j][1] - polygon[i][1]) +
+                  polygon[i][0]) {
+        inside = !inside;
+      }
+    }
+    return inside;
   }
 
   void _onMarkerTapped(MarkerId markerId) {
@@ -114,8 +152,19 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
     // GridLocation gridLocation = await getGridLocation();
     String data_json = await rootBundle.loadString('assets/data/800m_aisbuild1.json');
     GridLocation gridLocation = GridLocation.fromJson(json.decode(data_json));
+
+    String data_json_problem =
+    await rootBundle.loadString('assets/data/data_4326.json');
+
+    ProblemLocation problemArea =
+    ProblemLocation.fromJson(json.decode(data_json_problem));
+
     double diff = 0.0004999999999881766;
     double benchmark_max = 0;
+
+    final area_interest = problemArea.features[43];
+    List<List<List<double>>> area_interest_coor =
+        area_interest.geometry.coordinates;
 
     for (final features_data in gridLocation.features) {
       List<List<List<double>>> coordinates = features_data.geometry.coordinates;
@@ -164,17 +213,39 @@ class _MapNearByWidgetState extends State<MapNearByWidget> {
         LatLng(centerLat - (width / 2), centerLng - width),
       ];
 
-      _polygon.add(Polygon(
-        polygonId: PolygonId('${features_data.id}'),
-        points: hexagonPoints,
-        // given color to polygon
-        fillColor: Color.fromARGB(255, 175, 231, 104).withOpacity(0.4),
-        // given border color to polygon
-        strokeColor: Color.fromARGB(255, 253, 253, 253).withOpacity(0.4),
-        geodesic: true,
-        // given width of border
-        strokeWidth: 2,
-      ));
+      bool result = false;
+      for (final index_value in coordinates[0]) {
+        result = isPointInsidePolygon(area_interest_coor[0], index_value);
+        if (result) {
+          break;
+        }
+      }
+      if (result) {
+
+        _polygon.add(Polygon(
+          polygonId: PolygonId('${features_data.id}'),
+          points: hexagonPoints,
+          // given color to polygon
+          fillColor: Color.fromARGB(255, 229, 245, 6).withOpacity(0.3),
+          // given border color to polygon
+          strokeColor: Color.fromARGB(255, 229, 245, 6).withOpacity(0.3),
+          geodesic: true,
+          // given width of border
+          strokeWidth: 2,
+        ));
+      } else {
+        _polygon.add(Polygon(
+          polygonId: PolygonId('${features_data.id}'),
+          points: hexagonPoints,
+          // given color to polygon
+          fillColor: Color.fromARGB(255, 175, 231, 104).withOpacity(0.4),
+          // given border color to polygon
+          strokeColor: Color.fromARGB(255, 253, 253, 253).withOpacity(0.4),
+          geodesic: true,
+          // given width of border
+          strokeWidth: 2,
+        ));
+      }
     }
 
     if (widget.select1) {
