@@ -20,7 +20,7 @@ class _ModeWarningState extends State<ModeWarning> {
   Widget build(BuildContext context) {
     return Consumer<InternalProvider>(
       builder: (context, data, _) {
-        return ((data.mode5G?.error ?? false) || data.mode5G?.errorCode != null)
+        return ((data.mode5G?.error ?? false) || (data.mode5G?.errorCode != null))
             ? Container(
                 width: MediaQuery.of(context).size.width * 0.85,
                 constraints: const BoxConstraints(maxHeight: double.infinity),
@@ -39,7 +39,7 @@ class _ModeWarningState extends State<ModeWarning> {
                           height: 20,
                         ),
                         title: Text(
-                          warningRepo[data.mode5G?.errorCode ?? '500'],
+                          warningRepo[data.mode5G?.errorCode ?? '500'] ?? warningRepo['500'],
                           style: LNStyle.warningMessage,
                         ),
                       ),

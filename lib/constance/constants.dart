@@ -91,8 +91,8 @@ String msgDefault = 'Your Current Speed depend on your package, package status, 
 String msgAvailableUse = 'To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.'; //game or boost mode
 String msgNoTimeout = 'This Mode is no time out. To use your internet speed package, please turn off ECO Mode.'; //eco mode
 String msgInternetPack = 'Your internet speed will turn to your internet speed package.'; //max mode
-String msgBoostTimeout = 'BOOST Mode is timeout. Your internet speed will turn to your internet speed package.';
-String msgGameTimeout = 'GAME Mode is timeout. Your internet speed will turn to your internet speed package.';
+String msgBoostTimeout = 'BOOST Mode is time out. Your internet speed will turn to your internet speed package.';
+String msgGameTimeout = 'GAME Mode is time out. Your internet speed will turn to your internet speed package.';
 
 String textSubmitBtn = 'Confirm';
 String textCancelBtn = 'Close';
