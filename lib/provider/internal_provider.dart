@@ -93,10 +93,10 @@ class InternalProvider with ChangeNotifier {
     }
   }
 
-  Future<void> _reInitial(String token) async {
+  Future<void> _reInitial(String token, [String mode = '', bool atFirst = true]) async {
     try {
       repo = repo ?? InitialInternal();
-      _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest);
+      _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest, atFirst: atFirst, mode: mode);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       String code = mode5G?.errorCode ?? '';
       if (!(code == '1' || code == '2' || code == '3')) {
@@ -120,7 +120,7 @@ class InternalProvider with ChangeNotifier {
     print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
     String code = mode5G?.errorCode ?? '';
     if (code == '99999') {
-      await _reInitial(_token!);
+      await _reInitial(_token!, mode, false);
     } else if (code == '50000') {
       _status = 'Failed';
     }
