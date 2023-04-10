@@ -77,7 +77,7 @@ Map warningRepo = <String, String>{
   '4': 'Your switching Mode is quota met. Please try again tomorrow.',
   '5': 'You cannot switch Mode. The quota for using Mode has been reached. Please try again later.',
 
-  '6': 'You cannot switch Mode. The quota for using Mode has been reached. Please try again later.',
+  '6': 'You cannot switch Mode. The quota for using Mode has been reached. Please try again later.', //don't use
   '7': 'Your internet package is quota met or in FUP status. Please purchase 5G MAX Speed On Top package.',
   '8': 'Your request cannot be proceeded. You shall be use internet speed in the current Mode.',
   '9': 'Your request cannot be proceeded. Your internet speed will turn to your internet speed package.',
