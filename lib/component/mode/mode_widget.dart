@@ -473,7 +473,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false) ? ImageUtils.getImagePath('assets/images/mode_power_bw.png') : ImageUtils.getImagePath('assets/images/mode_power.png'),
+                        (data.mode5G?.isDisableMode ?? false) || (data.mode5G?.isDisableModeLive ?? false) ? ImageUtils.getImagePath('assets/images/mode_power_bw.png') : ImageUtils.getImagePath('assets/images/mode_power.png'),
                         height: 24,
                         width: 24,
                       ),
@@ -511,7 +511,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false) ? ImageUtils.getImagePath('assets/images/mode_game_bw.png') : ImageUtils.getImagePath('assets/images/mode_game.png'),
+                        (data.mode5G?.isDisableMode ?? false) || (data.mode5G?.isDisableModeGame ?? false) ? ImageUtils.getImagePath('assets/images/mode_game_bw.png') : ImageUtils.getImagePath('assets/images/mode_game.png'),
                         height: 24,
                         width: 24,
                       ),
