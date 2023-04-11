@@ -555,7 +555,7 @@ class _ModeWidgetState extends State<ModeWidget> {
                   Expanded(
                     child: button.ButtonMode(
                       icon: Image.asset(
-                        (data.mode5G?.isDisableMode ?? false|| (data.mode5G?.isDisableModeEco ?? false)) ? ImageUtils.getImagePath('assets/images/mode_eco_bw.png') : ImageUtils.getImagePath('assets/images/mode_eco.png'),
+                        (data.mode5G?.isDisableMode ?? false) || (data.mode5G?.isDisableModeEco ?? false) ? ImageUtils.getImagePath('assets/images/mode_eco_bw.png') : ImageUtils.getImagePath('assets/images/mode_eco.png'),
                         height: 24,
                         width: 24,
                       ),
