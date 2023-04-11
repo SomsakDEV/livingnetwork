@@ -99,7 +99,7 @@ class InternalProvider with ChangeNotifier {
       _mode5G = token.startsWith('5Gtest') ? await repo?.initiateProcessMock(token, caseTest: _caseTest) : await repo?.initiateProcess(token, caseTest: _caseTest, atFirst: atFirst, mode: mode);
       print('[LIVING_NETWORK] Mode : ${_mode5G?.toJson()}');
       String code = mode5G?.errorCode ?? '';
-      if (!(code == '1' || code == '2' || code == '3')) {
+      if (!(code == '1' || code == '2' || code == '3' || code == '9')) {
         if ((_mode5G?.error ?? true) || (_mode5G?.errorCode == '50000')) {
           _status = 'Failed';
         } else {
