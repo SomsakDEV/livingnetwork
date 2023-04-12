@@ -18,6 +18,7 @@ class InternalProvider with ChangeNotifier {
   LocationWifi? _locationWifi;
   LocationShop? _locationShop;
   bool _modExp = false;
+  bool _reTimeMode = false;
   String? _modeCurrent;
 
   setStatus(String value) {
@@ -40,6 +41,12 @@ class InternalProvider with ChangeNotifier {
   LocationWifi? get locationWifi => _locationWifi;
 
   String? get modeCurrent => _modeCurrent;
+
+  bool get reTimeMode => _reTimeMode;
+
+  setTimeMode(bool reTimeMode){
+    _reTimeMode = reTimeMode;
+  }
 
   caseTest(String value) {
     if (value.startsWith('5G')) {

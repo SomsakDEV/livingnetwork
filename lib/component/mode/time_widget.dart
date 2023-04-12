@@ -169,6 +169,10 @@ class _TimeWidgetState extends State<TimeWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<InternalProvider>(builder: (context, data, _) {
+      if(data.reTimeMode){
+        checkTimerStart = true;
+        timer?.cancel();
+      }
       startTimer(data);
       return buildTime();
     });

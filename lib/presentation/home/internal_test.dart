@@ -22,14 +22,25 @@ class Mode5GInternal extends StatefulWidget {
   State<Mode5GInternal> createState() => _Mode5GInternalState();
 }
 
-class _Mode5GInternalState extends State<Mode5GInternal> {
+class _Mode5GInternalState extends State<Mode5GInternal>
+    with WidgetsBindingObserver {
   late Duration duration;
   late Timer timer;
 
   @override
   void initState() {
     _initialState();
+    WidgetsBinding.instance.addObserver(this);
     super.initState();
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      Provider.of<InternalProvider>(context, listen: false).setTimeMode(true);
+      timer.cancel();
+      _initialState();
+    }
   }
 
   void _initialState() {
@@ -303,6 +314,7 @@ class _Mode5GInternalState extends State<Mode5GInternal> {
     if (Platform.isAndroid) {
       Provider.of<InternalProvider>(context).dispose();
     }
+    WidgetsBinding.instance.removeObserver(this);
     super.dispose();
   }
 }
