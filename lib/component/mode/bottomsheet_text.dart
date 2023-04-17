@@ -44,7 +44,7 @@ class _BottomSheetCardDialogTextModeState extends State<BottomSheetCardDialogTex
                     style: LNStyle.uiBottomSheetTextTitle,
                   ),
                   subtitle: Text(
-                    subTitle[index],
+                    subTitleEng[index],
                     style: LNStyle.uiBottomSheetTextDesc,
                   ),
                 ),

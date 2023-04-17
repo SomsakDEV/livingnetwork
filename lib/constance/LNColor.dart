@@ -46,6 +46,7 @@ class LNColor {
 
   // Neutrals
   static const neutralsWhite = Color(0xFFFFFFFF);
+  static const neutralsWhite10 = Color(0xFFF0F0F0);
   static const neutralsWhiteMixGrey = Color(0xFFFAFAFA);
   static const neutralsLightestGrey = Color(0xFFF5F5F5);
   static const neutralsLightGrey = Color(0xFFE9E9E9);
@@ -57,6 +58,7 @@ class LNColor {
   static const neutralsDarkestGrey = Color(0xFF262626);
   static const neutralsBlack = Color(0xFF000000);
   static const neutralsBlackSixtyPercent = Color(0x99000000);
+  static const neutralLightGrey = Color(0xFF7B8E98);
 
   // Kelly Green
   static const kellyGreen50 = Color(0xFFEEF8E8);
@@ -113,6 +115,7 @@ class LNColor {
   static const alertError100 = Color(0xFFFFC9BA);
   static const alertWarning800 = Color(0xFFFF8D00);
   static const alertWarning100 = Color(0xFFFFEBB2);
+  static const backgroundWarning = Color(0x66FFE9BD);
 
   //Speed Comparing
   static const lowInternet1 = Color(0xFFFF8266);

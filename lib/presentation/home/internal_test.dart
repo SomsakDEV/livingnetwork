@@ -34,13 +34,55 @@ class _Mode5GInternalState extends State<Mode5GInternal>
     super.initState();
   }
 
+  BuildContext? contextDialog;
   @override
   void didChangeAppLifecycleState(AppLifecycleState state) {
     if (state == AppLifecycleState.resumed) {
       Provider.of<InternalProvider>(context, listen: false).setTimeMode(true);
       timer.cancel();
-      _initialState();
+      if (Provider.of<InternalProvider>(context, listen: false).status != "Failed") {
+        if (contextDialog != null) {
+          Navigator.pop(contextDialog!);
+          Provider.of<InternalProvider>(context, listen: false).setStatus("Failed");
+        } else {
+          _reInitialState();
+        }
+      }
     }
+  }
+  void _reInitialState() {
+    WidgetsBinding.instance.addPostFrameCallback(
+          (_) => showDialog(
+        context: context,
+        barrierDismissible: false,
+        builder: (context) {
+          return FutureBuilder(
+            future: Provider.of<InternalProvider>(context, listen: false).initialCore(widget.token),
+            builder: (context, snap) {
+              contextDialog = context;
+              if (snap.hasData) {
+                if (snap.data == 'Passed') {
+                  DateTime? sExpire = Provider.of<InternalProvider>(context, listen: false).sExpire;
+                  if (sExpire != null) {
+                    print('[LIVING_NETWORK] Session expire : $sExpire');
+                    int sec = sExpire.difference(DateTime.now()).inSeconds;
+                    if (sec > 0) {
+                      duration = Duration(seconds: sec);
+                      timer = Timer.periodic(const Duration(seconds: 1), (_) => _counting());
+                    }
+                  }
+                }
+                Navigator.pop(context);
+                contextDialog = null;
+                return SizedBox();
+              } else {
+                return SizedBox();
+              }
+            },
+          );
+        },
+      ),
+    );
   }
 
   void _initialState() {
@@ -191,11 +233,11 @@ class _Mode5GInternalState extends State<Mode5GInternal>
                       Container(
                         alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFFFFFF),
+                          color: LNColor.neutralsWhite,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             width: 3,
-                            color: Color(0xFFF0F0F0),
+                            color: LNColor.neutralsWhite10,
                           ),
                         ),
                         width: w * 0.93,
@@ -209,7 +251,7 @@ class _Mode5GInternalState extends State<Mode5GInternal>
                         padding: EdgeInsets.all(15.0),
                         child: Text(
                           'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
-                          style: TextStyle(color: LNColor.failColor, fontSize: 17),
+                          style: LNStyle.loading,
                         ),
                       ),
                       SizedBox(

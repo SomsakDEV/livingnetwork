@@ -3,7 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:living_network/constance/LNColor.dart';
 import 'package:living_network/component/mode/time_widget.dart';
 
-enum ButtonType { primaryBtn, secondaryBtn, empty}
+enum ButtonType { primaryBtn, secondaryBtn, empty }
+
 class ButtonMode extends StatefulWidget {
   final Image icon;
   final String title;
@@ -51,9 +52,11 @@ class ButtonMode extends StatefulWidget {
     this.mode,
     this.check,
   }) : super(key: key);
+
   @override
   State<ButtonMode> createState() => _ButtonModeState();
 }
+
 class _ButtonModeState extends State<ButtonMode> {
   @override
   Widget build(BuildContext context) {
@@ -69,12 +72,10 @@ class _ButtonModeState extends State<ButtonMode> {
         ? LNColor.neutralsWhiteMixGrey
         : isPrimary == true
             ? widget.isDisable
-        ? const Color(0xFFFAFAFA)
-        : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100
+                ? LNColor.neutralsWhiteMixGrey
+                : LNColor.kellyGreen50
             : null;
-    final Color borderColor = clickEnable == false
-        ? LNColor.neutralsMediumGrey
-        : widget.backgroundColor ?? LNColor.kellyGreen100;
+    clickEnable == false ? LNColor.neutralsMediumGrey : widget.backgroundColor ?? LNColor.kellyGreen100;
     return InkWell(
       onTap: !clickEnable ? () {} : () => widget.onPress!(),
       child: Card(
@@ -82,17 +83,15 @@ class _ButtonModeState extends State<ButtonMode> {
               // side: BorderSide(color: BaseColors.kellyGreen500),
               side: BorderSide(
                   color: widget.isDisable
-                      ? const Color(0xFFFAFAFA)
+                      ? LNColor.neutralsWhiteMixGrey
                       : widget.isMode
-                      ? const Color(0xFF64CA00)
-                      : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100,
+                          ? LNColor.greenColor700
+                          : LNColor.kellyGreen50,
                   width: 2),
               borderRadius: BorderRadius.circular(10.0)),
           color: backgroundColor,
           child: SizedBox(
-              width: widget.isSmall != null && widget.isSmall == true
-                  ? null
-                  : widget.width ?? MediaQuery.of(context).size.width / 1.1,
+              width: widget.isSmall != null && widget.isSmall == true ? null : widget.width ?? MediaQuery.of(context).size.width / 1.1,
               // height: widget.isSmall != null && widget.isSmall == true
               //     ? null
               //     : widget.height ?? MediaQuery.of(context).size.height / 17.5,
@@ -123,9 +122,7 @@ class _ButtonModeState extends State<ButtonMode> {
                       style: widget.textStyle ??
                           TextStyle(
                             fontFamily: 'DB Heavent',
-                            color: widget.isDisable
-                                ? const Color(0xFF7B8E98)
-                                : const Color(0xFF38454C),
+                            color: widget.isDisable ? LNColor.neutralLightGrey : LNColor.header6_1,
                             fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
@@ -142,9 +139,7 @@ class _ButtonModeState extends State<ButtonMode> {
                       style: widget.textStyle ??
                           TextStyle(
                             fontFamily: 'DB Heavent',
-                            color: widget.isDisable
-                                ? const Color(0xFFB0BEC5)
-                                : const Color(0xFF9EDE3E),
+                            color: widget.isDisable ? LNColor.verticalDivider : LNColor.greenColor10,
                             fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,

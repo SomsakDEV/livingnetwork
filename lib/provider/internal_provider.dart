@@ -61,7 +61,7 @@ class InternalProvider with ChangeNotifier {
       caseTest(_token = token);
       WidgetsFlutterBinding.ensureInitialized();
       var coreConfig = CoreConfig(mode: Mode.debug);
-      await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig(endPointName: 'livingnetwork-qa').whenComplete(() => coreConfig.checkCacheConfig()));
+      await coreConfig.checkOrGetConfig().whenComplete(() => IntiAppCionfig().setInitAppConfig(endPointName: 'livingnetwork-prod').whenComplete(() => coreConfig.checkCacheConfig()));
       return await internalPrepare(token);
     } catch (e, st) {
       print('[LIVING_NETWORK] $e, $st');

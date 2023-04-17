@@ -326,13 +326,14 @@ class LNStyle {
   );
 
   static const saleButton = TextStyle(
-      fontFamily: 'DB Heavent',
-      color: LNColor.whiteColor,
-      fontSize: 18,
-      fontWeight: FontWeight.w500,
-      fontStyle: FontStyle.normal,
-      leadingDistribution: TextLeadingDistribution.even,
-      overflow: TextOverflow.clip);
+    fontFamily: 'DB Heavent',
+    color: LNColor.whiteColor,
+    fontSize: 18,
+    fontWeight: FontWeight.w500,
+    fontStyle: FontStyle.normal,
+    leadingDistribution: TextLeadingDistribution.even,
+    overflow: TextOverflow.clip,
+  );
 
   static const freeWifiButton = TextStyle(
     fontFamily: 'DB Heavent',
@@ -614,5 +615,25 @@ class LNStyle {
     color: LNColor.neutralsWhite,
     fontSize: 20,
     fontWeight: FontWeight.w400,
+  );
+
+  static const timeWidget = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontWeight: FontWeight.w500,
+    color: LNColor.greyBlue,
+    fontSize: 22,
+  );
+
+  static const timeWidgetFreeTrial = TextStyle(
+    fontFamily: 'DB Heavent',
+    fontWeight: FontWeight.w500,
+    fontSize: 18,
+    color: LNColor.textColorTabBar,
+  );
+
+  static const loading = TextStyle(
+    fontFamily: 'DB Heavent',
+    color: LNColor.failColor,
+    fontSize: 17,
   );
 }
