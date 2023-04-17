@@ -25,7 +25,7 @@ class _ModeWarningState extends State<ModeWarning> {
                 width: MediaQuery.of(context).size.width * 0.85,
                 constraints: const BoxConstraints(maxHeight: double.infinity),
                 decoration: const BoxDecoration(
-                  color: Color(0x66FFE9BD),
+                  color: LNColor.backgroundWarning,
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                 ),
                 child: Row(

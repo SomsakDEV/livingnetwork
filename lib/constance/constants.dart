@@ -2,11 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:living_network/utility/image_utils.dart';
 
 List title = ['ECO Mode', 'BOOST Mode', 'GAME Mode'];
-List subTitle = [
+List subTitleEng = [
   'Help you to save your internet quota. This Mode is no time out. To use your internet speed package, please turn off ECO Mode.',
-  'Help you to download huge file such as Movie faster. To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.',
+  'Help you to increase internet speed for using social network, downloading huge file, VDO Streaming smoothly even being in the dense area. To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.',
   'Help your internet quality stability for online gaming. To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.',
 ];
+
+List subTitleTH = [
+  'Help you to save your internet quota. This Mode is no time out. To use your internet speed package, please turn off ECO Mode.',
+  'เพื่อเพิ่มความเร็วเน็ตให้คุณเล่น Social โหลดไฟล์ ดูหนังได้ไม่กระตุก แม้อยู่ในพื้นที่ทีมีการใช้งานหนาแน่น และเพื่อประสิทธิภาพสูงสุดควรอยู่กับที่ในการใช้งานคุณสามารถใช้โหมดนี้ได้นานสูงสุด 60 นาทีต่อครั้ง เมื่อครบกำหนดความเร็วเน็ตจะกลับไปอยู่ที่ความเร็วเน็ตตามแพ็คเกจของคุณ',
+  'Help your internet quality stability for online gaming. To maximize usage, please stay still while using this mode. This mode will be available for 60 minutes. When Mode time out, internet speed will turn to your internet speed package.',
+];
+
 List<Image> image = [
   Image.asset(
     ImageUtils.getImagePath('assets/images/mode_eco.png'),

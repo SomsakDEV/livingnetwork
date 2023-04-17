@@ -235,11 +235,11 @@ class _Mode5GInternalState extends State<Mode5GInternal>
                       Container(
                         alignment: Alignment.topCenter,
                         decoration: BoxDecoration(
-                          color: Color(0xFFFFFFFF),
+                          color: LNColor.neutralsWhite,
                           borderRadius: BorderRadius.circular(8),
                           border: Border.all(
                             width: 3,
-                            color: Color(0xFFF0F0F0),
+                            color: LNColor.neutralsWhite10,
                           ),
                         ),
                         width: w * 0.93,
@@ -253,7 +253,7 @@ class _Mode5GInternalState extends State<Mode5GInternal>
                         padding: EdgeInsets.all(15.0),
                         child: Text(
                           'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
-                          style: TextStyle(color: LNColor.failColor, fontSize: 17),
+                          style: LNStyle.loading,
                         ),
                       ),
                       SizedBox(
