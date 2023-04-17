@@ -69,8 +69,8 @@ class _ButtonModeState extends State<ButtonMode> {
         ? LNColor.neutralsWhiteMixGrey
         : isPrimary == true
             ? widget.isDisable
-        ? const Color(0xFFFAFAFA)
-        : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100
+        ? LNColor.neutralsWhiteMixGrey
+        : LNColor.kellyGreen50 ?? LNColor.kellyGreen100
             : null;
     final Color borderColor = clickEnable == false
         ? LNColor.neutralsMediumGrey
@@ -82,10 +82,10 @@ class _ButtonModeState extends State<ButtonMode> {
               // side: BorderSide(color: BaseColors.kellyGreen500),
               side: BorderSide(
                   color: widget.isDisable
-                      ? const Color(0xFFFAFAFA)
+                      ? LNColor.neutralsWhiteMixGrey
                       : widget.isMode
-                      ? const Color(0xFF64CA00)
-                      : const Color(0xFFEEF8E8) ?? LNColor.kellyGreen100,
+                      ? LNColor.greenColor700
+                      : LNColor.kellyGreen50 ?? LNColor.kellyGreen100,
                   width: 2),
               borderRadius: BorderRadius.circular(10.0)),
           color: backgroundColor,
@@ -124,8 +124,8 @@ class _ButtonModeState extends State<ButtonMode> {
                           TextStyle(
                             fontFamily: 'DB Heavent',
                             color: widget.isDisable
-                                ? const Color(0xFF7B8E98)
-                                : const Color(0xFF38454C),
+                                ? LNColor.neutralLightGrey
+                                : LNColor.header6_1,
                             fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,
@@ -143,8 +143,8 @@ class _ButtonModeState extends State<ButtonMode> {
                           TextStyle(
                             fontFamily: 'DB Heavent',
                             color: widget.isDisable
-                                ? const Color(0xFFB0BEC5)
-                                : const Color(0xFF9EDE3E),
+                                ? LNColor.verticalDivider
+                                : LNColor.greenColor10,
                             fontSize: widget.fontSize ?? 12,
                             fontWeight: FontWeight.w500,
                             fontStyle: FontStyle.normal,

@@ -43,8 +43,7 @@ class _TimeWidgetState extends State<TimeWidget> {
   void startTimer(InternalProvider data) {
     if (widget.expire != null) {
       if (checkTimerStart) {
-        DateTime expireTime =
-            widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
+        DateTime expireTime = widget.expire ?? DateTime.now().add(const Duration(seconds: -10));
         int seconds = expireTime.difference(DateTime.now()).inSeconds;
         if (seconds > 0) {
           duration = Duration(seconds: seconds <= 0 ? 0 : seconds);
@@ -92,9 +91,10 @@ class _TimeWidgetState extends State<TimeWidget> {
             decoration: const BoxDecoration(
                 borderRadius: BorderRadius.all(Radius.circular(8)),
                 gradient: LinearGradient(
-                    begin: FractionalOffset.centerLeft,
-                    end: FractionalOffset.centerRight,
-                    colors: [LNColor.greenColor10, LNColor.greenColor20])),
+                  begin: FractionalOffset.centerLeft,
+                  end: FractionalOffset.centerRight,
+                  colors: [LNColor.greenColor10, LNColor.greenColor20],
+                )),
             height: 24,
             child: Row(
               children: [
@@ -124,37 +124,29 @@ class _TimeWidgetState extends State<TimeWidget> {
       } else {
         return Container(
             decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(4)),
-                color: LNColor.neutralsLightGrey),
+              borderRadius: BorderRadius.all(Radius.circular(4)),
+              color: LNColor.neutralsLightGrey,
+            ),
             // width: MediaQuery.of(context).size.width * 0.95,
             height: 54,
-            child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.only(left: 12),
-                    child: Text(
-                      'Free trial will expire:',
-                      textAlign: TextAlign.left,
-                      style: TextStyle(
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18,
-                          color: LNColor.textColorTabBar),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.only(right: 12),
-                    child: Text(
-                      '$hours : $minutes : $seconds',
-                      textAlign: TextAlign.right,
-                      style: widget.textStyle ??
-                          const TextStyle(
-                              fontWeight: FontWeight.w500,
-                              color: LNColor.greyBlue,
-                              fontSize: 22),
-                    ),
-                  ),
-                ]));
+            child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
+              const Padding(
+                padding: EdgeInsets.only(left: 12),
+                child: Text(
+                  'Free trial will expire:',
+                  textAlign: TextAlign.left,
+                  style: LNStyle.timeWidgetFreeTrial,
+                ),
+              ),
+              Padding(
+                padding: const EdgeInsets.only(right: 12),
+                child: Text(
+                  '$hours : $minutes : $seconds',
+                  textAlign: TextAlign.right,
+                  style: widget.textStyle ?? LNStyle.timeWidget,
+                ),
+              ),
+            ]));
       }
     }
   }
@@ -169,7 +161,7 @@ class _TimeWidgetState extends State<TimeWidget> {
   @override
   Widget build(BuildContext context) {
     return Consumer<InternalProvider>(builder: (context, data, _) {
-      if(data.reTimeMode){
+      if (data.reTimeMode) {
         checkTimerStart = true;
         timer?.cancel();
       }
