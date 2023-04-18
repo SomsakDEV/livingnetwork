@@ -243,17 +243,17 @@ class _Mode5GInternalState extends State<Mode5GInternal>
                         width: w * 0.93,
                         child: ModeWidget(),
                       ),
-                      Text(
-                        'Detected Network Type : ${data.detect}',
-                        style: TextStyle(color: LNColor.failColor, fontSize: 20),
-                      ),
-                      Padding(
-                        padding: EdgeInsets.all(15.0),
-                        child: Text(
-                          'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
-                          style: LNStyle.loading,
-                        ),
-                      ),
+                      // Text(
+                      //   'Detected Network Type : ${data.detect}',
+                      //   style: TextStyle(color: LNColor.failColor, fontSize: 20),
+                      // ),
+                      // Padding(
+                      //   padding: EdgeInsets.all(15.0),
+                      //   child: Text(
+                      //     'Data : ${data.mode5G == null ? "Loading . . ." : data.mode5G!.toJson()}',
+                      //     style: LNStyle.loading,
+                      //   ),
+                      // ),
                       SizedBox(
                         height: h * 0.55 /* 0.4*/,
                       ),
